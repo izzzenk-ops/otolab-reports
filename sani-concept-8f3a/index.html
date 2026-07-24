@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>さにさんのコンセプト案</title>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FDFCFA; --white: #FFFFFF; --ink: #4A4A5A; --ink-soft: #8A8A9A;
+    --coral: #FF9E9E; --coral-light: #FFF0F0; --blue: #7EB8E6; --blue-light: #EAF4FC;
+    --yellow: #FFE39E; --yellow-light: #FFF9E8; --radius: 20px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'M PLUS Rounded 1c', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.8; padding: 40px 20px 80px; }
+  .container { max-width: 860px; margin: 0 auto; }
+  .hero { background: linear-gradient(135deg, var(--coral-light), var(--blue-light)); border-radius: var(--radius); padding: 40px 36px; text-align: center; margin-bottom: 28px; }
+  .hero .pill { display: inline-block; background: var(--white); color: var(--coral); font-weight: 700; font-size: 13px; padding: 6px 18px; border-radius: 999px; margin-bottom: 14px; }
+  .hero h1 { font-size: 26px; font-weight: 800; margin-bottom: 8px; }
+  .hero .sub { color: var(--ink-soft); font-size: 14px; }
+  .card { background: var(--white); border-radius: var(--radius); padding: 28px 30px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(74,74,90,0.06); }
+  .card h2 { font-size: 18px; font-weight: 800; display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .card h2 .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--coral); flex-shrink: 0; }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+  .summary-item { background: var(--blue-light); border-radius: 14px; padding: 14px 16px; font-size: 14px; }
+  .summary-item .label { font-size: 12px; font-weight: 700; color: var(--blue); margin-bottom: 2px; }
+  .diag { background: var(--yellow-light); border-radius: 14px; padding: 16px 18px; font-size: 14px; margin-top: 4px; }
+  .diag b { color: #C9A227; }
+  .fork { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+  .fork div { border-radius: 14px; padding: 14px 16px; font-size: 13.5px; }
+  .fork .f1 { background: var(--coral-light); }
+  .fork .f2 { background: var(--blue-light); }
+  .concept { background: var(--white); border-radius: var(--radius); padding: 28px 30px; margin-bottom: 20px; box-shadow: 0 2px 12px rgba(74,74,90,0.06); border-left: 6px solid var(--coral); }
+  .concept.alt { border-left-color: var(--blue); }
+  .concept-head { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; flex-wrap: wrap; }
+  .concept-num { width: 40px; height: 40px; border-radius: 50%; background: var(--coral); color: var(--white); font-weight: 800; font-size: 18px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .concept.alt .concept-num { background: var(--blue); }
+  .concept-title { font-size: 20px; font-weight: 800; }
+  .tag { background: var(--yellow-light); color: #C9A227; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 999px; }
+  .catch { color: var(--coral); font-weight: 700; font-size: 15px; margin: 6px 0 16px 52px; }
+  .concept.alt .catch { color: var(--blue); }
+  .row { margin-bottom: 12px; }
+  .row .label { display: inline-block; font-size: 12px; font-weight: 700; color: var(--white); background: var(--ink-soft); padding: 3px 12px; border-radius: 999px; margin-bottom: 4px; }
+  .row.grow .label { background: var(--coral); }
+  .row.share .label { background: var(--blue); }
+  .row.fit .label { background: #C9A227; }
+  .row p { font-size: 14px; }
+  .row.fit { background: var(--yellow-light); border-radius: 14px; padding: 12px 16px; }
+  .prof { background: var(--bg); border-radius: 16px; padding: 20px 22px; margin-bottom: 14px; }
+  .pname { font-size: 15px; font-weight: 800; margin-bottom: 8px; }
+  .paccount { display:inline-block; background: var(--coral); color:#fff; font-weight:700; font-size:13px; padding:4px 14px; border-radius:999px; margin-bottom:10px; }
+  .pbody { background:#fff; border-radius:12px; padding:14px 16px; font-size:14px; line-height:1.9; margin-bottom:8px; }
+  .pnote { font-size: 13px; color: var(--ink-soft); }
+  .next { background: var(--coral-light); border-radius: var(--radius); padding: 32px; text-align: center; }
+  .next h2 { font-size: 20px; font-weight: 800; margin-bottom: 10px; }
+  .next p { font-size: 14px; color: var(--ink); }
+  .next .big { font-size: 16px; font-weight: 700; color: var(--coral); margin-top: 12px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="hero">
+    <div class="pill">コンセプト磨き上げレポート</div>
+    <h1>あなただけのコンセプト案</h1>
+    <div class="sub">2026年7月24日｜発信ジャンル：産後ママの見た目・自己肯定感</div>
+  </div>
+
+  <div class="card">
+    <h2><span class="dot"></span>あなたの土台（いまの設計から引き継ぎ）</h2>
+    <div class="summary-grid">
+      <div class="summary-item"><div class="label">誰の</div>産後、体型と見た目が変わってしまった30代ママ</div>
+      <div class="summary-item"><div class="label">どんな悩みを</div>オバ化して自信が持てない。ダイエットも続かない</div>
+      <div class="summary-item"><div class="label">どう解決するか</div>ずぼらでも続く習慣（麹・腸活・宅トレ）で無理せずキレイに</div>
+      <div class="summary-item"><div class="label">数字の武器</div>ダイエット歴15年／2年体型キープ／自己肯定感0／元保育士／選択一人っ子</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="dot"></span>いまのコンセプトが弱く感じる理由（3つ）</h2>
+    <div class="diag">
+      <p><b>1. いちばん混んでいる場所に立っている。</b>「ゆる」「ずぼら」「楽うま」「無理なく」は、いま最も競合が多い言葉です。同じ土俵に今から入っても埋もれます。</p>
+      <p style="margin-top:10px"><b>2. 発信が3つに散っている。</b>ゆる腸活・ゆる宅トレ・ゆるグルテンフリー。全部やると「何の人か」が残りません。1つに絞ると強くなります。</p>
+      <p style="margin-top:10px"><b>3. いちばん強い素材が飾りになっている。</b>「元保育士なのに育児恐怖症」「選択一人っ子」「ダイエット歴15年」「自己肯定感0」——これらはプロフィールの脇役でなく、<b>発信の軸そのもの</b>にできる強さがあります。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="dot"></span>先に決めたい「2つの分かれ道」</h2>
+    <p style="font-size:14px;margin-bottom:14px">さにさんの素材は強いものが2種類あって、方向が違います。どちらを本線にするかで選ぶ案が変わります。</p>
+    <div class="fork">
+      <div class="f1"><b>A：見た目・ダイエット軸</b><br>麹・作りおき・すっぴん・体型キープ。いまの設計の延長。商品化しやすい。<br><span style="color:#8A8A9A">→ 1・4・5・6・7・9番</span></div>
+      <div class="f2"><b>B：育児・母の心軸</b><br>元保育士なのに育児恐怖症・選択一人っ子・自己肯定感0。刺さり方はいちばん深い。<br><span style="color:#8A8A9A">→ 2・3・8・10番</span></div>
+    </div>
+  </div>
+
+  <div class="concept">
+    <div class="concept-head">
+      <div class="concept-num">1</div>
+      <div class="concept-title">麹だけで痩せた女</div>
+      <div class="tag">①極端な制限</div>
+    </div>
+    <div class="catch">「サプリも置き換えもジムも全部やめた。麹だけ。」</div>
+    <div class="row">
+      <span class="label">どんなアカウントか</span>
+      <p>ゆる腸活・ゆる宅トレ・ゆるグルテンフリーと散らさず、<b>麹一本</b>に絞るアカウント。市販の発酵食品ではなく、塩麹・醤油麹・甘麹を使った日常のごはんだけで体型をキープしている姿を出す。</p>
+    </div>
+    <div class="row grow">
+      <span class="label">伸びる理由</span>
+      <p>「ゆる腸活」は無数にあって埋もれるが、「<b>麹しかやらない</b>」という縛りは一度で覚えられる。しかも15年ダイエットに失敗した人が2年キープしている事実が裏づけになる。</p>
+    </div>
+    <div class="row share">
+      <span class="label">人に教えたくなる理由</span>
+      <p>「麹だけって何それ」で会話が始まる。腸活に興味はあるけど何から手をつけるか分からない人に、入口が1つだけなのが親切。</p>
+    </div>
+    <div class="row fit">
+      <span class="label">さにさんの勝ち筋との相性</span>
+      <p>すでに冷凍×麹という武器を持っているので<b>今日から撮れる</b>。作りおきは元から生活に入っていて続く。将来レシピや麹の講座を売るときも一直線につながる。</p>
+    </div>
+  </div>
+  <div class="concept alt">
+    <div class="concept-head">
+      <div class="concept-num">2</div>
+      <div class="concept-title">元保育士なのに、育児恐怖症</div>
+      <div class="tag">⑦過程公開</div>
+    </div>
+    <div class="catch">「子どものプロだったのに、我が子が怖かった。」</div>
+    <div class="row">
+      <span class="label">どんなアカウントか</span>
+      <p>保育のプロとして何百人も見てきたのに、自分の子どもだけが怖かった——その状態からどう回復していったかを隠さず出すアカウント。今の心の状態も定点で記録する。</p>
+    </div>
+    <div class="row grow">
+      <span class="label">伸びる理由</span>
+      <p>「元保育士」と「育児恐怖症」は<b>本来ぶつからない言葉</b>。この矛盾だけで足が止まる。同じ苦しさを抱えている母親は多いのに、プロの立場から言語化できる人はほとんどいない。</p>
+    </div>
+    <div class="row share">
+      <span class="label">人に教えたくなる理由</span>
+      <p>「私だけじゃなかった」と救われた人が、同じ状況の友達に送る。感情で広がるタイプ。</p>
+    </div>
+    <div class="row fit">
+      <span class="label">さにさんの勝ち筋との相性</span>
+      <p>さにさんにしか言えない最強の一言。ただし<b>見た目・ダイエットとは別の軸</b>なので、どちらを本線にするかの判断が要る（下の「2つの分かれ道」参照）。</p>
+    </div>
+  </div>
+  <div class="concept">
+    <div class="concept-head">
+      <div class="concept-num">3</div>
+      <div class="concept-title">選択一人っ子の本音</div>
+      <div class="tag">⑥逆転</div>
+    </div>
+    <div class="catch">「「2人目は？」に、もう黙らない。」</div>
+    <div class="row">
+      <span class="label">どんなアカウントか</span>
+      <p>一人っ子を「選んだ」母として、その理由・葛藤・後悔していない日常を出すアカウント。世間がなんとなく避ける話題に正面から答える。</p>
+    </div>
+    <div class="row grow">
+      <span class="label">伸びる理由</span>
+      <p>一人っ子は<b>言い訳の形で語られがち</b>で、「選んだ」と言い切る発信が極端に少ない。少数派ポジションがそのまま空いている。</p>
+    </div>
+    <div class="row share">
+      <span class="label">人に教えたくなる理由</span>
+      <p>同じことを言われ続けている母親が「よく言ってくれた」と保存・共有する。コメント欄が体験談で埋まる構造。</p>
+    </div>
+    <div class="row fit">
+      <span class="label">さにさんの勝ち筋との相性</span>
+      <p>元保育士という肩書きが「子どもを知った上での選択」として効く。負荷は軽く、<b>過去の話だけで何本も撮れる</b>。</p>
+    </div>
+  </div>
+  <div class="concept alt">
+    <div class="concept-head">
+      <div class="concept-num">4</div>
+      <div class="concept-title">ダイエット失敗15年分の供養</div>
+      <div class="tag">⑥逆転</div>
+    </div>
+    <div class="catch">「成功法は語りません。落ちた墓場を全部見せます。」</div>
+    <div class="row">
+      <span class="label">どんなアカウントか</span>
+      <p>15年で試して失敗した全ダイエットを1本ずつ掘り起こし、「なぜ続かなかったか」を検証して供養していくアカウント。成功談は最後まで出さない。</p>
+    </div>
+    <div class="row grow">
+      <span class="label">伸びる理由</span>
+      <p>成功法の発信は飽和しきっている。<b>失敗の一次情報は希少</b>で、しかも15年分という在庫の多さがそのまま連載の長さになる。</p>
+    </div>
+    <div class="row share">
+      <span class="label">人に教えたくなる理由</span>
+      <p>「私もこれで失敗した」が刺さって自分ごと化される。失敗の共有はコメントが集まりやすい。</p>
+    </div>
+    <div class="row fit">
+      <span class="label">さにさんの勝ち筋との相性</span>
+      <p><b>いちばん負荷が軽い</b>。過去の記憶だけで撮れるので今日から始められる。最後に「唯一続いた方法」へ着地させれば、商品への導線が自然にできる。</p>
+    </div>
+  </div>
+  <div class="concept">
+    <div class="concept-head">
+      <div class="concept-num">5</div>
+      <div class="concept-title">冷凍庫だけで1週間</div>
+      <div class="tag">①極端な制限</div>
+    </div>
+    <div class="catch">「買い物ゼロ。冷凍庫の中身だけで家族を回す。」</div>
+    <div class="row">
+      <span class="label">どんなアカウントか</span>
+      <p>1週間まったく買い物をせず、作りおき冷凍と常備の麹調味料だけで家族の食卓を回し切る。何をどう組み合わせたかを毎日出す。</p>
+    </div>
+    <div class="row grow">
+      <span class="label">伸びる理由</span>
+      <p>時短レシピは山ほどあるが、<b>「買い足さない」という縛り</b>を最後までやり切る人は少ない。節約とフードロスの両方に刺さって層が広がる。</p>
+    </div>
+    <div class="row share">
+      <span class="label">人に教えたくなる理由</span>
+      <p>「うちの冷凍庫でもできる？」と試したくなる。1週間という区切りがあるので結末が気になって最後まで見られる。</p>
+    </div>
+    <div class="row fit">
+      <span class="label">さにさんの勝ち筋との相性</span>
+      <p>爆速ごはんの強みを<b>そのまま企画に変換</b>できる。実際の生活と一致しているので無理がない。</p>
+    </div>
+  </div>
+  <div class="concept alt">
+    <div class="concept-head">
+      <div class="concept-num">6</div>
+      <div class="concept-title">毎朝5時のキッチン</div>
+      <div class="tag">③継続実況</div>
+    </div>
+    <div class="catch">「家族が起きる前の、ひとりの2時間。」</div>
+    <div class="row">
+      <span class="label">どんなアカウントか</span>
+      <p>産後ママが毎朝仕込みをしている時間を、同じ画角で365日撮り続けるアカウント。作るものより「続いている事実」が主役。</p>
+    </div>
+    <div class="row grow">
+      <span class="label">伸びる理由</span>
+      <p>レシピ単体はすぐ埋もれるが、<b>同じ時間・同じ場所の積み重ね</b>は真似しにくく、続くほど強くなる。1年後の比較が最大の見せ場。</p>
+    </div>
+    <div class="row share">
+      <span class="label">人に教えたくなる理由</span>
+      <p>早起きしたい人・自分の時間がない母親が、憧れとして保存する。朝の映像は雰囲気で伸びやすい。</p>
+    </div>
+    <div class="row fit">
+      <span class="label">さにさんの勝ち筋との相性</span>
+      <p>毎朝の撮影が必要なので<b>いちばん負荷が重い</b>。ただし生活の中でもともとやっていることなら成立する。続けられるかの見極めが必要。</p>
+    </div>
+  </div>
+  <div class="concept">
+    <div class="concept-head">
+      <div class="concept-num">7</div>
+      <div class="concept-title">すっぴん定点、1年</div>
+      <div class="tag">③継続実況</div>
+    </div>
+    <div class="catch">「オバ化から逃げずに、毎日同じ角度で撮る。」</div>
+    <div class="row">
+      <span class="label">どんなアカウントか</span>
+      <p>「産後のオバ化」を隠さず、毎日同じ照明・同じ角度ですっぴんを撮り続け、1年でどう変わるかを見せるアカウント。</p>
+    </div>
+    <div class="row grow">
+      <span class="label">伸びる理由</span>
+      <p>美容発信は盛る方向ばかり。<b>すっぴんを晒し続ける人はほとんどいない</b>ので、それだけで少数派になれる。変化が出れば証拠として最強。</p>
+    </div>
+    <div class="row share">
+      <span class="label">人に教えたくなる理由</span>
+      <p>「こんなに変わるの」というビフォーアフターは共有されやすい。同じ悩みの産後ママが自分ごと化する。</p>
+    </div>
+    <div class="row fit">
+      <span class="label">さにさんの勝ち筋との相性</span>
+      <p>自己肯定感0から回復した実体験と<b>テーマが完全に一致</b>。ただし顔を出し続ける覚悟が要るので、そこだけ確認が必要。</p>
+    </div>
+  </div>
+  <div class="concept alt">
+    <div class="concept-head">
+      <div class="concept-num">8</div>
+      <div class="concept-title">毎日1つ、夫に褒めてもらう女</div>
+      <div class="tag">⑤他人に委ねる</div>
+    </div>
+    <div class="catch">「自分では見つけられないから、他人の目を借りる。」</div>
+    <div class="row">
+      <span class="label">どんなアカウントか</span>
+      <p>自分では見つけられない「私のいいところ」を、夫や友人に毎日1つ聞いて記録していくアカウント。判断を自分でしないのがルール。</p>
+    </div>
+    <div class="row grow">
+      <span class="label">伸びる理由</span>
+      <p>自己肯定感の発信は「考え方」の話に偏りがち。<b>実際に他人に聞きに行く</b>という行動があるので、見ていて展開が読めない。</p>
+    </div>
+    <div class="row share">
+      <span class="label">人に教えたくなる理由</span>
+      <p>「これ夫婦でやってみたい」と送り合われる。夫の答えが予想外なほど面白くなる。</p>
+    </div>
+    <div class="row fit">
+      <span class="label">さにさんの勝ち筋との相性</span>
+      <p>巻き込むのは<b>夫と友人だけ</b>なのでフォロワー0の今日から始められる。自己肯定感0→回復という核のストーリーに直結する。</p>
+    </div>
+  </div>
+  <div class="concept">
+    <div class="concept-head">
+      <div class="concept-num">9</div>
+      <div class="concept-title">市販調味料ゼロの台所</div>
+      <div class="tag">②全部手作業</div>
+    </div>
+    <div class="catch">「買えば済むものを、全部自分で仕込む。」</div>
+    <div class="row">
+      <span class="label">どんなアカウントか</span>
+      <p>めんつゆもドレッシングも市販を使わず、味噌・塩麹・醤油麹まで全部自分で仕込んで1年暮らすアカウント。仕込みの過程も待つ時間も見せる。</p>
+    </div>
+    <div class="row grow">
+      <span class="label">伸びる理由</span>
+      <p>「ゆる腸活」の逆で<b>手間を全部引き受ける</b>ので、本気度が一目で伝わる。発酵は完成まで時間がかかるぶん、待つこと自体がコンテンツになる。</p>
+    </div>
+    <div class="row share">
+      <span class="label">人に教えたくなる理由</span>
+      <p>丁寧な暮らし・発酵好きに刺さり、保存されやすい。「そこから作るの？」の驚きがある。</p>
+    </div>
+    <div class="row fit">
+      <span class="label">さにさんの勝ち筋との相性</span>
+      <p>麹の知識がそのまま資産になり、<b>将来の講座・レシピ販売の裏づけ</b>として最も強い。ただし仕込みの手間があるので負荷は重め。</p>
+    </div>
+  </div>
+  <div class="concept alt">
+    <div class="concept-head">
+      <div class="concept-num">10</div>
+      <div class="concept-title">保育士の技、我が子で全部検証</div>
+      <div class="tag">④実体験検証</div>
+    </div>
+    <div class="catch">「現場で使っていた技は、我が子に効くのか。」</div>
+    <div class="row">
+      <span class="label">どんなアカウントか</span>
+      <p>保育の現場で実際に使っていた寝かしつけ・声かけ・イヤイヤ対応を、我が子で1つずつ試して「効いた／効かなかった」を出すアカウント。</p>
+    </div>
+    <div class="row grow">
+      <span class="label">伸びる理由</span>
+      <p>育児の発信は「正しいやり方」を教える形が大半。<b>プロが自分の子で答え合わせをする</b>形は珍しく、失敗も出せるので信頼される。</p>
+    </div>
+    <div class="row share">
+      <span class="label">人に教えたくなる理由</span>
+      <p>「これ試したい」と保存される実用性がある。効かなかった回ほどコメントが集まる。</p>
+    </div>
+    <div class="row fit">
+      <span class="label">さにさんの勝ち筋との相性</span>
+      <p>元保育士という資産を<b>肩書きでなく中身で使える</b>唯一の案。ただし育児軸なので、見た目・ダイエット軸とは分ける必要がある。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="dot"></span>プロフィール案（3パターン）</h2>
+    <p style="font-size:14px;margin-bottom:16px">上の「分かれ道」に対応した3案です。1行目だけで足を止めることを最優先にしています。</p>
+    <div class="prof">
+      <div class="pname">A案：麹一本に絞る（見た目・ダイエット軸）</div>
+      <div class="paccount">さに｜麹だけで痩せた女</div>
+      <div class="pbody">\ ダイエット15年、全部失敗した女 /<br>麹だけで2年、体型キープ中<br>▶ サプリ0・ジム0・置き換え0<br>▶ 冷凍作りおきで平日は5分<br>▶ 産後のオバ化、まだ諦めてない</div>
+      <div class="pnote">強い数字（15年・2年）を1行目に置き、やらないこと（サプリ0・ジム0・置き換え0）で立ち位置を一言で伝える形。「ゆる」を全部消したのがポイント。</div>
+    </div>
+    <div class="prof">
+      <div class="pname">B案：元保育士の矛盾で掴む（育児・心の軸）</div>
+      <div class="paccount">さに｜元保育士なのに育児恐怖症</div>
+      <div class="pbody">\ 子どものプロだったのに、我が子が怖かった /<br>自己肯定感0から戻ってくるまでの記録<br>▶ 選択一人っ子、後悔してません<br>▶ 保育士の技を我が子で全部検証<br>▶ 毎日1つ、夫に褒めてもらってます</div>
+      <div class="pnote">1行目の矛盾だけで足を止める形。ダイエットを一旦外して、母の心に軸を寄せた場合の案。刺さり方はいちばん深い。</div>
+    </div>
+    <div class="prof">
+      <div class="pname">C案：両方を1本の線でつなぐ（ハイブリッド）</div>
+      <div class="paccount">さに｜自己肯定感0から戻る台所</div>
+      <div class="pbody">\ 元保育士なのに育児恐怖症だった母 /<br>ダイエット15年失敗 → 麹だけで2年キープ<br>▶ 台所に立つ時間で自分を取り戻した<br>▶ 冷凍×麹の作りおき<br>▶ 選択一人っ子・産後のオバ化と戦い中</div>
+      <div class="pnote">「台所＝自分を取り戻す場所」で育児と体型を1本につないだ案。素材を全部使えるが、絞りはやや弱くなる。</div>
+    </div>
+  </div>
+
+  <div class="next">
+    <h2>次のステップ</h2>
+    <p>10案の中から「これ気になる」と思った番号を教えてください（複数OK）。<br>
+    まずは <b>A（見た目）とB（育児）のどちらを本線にするか</b> が決まると、一気に絞れます。</p>
+    <div class="big">例：「A軸でいく。1番と4番が気になる」「2番をもっと極端に」</div>
+  </div>
+
+</div>
+</body>
+</html>

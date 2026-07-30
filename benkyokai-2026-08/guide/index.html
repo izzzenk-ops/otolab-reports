@@ -67,6 +67,9 @@
     font-size:13.5px;text-decoration:none;}
   .seemore a:hover{text-decoration:underline;}
   .seemore .mini2{display:block;font-size:11.5px;color:var(--sub);margin-top:5px;}
+  .discord{margin-top:11px;background:#eef0fb;border:1px solid #d9ddf5;border-radius:12px;
+    padding:10px 14px;font-size:12.5px;color:var(--ink);}
+  .discord b{color:#5865F2;}
   .done-card .try{margin-top:12px;}
   .pill{display:inline-block;background:#fff;color:#3d8159;border:1px solid #cfe9d8;border-radius:999px;
     padding:4px 13px;font-size:12.5px;font-weight:700;margin:0 5px 6px 0;}
@@ -210,13 +213,14 @@ eval "$(/opt/homebrew/bin/brew shellenv)"</code>
 
   <div class="step">
     <span class="num">＋</span><h2>スキルが増えたら（更新の受け取り方）</h2>
-    <div class="desc">おとラボのスキルは<b>あとから増えたり、改良されたりします</b>。すでに導入ずみの方は、下の1行を貼って実行するだけで<b>最新の状態</b>になります（入れ直す必要はありません）。うまくいくと「更新しました」と表示されます。</div>
+    <div class="desc">おとラボのスキルは<b>あとから増えたり、改良されたりします</b>。<b>スキルを追加・更新したときは Discord でお知らせします</b>ので、その連絡が来たら下の1行を貼って実行してください。それだけで<b>最新の状態</b>になります（入れ直す必要はありません）。うまくいくと「更新しました」と表示されます。</div>
     <div class="cmdlabel">Claude Code に貼る（更新したいとき）</div>
     <div class="cmd">
       <code id="c4">/plugin marketplace update</code>
       <button class="copy" data-target="c4">コピー</button>
     </div>
-    <div class="desc" style="margin-top:10px;">💡 <b>「新しいスキルを追加しました」と連絡が来たとき</b>に実行してください。ふだんは不要です。実行しても、作った成果物や初期設定は消えません。</div>
+    <div class="discord">💬 <b>お知らせは Discord に流します。</b>新しいスキルが増えたとき・使い方が変わったときにお伝えするので、<b>Discord の通知はオンにしておいてください</b>。</div>
+    <div class="desc" style="margin-top:8px;">💡 連絡が来ていないときは実行不要です。実行しても、作った成果物や初期設定は消えません。</div>
   </div>
 
   <div class="warn">

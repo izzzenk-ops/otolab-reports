@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>おとラボ スキル 導入ガイド</title>
+<style>
+  :root{
+    --ink:#3f4a5a; --sub:#8b93a3; --line:#f0e8dd; --bg:#f7f3ec; --card:#fff;
+    --accent:#ec8080; --accent-deep:#e06c6c; --accent-soft:#fdecec;
+    --blue:#6b9bd2; --blue-deep:#5b8ac4; --blue-soft:#e8f1fb;
+    --gold:#d9822b; --gold-soft:#fdf1e3; --green:#57a773; --green-soft:#e9f6ee;
+    --grad:linear-gradient(135deg,#f19a9a,#f4b183);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:"Hiragino Maru Gothic ProN","Zen Maru Gothic","Hiragino Sans","Yu Gothic",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.8;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:760px;margin:0 auto;padding:40px 22px 80px;}
+
+  header{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:34px 34px 30px;margin-bottom:24px;position:relative;overflow:hidden;}
+  header::before{content:"";position:absolute;top:0;left:0;right:0;height:8px;background:var(--grad);}
+  .label{font-size:12px;letter-spacing:2px;color:var(--accent-deep);font-weight:700;}
+  header h1{font-size:26px;font-weight:800;margin:6px 0 6px;}
+  header p{font-size:14px;color:var(--sub);}
+
+  /* 準備 */
+  .prep{background:var(--blue-soft);border:1px solid #d5e6f7;border-radius:18px;padding:18px 22px;margin-bottom:26px;}
+  .prep h2{font-size:14px;font-weight:800;color:var(--blue-deep);margin-bottom:8px;display:flex;align-items:center;gap:7px;}
+  .prep ul{list-style:none;font-size:13.5px;}
+  .prep li{padding:3px 0 3px 20px;position:relative;}
+  .prep li::before{content:"✓";position:absolute;left:0;color:var(--blue-deep);font-weight:800;}
+  .prep .mini{font-size:12px;color:var(--sub);}
+
+  /* STEP */
+  .step{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px 26px;margin-bottom:16px;position:relative;}
+  .step .num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;
+    background:var(--grad);color:#fff;font-weight:800;font-size:15px;margin-right:10px;vertical-align:middle;}
+  .step h2{display:inline;font-size:18px;font-weight:800;}
+  .step .desc{font-size:13.5px;color:var(--sub);margin:10px 0 14px;}
+
+  .cmd{display:flex;align-items:stretch;gap:8px;margin-top:10px;}
+  .cmd code{flex:1;background:#2f3542;color:#e8eef5;border-radius:10px;padding:12px 15px;
+    font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;overflow-x:auto;white-space:nowrap;display:flex;align-items:center;}
+  .cmd code.multi{white-space:pre-wrap;display:block;font-size:11.5px;line-height:1.65;max-height:340px;overflow-y:auto;}
+  .copy{flex:0 0 auto;border:none;cursor:pointer;background:var(--accent);color:#fff;font-weight:800;
+    border-radius:10px;padding:0 16px;font-size:12.5px;font-family:inherit;transition:.15s;white-space:nowrap;}
+  .copy:hover{background:var(--accent-deep);}
+  .copy.done{background:var(--green);}
+  .cmdlabel{font-size:11.5px;color:var(--sub);margin:12px 0 2px;font-weight:700;}
+
+  /* 完了 */
+  .done-card{background:var(--green-soft);border:1px solid #cfe9d8;border-radius:20px;padding:24px 26px;margin:22px 0 16px;}
+  .done-card h2{font-size:17px;font-weight:800;color:#3d8159;display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+  .done-card p{font-size:13.5px;}
+  .done-card .try{margin-top:12px;}
+  .pill{display:inline-block;background:#fff;color:#3d8159;border:1px solid #cfe9d8;border-radius:999px;
+    padding:4px 13px;font-size:12.5px;font-weight:700;margin:0 5px 6px 0;}
+
+  /* 動画編集の注意 */
+  .warn{background:var(--gold-soft);border:1px solid #f2ddba;border-radius:18px;padding:20px 24px;margin-bottom:16px;}
+  .warn h2{font-size:15px;font-weight:800;color:var(--gold);display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+  .warn ul{list-style:none;font-size:13px;}
+  .warn li{padding:4px 0 4px 22px;position:relative;}
+  .warn li::before{content:"•";position:absolute;left:6px;color:var(--gold);font-weight:800;}
+  .warn code.inline{background:#efe4cf;color:#8a5a1a;border-radius:6px;padding:1px 7px;font-size:12px;font-family:ui-monospace,monospace;}
+
+  .help{text-align:center;background:var(--accent-soft);border-radius:16px;padding:16px 22px;font-size:13.5px;color:var(--accent-deep);font-weight:700;margin-top:8px;}
+  footer{text-align:center;font-size:11.5px;color:var(--sub);margin-top:28px;}
+  @media(max-width:560px){.cmd{flex-direction:column;}.copy{padding:10px;}}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  @media print{
+    body{background:#fff;}
+    .wrap{max-width:none;padding:12px 16px 20px;}
+    header,.step,.prep,.done-card,.warn,.help{break-inside:avoid;}
+    .copy{display:none;}
+    .cmd code{white-space:normal;word-break:break-all;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="label">OTOLAB SKILLS ｜ SETUP</div>
+    <h1>おとラボ スキル 導入ガイド</h1>
+    <p>Claude Code に貼るのは <b>3つ</b> だけ（スキル導入の2行＋初期設定）。分析・台本・動画編集の全スキルが、あなた仕様で使えるようになります。</p>
+  </header>
+
+  <div class="prep">
+    <h2>🧰 はじめる前に</h2>
+    <ul>
+      <li><b>Claude Code</b> が使える状態（アプリの「Code」モード、またはターミナルの <b>claude</b>）</li>
+      <li><span class="mini"><b>Mac の方で「動画編集」も使いたい場合のみ</b>：Homebrew が必要です（未導入なら <b>https://brew.sh</b>）。分析・台本スキルだけなら不要です。</span></li>
+    </ul>
+  </div>
+
+  <div class="step">
+    <span class="num">1</span><h2>マーケットプレイスを登録</h2>
+    <div class="desc">おとラボのスキル置き場を Claude Code に教えます。下の1行をコピーして、Claude Code に貼って実行してください。</div>
+    <div class="cmdlabel">Claude Code に貼る ①</div>
+    <div class="cmd">
+      <code id="c1">/plugin marketplace add izzzenk-ops/otolab-skills</code>
+      <button class="copy" data-target="c1">コピー</button>
+    </div>
+  </div>
+
+  <div class="step">
+    <span class="num">2</span><h2>スキルを一括インストール</h2>
+    <div class="desc">全スキルが入った「otolab-insta」を入れます。同じく下の1行を貼って実行してください。</div>
+    <div class="cmdlabel">Claude Code に貼る ②</div>
+    <div class="cmd">
+      <code id="c2">/plugin install otolab-insta@otolab-skills</code>
+      <button class="copy" data-target="c2">コピー</button>
+    </div>
+  </div>
+
+  <div class="step">
+    <span class="num">3</span><h2>初期設定（あなた専用にする）</h2>
+    <div class="desc">最後に、下の文章を<b>まるごとコピー</b>して Claude Code に貼って実行してください。Claude が1問ずつ質問しながら、成果物の保存フォルダと<b>あなたの発信プロフィール</b>を作ってくれます。これで台本・分析スキルが<b>あなた仕様</b>で動くようになります。</div>
+    <div class="cmdlabel">Claude Code に貼る ③（全文コピー）</div>
+    <div class="cmd">
+      <code id="c3" class="multi">おとラボスキルを使うための初期設定をお願いします。以下を順番に実行してください。
+
+1. ホームの「Documents/Claude/Projects」フォルダを作成する（すでにあればそのまま使う）。今後、分析報告書・台本などの成果物はすべてこの中に保存される。
+
+2. 「Documents/Claude/CLAUDE.md」を次の内容で作成する（すでにあれば内容を壊さずにこのルールを追記する）：
+- 成果物は必ず Projects/&lt;プロジェクト名&gt;/ の中に作る。Documents/Claude の直下にファイルを直接置かない
+- 一時ファイルはセッションのscratchpadを使い、このフォルダには置かない
+- ファイルやフォルダの削除・移動は勝手にせず、必ず提案して許可を得てから行う
+
+3. 私に1問ずつ質問しながら「Documents/Claude/Projects/発信プロフィール/profile.md」を作成する。聞いてほしい項目：
+- 名前（ニックネームOK）
+- Instagramのアカウント名（まだなければ「これから」でOK）
+- 発信ジャンル
+- 誰に向けて発信するか（ターゲット）
+- 発信の目的（フォロワーを増やしたい・集客につなげたい など）
+- 口調・キャラの希望（あれば）
+回答を profile.md にきれいにまとめて保存する。
+
+4. 最後に、作成したフォルダ構成をツリーで見せて「初期設定完了」と報告する。</code>
+      <button class="copy" data-target="c3">コピー</button>
+    </div>
+    <div class="cmdlabel" style="margin-top:10px">💡 次回から Claude Code を開くときは、作業フォルダに「Documents/Claude」を選ぶと設定が効きます。</div>
+  </div>
+
+  <div class="done-card">
+    <h2>🎉 これで完了です</h2>
+    <p>分析・設計・台本・動画編集の <b>全スキルがそのまま使えます</b>。ふだんのチャットに、こう話しかけるだけ：</p>
+    <div class="try">
+      <span class="pill">このリールを分析して＋URL</span>
+      <span class="pill">競合分析して＋URL</span>
+      <span class="pill">今日あったことで台本書いて</span>
+      <span class="pill">台本を添削して</span>
+      <span class="pill">アフレコ動画を編集して</span>
+      <span class="pill">このリールを完コピしたい＋URL</span>
+    </div>
+  </div>
+
+  <div class="warn">
+    <h2>🎬 「動画編集」を初めて使うときだけ</h2>
+    <ul>
+      <li>初回に話しかけると、<b>編集ツールを自動でセットアップ</b>します（<b>数分〜十数分</b>／ネット接続が必要。2回目以降は速いです）。</li>
+      <li>Mac の方は先に <b>Homebrew</b> を入れておくと途中で止まりません（上の「はじめる前に」参照）。</li>
+      <li>途中で許可を聞かれたら <b>「常に許可（今後聞かない）」</b> を選ぶとスムーズです。</li>
+      <li>Windows の方は <b>「Windows Terminal」の <code class="inline">claude</code></b> で使ってください（アプリの「Code」タブでは動きません）。</li>
+    </ul>
+  </div>
+
+  <div class="help">💬 途中で止まったり、よく分からない画面が出たら —— その画面をスクショして、<b>いま開いている Claude Code にそのまま貼り付けて「これどうすればいい？」</b>と聞いてください。その場で教えてくれます。</div>
+
+  <footer>おとラボ スキル 導入ガイド ｜ 2026/07</footer>
+</div>
+
+<script>
+  function feedback(btn){
+    var old = btn.dataset.label || btn.innerText;
+    btn.dataset.label = old;
+    btn.innerText = 'コピー済み ✓';
+    btn.classList.add('done');
+    setTimeout(function(){ btn.innerText = old; btn.classList.remove('done'); }, 1600);
+  }
+  function legacyCopy(text){
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.top = '-1000px';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch(e){ ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+  document.querySelectorAll('.copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var el = document.getElementById(btn.dataset.target);
+      var text = el.innerText.trim();
+      // 確実に動く方式（file://でもOK）を先に。ダメなら新APIを試す。
+      if (legacyCopy(text)) { feedback(btn); return; }
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(function(){ feedback(btn); },
+          function(){ /* 最終手段: 選択状態にして手動コピーを促す */
+            var r = document.createRange(); r.selectNodeContents(el);
+            var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+          });
+      }
+    });
+  });
+</script>
+</body>
+</html>

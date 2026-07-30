@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>おとラボ スキル勉強会スライド</title>
+<style>
+  :root{
+    --ink:#3f4a5a; --sub:#8b93a3; --line:#f0e8dd; --bg:#f7f3ec; --card:#fff;
+    --accent:#ec8080; --accent-deep:#e06c6c; --accent-soft:#fdecec;
+    --blue:#6b9bd2; --blue-deep:#5b8ac4; --blue-soft:#e8f1fb;
+    --gold:#d9822b; --gold-soft:#fdf1e3; --green:#57a773; --green-soft:#e9f6ee;
+    --psy:#8b7fd0; --psy-soft:#efecfb;
+    --grad:linear-gradient(135deg,#f19a9a,#f4b183);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{height:100%;}
+  body{font-family:"Hiragino Maru Gothic ProN","Zen Maru Gothic","Hiragino Sans","Yu Gothic",sans-serif;
+    background:#3a3f4b;color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased;overflow:hidden;}
+
+  /* 16:9 固定ステージ（ウィンドウに合わせて等倍スケール） */
+  #stage{width:1280px;height:720px;position:absolute;top:50%;left:50%;
+    transform:translate(-50%,-50%) scale(1);transform-origin:center center;
+    background:var(--bg);border-radius:6px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.35);}
+
+  .slide{display:none;position:absolute;inset:0;background:var(--bg);
+    padding:36px 72px;flex-direction:column;justify-content:center;overflow:hidden;}
+  .slide.active{display:flex;}
+  .slide::before{content:"";position:absolute;top:0;left:0;right:0;height:8px;background:var(--grad);}
+
+  .kicker{font-size:15px;letter-spacing:.3em;color:var(--accent-deep);font-weight:700;margin-bottom:8px;}
+  h1{font-size:58px;font-weight:800;line-height:1.3;}
+  h2{font-size:40px;font-weight:800;line-height:1.35;margin-bottom:24px;}
+  h2 .em{color:var(--accent-deep);}
+  .lead{font-size:22px;color:var(--sub);margin-top:10px;}
+
+  /* タイトル */
+  .title-slide{align-items:center;text-align:center;}
+  .title-slide .date{margin-top:28px;font-size:20px;color:var(--sub);font-weight:700;}
+  .title-badge{display:inline-block;background:var(--card);border:1px solid var(--line);border-radius:999px;
+    padding:6px 26px;font-size:19px;font-weight:800;color:var(--accent-deep);margin-bottom:22px;}
+
+  /* カード群 */
+  .cards{display:grid;gap:18px;}
+  .cards.c2{grid-template-columns:1fr 1fr;}
+  .cards.c3{grid-template-columns:1fr 1fr 1fr;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;}
+  .card .big{font-size:30px;margin-bottom:4px;}
+  .card h3{font-size:22px;font-weight:800;margin-bottom:6px;line-height:1.4;}
+  .card p{font-size:16.5px;color:var(--ink);}
+  .card .mono{font-family:ui-monospace,Menlo,monospace;font-size:15px;color:var(--accent-deep);font-weight:700;}
+
+  .num-badge{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;
+    background:var(--grad);color:#fff;font-weight:800;font-size:18px;margin-bottom:8px;}
+
+  /* タイムテーブル */
+  .timeline{display:flex;flex-direction:column;gap:10px;}
+  .trow{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center;
+    background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 22px;}
+  .trow .time{font-size:19px;font-weight:800;color:var(--accent-deep);text-align:center;
+    background:var(--accent-soft);border-radius:999px;padding:4px 0;}
+  .trow .tt{font-size:21px;font-weight:800;}
+  .trow .tt small{font-size:15px;font-weight:700;color:var(--sub);margin-left:10px;}
+
+  /* コマンド */
+  .cmdbox{background:#2f3542;color:#e8eef5;border-radius:12px;padding:17px 24px;
+    font-family:ui-monospace,Menlo,Consolas,monospace;font-size:25px;margin:8px 0;white-space:nowrap;overflow-x:auto;}
+  .cmdlabel{font-size:17px;color:var(--sub);font-weight:700;margin-top:12px;}
+
+  .pill{display:inline-block;background:var(--accent-soft);color:var(--accent-deep);border-radius:999px;
+    padding:4px 16px;font-size:17px;font-weight:700;margin:0 6px 7px 0;}
+
+  /* フローマップ */
+  .flowmap{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;align-items:stretch;gap:10px;}
+  .flowcol{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 14px;text-align:center;}
+  .flowcol .fh{font-size:21px;font-weight:800;margin-bottom:8px;}
+  .flowcol .fh .dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:5px;}
+  .flowcol ul{list-style:none;text-align:left;font-size:15px;}
+  .flowcol li{padding:2px 0 2px 16px;position:relative;color:var(--ink);}
+  .flowcol li::before{content:"・";position:absolute;left:0;color:var(--sub);}
+  .flowarrow{align-self:center;font-size:28px;color:var(--accent-deep);font-weight:800;}
+  .d-de{background:var(--psy);} .d-an{background:var(--blue);} .d-sc{background:var(--accent);} .d-ed{background:var(--gold);}
+
+  /* スキル詳細スライド */
+  .cat-head{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+  .cat-head .cdot{width:18px;height:18px;border-radius:50%;}
+  .skillrow{display:flex;flex-direction:column;gap:12px;}
+  .skill{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 24px;
+    display:grid;grid-template-columns:26% 1fr 30%;gap:18px;align-items:center;}
+  .skill .name{font-size:22px;font-weight:800;line-height:1.35;}
+  .skill .name .id{display:block;font-family:ui-monospace,monospace;font-size:14px;color:var(--accent-deep);font-weight:700;margin-top:2px;}
+  .skill .what{font-size:16px;}
+  .skill .word{text-align:right;}
+  .skill .word .t{display:block;font-size:12px;color:var(--sub);font-weight:700;margin-bottom:3px;}
+  .skill .word .pill{font-size:14.5px;margin:0 0 5px 5px;}
+
+  /* 画像スライド */
+  .shots{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;align-items:start;}
+  .shot{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center;}
+  .shot img{width:100%;height:380px;object-fit:cover;object-position:top;border-radius:10px;border:1px solid var(--line);}
+  .shot .cap{font-size:17px;font-weight:800;margin-top:8px;}
+
+  /* 注意・まとめ */
+  .checklist{list-style:none;font-size:22px;}
+  .checklist li{padding:9px 0 9px 36px;position:relative;}
+  .checklist li::before{content:"✓";position:absolute;left:5px;color:var(--green);font-weight:800;}
+  .checklist li b{color:var(--accent-deep);}
+  .warnlist{list-style:none;font-size:19px;}
+  .warnlist li{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 22px;margin-bottom:10px;}
+  .warnlist li b{color:var(--gold);}
+  .helpbox{background:var(--accent-soft);border-radius:15px;padding:24px 32px;font-size:27px;
+    color:var(--accent-deep);font-weight:800;text-align:center;line-height:1.7;}
+
+  .demo-box{background:var(--card);border:2px dashed var(--accent);border-radius:16px;padding:26px 32px;text-align:center;}
+  .demo-box .d1{font-size:30px;font-weight:800;}
+  .demo-box .d2{font-size:19px;color:var(--sub);margin-top:8px;}
+
+  /* ワークタイム */
+  .worksteps{list-style:none;counter-reset:ws;font-size:21px;}
+  .worksteps li{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:11px 20px 11px 58px;margin-bottom:10px;position:relative;counter-increment:ws;}
+  .worksteps li::before{content:counter(ws);position:absolute;left:14px;top:50%;transform:translateY(-50%);
+    width:30px;height:30px;border-radius:50%;background:var(--grad);color:#fff;font-weight:800;font-size:16px;
+    display:flex;align-items:center;justify-content:center;}
+  .worksteps code{font-family:ui-monospace,monospace;background:#2f3542;color:#e8eef5;border-radius:7px;padding:2px 10px;font-size:17px;}
+
+  /* ナビ */
+  .pagenum{position:absolute;bottom:14px;right:22px;font-size:14px;color:var(--sub);font-weight:700;z-index:10;}
+  .navhint{position:absolute;bottom:14px;left:22px;font-size:12px;color:var(--sub);z-index:10;opacity:.6;}
+</style>
+</head>
+<body>
+<div id="stage">
+
+<!-- 1 タイトル -->
+<section class="slide active title-slide">
+  <div class="title-badge">OTOLAB SKILLS 勉強会</div>
+  <h1>Claude Code をはじめよう<br>＆ おとラボスキル 全解説</h1>
+  <p class="lead">2行入れるだけで、分析・台本・動画編集があなたのものに</p>
+  <div class="date">2026年8月 ｜ おとラボ ｜ 60分</div>
+</section>
+
+<!-- 2 タイムテーブル -->
+<section class="slide">
+  <div class="kicker">AGENDA ｜ 60分</div>
+  <h2>今日の流れ</h2>
+  <div class="timeline">
+    <div class="trow"><span class="time">0–10分</span><span class="tt">① Claude Code を知る<small>ふだんのClaudeと何が違う？ 「スキル」って何？</small></span></div>
+    <div class="trow"><span class="time">10–25分</span><span class="tt">② その場で一緒に導入＋初期設定<small>コピペ2行＋初期設定プロンプト。全員終わるまでサポート</small></span></div>
+    <div class="trow"><span class="time">25–40分</span><span class="tt">③ 全12スキル解説<small>設計→分析→台本→編集の流れで、使いどころと起動ワード</small></span></div>
+    <div class="trow"><span class="time">40–50分</span><span class="tt">④ 実演デモ<small>「このリールを分析して」を画面共有でライブ実行</small></span></div>
+    <div class="trow"><span class="time">50–60分</span><span class="tt">⑤ まとめ・質問タイム<small>今日の宿題と、困ったときの対処法</small></span></div>
+  </div>
+</section>
+
+<!-- 3 Claude Codeとは -->
+<section class="slide">
+  <div class="kicker">01 ｜ WHAT IS CLAUDE CODE</div>
+  <h2>Claude Code ＝ <span class="em">あなたのPCの中で作業してくれる</span> Claude</h2>
+  <div class="cards c2">
+    <div class="card"><div class="big">💬</div>
+      <h3>ふだんの Claude（チャット）</h3>
+      <p>質問に「答えてくれる」。<br>文章のアドバイスや相談が得意。<br>でも、あなたのPCの中は触れない。</p></div>
+    <div class="card"><div class="big">🛠️</div>
+      <h3>Claude Code</h3>
+      <p>話しかけると「作業までしてくれる」。<br>動画をダウンロードして文字起こしして、<br>報告書を作ってブラウザで開く——まで全部。</p></div>
+  </div>
+  <p class="lead" style="margin-top:20px">使い方は同じ。<b>日本語で話しかけるだけ</b>です。</p>
+</section>
+
+<!-- 4 なぜインスタ運用に -->
+<section class="slide">
+  <div class="kicker">01 ｜ WHY</div>
+  <h2>インスタ運用の<span class="em">「めんどくさい」が全部1か所に</span></h2>
+  <div class="cards c3">
+    <div class="card"><div class="big">📊</div><h3>分析</h3>
+      <p>伸びてるリールをダウンロード→全文文字起こし→なぜ伸びたかを報告書に。手作業なら数時間の作業です。</p></div>
+    <div class="card"><div class="big">✍️</div><h3>台本</h3>
+      <p>参考発信者の「型」を抽出して、あなたの出来事を同じ構成の台本に。添削・採点までしてくれます。</p></div>
+    <div class="card"><div class="big">🎬</div><h3>編集</h3>
+      <p>アフレコ音声と素材を渡すだけで、テロップ付き縦型動画に。参考リールの完コピ編集も。</p></div>
+  </div>
+  <p class="lead" style="margin-top:20px">これを実現するのが、おとラボの<b>「スキル」</b>です。</p>
+</section>
+
+<!-- 5 スキルとは -->
+<section class="slide">
+  <div class="kicker">01 ｜ SKILLS</div>
+  <h2>「スキル」＝ Claude に渡す<span class="em">専用レシピ</span></h2>
+  <div class="cards c2">
+    <div class="card">
+      <h3>スキルなし</h3>
+      <p>「リール分析して」と頼んでも、毎回やり方がバラバラ。手順の説明から始める必要があります。</p></div>
+    <div class="card">
+      <h3>スキルあり</h3>
+      <p>おとラボで磨き込んだ手順書がClaudeに入っているので、<b>起動ワードを言うだけ</b>で、毎回同じ品質の報告書・台本・動画が出てきます。</p></div>
+  </div>
+  <div style="margin-top:26px">
+    <span class="pill">このリールを分析して＋URL</span>
+    <span class="pill">今日あったことで台本書いて</span>
+    <span class="pill">アフレコ動画を編集して</span>
+    <span class="lead" style="font-size:18px">← こういう「起動ワード」で呼び出します</span>
+  </div>
+</section>
+
+<!-- 6 事前準備 -->
+<section class="slide">
+  <div class="kicker">02 ｜ PREPARATION</div>
+  <h2>はじめる前のチェック</h2>
+  <ul class="checklist">
+    <li><b>Claude Code が使える状態</b>（アプリの「Code」モード、またはターミナルの claude）</li>
+    <li>Chrome に <b>Claude 拡張機能</b>（アカウント分析でインスタ画面を見るのに使います）</li>
+    <li>Chrome で <b>Instagram にログイン</b>済み</li>
+    <li>（Macで動画編集も使う人だけ）<b>Homebrew</b> — brew.sh から。分析・台本だけなら不要</li>
+  </ul>
+</section>
+
+<!-- 7 導入は2行 -->
+<section class="slide">
+  <div class="kicker">02 ｜ INSTALL</div>
+  <h2>導入は、この<span class="em">2行をコピペするだけ</span></h2>
+  <div class="cmdlabel">① マーケットプレイスを登録（おとラボのスキル置き場を教える）</div>
+  <div class="cmdbox">/plugin marketplace add izzzenk-ops/otolab-skills</div>
+  <div class="cmdlabel">② スキルを一括インストール（全12スキルが一度に入る）</div>
+  <div class="cmdbox">/plugin install otolab-insta@otolab-skills</div>
+  <p class="lead" style="margin-top:16px">🎉 最初の1回だけでOK。次のスライドから、いま全員でやります。</p>
+</section>
+
+<!-- 8 ワークタイム -->
+<section class="slide">
+  <div class="kicker">02 ｜ WORK TIME（15分）</div>
+  <h2>🖐 いっしょにやってみよう</h2>
+  <ol class="worksteps">
+    <li>Claude Code を開く（アプリの「Code」モード、またはターミナルの <code>claude</code>）</li>
+    <li>1行目 <code>/plugin marketplace add izzzenk-ops/otolab-skills</code> を貼って実行</li>
+    <li>2行目 <code>/plugin install otolab-insta@otolab-skills</code> を貼って実行</li>
+    <li>配布した<b>「初期設定プロンプト」</b>を貼って実行 —— Claude が質問しながら<b>あなた専用の設定</b>を作ります</li>
+    <li>「初期設定完了」が出たらゴール🎉 早く終わった人は、隣の人を助けてあげてください</li>
+  </ol>
+  <p class="lead" style="margin-top:14px">🆘 途中で変な画面が出たら —— <b>その画面をスクショして Claude Code に貼り付けて「これどうすればいい？」</b></p>
+</section>
+
+<!-- 8.5 初期設定で何ができたか -->
+<section class="slide">
+  <div class="kicker">02 ｜ SETUP</div>
+  <h2>初期設定で、<span class="em">あなた専用の作業場</span>ができました</h2>
+  <div class="cards c2" style="grid-template-columns:46% 1fr;align-items:center;">
+    <div class="card" style="font-family:ui-monospace,Menlo,monospace;font-size:16.5px;line-height:2;background:#2f3542;color:#e8eef5;border:none;">
+      🏠 Documents/Claude/<br>
+      &nbsp;├ 📖 CLAUDE.md<br>
+      &nbsp;└ 📁 Projects/<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;├ 💗 発信プロフィール/profile.md<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;├ 📊 リール1本分析/…<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;├ 📊 競合アカウント分析/…<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;└ ✍️ 台本添削/…
+    </div>
+    <div>
+      <ul class="checklist" style="font-size:19px;">
+        <li><b>CLAUDE.md</b> ＝ Claudeへのルールブック。散らかさない・勝手に消さない、を約束させます</li>
+        <li><b>Projects/</b> ＝ 報告書・台本などの成果物が全部ここに貯まります（スキルの保存先もここ）</li>
+        <li><b>profile.md</b> ＝ あなたの発信設定。<b>台本・分析スキルがあなた仕様</b>で動くようになります</li>
+      </ul>
+      <p class="lead" style="font-size:16px;margin-top:12px">💡 次回からClaude Codeを開くときは、作業フォルダに「Documents/Claude」を選ぶとルールが効きます</p>
+    </div>
+  </div>
+</section>
+
+<!-- 9 全体マップ -->
+<section class="slide">
+  <div class="kicker">03 ｜ SKILL MAP</div>
+  <h2>全12スキル ＝ 運用の流れそのまま</h2>
+  <div class="flowmap">
+    <div class="flowcol"><div class="fh"><span class="dot d-de"></span>🎯 設計</div>
+      <ul><li>アカウント設計</li><li>コンセプト磨き上げ</li></ul></div>
+    <div class="flowarrow">→</div>
+    <div class="flowcol"><div class="fh"><span class="dot d-an"></span>📊 分析</div>
+      <ul><li>リール1本 徹底分析</li><li>競合アカウント分析</li><li>自分のアカウント分析</li></ul></div>
+    <div class="flowarrow">→</div>
+    <div class="flowcol"><div class="fh"><span class="dot d-sc"></span>✍️ 台本</div>
+      <ul><li>型移植 台本作成</li><li>台本 辛口添削</li></ul></div>
+    <div class="flowarrow">→</div>
+    <div class="flowcol"><div class="fh"><span class="dot d-ed"></span>🎬 編集</div>
+      <ul><li>アフレコ自動編集</li><li>リール完コピ</li><li>無音カット</li></ul></div>
+  </div>
+  <p class="lead" style="margin-top:20px;text-align:center">＋✨応用編2つ（好きな発信者の型を移植した台本テンプレ）</p>
+</section>
+
+<!-- 10 設計スキル -->
+<section class="slide">
+  <div class="cat-head"><span class="cdot d-de"></span><h2 style="margin:0">🎯 設計する <span class="lead" style="font-size:18px">— まずはここから</span></h2></div>
+  <div class="skillrow">
+    <div class="skill">
+      <div class="name">アカウント設計<span class="id">insta-concept-design</span></div>
+      <div class="what">①自己分析インタビュー → ②コンセプト設計（誰の・どんな悩みを・どう解決する）→ ③アカウント名＆プロフィール作成。<b>すべての出発点</b>。</div>
+      <div class="word"><span class="t">起動ワード</span><span class="pill">自己分析して</span><span class="pill">コンセプト決めたい</span></div>
+    </div>
+    <div class="skill">
+      <div class="name">コンセプト磨き上げ<span class="id">concept-brush-up</span></div>
+      <div class="what">固めたコンセプトを<b>もっと目立てる・差別化できる形</b>に。10案レポート→対話しながら決定版＋プロフ改善案まで。</div>
+      <div class="word"><span class="t">起動ワード</span><span class="pill">コンセプトを磨きたい</span><span class="pill">コンセプト10案出して</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 分析スキル -->
+<section class="slide">
+  <div class="cat-head"><span class="cdot d-an"></span><h2 style="margin:0">📊 分析する</h2></div>
+  <div class="skillrow">
+    <div class="skill">
+      <div class="name">リール1本 徹底分析<span class="id">bunseki-reel</span></div>
+      <div class="what">URLを渡すと動画DL・全文文字起こし・画面解析。<b>フック／サムネ／構成／台本の型／活かし方</b>を1枚の報告書に。</div>
+      <div class="word"><span class="t">起動ワード</span><span class="pill">このリールを分析して＋URL</span></div>
+    </div>
+    <div class="skill">
+      <div class="name">競合アカウント分析<span class="id">bunseki-competitor-account</span></div>
+      <div class="what">参考アカウントを丸ごと分析。伸びてる上位＋最新リールを文字起こしして、<b>サムネの法則・台本の共通構成・伸びてる理由</b>を報告書に。</div>
+      <div class="word"><span class="t">起動ワード</span><span class="pill">競合分析して＋URL</span></div>
+    </div>
+    <div class="skill">
+      <div class="name">自分のアカウント分析<span class="id">bunseki-my-account</span></div>
+      <div class="what">インサイトの画面録画を渡すと、<b>裏側データ×投稿の中身</b>を突き合わせて原因診断・次に作る10本リストまで。</div>
+      <div class="word"><span class="t">起動ワード</span><span class="pill">自分のアカウント分析して</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 報告書見本 -->
+<section class="slide">
+  <div class="kicker">03 ｜ SAMPLE</div>
+  <h2>実物はこんな感じ — <span class="em">1枚のビジュアル報告書</span>が届きます</h2>
+  <div class="shots">
+    <div class="shot"><img src="img/bunseki-reel_報告書見本.png" alt="リール1本分析の報告書見本"><div class="cap">リール1本 徹底分析</div></div>
+    <div class="shot"><img src="img/競合アカウント分析_報告書見本.png" alt="競合アカウント分析の報告書見本"><div class="cap">競合アカウント分析</div></div>
+    <div class="shot"><img src="img/daihon-tensaku_報告書見本.png" alt="台本辛口添削の報告書見本"><div class="cap">台本 辛口添削</div></div>
+  </div>
+</section>
+
+<!-- 13 台本スキル -->
+<section class="slide">
+  <div class="cat-head"><span class="cdot d-sc"></span><h2 style="margin:0">✍️ 台本を作る</h2></div>
+  <div class="skillrow">
+    <div class="skill">
+      <div class="name">型移植 台本作成<span class="id">daihon-copy-make</span></div>
+      <div class="what">参考台本や分析結果から「型」を抽出して、自分の出来事を<b>同じ構成・文体の台本</b>に変換。どんな参考でも「その人風」に。</div>
+      <div class="word"><span class="t">起動ワード</span><span class="pill">この台本を参考に台本を作って</span></div>
+    </div>
+    <div class="skill">
+      <div class="name">台本 辛口添削<span class="id">daihon-tensaku</span></div>
+      <div class="what">台本テキストを貼るだけで<b>6軸100点採点＋1フレーズずつ解説</b>、Before→Afterのリライト完成台本まで。撮影前の最終チェックに。</div>
+      <div class="word"><span class="t">起動ワード</span><span class="pill">台本を添削して</span><span class="pill">この台本どう？</span></div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:16px;background:var(--psy-soft);border-color:#e2ddf5">
+    <h3 style="color:var(--psy)">✨ 応用編：好きな発信者の型を移植する</h3>
+    <p style="font-size:16px">競合アカウント分析でロールモデルを徹底分析 → 口調・構成を自分の台本に移植。代表例として <span class="mono">daihon-kyaba-vlog</span>（大阪弁1日Vlog）と <span class="mono">daihon-eiga-vlog</span>（映画風Vlog）を同梱しています。</p>
+  </div>
+</section>
+
+<!-- 14 編集スキル -->
+<section class="slide">
+  <div class="cat-head"><span class="cdot d-ed"></span><h2 style="margin:0">🎬 動画を編集する</h2></div>
+  <div class="skillrow">
+    <div class="skill">
+      <div class="name">アフレコ動画 自動編集<span class="id">reel-henshu-afreco</span></div>
+      <div class="what">アフレコ音声と素材フォルダを渡すだけで、<b>文字起こし→カード生成→ブラウザの編集画面</b>まで一気に。縦型ショートを書き出せます。</div>
+      <div class="word"><span class="t">起動ワード</span><span class="pill">アフレコ動画を編集して</span></div>
+    </div>
+    <div class="skill">
+      <div class="name">リール完コピ<span class="id">reel-henshu-copy</span></div>
+      <div class="what">参考リールのURLから<b>同じ尺・同じカット割りのカード</b>を発行。自分の素材をはめるだけで編集リズムを丸ごと完コピ。</div>
+      <div class="word"><span class="t">起動ワード</span><span class="pill">このリールを完コピしたい＋URL</span></div>
+    </div>
+    <div class="skill">
+      <div class="name">無音カット<span class="id">cut-silence</span></div>
+      <div class="what">言葉と言葉の<b>「間」を自動でカット</b>してテンポのいい素材に。元ファイルはそのまま残ります。</div>
+      <div class="word"><span class="t">起動ワード</span><span class="pill">間をカットして</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 15 デモ -->
+<section class="slide">
+  <div class="kicker">04 ｜ LIVE DEMO</div>
+  <h2>実演タイム 🎬</h2>
+  <div class="demo-box">
+    <div class="d1">「このリールを分析して」＋URL を、その場でやってみます</div>
+    <div class="d2">話しかけてから報告書が開くまで、画面共有でそのままお見せします</div>
+  </div>
+  <p class="lead" style="margin-top:20px">見てほしいポイント：<b>①話しかけるだけ ②途中は放置でOK ③最後に報告書がブラウザで開く</b></p>
+</section>
+
+<!-- 16 注意点 -->
+<section class="slide">
+  <div class="kicker">05 ｜ TIPS</div>
+  <h2>つまずきやすいポイント</h2>
+  <ul class="warnlist">
+    <li><b>動画編集の初回だけ</b>：編集ツールを自動セットアップします（数分〜十数分・ネット必要）。2回目以降は速いです。</li>
+    <li><b>許可を聞かれたら</b>：「常に許可（今後聞かない）」を選ぶとスムーズ。分析系ではほぼ聞かれません。</li>
+    <li><b>Windows の方</b>：「Windows Terminal」の claude で使ってください（アプリの「Code」タブでは動画編集が動きません）。</li>
+    <li><b>スキルが更新されたら</b>：Discordでお知らせします。<span style="font-family:ui-monospace,monospace">/plugin marketplace update</span> を1回実行するだけ。</li>
+  </ul>
+</section>
+
+<!-- 17 困ったとき -->
+<section class="slide">
+  <div class="kicker">05 ｜ HELP</div>
+  <h2>困ったときの<span class="em">魔法の一手</span></h2>
+  <div class="helpbox">分からない画面が出たら、その画面をスクショして<br>Claude Code に貼り付けて「これどうすればいい？」</div>
+  <p class="lead" style="margin-top:20px;text-align:center">エラーの意味を調べる必要はありません。Claude がその場で解決してくれます。</p>
+</section>
+
+<!-- 18 まとめ -->
+<section class="slide">
+  <div class="kicker">05 ｜ NEXT STEP</div>
+  <h2>今日の宿題：<span class="em">まず1つ、試してみる</span></h2>
+  <div class="cards c3">
+    <div class="card"><div class="big">🥇</div><h3>いちばん簡単</h3>
+      <p>気になるリールのURLをコピーして<br><span class="mono">このリールを分析して＋URL</span></p></div>
+    <div class="card"><div class="big">🥈</div><h3>台本がある人</h3>
+      <p>撮る前の台本を貼り付けて<br><span class="mono">台本を添削して</span></p></div>
+    <div class="card"><div class="big">🥉</div><h3>設計から見直したい人</h3>
+      <p>まっさらな気持ちで<br><span class="mono">自己分析して</span></p></div>
+  </div>
+  <p class="lead" style="margin-top:24px;text-align:center">使ってみた感想・できた報告書は、ぜひ Discord に貼ってください 🙌</p>
+</section>
+
+<div class="pagenum"><span id="cur">1</span> / <span id="total">18</span></div>
+<div class="navhint">← → キーで移動</div>
+
+</div><!-- /stage -->
+
+<script>
+  var stage = document.getElementById('stage');
+  function fit(){
+    var s = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+    stage.style.transform = 'translate(-50%,-50%) scale(' + s + ')';
+  }
+  window.addEventListener('resize', fit);
+  fit();
+
+  var slides = document.querySelectorAll('.slide');
+  var cur = 0;
+  document.getElementById('total').textContent = slides.length;
+  function show(i){
+    cur = Math.max(0, Math.min(slides.length - 1, i));
+    slides.forEach(function(s, j){ s.classList.toggle('active', j === cur); });
+    document.getElementById('cur').textContent = cur + 1;
+    location.hash = cur + 1;
+  }
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') show(cur + 1);
+    if(e.key === 'ArrowLeft' || e.key === 'PageUp') show(cur - 1);
+    if(e.key === 'Home') show(0);
+    if(e.key === 'End') show(slides.length - 1);
+  });
+  document.addEventListener('click', function(e){
+    if(e.clientX > window.innerWidth / 2) show(cur + 1); else show(cur - 1);
+  });
+  show(parseInt(location.hash.slice(1), 10) - 1 || 0);
+</script>
+</body>
+</html>

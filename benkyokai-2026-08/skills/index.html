@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>おとラボ スキル・ツール一覧</title>
+<style>
+  :root{
+    --ink:#3f4a5a; --sub:#8b93a3; --line:#f0e8dd; --bg:#f7f3ec; --card:#fff;
+    --accent:#ec8080; --accent-deep:#e06c6c; --accent-soft:#fdecec;
+    --blue:#6b9bd2; --blue-deep:#5b8ac4; --blue-soft:#e8f1fb;
+    --gold:#d9822b; --gold-soft:#fdf1e3; --green:#57a773; --green-soft:#e9f6ee;
+    --psy:#8b7fd0; --psy-soft:#efecfb;
+    --grad:linear-gradient(135deg,#f19a9a,#f4b183);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:"Hiragino Maru Gothic ProN","Zen Maru Gothic","Hiragino Sans","Yu Gothic",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.8;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1000px;margin:0 auto;padding:40px 22px 80px;}
+  header{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:34px 38px;margin-bottom:26px;position:relative;overflow:hidden;}
+  header::before{content:"";position:absolute;top:0;left:0;right:0;height:8px;background:var(--grad);}
+  .label{font-size:12px;letter-spacing:2px;color:var(--accent-deep);font-weight:700;}
+  header h1{font-size:28px;font-weight:800;margin:6px 0 4px;}
+  header p{font-size:14px;color:var(--sub);}
+  .install{margin-top:18px;background:var(--bg);border-radius:14px;padding:14px 16px;font-size:13px;}
+  .install b{color:var(--accent-deep);}
+  .install code{display:block;background:#2f3542;color:#e8eef5;border-radius:8px;padding:8px 12px;margin-top:6px;
+    font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;overflow-x:auto;}
+  .flow{margin:6px 0 22px;font-size:12.5px;color:var(--sub);text-align:center;}
+  .flow b{color:var(--accent-deep);}
+  .cat{font-size:15px;font-weight:800;margin:28px 0 12px;display:flex;align-items:center;gap:8px;}
+  .cat .dot{width:10px;height:10px;border-radius:50%;}
+  .c-an{background:var(--blue);} .c-de{background:var(--psy);} .c-sc{background:var(--accent);} .c-ed{background:var(--gold);}
+  .startbadge{margin-left:6px;background:var(--psy-soft);color:var(--psy);border-radius:999px;padding:2px 11px;font-size:10.5px;font-weight:700;}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .skill{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 22px;}
+  .skill h3{font-size:17px;font-weight:800;margin-bottom:3px;line-height:1.35;}
+  .id-row{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+  .id-row .id{margin-bottom:0;}
+  .copybtn{flex:0 0 auto;background:var(--accent);color:#fff;border:none;border-radius:999px;
+    padding:3px 11px;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap;font-family:inherit;transition:background .15s;}
+  .copybtn:hover{background:var(--accent-deep);}
+  .copybtn.done{background:var(--green);}
+  .skill .id{font-size:15px;color:var(--accent-deep);font-weight:700;font-family:ui-monospace,monospace;margin-bottom:10px;letter-spacing:.2px;}
+  .skill .what{font-size:13.5px;color:var(--ink);}
+  .words{margin-top:12px;}
+  .words .t{font-size:10.5px;color:var(--accent-deep);font-weight:700;display:block;margin-bottom:5px;}
+  .pill{display:inline-block;background:var(--accent-soft);color:var(--accent-deep);border-radius:999px;
+    padding:3px 11px;font-size:12px;font-weight:700;margin:0 4px 5px 0;}
+  .note{font-size:11.5px;color:var(--sub);margin-top:10px;background:var(--gold-soft);border-radius:10px;padding:7px 11px;}
+  /* 応用編（事例集） */
+  .applied{background:var(--psy-soft);border:1px solid #e2ddf5;border-radius:22px;padding:24px 26px 26px;margin-top:34px;}
+  .applied .ahead{font-size:16px;font-weight:800;color:var(--psy);display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+  .applied .intro{font-size:13px;color:var(--ink);margin-bottom:16px;}
+  .applied .skill{border-color:#e2ddf5;}
+  .opt{display:inline-block;background:var(--psy);color:#fff;border-radius:999px;padding:2px 10px;font-size:10.5px;font-weight:700;margin-left:8px;vertical-align:middle;}
+  footer{text-align:center;font-size:11.5px;color:var(--sub);margin-top:34px;}
+  @media(max-width:720px){.grid{grid-template-columns:1fr;}}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  @media print{
+    body{background:#fff;}
+    .wrap{max-width:none;padding:12px 14px 20px;}
+    header,.skill,.applied{break-inside:avoid;}
+    .cat{break-after:avoid;}
+    .copybtn{display:none;}  /* PDFではボタンは動かないので隠す（HTML版のみの機能） */
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="label">OTOLAB SKILLS</div>
+    <h1>おとラボ スキル・ツール一覧</h1>
+    <p>Claude Code で使える、インスタ運用＆動画編集のスキル集（全12点）</p>
+    <div class="install">
+      <b>導入は最初の1回だけ、この2行を Claude Code に打つだけ：</b>
+      <code>/plugin marketplace add izzzenk-ops/otolab-skills</code>
+      <code>/plugin install otolab-insta@otolab-skills</code>
+    </div>
+  </header>
+
+  <div class="flow">運用の流れ：<b>① 設計</b> → <b>② 分析</b> → <b>③ 台本</b> → <b>④ 編集</b>（この一覧もその順番で並んでいます）</div>
+
+  <!-- ① 設計（講座のスタート地点） -->
+  <div class="cat"><span class="dot c-de"></span>🎯 設計する<span class="startbadge">まずはここから</span></div>
+  <div class="grid">
+    <div class="skill">
+      <h3>アカウント設計</h3><div class="id">insta-concept-design</div>
+      <div class="what">①自己分析インタビュー →②コンセプト設計（誰の・どんな悩みを・どう解決する）→③アカウント名＆プロフィール作成、の3ステップで発信の土台を固めます。<b>すべての出発点</b>。</div>
+      <div class="words"><span class="t">起動ワード</span>
+        <span class="pill">自己分析して</span><span class="pill">コンセプト決めたい</span><span class="pill">アカウント名考えて</span><span class="pill">プロフィール作って</span></div>
+    </div>
+    <div class="skill">
+      <h3>コンセプト磨き上げ</h3><div class="id">concept-brush-up</div>
+      <div class="what">設計で固めたジャンル・コンセプトを、<b>もっと目立てる・差別化できる形</b>に磨き上げたいときに使います。10案をレポートで出し、対話しながら決定版＋プロフ改善案まで仕上げます。</div>
+      <div class="words"><span class="t">起動ワード</span>
+        <span class="pill">コンセプトを磨きたい</span><span class="pill">コンセプト10案出して</span><span class="pill">差別化できるコンセプト</span></div>
+    </div>
+  </div>
+
+  <!-- ② 分析 -->
+  <div class="cat"><span class="dot c-an"></span>📊 分析する</div>
+  <div class="grid">
+    <div class="skill">
+      <h3>リール1本 徹底分析</h3><div class="id">bunseki-reel</div>
+      <div class="what">気になるリール1本のURLを渡すと、動画DL・全文文字起こし・画面解析をして、<b>冒頭フック／サムネ設計／構成／台本と型／視聴者心理／コメント反応／自分への活かし方</b>を1枚の報告書にまとめて開きます。</div>
+      <div class="words"><span class="t">起動ワード</span>
+        <span class="pill">このリールを分析して</span><span class="pill">このリールなんで伸びてるの</span><span class="pill">リールを解剖して</span>＋リールURL</div>
+    </div>
+    <div class="skill">
+      <h3>競合アカウント分析</h3><div class="id">bunseki-competitor-account</div>
+      <div class="what">参考アカウントを丸ごと分析。伸びてる上位＋最新リールを文字起こしして、<b>サムネの法則・台本の共通構成・伸びてる理由・自分への活かし方</b>をサムネ入り報告書に。</div>
+      <div class="words"><span class="t">起動ワード</span>
+        <span class="pill">競合分析して</span><span class="pill">このアカウントを徹底分析して</span><span class="pill">なんで伸びてるのか調べて</span>＋アカウントURL</div>
+    </div>
+    <div class="skill">
+      <h3>自分のアカウント分析</h3><div class="id">bunseki-my-account</div>
+      <div class="what">スマホのインサイト画面録画を渡すと、<b>裏側データ（外部リーチ・視聴維持率・保存率）×投稿の中身</b>を突き合わせ、伸びなかった原因診断・冒頭文5案・次に作る10本リストまで出します。</div>
+      <div class="words"><span class="t">起動ワード</span>
+        <span class="pill">自分のアカウント分析して</span><span class="pill">自分のインサイト分析して</span><span class="pill">次の施策考えて</span></div>
+    </div>
+  </div>
+
+  <!-- ③ 台本 -->
+  <div class="cat"><span class="dot c-sc"></span>✍️ 台本を作る</div>
+  <div class="grid">
+    <div class="skill">
+      <h3>型移植 台本作成</h3><div class="id">daihon-copy-make</div>
+      <div class="what">参考台本や分析結果から「型」を抽出して、自分の出来事を<b>同じ構成・文体・視聴者心理設計</b>の台本に変換。どんな参考でも即席で「その人風」に。</div>
+      <div class="words"><span class="t">起動ワード</span>
+        <span class="pill">この台本を参考に台本を作って</span><span class="pill">〇〇風で今日の出来事を台本にして</span></div>
+    </div>
+    <div class="skill">
+      <h3>台本 辛口添削</h3><div class="id">daihon-tensaku</div>
+      <div class="what">できあがった台本テキストを貼るだけで、動画なしで<b>6軸100点採点＋1フレーズずつ解説（感情の動き／改善案／加えるワード）</b>、Before→Afterのリライト完成台本まで。撮影前の最終チェックに使えます。</div>
+      <div class="words"><span class="t">起動ワード</span>
+        <span class="pill">台本を添削して</span><span class="pill">この台本どう？</span><span class="pill">台本を採点して</span></div>
+    </div>
+  </div>
+
+  <!-- ④ 編集 -->
+  <div class="cat"><span class="dot c-ed"></span>🎬 動画を編集する</div>
+  <div class="grid">
+    <div class="skill">
+      <h3>アフレコ動画 自動編集</h3><div class="id">reel-henshu-afreco</div>
+      <div class="what">アフレコ音声と素材フォルダを渡すだけで、<b>文字起こし→カード生成→素材の自動割り当て→ブラウザの編集画面</b>（テロップ・演出を調整）まで一気に。縦型ショート動画を書き出せます。</div>
+      <div class="words"><span class="t">起動ワード</span>
+        <span class="pill">アフレコ動画を編集して</span></div>
+      <div class="note">💡 Mac＝そのまま／Windows＝「Windows Terminal」の <b>claude</b> で使う（現在テスト中）<br>
+      💡 初回セットアップ時に許可を何度か聞かれます。「<b>常に許可（今後聞かない）</b>」を選べば、以降は聞かれずスムーズに進みます（分析系のスキルではほぼ聞かれません）。</div>
+    </div>
+    <div class="skill">
+      <h3>リール完コピ</h3><div class="id">reel-henshu-copy</div>
+      <div class="what">お手本にしたい参考リールのURLを渡すと、<b>そのリールと同じ尺・同じカット割りでカードを発行</b>。各カードに自分の素材をはめるだけで、伸びているリールの編集リズムを丸ごと完コピできます。カードの秒数は数字で微調整でき、<b>お手本（そのカットだけ再生）</b>を見ながらワンクリックで分割も可能。素材が未割り当てでも参考映像で仮表示して通しプレビューできるので、途中で詰まりません。</div>
+      <div class="words"><span class="t">起動ワード</span>
+        <span class="pill">このリールを完コピしたい</span><span class="pill">参考リールのカット割りで作りたい</span><span class="pill">リール完コピ</span></div>
+      <div class="note">💡 音声（アフレコ）から作るときは上の「アフレコ動画 自動編集」を使います。こちらは<b>音声なし・自分で撮った素材</b>を、伸びているリールの型に流し込む用です（編集画面は共通）。</div>
+    </div>
+    <div class="skill">
+      <h3>無音カット</h3><div class="id">cut-silence</div>
+      <div class="what">動画・音声の<b>言葉と言葉の間（無音）を自動で見つけてカット</b>し、テンポのいい素材に短縮します。しゃべっていない“間”が詰まるので、ダラっとした動画が一気に見やすく。出力は元と同じフォルダに <b>元の名前_cut.mp4</b>（音声だけなら _cut.m4a）で保存され、元ファイルはそのまま残ります。</div>
+      <div class="words"><span class="t">起動ワード</span>
+        <span class="pill">間をカットして</span><span class="pill">無音をカット</span><span class="pill">動画を短くして</span><span class="pill">ジャンプカットして</span></div>
+      <div class="note">💡 <b>Apple Silicon Mac 専用</b>。初回だけ ffmpeg が必要で、入っていなければ入れ方を案内します（1回入れれば以降は不要）。</div>
+    </div>
+  </div>
+
+  <!-- 応用編（事例集） -->
+  <div class="applied">
+    <div class="ahead">✨ 応用編：好きな発信者の“型”を移植する（事例集）</div>
+    <div class="intro">ここは基本スキルではなく、<b>「使い方の応用例」</b>です。<br>
+    まず <b>競合アカウント分析</b> で、お手本にしたい発信者（自分のロールモデル）を徹底分析 → その人の<b>口調・言い回し・構成</b>を自分の台本に移植する、という使い方ができます。下の2つは、その代表例（特定の発信者スタイルを再現するテンプレ）です。</div>
+    <div class="grid">
+      <div class="skill">
+        <h3>大阪弁 1日Vlog台本<span class="opt">応用</span></h3><div class="id">daihon-kyaba-vlog</div>
+        <div class="what">その日の出来事を話すと、<b>大阪弁・一人称の等身大な実況ナレーション</b>の1日Vlog台本に変換。※特定の発信者スタイルの再現例です。</div>
+        <div class="words"><span class="t">起動ワード</span>
+          <span class="pill">vlog台本書いて</span><span class="pill">1日Vlogの台本作って</span><span class="pill">今日あったことで台本書いて</span></div>
+      </div>
+      <div class="skill">
+        <h3>映画風 Vlog台本<span class="opt">応用</span></h3><div class="id">daihon-eiga-vlog</div>
+        <div class="what">その日の出来事を、<b>映画・ドキュメンタリーのナレーター文体</b>（三人称・皮肉・官僚語）のVlog台本に変換。※特定の発信者スタイルの再現例です。</div>
+        <div class="words"><span class="t">起動ワード</span>
+          <span class="pill">映画風台本書いて</span><span class="pill">映画風にして</span></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>おとラボ スキル・ツール一覧（全12スキル）｜ 更新: 2026/07/28 ｜ 導入で困ったら、画面をスクショして Claude Code に貼って聞いてください</footer>
+</div>
+<script>
+// 各スキルカードの名前の横に「コピー」ボタンを差し込む。
+// 押すとそのスキルの起動ワード（最初のワード）をコピーできるので、
+// Claude Code にそのまま貼り付けて使える。※クリップボードはHTML版でのみ動作（PDFは静的）。
+document.querySelectorAll('.skill').forEach(function(card){
+  var idEl = card.querySelector('.id');
+  if(!idEl) return;
+  var phrase = idEl.textContent.trim();  // 英語のスキル名（ID）。これ自体が起動フレーズなので貼れば動く
+  // 英語スキル名(ID)の「横」にコピーボタンを置く（同じ行に並べる）
+  var head = document.createElement('div');
+  head.className = 'id-row';
+  idEl.parentNode.insertBefore(head, idEl);
+  head.appendChild(idEl);
+  var btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'copybtn';
+  btn.textContent = '📋 コピー';
+  btn.title = 'スキル名「' + phrase + '」をコピー（Claude Codeに貼って使えます）';
+  btn.addEventListener('click', function(){
+    function done(){ btn.textContent = '✓ コピーした'; btn.classList.add('done');
+      setTimeout(function(){ btn.textContent = '📋 コピー'; btn.classList.remove('done'); }, 1600); }
+    function fallback(){ var ta = document.createElement('textarea'); ta.value = phrase;
+      ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.focus(); ta.select();
+      try{ document.execCommand('copy'); }catch(e){} document.body.removeChild(ta); done(); }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(phrase).then(done, fallback);
+    } else { fallback(); }
+  });
+  head.appendChild(btn);
+});
+</script>
+</body>
+</html>

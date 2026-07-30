@@ -30,6 +30,16 @@
   .prep li{padding:3px 0 3px 20px;position:relative;}
   .prep li::before{content:"✓";position:absolute;left:0;color:var(--blue-deep);font-weight:800;}
   .prep .mini{font-size:12px;color:var(--sub);}
+  .brew{margin-top:12px;background:#fff;border:1px solid #d5e6f7;border-radius:14px;overflow:hidden;}
+  .brew summary{cursor:pointer;list-style:none;padding:11px 16px;font-size:13px;font-weight:800;
+    color:var(--blue-deep);background:#f3f9ff;user-select:none;}
+  .brew summary::-webkit-details-marker{display:none;}
+  .brew summary::after{content:"＋ 開く";float:right;font-size:11.5px;font-weight:700;color:var(--sub);}
+  .brew[open] summary::after{content:"− 閉じる";}
+  .brewbody{padding:14px 16px 16px;}
+  .brewbody .mini{font-size:12.5px;color:var(--ink);display:block;margin-top:10px;}
+  .brewbody .mini:first-child{margin-top:0;}
+  .brewbody .cmd code{font-size:11.5px;white-space:pre-wrap;}
 
   /* STEP */
   .step{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px 26px;margin-bottom:16px;position:relative;}
@@ -52,6 +62,11 @@
   .done-card{background:var(--green-soft);border:1px solid #cfe9d8;border-radius:20px;padding:24px 26px;margin:22px 0 16px;}
   .done-card h2{font-size:17px;font-weight:800;color:#3d8159;display:flex;align-items:center;gap:8px;margin-bottom:8px;}
   .done-card p{font-size:13.5px;}
+  .seemore{margin-top:14px;background:#fff;border:1px solid #cfe9d8;border-radius:14px;padding:13px 16px;font-size:13px;}
+  .seemore a{display:block;margin-top:5px;color:var(--accent-deep);font-weight:800;word-break:break-all;
+    font-size:13.5px;text-decoration:none;}
+  .seemore a:hover{text-decoration:underline;}
+  .seemore .mini2{display:block;font-size:11.5px;color:var(--sub);margin-top:5px;}
   .done-card .try{margin-top:12px;}
   .pill{display:inline-block;background:#fff;color:#3d8159;border:1px solid #cfe9d8;border-radius:999px;
     padding:4px 13px;font-size:12.5px;font-weight:700;margin:0 5px 6px 0;}
@@ -89,9 +104,40 @@
   <div class="prep">
     <h2>🧰 はじめる前に</h2>
     <ul>
-      <li><b>Claude Code</b> が使える状態（アプリの「Code」モード、またはターミナルの <b>claude</b>）</li>
-      <li><span class="mini"><b>Mac の方で「動画編集」も使いたい場合のみ</b>：Homebrew が必要です（未導入なら <b>https://brew.sh</b>）。分析・台本スキルだけなら不要です。</span></li>
+      <li><b>Claude Code が使える状態</b>にしておいてください。使い方は2通りあります：
+        <br><span class="mini">・<b>Claude デスクトップアプリ</b>（パソコンにインストールするアプリ）を開いて、左上の <b>「Code」</b> に切り替える　←ふだんはこちらが簡単です
+        <br>・または <b>ターミナル</b>（Macは「ターミナル」アプリ／Windowsは「Windows Terminal」）で <b>claude</b> と打って起動する</span></li>
+      <li><b>Mac の方</b>：そのまま進んでOKです。
+        <br><span class="mini">「動画編集」スキルも使いたい場合のみ、先に <b>Homebrew</b> を入れておくと途中で止まりません（入れ方は下の折りたたみを参照）。分析・台本スキルだけなら不要です。</span></li>
+      <li><b>Windows の方</b>：<b>「Windows Terminal」から <code class="inline">claude</code> で起動</b>してください。
+        <br><span class="mini">デスクトップアプリの「Code」タブでは、動画編集スキルが動かないことをテストで確認しています（分析・台本スキルはどちらでも動きます）。「Windows Terminal」はスタートメニューで「terminal」と検索すると出てきます（無い場合は Microsoft Store から無料で入ります）。Homebrew は Mac 専用なので、Windows の方は不要です。</span></li>
     </ul>
+
+    <details class="brew">
+      <summary>🍺 Homebrew の入れ方（Mac で動画編集を使う方だけ・3分）</summary>
+      <div class="brewbody">
+        <p class="mini"><b>Homebrew（ホームブリュー）</b>は、動画編集に必要な部品を自動で入れてくれる道具です。1回入れれば、あとはずっと使えます。</p>
+        <p class="mini"><b>① まず入っているか確認</b>：Mac標準の「ターミナル」アプリを開いて、下を貼って実行。バージョン（例：Homebrew 4.x.x）が出たら<b>導入ずみなので何もしなくてOK</b>です。</p>
+        <div class="cmd">
+          <code id="b1">brew --version</code>
+          <button class="copy" data-target="b1">コピー</button>
+        </div>
+        <p class="mini"><b>② <code class="inline">command not found</code> と出たら</b>、下を貼って実行（公式のインストーラーです）。</p>
+        <div class="cmd">
+          <code id="b2">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code>
+          <button class="copy" data-target="b2">コピー</button>
+        </div>
+        <p class="mini">途中で <b>Macのログインパスワード</b>を聞かれます。打っても画面には何も表示されませんが、そのまま入力して Enter で進みます。数分かかります。</p>
+        <p class="mini"><b>③ 使えるようにする</b>（この2行を忘れると「入れたのに見つからない」となります）。</p>
+        <div class="cmd">
+          <code id="b3">echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' &gt;&gt; ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"</code>
+          <button class="copy" data-target="b3">コピー</button>
+        </div>
+        <p class="mini"><b>④ もう一度 <code class="inline">brew --version</code></b> を実行して、バージョンが出れば完了です。</p>
+        <p class="mini">💡 うまくいかないときは、その画面をスクショして Claude Code に貼り、「これどうすればいい？」と聞けば教えてくれます。</p>
+      </div>
+    </details>
   </div>
 
   <div class="step">
@@ -154,6 +200,11 @@
       <span class="pill">台本を添削して</span>
       <span class="pill">アフレコ動画を編集して</span>
       <span class="pill">このリールを完コピしたい＋URL</span>
+    </div>
+    <div class="seemore">
+      📖 <b>どんなスキルがあるか・どんな報告書がもらえるかは、こちらで全部見られます</b>
+      <a href="https://otolabo.keji-insta.workers.dev/guides/skills" target="_blank" rel="noopener">https://otolabo.keji-insta.workers.dev/guides/skills</a>
+      <span class="mini2">スキルごとに「もらえる報告書」「操作画面」の画像つき。起動ワードもここにまとまっています。</span>
     </div>
   </div>
 

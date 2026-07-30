@@ -48,6 +48,28 @@
   .pill{display:inline-block;background:var(--accent-soft);color:var(--accent-deep);border-radius:999px;
     padding:3px 11px;font-size:12px;font-weight:700;margin:0 4px 5px 0;}
   .note{font-size:11.5px;color:var(--sub);margin-top:10px;background:var(--gold-soft);border-radius:10px;padding:7px 11px;}
+  /* プレビュー画像（クリックで拡大） */
+  .prev{margin:12px 0 4px;}
+  .prev .kind{display:inline-block;border-radius:999px;padding:2px 10px;font-size:10.5px;font-weight:800;margin-bottom:6px;}
+  .kind.rep{background:var(--blue-soft);color:var(--blue-deep);}   /* 📄 もらえる報告書 */
+  .kind.ui{background:var(--gold-soft);color:var(--gold);}         /* 🖥️ 操作画面 */
+  .kind.out{background:var(--psy-soft);color:var(--psy);}           /* ✍️ 出力の見本 */
+  .shot{display:block;width:100%;border:1px solid var(--line);border-radius:12px;background:var(--bg);
+    cursor:zoom-in;max-height:210px;object-fit:cover;object-position:top;transition:box-shadow .15s,transform .15s;}
+  .shot:hover{box-shadow:0 6px 18px rgba(63,74,90,.13);transform:translateY(-2px);}
+  .shotcap{font-size:10.5px;color:var(--sub);margin-top:5px;text-align:right;}
+  /* ライトボックス */
+  .lb{position:fixed;inset:0;background:rgba(45,52,64,.86);display:none;z-index:99;padding:26px;overflow:auto;}
+  .lb.on{display:block;}
+  .lb img{display:block;max-width:1000px;width:100%;margin:0 auto;border-radius:14px;background:#fff;}
+  .lb .x{position:fixed;top:16px;right:22px;background:#fff;color:var(--ink);border:none;border-radius:999px;
+    width:42px;height:42px;font-size:20px;font-weight:800;cursor:pointer;font-family:inherit;}
+  .lb .cap{color:#fff;text-align:center;font-size:13px;font-weight:700;margin-bottom:12px;}
+  /* 目次ナビ */
+  .nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 22px;}
+  .nav a{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 15px;
+    font-size:12.5px;font-weight:700;color:var(--ink);text-decoration:none;}
+  .nav a:hover{border-color:var(--accent);color:var(--accent-deep);}
   /* 応用編（事例集） */
   .applied{background:var(--psy-soft);border:1px solid #e2ddf5;border-radius:22px;padding:24px 26px 26px;margin-top:34px;}
   .applied .ahead{font-size:16px;font-weight:800;color:var(--psy);display:flex;align-items:center;gap:8px;margin-bottom:8px;}
@@ -63,6 +85,9 @@
     header,.skill,.applied{break-inside:avoid;}
     .cat{break-after:avoid;}
     .copybtn{display:none;}  /* PDFではボタンは動かないので隠す（HTML版のみの機能） */
+    .lb,.nav{display:none !important;}  /* 拡大表示・ページ内ナビはPDFでは不要 */
+    .shot{max-height:150px;}            /* 紙では小さめに（雰囲気が伝わればよい） */
+    .shotcap{display:none;}
   }
 </style>
 </head>
@@ -72,7 +97,7 @@
   <header>
     <div class="label">OTOLAB SKILLS</div>
     <h1>おとラボ スキル・ツール一覧</h1>
-    <p>Claude Code で使える、インスタ運用＆動画編集のスキル集（全12点）</p>
+    <p>Claude Code で使える、インスタ運用＆動画編集のスキル集（全14点）</p>
     <div class="install">
       <b>導入は最初の1回だけ、この2行を Claude Code に打つだけ：</b>
       <code>/plugin marketplace add izzzenk-ops/otolab-skills</code>
@@ -82,69 +107,140 @@
 
   <div class="flow">運用の流れ：<b>① 設計</b> → <b>② 分析</b> → <b>③ 台本</b> → <b>④ 編集</b>（この一覧もその順番で並んでいます）</div>
 
+  <div class="nav">
+    <a href="#sec-design">🎯 設計する</a>
+    <a href="#sec-analyze">📊 分析する</a>
+    <a href="#sec-script">✍️ 台本を作る</a>
+    <a href="#sec-edit">🎬 動画を編集する</a>
+  </div>
+
   <!-- ① 設計（講座のスタート地点） -->
-  <div class="cat"><span class="dot c-de"></span>🎯 設計する<span class="startbadge">まずはここから</span></div>
+  <div class="cat" id="sec-design"><span class="dot c-de"></span>🎯 設計する<span class="startbadge">まずはここから</span></div>
   <div class="grid">
     <div class="skill">
       <h3>アカウント設計</h3><div class="id">insta-concept-design</div>
       <div class="what">①自己分析インタビュー →②コンセプト設計（誰の・どんな悩みを・どう解決する）→③アカウント名＆プロフィール作成、の3ステップで発信の土台を固めます。<b>すべての出発点</b>。</div>
+      <div class="prev">
+        <span class="kind ui">🖥️ 操作画面</span>
+        <img class="shot" src="images/insta-concept-design.png" alt="Chromeで開く設計ツール（コンセプトを選ぶ画面）" data-cap="Chromeで開く設計ツール（コンセプトを選ぶ画面）" loading="lazy">
+        <div class="shotcap">クリックで拡大 ↗</div>
+      </div>
       <div class="words"><span class="t">起動ワード</span>
         <span class="pill">自己分析して</span><span class="pill">コンセプト決めたい</span><span class="pill">アカウント名考えて</span><span class="pill">プロフィール作って</span></div>
     </div>
     <div class="skill">
+      <h3>ジャンル選定</h3><div class="id">genre-sentei</div>
+      <div class="what">どのジャンルで発信するかを、感覚ではなく<b>市場の数字</b>で決めます。候補ジャンルを一緒に出し、あなたのスマホ巡回と組み合わせて「今も伸びるか・収益化できるか」を判定→<b>戦うジャンルを1つに確定</b>して報告書にします。</div>
+      <div class="prev">
+        <span class="kind rep">📄 もらえる報告書</span>
+        <img class="shot" src="images/genre-sentei.png" alt="候補ジャンルの判定表と確定ジャンル" data-cap="候補ジャンルの判定表と確定ジャンル" loading="lazy">
+        <div class="shotcap">クリックで拡大 ↗</div>
+      </div>
+      <div class="words"><span class="t">起動ワード</span>
+        <span class="pill">ジャンル選定して</span><span class="pill">ジャンル決めたい</span><span class="pill">何を発信したらいいかわからない</span></div>
+      <div class="note">💡 途中で「スマホで1日15分×2〜3日の巡回宿題」が出ます。見つけたアカウントを提出すると続きが再開します。</div>
+    </div>
+    <div class="skill">
       <h3>コンセプト磨き上げ</h3><div class="id">concept-brush-up</div>
       <div class="what">設計で固めたジャンル・コンセプトを、<b>もっと目立てる・差別化できる形</b>に磨き上げたいときに使います。10案をレポートで出し、対話しながら決定版＋プロフ改善案まで仕上げます。</div>
+      <div class="prev">
+        <span class="kind rep">📄 もらえる報告書</span>
+        <img class="shot" src="images/concept-brush-up.png" alt="差別化コンセプト10案（抜粋）" data-cap="差別化コンセプト10案（抜粋）" loading="lazy">
+        <div class="shotcap">クリックで拡大 ↗</div>
+      </div>
       <div class="words"><span class="t">起動ワード</span>
         <span class="pill">コンセプトを磨きたい</span><span class="pill">コンセプト10案出して</span><span class="pill">差別化できるコンセプト</span></div>
     </div>
   </div>
 
   <!-- ② 分析 -->
-  <div class="cat"><span class="dot c-an"></span>📊 分析する</div>
+  <div class="cat" id="sec-analyze"><span class="dot c-an"></span>📊 分析する</div>
   <div class="grid">
+    <div class="skill">
+      <h3>バズ企画リサーチ</h3><div class="id">buzz-kikaku-research</div>
+      <div class="what">発見欄で「なんか手が止まった」リールのURLを貼ると、<b>それが本物のバズか数字で判定</b>（フォロワー×10倍 or 100万再生）。伸びてる投稿と伸びてない投稿の<b>冒頭7秒</b>を比べて「なぜ伸びたか」の仮説を出し、あなたの企画への使い方まで提案します。判定の数字を毎回全部見せるので、<b>使うほど自分で見抜けるように</b>なります。</div>
+      <div class="prev">
+        <span class="kind rep">📄 もらえる報告書</span>
+        <img class="shot" src="images/buzz-kikaku-research.png" alt="バズ判定とフック仮説カード" data-cap="バズ判定とフック仮説カード" loading="lazy">
+        <div class="shotcap">クリックで拡大 ↗</div>
+      </div>
+      <div class="words"><span class="t">起動ワード</span>
+        <span class="pill">この投稿バズってる？</span><span class="pill">なんで伸びてるのか仮説を立てて</span><span class="pill">バズ企画リサーチ</span>＋リールURL</div>
+      <div class="note">💡 見つけた仮説は「ネタ帳」に貯まります。投稿ネタに困ったら「<b>ネタ帳から出して</b>」で企画を提案してもらえます。</div>
+    </div>
     <div class="skill">
       <h3>リール1本 徹底分析</h3><div class="id">bunseki-reel</div>
       <div class="what">気になるリール1本のURLを渡すと、動画DL・全文文字起こし・画面解析をして、<b>冒頭フック／サムネ設計／構成／台本と型／視聴者心理／コメント反応／自分への活かし方</b>を1枚の報告書にまとめて開きます。</div>
+      <div class="prev">
+        <span class="kind rep">📄 もらえる報告書</span>
+        <img class="shot" src="images/bunseki-reel.png" alt="リール1本の解剖レポート" data-cap="リール1本の解剖レポート" loading="lazy">
+        <div class="shotcap">クリックで拡大 ↗</div>
+      </div>
       <div class="words"><span class="t">起動ワード</span>
         <span class="pill">このリールを分析して</span><span class="pill">このリールなんで伸びてるの</span><span class="pill">リールを解剖して</span>＋リールURL</div>
     </div>
     <div class="skill">
       <h3>競合アカウント分析</h3><div class="id">bunseki-competitor-account</div>
       <div class="what">参考アカウントを丸ごと分析。伸びてる上位＋最新リールを文字起こしして、<b>サムネの法則・台本の共通構成・伸びてる理由・自分への活かし方</b>をサムネ入り報告書に。</div>
+      <div class="prev">
+        <span class="kind rep">📄 もらえる報告書</span>
+        <img class="shot" src="images/bunseki-competitor-account.png" alt="サムネ入りの競合分析レポート" data-cap="サムネ入りの競合分析レポート" loading="lazy">
+        <div class="shotcap">クリックで拡大 ↗</div>
+      </div>
       <div class="words"><span class="t">起動ワード</span>
         <span class="pill">競合分析して</span><span class="pill">このアカウントを徹底分析して</span><span class="pill">なんで伸びてるのか調べて</span>＋アカウントURL</div>
     </div>
     <div class="skill">
       <h3>自分のアカウント分析</h3><div class="id">bunseki-my-account</div>
       <div class="what">スマホのインサイト画面録画を渡すと、<b>裏側データ（外部リーチ・視聴維持率・保存率）×投稿の中身</b>を突き合わせ、伸びなかった原因診断・冒頭文5案・次に作る10本リストまで出します。</div>
+      <div class="prev">
+        <span class="kind rep">📄 もらえる報告書</span>
+        <img class="shot" src="images/bunseki-my-account.png" alt="自分の投稿の原因診断と次の10本" data-cap="自分の投稿の原因診断と次の10本" loading="lazy">
+        <div class="shotcap">クリックで拡大 ↗</div>
+      </div>
       <div class="words"><span class="t">起動ワード</span>
         <span class="pill">自分のアカウント分析して</span><span class="pill">自分のインサイト分析して</span><span class="pill">次の施策考えて</span></div>
     </div>
   </div>
 
   <!-- ③ 台本 -->
-  <div class="cat"><span class="dot c-sc"></span>✍️ 台本を作る</div>
+  <div class="cat" id="sec-script"><span class="dot c-sc"></span>✍️ 台本を作る</div>
   <div class="grid">
     <div class="skill">
       <h3>型移植 台本作成</h3><div class="id">daihon-copy-make</div>
       <div class="what">参考台本や分析結果から「型」を抽出して、自分の出来事を<b>同じ構成・文体・視聴者心理設計</b>の台本に変換。どんな参考でも即席で「その人風」に。</div>
+      <div class="prev">
+        <span class="kind out">✍️ 出力の見本</span>
+        <img class="shot" src="images/daihon-copy-make.png" alt="抽出した型と、あなた版の完成台本" data-cap="抽出した型と、あなた版の完成台本" loading="lazy">
+        <div class="shotcap">クリックで拡大 ↗</div>
+      </div>
       <div class="words"><span class="t">起動ワード</span>
         <span class="pill">この台本を参考に台本を作って</span><span class="pill">〇〇風で今日の出来事を台本にして</span></div>
     </div>
     <div class="skill">
       <h3>台本 辛口添削</h3><div class="id">daihon-tensaku</div>
       <div class="what">できあがった台本テキストを貼るだけで、動画なしで<b>6軸100点採点＋1フレーズずつ解説（感情の動き／改善案／加えるワード）</b>、Before→Afterのリライト完成台本まで。撮影前の最終チェックに使えます。</div>
+      <div class="prev">
+        <span class="kind rep">📄 もらえる報告書</span>
+        <img class="shot" src="images/daihon-tensaku.png" alt="6軸採点と1フレーズずつの添削" data-cap="6軸採点と1フレーズずつの添削" loading="lazy">
+        <div class="shotcap">クリックで拡大 ↗</div>
+      </div>
       <div class="words"><span class="t">起動ワード</span>
         <span class="pill">台本を添削して</span><span class="pill">この台本どう？</span><span class="pill">台本を採点して</span></div>
     </div>
   </div>
 
   <!-- ④ 編集 -->
-  <div class="cat"><span class="dot c-ed"></span>🎬 動画を編集する</div>
+  <div class="cat" id="sec-edit"><span class="dot c-ed"></span>🎬 動画を編集する</div>
   <div class="grid">
     <div class="skill">
       <h3>アフレコ動画 自動編集</h3><div class="id">reel-henshu-afreco</div>
       <div class="what">アフレコ音声と素材フォルダを渡すだけで、<b>文字起こし→カード生成→素材の自動割り当て→ブラウザの編集画面</b>（テロップ・演出を調整）まで一気に。縦型ショート動画を書き出せます。</div>
+      <div class="prev">
+        <span class="kind ui">🖥️ 操作画面</span>
+        <img class="shot" src="images/reel-henshu-afreco.png" alt="ブラウザ編集画面（カードに素材を割り当て）" data-cap="ブラウザ編集画面（カードに素材を割り当て）" loading="lazy">
+        <div class="shotcap">クリックで拡大 ↗</div>
+      </div>
       <div class="words"><span class="t">起動ワード</span>
         <span class="pill">アフレコ動画を編集して</span></div>
       <div class="note">💡 Mac＝そのまま／Windows＝「Windows Terminal」の <b>claude</b> で使う（現在テスト中）<br>
@@ -153,6 +249,11 @@
     <div class="skill">
       <h3>リール完コピ</h3><div class="id">reel-henshu-copy</div>
       <div class="what">お手本にしたい参考リールのURLを渡すと、<b>そのリールと同じ尺・同じカット割りでカードを発行</b>。各カードに自分の素材をはめるだけで、伸びているリールの編集リズムを丸ごと完コピできます。カードの秒数は数字で微調整でき、<b>お手本（そのカットだけ再生）</b>を見ながらワンクリックで分割も可能。素材が未割り当てでも参考映像で仮表示して通しプレビューできるので、途中で詰まりません。</div>
+      <div class="prev">
+        <span class="kind ui">🖥️ 操作画面</span>
+        <img class="shot" src="images/reel-henshu-copy.png" alt="お手本と並べて完コピする編集画面" data-cap="お手本と並べて完コピする編集画面" loading="lazy">
+        <div class="shotcap">クリックで拡大 ↗</div>
+      </div>
       <div class="words"><span class="t">起動ワード</span>
         <span class="pill">このリールを完コピしたい</span><span class="pill">参考リールのカット割りで作りたい</span><span class="pill">リール完コピ</span></div>
       <div class="note">💡 音声（アフレコ）から作るときは上の「アフレコ動画 自動編集」を使います。こちらは<b>音声なし・自分で撮った素材</b>を、伸びているリールの型に流し込む用です（編集画面は共通）。</div>
@@ -160,6 +261,11 @@
     <div class="skill">
       <h3>無音カット</h3><div class="id">cut-silence</div>
       <div class="what">動画・音声の<b>言葉と言葉の間（無音）を自動で見つけてカット</b>し、テンポのいい素材に短縮します。しゃべっていない“間”が詰まるので、ダラっとした動画が一気に見やすく。出力は元と同じフォルダに <b>元の名前_cut.mp4</b>（音声だけなら _cut.m4a）で保存され、元ファイルはそのまま残ります。</div>
+      <div class="prev">
+        <span class="kind out">✍️ 出力の見本</span>
+        <img class="shot" src="images/cut-silence.png" alt="カット前後の比較と実行画面" data-cap="カット前後の比較と実行画面" loading="lazy">
+        <div class="shotcap">クリックで拡大 ↗</div>
+      </div>
       <div class="words"><span class="t">起動ワード</span>
         <span class="pill">間をカットして</span><span class="pill">無音をカット</span><span class="pill">動画を短くして</span><span class="pill">ジャンプカットして</span></div>
       <div class="note">💡 <b>Apple Silicon Mac 専用</b>。初回だけ ffmpeg が必要で、入っていなければ入れ方を案内します（1回入れれば以降は不要）。</div>
@@ -175,21 +281,58 @@
       <div class="skill">
         <h3>大阪弁 1日Vlog台本<span class="opt">応用</span></h3><div class="id">daihon-kyaba-vlog</div>
         <div class="what">その日の出来事を話すと、<b>大阪弁・一人称の等身大な実況ナレーション</b>の1日Vlog台本に変換。※特定の発信者スタイルの再現例です。</div>
+        <div class="prev">
+          <span class="kind out">✍️ 出力の見本</span>
+          <img class="shot" src="images/daihon-kyaba-vlog.png" alt="大阪弁・一人称の1日Vlog台本" data-cap="大阪弁・一人称の1日Vlog台本" loading="lazy">
+          <div class="shotcap">クリックで拡大 ↗</div>
+        </div>
         <div class="words"><span class="t">起動ワード</span>
           <span class="pill">vlog台本書いて</span><span class="pill">1日Vlogの台本作って</span><span class="pill">今日あったことで台本書いて</span></div>
       </div>
       <div class="skill">
         <h3>映画風 Vlog台本<span class="opt">応用</span></h3><div class="id">daihon-eiga-vlog</div>
         <div class="what">その日の出来事を、<b>映画・ドキュメンタリーのナレーター文体</b>（三人称・皮肉・官僚語）のVlog台本に変換。※特定の発信者スタイルの再現例です。</div>
+        <div class="prev">
+          <span class="kind out">✍️ 出力の見本</span>
+          <img class="shot" src="images/daihon-eiga-vlog.png" alt="映画風ナレーションの1日Vlog台本" data-cap="映画風ナレーションの1日Vlog台本" loading="lazy">
+          <div class="shotcap">クリックで拡大 ↗</div>
+        </div>
         <div class="words"><span class="t">起動ワード</span>
           <span class="pill">映画風台本書いて</span><span class="pill">映画風にして</span></div>
       </div>
     </div>
   </div>
 
-  <footer>おとラボ スキル・ツール一覧（全12スキル）｜ 更新: 2026/07/28 ｜ 導入で困ったら、画面をスクショして Claude Code に貼って聞いてください</footer>
+  <footer>おとラボ スキル・ツール一覧（全14スキル）｜ 更新: 2026/07/30 ｜ 導入で困ったら、画面をスクショして Claude Code に貼って聞いてください</footer>
 </div>
+
+<!-- 画像の拡大表示（クリックで開く） -->
+<div class="lb" id="lb">
+  <button class="x" type="button" id="lbx" aria-label="閉じる">×</button>
+  <div class="cap" id="lbcap"></div>
+  <img id="lbimg" src="" alt="">
+</div>
+
 <script>
+// プレビュー画像をクリックすると、原寸で拡大表示する（もらえる報告書・操作画面の中身を読める）
+(function(){
+  var lb = document.getElementById('lb'), img = document.getElementById('lbimg'), cap = document.getElementById('lbcap');
+  function close(){ lb.classList.remove('on'); document.body.style.overflow = ''; }
+  document.querySelectorAll('.shot').forEach(function(el){
+    el.addEventListener('click', function(){
+      img.src = el.getAttribute('src');
+      img.alt = el.getAttribute('alt') || '';
+      cap.textContent = el.dataset.cap || '';
+      lb.classList.add('on');
+      lb.scrollTop = 0;
+      document.body.style.overflow = 'hidden';  // 背面のスクロールを止める
+    });
+  });
+  document.getElementById('lbx').addEventListener('click', close);
+  lb.addEventListener('click', function(e){ if(e.target !== img) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
+})();
+
 // 各スキルカードの名前の横に「コピー」ボタンを差し込む。
 // 押すとそのスキルの起動ワード（最初のワード）をコピーできるので、
 // Claude Code にそのまま貼り付けて使える。※クリップボードはHTML版でのみ動作（PDFは静的）。

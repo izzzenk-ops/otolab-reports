@@ -70,6 +70,9 @@
   .discord{margin-top:11px;background:#eef0fb;border:1px solid #d9ddf5;border-radius:12px;
     padding:10px 14px;font-size:12.5px;color:var(--ink);}
   .discord b{color:#5865F2;}
+  .discord.folder{background:#fdf1e3;border-color:#f0dcc0;}
+  .discord.folder b{color:#d9822b;}
+  .discord.folder .mini2 b{color:#b8762a;}
   .done-card .try{margin-top:12px;}
   .pill{display:inline-block;background:#fff;color:#3d8159;border:1px solid #cfe9d8;border-radius:999px;
     padding:4px 13px;font-size:12.5px;font-weight:700;margin:0 5px 6px 0;}
@@ -109,12 +112,32 @@
     <ul>
       <li><b>Claude Code が使える状態</b>にしておいてください。使い方は2通りあります：
         <br><span class="mini">・<b>Claude デスクトップアプリ</b>（パソコンにインストールするアプリ）を開いて、左上の <b>「Code」</b> に切り替える　←ふだんはこちらが簡単です
-        <br>・または <b>ターミナル</b>（Macは「ターミナル」アプリ／Windowsは「Windows Terminal」）で <b>claude</b> と打って起動する</span></li>
+        <br>・または <b>ターミナル</b>（Macは「ターミナル」アプリ／Windowsは「Windows Terminal」）で <b>claude</b> と打って起動する
+        <br><b style="color:#e06c6c;">※この2つは別物です。</b>デスクトップアプリを入れても、ターミナルの <code class="inline">claude</code> は使えるようになりません（逆も同じ）。<b>どちらか片方でOK</b>ですが、動画編集スキルも使う Windows の方はターミナル版が必要です。<b>「まだ入っていない」「claude と打っても反応しない」方は下の折りたたみへ👇</b></span></li>
       <li><b>Mac の方</b>：そのまま進んでOKです。
         <br><span class="mini">「動画編集」スキルも使いたい場合のみ、先に <b>Homebrew</b> を入れておくと途中で止まりません（入れ方は下の折りたたみを参照）。分析・台本スキルだけなら不要です。</span></li>
       <li><b>Windows の方</b>：<b>「Windows Terminal」から <code class="inline">claude</code> で起動</b>してください。
         <br><span class="mini">デスクトップアプリの「Code」タブでは、動画編集スキルが動かないことをテストで確認しています（分析・台本スキルはどちらでも動きます）。「Windows Terminal」はスタートメニューで「terminal」と検索すると出てきます（無い場合は Microsoft Store から無料で入ります）。Homebrew は Mac 専用なので、Windows の方は不要です。</span></li>
     </ul>
+
+    <details class="brew">
+      <summary>⚙️ Claude Code が入っていない・「claude」で反応しないとき（3分）</summary>
+      <div class="brewbody">
+        <p class="mini"><b>デスクトップアプリだけ入れていて、ターミナルで <code class="inline">claude</code> が使えない</b>のはよくあることです（別のソフト扱いなので）。ターミナル版を使いたいときは、下の1行を入れるだけです。</p>
+        <p class="mini"><b>【Mac の方】</b>「ターミナル」アプリを開いて、下を貼って実行してください。</p>
+        <div class="cmd">
+          <code id="i1">curl -fsSL https://claude.ai/install.sh | bash</code>
+          <button class="copy" data-target="i1">コピー</button>
+        </div>
+        <p class="mini"><b>【Windows の方】</b>「Windows Terminal」を開いて、下を貼って実行してください。</p>
+        <div class="cmd">
+          <code id="i2">irm https://claude.ai/install.ps1 | iex</code>
+          <button class="copy" data-target="i2">コピー</button>
+        </div>
+        <p class="mini"><b>終わったら、ターミナルを一度閉じて開き直してから</b> <code class="inline">claude</code> と打ってください。Claude Code が立ち上がれば成功です。初回はログインを求められるので、いつものアカウントでログインしてください。</p>
+        <p class="mini">💡 デスクトップアプリの「Code」モードだけで進める方は、この作業は不要です（分析・台本スキルはどちらでも動きます）。</p>
+      </div>
+    </details>
 
     <details class="brew">
       <summary>🍺 Homebrew の入れ方（Mac で動画編集を使う方だけ・3分）</summary>
@@ -189,7 +212,12 @@ eval "$(/opt/homebrew/bin/brew shellenv)"</code>
 4. 最後に、作成したフォルダ構成をツリーで見せて「初期設定完了」と報告する。</code>
       <button class="copy" data-target="c3">コピー</button>
     </div>
-    <div class="cmdlabel" style="margin-top:10px">💡 次回から Claude Code を開くときは、作業フォルダに「Documents/Claude」を選ぶと設定が効きます。</div>
+    <div class="discord folder" style="margin-top:12px;">
+      📁 <b>レポートが保存される場所（ここだけ覚えてください）</b><br>
+      分析レポートや台本などの成果物は、<b>どのフォルダから Claude Code を起動しても、必ずここに保存されます</b>👇<br>
+      <b>書類（Documents） → Claude → Projects</b><br>
+      <span class="mini2" style="color:#8b93a3;">デスクトップなど別の場所に「Claude」フォルダを作って使っている方も、そのままで大丈夫です。スキルは正常に動きます。ただし<b>レポートを探すときは上の「書類」フォルダ</b>を見てください。<br>💡 次回から Claude Code を開くときに、作業フォルダとして「書類 → Claude」を選んでおくと、フォルダの決まりごとも効いていちばんスムーズです。</span>
+    </div>
   </div>
 
   <div class="done-card">

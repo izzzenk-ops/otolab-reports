@@ -208,11 +208,37 @@
   <div class="kicker">02 ｜ PREPARATION</div>
   <h2>はじめる前のチェック</h2>
   <ul class="checklist">
-    <li><b>Claude Code が使える状態</b>（アプリの「Code」モード、またはターミナルの claude）</li>
+    <li><b>Claude Code が使える状態</b>（デスクトップアプリの「Code」モード、またはターミナルの claude）</li>
     <li>Chrome に <b>Claude 拡張機能</b>（アカウント分析でインスタ画面を見るのに使います）</li>
     <li>Chrome で <b>Instagram にログイン</b>済み</li>
     <li>（Macで動画編集も使う人だけ）<b>Homebrew</b> — brew.sh から。分析・台本だけなら不要</li>
   </ul>
+</section>
+
+<!-- 6.5 つまずきポイント2つ（実際に出た質問） -->
+<section class="slide">
+  <div class="kicker">02 ｜ 先に言っておきます</div>
+  <h2>ここで<span class="em">つまずく人が多い</span>2つ</h2>
+  <div class="cards c2">
+    <div class="card">
+      <div class="big">①</div>
+      <h3>デスクトップアプリと<br>ターミナルの claude は<b style="color:#e06c6c">別物</b></h3>
+      <p>アプリを入れても、ターミナルで <span class="mono">claude</span> は使えるようになりません（逆も同じ）。<br><br>
+      <b>「貼るだけ」で進めない＝あなたのせいではありません。</b><br>
+      ターミナル版を入れるなら1行でOK：</p>
+      <div class="cmdbox" style="font-size:16px;margin-top:8px">curl -fsSL https://claude.ai/install.sh | bash</div>
+      <p style="font-size:14px;color:var(--sub);margin-top:6px">Windowsは <span class="mono">irm https://claude.ai/install.ps1 | iex</span><br>入れたらターミナルを閉じて開き直す</p>
+    </div>
+    <div class="card">
+      <div class="big">②</div>
+      <h3>レポートが出てくる場所は<br><b style="color:#d9822b">ここで固定</b></h3>
+      <p>分析レポートも台本も、<b>どのフォルダから起動しても</b>必ずここに保存されます：</p>
+      <div class="cmdbox" style="font-size:18px;margin-top:8px">書類 → Claude → Projects</div>
+      <p style="margin-top:10px">デスクトップに「Claude」フォルダを作って使っている人も<b>そのままでOK</b>。スキルは正常に動きます。<br><br>
+      <b>探すときだけ「書類」を見てください。</b></p>
+    </div>
+  </div>
+  <p class="lead" style="margin-top:14px;font-size:18px">💡 どちらも実際に出た質問です。今日この場で全部解決します。</p>
 </section>
 
 <!-- 7 導入は2行 -->

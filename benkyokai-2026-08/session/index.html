@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claudeとの会話の使い方</title>
+<style>
+  :root{
+    --ink:#3f4a5a; --sub:#8b93a3; --line:#f0e8dd; --bg:#f7f3ec; --card:#fff;
+    --accent:#ec8080; --accent-deep:#e06c6c; --accent-soft:#fdecec;
+    --blue:#6b9bd2; --blue-deep:#5b8ac4; --blue-soft:#e8f1fb;
+    --gold:#d9822b; --gold-soft:#fdf1e3;
+    --grad:linear-gradient(135deg,#f19a9a,#f4b183);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:"Hiragino Maru Gothic ProN","Zen Maru Gothic","Hiragino Sans","Yu Gothic",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.8;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:720px;margin:0 auto;padding:40px 22px 80px;}
+  header{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:34px 38px;position:relative;overflow:hidden;}
+  header::before{content:"";position:absolute;top:0;left:0;right:0;height:8px;background:var(--grad);}
+  .label{font-size:12px;letter-spacing:2px;color:var(--accent-deep);font-weight:700;}
+  header h1{font-size:26px;font-weight:800;margin:6px 0 8px;}
+  header p{font-size:14px;color:var(--sub);}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 28px;margin-top:20px;}
+  .card h2{font-size:17px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+  .card p{font-size:14px;}
+  .card p + p{margin-top:10px;}
+  .hero{background:var(--accent-soft);border:1px solid #f8d9d9;border-radius:20px;padding:26px 28px;margin-top:20px;text-align:center;}
+  .hero .big{font-size:21px;font-weight:800;color:var(--accent-deep);line-height:1.6;}
+  .hero .small{font-size:13px;color:var(--sub);margin-top:10px;}
+  .steps{counter-reset:s;list-style:none;margin-top:8px;}
+  .steps li{counter-increment:s;position:relative;padding:8px 0 8px 34px;font-size:14px;border-bottom:1px dashed var(--line);}
+  .steps li:last-child{border-bottom:none;}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:8px;width:22px;height:22px;border-radius:50%;
+    background:var(--blue);color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;}
+  .steps b{color:var(--accent-deep);}
+  table{width:100%;border-collapse:collapse;margin-top:6px;font-size:13.5px;}
+  th,td{text-align:left;padding:11px 10px;border-bottom:1px dashed var(--line);vertical-align:top;}
+  th{font-size:12px;color:var(--sub);font-weight:700;}
+  tr:last-child td{border-bottom:none;}
+  .pill{display:inline-block;border-radius:999px;padding:3px 12px;font-size:12px;font-weight:800;white-space:nowrap;}
+  .pill.keep{background:var(--blue-soft);color:var(--blue-deep);}
+  .pill.new{background:var(--accent-soft);color:var(--accent-deep);}
+  .say{background:var(--bg);border:1px dashed var(--line);border-radius:12px;padding:12px 15px;margin-top:10px;
+    font-size:14px;font-weight:700;color:var(--accent-deep);}
+  .say span{display:block;font-size:11.5px;color:var(--sub);font-weight:400;margin-bottom:3px;}
+  .note{font-size:12.5px;color:var(--sub);background:var(--blue-soft);border-radius:12px;padding:12px 14px;margin-top:14px;}
+  .warn{background:var(--gold-soft);border:1px solid #f3ddc0;border-radius:20px;padding:26px 28px;margin-top:20px;}
+  .warn h2{font-size:17px;font-weight:800;margin-bottom:10px;color:var(--gold);}
+  .warn p{font-size:14px;}
+  footer{text-align:center;font-size:11.5px;color:var(--sub);margin-top:30px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="label">● INSTAGRAM AI 活用講座 / 運用ガイド</div>
+    <h1>Claudeとの会話の使い方</h1>
+    <p>スキルを使うとき、会話をどう開いて、どう閉じるか。ここを知らないだけで、Claudeはどんどん遅く・重くなっていきます。</p>
+  </header>
+
+  <div class="hero">
+    <div class="big">1つの用件に、1つの新しい会話。<br>終わったら閉じる。</div>
+    <div class="small">覚えることはこれだけです。理由は下に書きました。</div>
+  </div>
+
+  <div class="card">
+    <h2>🤔 なぜ会話を分けるの？</h2>
+    <p>Claudeは返事をするたびに、<b>その会話の最初から全部を読み直しています。</b></p>
+    <p>だから会話が長くなるほど、毎回の読み直しが増えて、返事が遅くなっていきます。1つの会話に3か月分の用件を詰め込むと、毎回その3か月分を読んでから返事をすることになります。</p>
+    <p>読み直しには「下書きメモ」があって、それが効いているうちは高速です。ただし<b>このメモは1時間で消えます。</b>消えたあとに同じ会話を開くと、また一から全部読み直しです。</p>
+    <div class="note">つまり <b>「昨日の会話のつづき」がいちばん重い</b> ということ。新しく開いたほうが速いし、軽いです。</div>
+  </div>
+
+  <div class="card">
+    <h2>📏 いつ新しく開く？</h2>
+    <table>
+      <tr><th>こんなとき</th><th>どうする</th></tr>
+      <tr><td>お茶を淹れて戻ってきた（1時間以内）</td><td><span class="pill keep">そのまま</span></td></tr>
+      <tr><td>お昼休憩から戻ってきた</td><td><span class="pill new">新しく開く</span></td></tr>
+      <tr><td>次の日になった</td><td><span class="pill new">新しく開く</span></td></tr>
+      <tr><td>用件が変わった（台本を書いた → リールを添削したい）</td><td><span class="pill new">新しく開く</span></td></tr>
+    </table>
+    <div class="note">迷ったら新しく開いて大丈夫です。新しく開くことでの損は<b>ありません</b>。</div>
+  </div>
+
+  <div class="card">
+    <h2>💭 スキルの名前は覚えなくていい</h2>
+    <p>「スキル名を忘れたから、前に使った会話を探して開く」——これがいちばんもったいないパターンです。</p>
+    <p>会話を開いた瞬間、<b>Claudeの側はスキル全部の名前と説明を読み込んでいます。</b>あなたが覚えている必要はありません。日本語で用件を言えば、Claudeが選んで起動します。</p>
+    <div class="say"><span>例1</span>このアカウント分析して　https://instagram.com/○○</div>
+    <div class="say"><span>例2</span>このリール何点？（動画をドラッグ＆ドロップ）</div>
+    <div class="say"><span>例3</span>台本を辛口で添削して</div>
+    <div class="note">どんなスキルがあるか一覧で見たいときは「スキル一覧」のページを開いてください。会話を開いて探す必要はありません。</div>
+  </div>
+
+  <div class="card">
+    <h2>📅 何日もかかる作業はどうするの？</h2>
+    <p>コンセプト設計やリサーチのように、何日かに分けて進める作業があります。それでも<b>毎日、新しい会話で大丈夫です。</b></p>
+    <p>理由は、スキルが作業の結果を<b>あなたのフォルダにファイルとして保存している</b>から。翌日に新しい会話で「○○の続きをやりたい」と言えば、Claudeがそのファイルを読んで、続きから再開します。</p>
+    <div class="say"><span>翌日の第一声はこれでOK</span>コンセプトリサーチの続きをやりたい</div>
+    <div class="note">引き継がれるのは<b>会話ではなくファイル</b>です。だから昨日の会話は開かなくていいのです。</div>
+  </div>
+
+  <div class="warn">
+    <h2>⚠️ これだけはやらないでください</h2>
+    <p><b>古い会話を一覧から探して開き、そこに新しい用件を打つ。</b></p>
+    <p>いちばん遅く、いちばん重くなるやり方です。過去の会話を<b>開いて読み返す</b>のは自由ですが、そこで<b>新しい仕事を頼まない</b>——ここだけ気をつけてください。</p>
+  </div>
+
+  <div class="card">
+    <h2>✅ 1日の流れ（まとめ）</h2>
+    <ol class="steps">
+      <li>新しい会話を開く</li>
+      <li>日本語で用件を言う（<b>スキル名は不要</b>）</li>
+      <li>作業する</li>
+      <li>終わったら<b>閉じる</b>。次の用件はまた新しく開く</li>
+    </ol>
+  </div>
+
+  <footer>おとラボ講座 ／ Instagram AI活用講座</footer>
+</div>
+</body>
+</html>

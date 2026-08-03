@@ -116,9 +116,26 @@
         <br><b style="color:#e06c6c;">※この2つは別物です。</b>デスクトップアプリを入れても、ターミナルの <code class="inline">claude</code> は使えるようになりません（逆も同じ）。<b>どちらか片方でOK</b>ですが、動画編集スキルも使う Windows の方はターミナル版が必要です。<b>「まだ入っていない」「claude と打っても反応しない」方は下の折りたたみへ👇</b></span></li>
       <li><b>Mac の方</b>：そのまま進んでOKです。
         <br><span class="mini">「動画編集」スキルも使いたい場合のみ、先に <b>Homebrew</b> を入れておくと途中で止まりません（入れ方は下の折りたたみを参照）。分析・台本スキルだけなら不要です。</span></li>
-      <li><b>Windows の方</b>：<b>「Windows Terminal」から <code class="inline">claude</code> で起動</b>してください。
-        <br><span class="mini">デスクトップアプリの「Code」タブでは、動画編集スキルが動かないことをテストで確認しています（分析・台本スキルはどちらでも動きます）。「Windows Terminal」はスタートメニューで「terminal」と検索すると出てきます（無い場合は Microsoft Store から無料で入ります）。Homebrew は Mac 専用なので、Windows の方は不要です。</span></li>
+      <li><b>Windows の方</b>：<b style="color:#e06c6c;">先に「Git」を入れてください。</b>これが無いと、Claude で自分のパソコンのファイルが扱えません（赤字で「ローカルセッションにはGitが必要です」と出ます）。<b>入れ方は下の折りたたみへ👇</b>
+        <br><span class="mini">また、<b>「Windows Terminal」から <code class="inline">claude</code> で起動</b>してください。デスクトップアプリの「Code」タブでは、動画編集スキルが動かないことをテストで確認しています（分析・台本スキルはどちらでも動きます）。「Windows Terminal」はスタートメニューで「terminal」と検索すると出てきます（無い場合は Microsoft Store から無料で入ります）。Homebrew は Mac 専用なので、Windows の方は不要です。</span></li>
     </ul>
+
+    <details class="brew">
+      <summary>🪟 Git の入れ方（Windows の方は必須・3分）</summary>
+      <div class="brewbody">
+        <p class="mini">Claude で「<b style="color:#e06c6c;">ローカルセッションには Git が必要です</b>」と赤字が出たら、<b>Git というソフトが入っていないだけ</b>です。入れれば消えます。<b>裏方のソフトなので、入れたあとに操作することはありません。</b></p>
+        <p class="mini"><b>① スタートメニューで「terminal」と検索</b>して「Windows Terminal」を開き、下を貼って実行してください。</p>
+        <div class="cmd">
+          <code id="w1">winget install -e --id Git.Git</code>
+          <button class="copy" data-target="w1">コピー</button>
+        </div>
+        <p class="mini"><b>② 終わったら、Windows Terminal と Claude を「両方とも」いったん閉じて</b>、Claude を開き直してください。赤い警告が消えていれば成功です。</p>
+        <p class="mini"><b>③ winget が使えなかった場合</b>は、公式サイトから直接入れられます：<br>
+        <b>https://git-scm.com/download/win</b><br>
+        「64-bit Git for Windows Setup」をダウンロードし、出てくる画面は<b>すべてそのまま「Next」</b>で進めてOKです。終わったら Claude を開き直してください。</p>
+        <p class="mini">💡 Mac の方はこの作業は不要です（Git は最初から入っています）。</p>
+      </div>
+    </details>
 
     <details class="brew">
       <summary>⚙️ Claude Code が入っていない・「claude」で反応しないとき（3分）</summary>

@@ -218,27 +218,32 @@
 <!-- 6.5 つまずきポイント2つ（実際に出た質問） -->
 <section class="slide">
   <div class="kicker">02 ｜ 先に言っておきます</div>
-  <h2>ここで<span class="em">つまずく人が多い</span>2つ</h2>
-  <div class="cards c2">
+  <h2>ここで<span class="em">つまずく人が多い</span>3つ</h2>
+  <div class="cards c3">
     <div class="card">
       <div class="big">①</div>
-      <h3>デスクトップアプリと<br>ターミナルの claude は<b style="color:#e06c6c">別物</b></h3>
-      <p>アプリを入れても、ターミナルで <span class="mono">claude</span> は使えるようになりません（逆も同じ）。<br><br>
-      <b>「貼るだけ」で進めない＝あなたのせいではありません。</b><br>
-      ターミナル版を入れるなら1行でOK：</p>
-      <div class="cmdbox" style="font-size:16px;margin-top:8px">curl -fsSL https://claude.ai/install.sh | bash</div>
-      <p style="font-size:14px;color:var(--sub);margin-top:6px">Windowsは <span class="mono">irm https://claude.ai/install.ps1 | iex</span><br>入れたらターミナルを閉じて開き直す</p>
+      <h3 style="font-size:19px">デスクトップアプリと<br>ターミナルの claude は<b style="color:#e06c6c">別物</b></h3>
+      <p style="font-size:15px">アプリを入れても、ターミナルで <span class="mono">claude</span> は使えません（逆も同じ）。<br>
+      <b>「貼るだけ」で進めない＝あなたのせいではありません。</b></p>
+      <div class="cmdbox" style="font-size:13px;margin-top:6px;white-space:normal">curl -fsSL https://claude.ai/install.sh | bash</div>
+      <p style="font-size:13px;color:var(--sub);margin-top:5px">Windowsは <span class="mono">irm https://claude.ai/install.ps1 | iex</span></p>
     </div>
     <div class="card">
       <div class="big">②</div>
-      <h3>レポートが出てくる場所は<br><b style="color:#d9822b">ここで固定</b></h3>
-      <p>分析レポートも台本も、<b>どのフォルダから起動しても</b>必ずここに保存されます：</p>
-      <div class="cmdbox" style="font-size:18px;margin-top:8px">書類 → Claude → Projects</div>
-      <p style="margin-top:10px">デスクトップに「Claude」フォルダを作って使っている人も<b>そのままでOK</b>。スキルは正常に動きます。<br><br>
-      <b>探すときだけ「書類」を見てください。</b></p>
+      <h3 style="font-size:19px"><b style="color:#5b8ac4">Windowsの方は</b><br>先に「Git」が必要</h3>
+      <p style="font-size:15px">無いと赤字で<b>「ローカルセッションにはGitが必要です」</b>と出て進めません。1行で入ります：</p>
+      <div class="cmdbox" style="font-size:14px;margin-top:6px;white-space:normal">winget install -e --id Git.Git</div>
+      <p style="font-size:13px;color:var(--sub);margin-top:5px">入れたら Terminal と Claude を両方閉じて開き直す。Macは不要（最初から入っています）</p>
+    </div>
+    <div class="card">
+      <div class="big">③</div>
+      <h3 style="font-size:19px">レポートが出る場所は<br><b style="color:#d9822b">ここで固定</b></h3>
+      <p style="font-size:15px">分析レポートも台本も、<b>どのフォルダから起動しても</b>必ずここへ：</p>
+      <div class="cmdbox" style="font-size:15px;margin-top:6px;white-space:normal">書類 → Claude → Projects</div>
+      <p style="font-size:13px;margin-top:6px">デスクトップに「Claude」フォルダを作って使っている人も<b>そのままでOK</b>。<b>探すときだけ「書類」を見る。</b></p>
     </div>
   </div>
-  <p class="lead" style="margin-top:14px;font-size:18px">💡 どちらも実際に出た質問です。今日この場で全部解決します。</p>
+  <p class="lead" style="margin-top:12px;font-size:17px">💡 どれも実際に出た質問です。今日この場で全部解決します。</p>
 </section>
 
 <!-- 7 導入は2行 -->

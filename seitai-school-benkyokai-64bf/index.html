@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>整体スクールを、インスタで売る｜上田さま 勉強会</title>
+<style>
+  :root{
+    /* インスタの教科書 パステル正本 */
+    --bg:#fdfcfa; --ink:#4a4a5a; --sub:#8a8a9a; --line:#edeae4; --line2:#e3e0d9;
+    --card:#fff; --dark:#3a3a46; --dark-light:#f1efec;
+    --accent:#ff9e9e; --accent-deep:#fb8b8b; --accent-light:#fff0f0;
+    --blue:#7eb8e6; --blue-deep:#5d9fd4; --blue-light:#eaf4fc;
+    --yellow:#ffe39e; --yellow-light:#fff9e8; --gold:#c29438;
+    --green:#7cc4a0; --green-light:#eaf7f1;
+    --grad:linear-gradient(135deg,#ff9e9e,#ffb88e);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{font-family:"Hiragino Maru Gothic ProN","Zen Maru Gothic","Hiragino Sans","Yu Gothic",sans-serif;
+    background:#33333d;color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased;overflow:hidden}
+
+  /* 16:9固定ステージ */
+  #stage{width:1280px;height:720px;position:absolute;top:50%;left:50%;
+    transform:translate(-50%,-50%) scale(1);transform-origin:center center;
+    background:var(--bg);border-radius:6px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+  .slide{display:none;position:absolute;inset:0;background:var(--bg);
+    padding:38px 68px;flex-direction:column;justify-content:center;overflow:hidden}
+  .slide.active{display:flex}
+  .slide::before{content:"";position:absolute;top:0;left:0;right:0;height:7px;background:var(--grad)}
+
+  .kicker{font-size:14px;letter-spacing:.26em;color:var(--accent-deep);font-weight:800;margin-bottom:9px}
+  h1{font-size:56px;font-weight:800;line-height:1.28;letter-spacing:.01em}
+  h2{font-size:38px;font-weight:800;line-height:1.34;margin-bottom:22px;text-wrap:balance}
+  h2.tight{margin-bottom:16px}
+  .lead{font-size:21px;color:var(--sub);font-weight:700;margin-top:10px}
+
+  /* 語単位の強調（教科書の流儀） */
+  .m{background:linear-gradient(var(--yellow),var(--yellow)) no-repeat 0 .5em / 100% .58em;
+    font-weight:800;color:var(--ink);padding:0 3px}
+  .b{font-weight:800;color:var(--dark)}
+  .em,.bc{font-weight:800;color:var(--accent-deep)}
+  .bb{font-weight:800;color:#4a87bc}
+  .u{font-weight:800;border-bottom:3px solid var(--accent);padding-bottom:1px}
+  .nw{display:inline-block;white-space:nowrap}
+  .m,.b,.em,.bc,.bb,.u{display:inline-block;white-space:nowrap}
+
+  /* タイトル */
+  .title-slide{align-items:center;text-align:center}
+  .title-badge{display:inline-block;background:var(--card);border:2px solid var(--accent);border-radius:999px;
+    padding:7px 30px;font-size:18px;font-weight:800;color:var(--accent-deep);margin-bottom:26px}
+  .title-slide .sub{margin-top:22px;font-size:23px;color:var(--sub);font-weight:700}
+  .title-slide .date{margin-top:30px;font-size:17px;color:var(--sub);font-weight:700;
+    border-top:1px solid var(--line2);padding-top:18px}
+
+  /* カード */
+  .cards{display:grid;gap:16px}
+  .cards.c2{grid-template-columns:1fr 1fr}
+  .cards.c3{grid-template-columns:repeat(3,1fr)}
+  .cards.c4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:18px 20px;
+    box-shadow:0 3px 14px rgba(74,74,90,.05)}
+  .card .big{font-size:30px;margin-bottom:6px;line-height:1}
+  .card h3{font-size:20.5px;font-weight:800;margin-bottom:7px;line-height:1.4}
+  .card p{font-size:16px;line-height:1.72}
+  .card.is-accent{border-color:var(--accent);background:var(--accent-light)}
+  .card.is-blue{border-color:var(--blue);background:var(--blue-light)}
+
+  .num-badge{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;
+    border-radius:50%;background:var(--grad);color:#fff;font-weight:800;font-size:17px;margin-bottom:8px}
+
+  /* タイムテーブル */
+  .timeline{display:flex;flex-direction:column;gap:8px}
+  .trow{display:grid;grid-template-columns:112px 1fr;gap:16px;align-items:center;
+    background:var(--card);border:1.5px solid var(--line);border-radius:13px;padding:10px 20px}
+  .trow .time{font-size:17px;font-weight:800;color:var(--accent-deep);text-align:center;
+    background:var(--accent-light);border-radius:999px;padding:3px 0}
+  .trow .tt{font-size:19.5px;font-weight:800}
+  .trow .tt small{font-size:14.5px;font-weight:700;color:var(--sub);margin-left:10px}
+  .trow.is-hi{border-color:var(--accent);background:var(--accent-light)}
+  .trow.is-hi .time{background:var(--accent);color:#fff}
+
+  /* 対比（教科書の型1） */
+  .vs{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:stretch}
+  .vs__mark{align-self:center;font-size:21px;font-weight:800;color:var(--sub)}
+  .side{border:2px solid var(--dark);border-radius:14px;background:#fff;overflow:hidden;display:flex;flex-direction:column}
+  .side.is-good{border-color:var(--accent)}
+  .side__head{background:var(--dark);color:#fff;text-align:center;font-weight:800;padding:10px 8px;font-size:19px}
+  .side.is-good .side__head{background:var(--accent)}
+  .side__body{padding:16px 18px;display:flex;flex-direction:column;gap:9px;flex:1}
+  .item{font-size:16px;font-weight:600;line-height:1.65;padding-left:16px;position:relative;color:#6e6e80}
+  .item::before{content:"・";position:absolute;left:0;color:var(--dark);font-weight:800}
+  .side.is-good .item::before{color:var(--accent)}
+  .pill-foot{margin-top:auto;background:var(--dark-light);border-radius:9px;padding:10px 12px;text-align:center;
+    font-weight:800;font-size:15.5px;line-height:1.6}
+  .side.is-good .pill-foot{background:var(--accent-light);color:var(--accent-deep)}
+
+  /* 導線フロー */
+  .funnel{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;align-items:stretch;margin-top:6px}
+  .fstep{background:var(--card);border:2px solid var(--line2);border-radius:13px;padding:13px 9px;text-align:center;
+    position:relative;display:flex;flex-direction:column}
+  .fstep .fn{font-size:11px;font-weight:800;color:#fff;background:var(--sub);border-radius:999px;
+    padding:1px 9px;display:inline-block;margin:0 auto 7px}
+  .fstep .fi{font-size:25px;line-height:1;margin-bottom:6px}
+  .fstep .ft{font-size:15.5px;font-weight:800;line-height:1.35}
+  .fstep .fd{font-size:12.5px;color:var(--sub);font-weight:700;margin-top:5px;line-height:1.5}
+  .fstep::after{content:"▶";position:absolute;right:-9px;top:50%;transform:translateY(-50%);
+    font-size:12px;color:var(--accent);z-index:2}
+  .fstep:last-child::after{display:none}
+  .fstep.g1{border-color:var(--blue)}   .fstep.g1 .fn{background:var(--blue-deep)}
+  .fstep.g2{border-color:var(--accent)} .fstep.g2 .fn{background:var(--accent-deep)}
+  .fstep.g3{border-color:var(--gold)}   .fstep.g3 .fn{background:var(--gold)}
+  .zonebar{display:grid;grid-template-columns:2fr 2fr 2fr;gap:7px;margin-top:9px}
+  .zone{border-radius:9px;padding:6px;text-align:center;font-size:13.5px;font-weight:800}
+  .zone.z1{background:var(--blue-light);color:var(--blue-deep)}
+  .zone.z2{background:var(--accent-light);color:var(--accent-deep)}
+  .zone.z3{background:#fdf3e3;color:var(--gold)}
+
+  /* ステップ（縦） */
+  .steps{display:flex;flex-direction:column;gap:10px;counter-reset:st}
+  .steps li{list-style:none;background:var(--card);border:1.5px solid var(--line);border-radius:13px;
+    padding:12px 22px 12px 62px;position:relative;counter-increment:st}
+  .steps li::before{content:counter(st);position:absolute;left:16px;top:50%;transform:translateY(-50%);
+    width:32px;height:32px;border-radius:50%;background:var(--grad);color:#fff;font-weight:800;font-size:17px;
+    display:flex;align-items:center;justify-content:center}
+  .steps li .sh{font-size:20px;font-weight:800}
+  .steps li .sd{font-size:15px;color:var(--sub);font-weight:700;line-height:1.6}
+
+  /* ロードマップ */
+  .roadmap{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .phase{background:var(--card);border:1.5px solid var(--line);border-radius:14px;overflow:hidden;
+    display:flex;flex-direction:column}
+  .phase__h{padding:9px;text-align:center;font-weight:800;color:#fff;font-size:16.5px}
+  .phase:nth-child(1) .phase__h{background:var(--blue)}
+  .phase:nth-child(2) .phase__h{background:#8fc9a8}
+  .phase:nth-child(3) .phase__h{background:var(--accent)}
+  .phase:nth-child(4) .phase__h{background:var(--gold)}
+  .phase__b{padding:13px 15px;flex:1}
+  .phase__b .goal{font-size:15px;font-weight:800;color:var(--dark);margin-bottom:8px;line-height:1.5;
+    border-bottom:1px dashed var(--line2);padding-bottom:8px}
+  .phase__b ul{list-style:none}
+  .phase__b li{font-size:13.5px;font-weight:600;color:#6e6e80;padding:2.5px 0 2.5px 14px;position:relative;line-height:1.55}
+  .phase__b li::before{content:"・";position:absolute;left:0;color:var(--accent)}
+
+  /* 大きな主張ボックス */
+  .statement{background:var(--accent-light);border:2px solid var(--accent);border-radius:18px;
+    padding:26px 34px;text-align:center}
+  .statement .s1{font-size:31px;font-weight:800;line-height:1.5;color:var(--ink)}
+  .statement .s2{font-size:18px;color:var(--accent-deep);font-weight:800;margin-top:12px}
+  .quiet{background:var(--dark);color:#fff;border-radius:18px;padding:24px 34px;text-align:center}
+  .quiet .s1{font-size:29px;font-weight:800;line-height:1.5}
+  .quiet .s2{font-size:17px;opacity:.75;font-weight:700;margin-top:10px}
+
+  /* チェックリスト */
+  .checklist{list-style:none;font-size:20px}
+  .checklist li{padding:9px 0 9px 38px;position:relative;font-weight:700}
+  .checklist li::before{content:"✓";position:absolute;left:6px;color:var(--green);font-weight:800;font-size:22px}
+  .crosslist{list-style:none;font-size:19px}
+  .crosslist li{padding:8px 0 8px 38px;position:relative;font-weight:700;color:#6e6e80}
+  .crosslist li::before{content:"✕";position:absolute;left:8px;color:var(--dark);font-weight:800}
+
+  /* Before/After */
+  .ba{display:flex;flex-direction:column;gap:10px}
+  .barow{display:grid;grid-template-columns:1.4fr 1fr auto 1fr;gap:14px;align-items:center;
+    background:var(--card);border:1.5px solid var(--line);border-radius:13px;padding:11px 22px}
+  .barow .task{font-size:18.5px;font-weight:800}
+  .barow .before{font-size:18px;font-weight:800;color:var(--sub);text-align:center;
+    background:var(--dark-light);border-radius:8px;padding:5px 0}
+  .barow .arw{font-size:17px;color:var(--accent);font-weight:800}
+  .barow .after{font-size:19px;font-weight:800;color:var(--accent-deep);text-align:center;
+    background:var(--accent-light);border-radius:8px;padding:5px 0}
+
+  /* 料金 */
+  .pricebox{background:var(--card);border:3px solid var(--accent);border-radius:20px;padding:26px 40px;text-align:center;
+    box-shadow:0 6px 26px rgba(251,139,139,.14)}
+  .pricebox .pname{font-size:22px;font-weight:800;color:var(--accent-deep)}
+  .pricebox .pval{font-size:52px;font-weight:800;margin:8px 0 4px;letter-spacing:.01em}
+  .pricebox .pval small{font-size:23px;color:var(--sub);font-weight:800;margin-left:6px}
+  .pricebox .pnote{font-size:16px;color:var(--sub);font-weight:700}
+  .incl{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:18px;text-align:left}
+  .incl div{background:var(--card);border:1.5px solid var(--line);border-radius:11px;padding:9px 16px;
+    font-size:16px;font-weight:700}
+  .incl div b{color:var(--accent-deep)}
+
+  /* デモ */
+  .demo-box{background:var(--card);border:2.5px dashed var(--accent);border-radius:18px;padding:26px 34px;text-align:center}
+  .demo-box .d1{font-size:29px;font-weight:800;line-height:1.45}
+  .demo-box .d2{font-size:18px;color:var(--sub);font-weight:700;margin-top:10px}
+  .cmdbox{background:#2f3542;color:#e8eef5;border-radius:12px;padding:14px 24px;
+    font-family:ui-monospace,Menlo,Consolas,monospace;font-size:22px;margin:10px 0;font-weight:600}
+
+  .pill{display:inline-block;background:var(--accent-light);color:var(--accent-deep);border-radius:999px;
+    padding:4px 16px;font-size:16px;font-weight:800;margin:0 6px 7px 0}
+  .pill.blue{background:var(--blue-light);color:var(--blue-deep)}
+
+  /* 3カラム見出し付きボックス */
+  .whybox{background:var(--blue-light);border-left:5px solid var(--blue);border-radius:0 12px 12px 0;
+    padding:14px 22px;margin-top:16px;font-size:17px;font-weight:700;line-height:1.7}
+  .whybox b{color:var(--blue-deep)}
+
+  /* 要確認プレースホルダ */
+  .tbd{display:inline-block;background:#fff6d9;border:1.5px dashed var(--gold);color:var(--gold);
+    border-radius:7px;padding:0 9px;font-size:.86em;font-weight:800}
+
+  .pagenum{position:absolute;bottom:12px;right:20px;font-size:13px;color:var(--sub);font-weight:700;z-index:10}
+  .navhint{position:absolute;bottom:12px;left:20px;font-size:11.5px;color:var(--sub);z-index:10;opacity:.55}
+</style>
+</head>
+<body>
+<div id="stage">
+
+<!-- ══════════ A. オープニング ══════════ -->
+
+<!-- 1 -->
+<section class="slide active title-slide">
+  <div class="title-badge">上田さま 専用 勉強会</div>
+  <h1>整体スクールを、<br><span class="em">インスタで売る。</span></h1>
+  <p class="sub">「整体院の集客」ではなく、<span class="m">自分の商品を売るための発信</span>の作り方</p>
+  <div class="date">2026年8月5日 ｜ 60分 ｜ 宮部謙二</div>
+</section>
+
+<!-- 2 -->
+<section class="slide">
+  <div class="kicker">START ｜ 今日のゴール</div>
+  <h2>今日、この3つを持ち帰ってください</h2>
+  <div class="cards c3">
+    <div class="card is-blue"><div class="num-badge">1</div>
+      <h3>1年後の完成形が<br>絵で見える</h3>
+      <p>インスタから、スクール入会までの<b>導線がどうつながるのか</b>。ぼんやりではなく、図で。</p></div>
+    <div class="card is-accent"><div class="num-badge">2</div>
+      <h3>何から手をつけるか<br>決まっている</h3>
+      <p>撮影から始めると、ほぼ失敗します。<b>先に決めるべきこと</b>がはっきりします。</p></div>
+    <div class="card"><div class="num-badge">3</div>
+      <h3>「忙しくて止まる」を<br>どう防ぐか分かる</h3>
+      <p>実業をやりながら発信を続ける方法。<b>今日、実演でお見せします。</b></p></div>
+  </div>
+  <p class="lead" style="text-align:center;margin-top:22px">今日は<span class="m">説明会ではなく、作戦会議</span>のつもりで聞いてください。</p>
+</section>
+
+<!-- 3 -->
+<section class="slide">
+  <div class="kicker">AGENDA ｜ 60分</div>
+  <h2>今日の流れ</h2>
+  <div class="timeline">
+    <div class="trow"><span class="time">0–8分</span><span class="tt">① 現在地とゴールを合わせる<small>整体院の発信と、スクールを売る発信は別物です</small></span></div>
+    <div class="trow"><span class="time">8–16分</span><span class="tt">② 完成形の導線を、先に見る<small>投稿 → LINE → 個別面談 → 入会。この1本道を作ります</small></span></div>
+    <div class="trow"><span class="time">16–28分</span><span class="tt">③ 勝敗は「初期設計」で8割決まる<small>ジャンル・コンセプト・独自性・世界観</small></span></div>
+    <div class="trow"><span class="time">28–38分</span><span class="tt">④ やることは、たった4つ<small>リサーチ → コンセプト → 台本と撮影 → 導線</small></span></div>
+    <div class="trow is-hi"><span class="time">38–52分</span><span class="tt">⑤ 「忙しくて止まる」をAIで解決 ＋ 実演<small>実際に画面を動かしてお見せします</small></span></div>
+    <div class="trow"><span class="time">52–60分</span><span class="tt">⑥ 1年間の並走プランと、次の一歩<small>質問はいつでも遮って大丈夫です</small></span></div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="slide">
+  <div class="kicker">01 ｜ 現在地</div>
+  <h2 class="tight">最初に握らせてください。<br><span class="em">この2つは、まったく別の発信</span>です</h2>
+  <div class="vs">
+    <div class="side">
+      <div class="side__head">整体院の集客アカウント</div>
+      <div class="side__body">
+        <div class="item">見せる相手は<b>「腰が痛い地元の人」</b></div>
+        <div class="item">ゴールは<b>来院予約</b></div>
+        <div class="item">商圏は<b>長浜市の周辺だけ</b></div>
+        <div class="item">伸ばしても、椅子の数以上は増えない</div>
+        <div class="pill-foot">売上＝時間の切り売り</div>
+      </div>
+    </div>
+    <div class="vs__mark">VS</div>
+    <div class="side is-good">
+      <div class="side__head">スクールを売るアカウント</div>
+      <div class="side__body">
+        <div class="item">見せる相手は<b>「整体で食べていきたい人」</b></div>
+        <div class="item">ゴールは<b>スクール入会</b></div>
+        <div class="item">商圏は<b>日本全国</b></div>
+        <div class="item">1本の投稿が、何年も働き続ける</div>
+        <div class="pill-foot">売上＝仕組み</div>
+      </div>
+    </div>
+  </div>
+  <p class="lead" style="text-align:center;margin-top:18px">同じ「整体」でも、<span class="m">見せる相手が違うので、投稿の中身は全部変わります</span>。</p>
+</section>
+
+<!-- 5 -->
+<section class="slide">
+  <div class="kicker">01 ｜ 現在地</div>
+  <h2>いま持っている資産は、そのまま強みになります</h2>
+  <div class="cards c3">
+    <div class="card is-accent"><div class="big">🏥</div><h3>現役で結果を出している</h3>
+      <p>これが一番強い。<b>「教えるだけの人」との差</b>は、実務の生々しさで出ます。整体スクールの世界では、<span class="m">現場を持っていること自体が希少</span>です。</p></div>
+    <div class="card is-accent"><div class="big">📦</div><h3>スクール商品が<br>すでにある</h3>
+      <p><b>整体師が売上を上げるためのスクール</b>——売るものが決まっている状態です。ゼロから商品設計する人は、ここで半年使います。<b>その半年が要りません。</b></p></div>
+    <div class="card"><div class="big">📱</div><h3>インスタの<br>運用経験がある</h3>
+      <p>撮る・投稿するの心理的ハードルが低い。<b>ゼロからの人より3か月速い</b>スタートが切れます。</p></div>
+  </div>
+  <div class="whybox">つまり上田さんに足りないのは、材料ではありません。<b>「誰に、何を、どの順番で見せるか」という設計と、続ける仕組み</b>だけです。</div>
+</section>
+
+<!-- ══════════ B. 完成形の導線 ══════════ -->
+
+<!-- 6 -->
+<section class="slide">
+  <div class="kicker">02 ｜ 完成形</div>
+  <h2 class="tight">1年かけて作るのは、<span class="em">この1本道</span>です</h2>
+  <div class="funnel">
+    <div class="fstep g1"><span class="fn">STEP 1</span><div class="fi">🎬</div>
+      <div class="ft">リールで<br>見つかる</div><div class="fd">発見タブに乗り、<br>知らない整体師に届く</div></div>
+    <div class="fstep g1"><span class="fn">STEP 2</span><div class="fi">👤</div>
+      <div class="ft">プロフで<br>納得される</div><div class="fd">「この人から<br>学びたい」に変える</div></div>
+    <div class="fstep g2"><span class="fn">STEP 3</span><div class="fi">💬</div>
+      <div class="ft">LINE・<br>オプチャへ</div><div class="fd">こちらから届けられる<br>場所に移す</div></div>
+    <div class="fstep g2"><span class="fn">STEP 4</span><div class="fi">📚</div>
+      <div class="ft">教育して<br>信頼を作る</div><div class="fd">配信で「自己流の限界」<br>を自覚してもらう</div></div>
+    <div class="fstep g3"><span class="fn">STEP 5</span><div class="fi">🤝</div>
+      <div class="ft">個別面談に<br>呼ぶ</div><div class="fd">悩みを聞き、<br>現状を整理する</div></div>
+    <div class="fstep g3"><span class="fn">STEP 6</span><div class="fi">🎓</div>
+      <div class="ft">スクール<br>入会</div><div class="fd">必要な人にだけ、<br>提案する</div></div>
+  </div>
+  <div class="zonebar">
+    <div class="zone z1">① 見つけてもらう（インスタの仕事）</div>
+    <div class="zone z2">② 信頼を作る（LINE・オプチャの仕事）</div>
+    <div class="zone z3">③ 決めてもらう（面談の仕事）</div>
+  </div>
+  <p class="lead" style="text-align:center;margin-top:14px">1つの投稿で売ろうとしないこと。<span class="m">役割を分けるから、売り込まずに売れます</span>。</p>
+</section>
+
+<!-- 7 -->
+<section class="slide">
+  <div class="kicker">02 ｜ 完成形</div>
+  <h2>「フォロワーを増やす」を、ゴールにしないでください</h2>
+  <div class="vs">
+    <div class="side">
+      <div class="side__head">よくある失敗パターン</div>
+      <div class="side__body">
+        <div class="item">とにかくバズを狙う</div>
+        <div class="item">「肩こり解消ストレッチ」が当たる</div>
+        <div class="item">フォロワーは増える</div>
+        <div class="item"><b>集まったのは「無料で治したい一般の人」</b></div>
+        <div class="item">スクールの案内をしても、誰も反応しない</div>
+        <div class="pill-foot">1万人いても、売上ゼロ</div>
+      </div>
+    </div>
+    <div class="vs__mark">VS</div>
+    <div class="side is-good">
+      <div class="side__head">上田さんが作るべき状態</div>
+      <div class="side__body">
+        <div class="item">整体師・これから開業したい人に絞って届ける</div>
+        <div class="item">「自分では気づけなかった」を毎回渡す</div>
+        <div class="item">フォロワーの増え方は、ゆるやか</div>
+        <div class="item"><b>集まるのは「お金を払って学びたい人」</b></div>
+        <div class="item">案内した瞬間に、面談の申し込みが入る</div>
+        <div class="pill-foot">1,000人でも、事業になる</div>
+      </div>
+    </div>
+  </div>
+  <p class="lead" style="text-align:center;margin-top:18px">追う数字は再生数ではなく、<span class="m">「LINEに何人来たか」</span>です。</p>
+</section>
+
+<!-- 8 -->
+<section class="slide">
+  <div class="kicker">02 ｜ 完成形</div>
+  <h2>数字で見ると、必要な母数は意外と小さい</h2>
+  <div class="cards c4">
+    <div class="card is-blue"><h3>月10万再生</h3>
+      <p style="font-size:15px">リール月8〜12本。<br>1本1万再生が当たり前になった状態。<b>半年〜9か月</b>で到達を狙う水準です。</p></div>
+    <div class="card"><h3>→ LINE 100人</h3>
+      <p style="font-size:15px">再生の<b>0.1%</b>が登録。<br>プロフィールと導線がちゃんと組めていれば、これは固い数字です。</p></div>
+    <div class="card"><h3>→ 面談 10人</h3>
+      <p style="font-size:15px">登録者の<b>10%</b>が申し込み。<br>配信で信頼が作れているかで、ここが大きく動きます。</p></div>
+    <div class="card is-accent"><h3>→ 入会 2〜3人</h3>
+      <p style="font-size:15px">面談の<b>20〜30%</b>。<br>必要な人にだけ提案するので、無理な売り込みは要りません。</p></div>
+  </div>
+  <div class="whybox">数字は目安です。ただ大事なのは —— <b>「バズらせないと無理」ではない</b>ということ。<span class="m">月10万再生は、正しく設計すれば届く数字</span>です。逆に、設計を外すと100万再生でも1人も入りません。</div>
+</section>
+
+<!-- ══════════ C. 初期設計 ══════════ -->
+
+<!-- 9 -->
+<section class="slide">
+  <div class="kicker">03 ｜ 初期設計</div>
+  <h2 style="text-align:center">では、何から始めるか</h2>
+  <div class="statement">
+    <div class="s1">撮影でも、編集でもありません。<br><span class="em">勝敗の8割は、撮る前の「初期設計」で決まります。</span></div>
+    <div class="s2">ここを飛ばした人が、100投稿してから設計に戻ってくる —— 何度も見てきました</div>
+  </div>
+  <p class="lead" style="text-align:center;margin-top:24px">投稿の質を上げても、<span class="m">向いている方向が違えば、遠ざかるだけ</span>だからです。</p>
+</section>
+
+<!-- 10 -->
+<section class="slide">
+  <div class="kicker">03 ｜ 初期設計</div>
+  <h2 class="tight">伸びているアカウントは、この4つを持っています</h2>
+  <div class="cards c4">
+    <div class="card is-accent"><div class="big">🎨</div><h3>世界観</h3>
+      <p style="font-size:15px">見た瞬間に「この人だ」と分かる。色・トーン・話し方が揃っている状態。</p>
+      <div class="pill" style="margin-top:9px;font-size:13px">最初に決める</div></div>
+    <div class="card is-accent"><div class="big">💎</div><h3>独自性</h3>
+      <p style="font-size:15px">同じジャンルの人と、何が違うのか。埋もれないための「差」。</p>
+      <div class="pill" style="margin-top:9px;font-size:13px">最初に決める</div></div>
+    <div class="card"><div class="big">💡</div><h3>企画力</h3>
+      <p style="font-size:15px">何を撮るか。ネタ選び。ここは<b>毎回</b>やることになります。</p>
+      <div class="pill blue" style="margin-top:9px;font-size:13px">毎回やる</div></div>
+    <div class="card"><div class="big">🎬</div><h3>撮影・編集</h3>
+      <p style="font-size:15px">見やすさ・テンポ。上達はしますが、<b>ここだけ上げても伸びません</b>。</p>
+      <div class="pill blue" style="margin-top:9px;font-size:13px">毎回やる</div></div>
+  </div>
+  <div class="whybox">多くの人は<b>右の2つ（企画・編集）から手をつけて</b>、うまくいかず消えていきます。<span class="m">左の2つは一度決めれば、その後ずっと効き続ける</span>。だから最初にやります。</div>
+</section>
+
+<!-- 11 -->
+<section class="slide">
+  <div class="kicker">03 ｜ 初期設計</div>
+  <h2>戦う場所選び ——「3つの掟」で確かめます</h2>
+  <ol class="steps">
+    <li><span class="sh">掟① インスタの中に、その話を<span class="em">見たい人がいるか</span></span>
+      <div class="sd">世の中に需要があるかではなく、<b>インスタの中に</b>いるか。実際に検索して、その話で伸びている投稿があるかを数字で見ます。</div></li>
+    <li><span class="sh">掟② <span class="em">100投稿、撮り続けられるか</span></span>
+      <div class="sd">最初の30本は伸びません。それでも喋れるネタが自分の中にあるか。<b>「儲かりそう」で選ぶと、ここで必ず止まります。</b></div></li>
+    <li><span class="sh">掟③ そのジャンルで、<span class="em">すでに稼いでいる人がいるか</span></span>
+      <div class="sd">ライバルがいないジャンルは、ブルーオーシャンではなく<b>「お金にならないと証明済み」</b>の場所です。稼いでいる人がいる＝道がある。</div></li>
+  </ol>
+  <p class="lead" style="text-align:center;margin-top:16px">上田さんの「整体師向けスクール」は、<span class="m">3つとも○がつく数少ないジャンル</span>です。</p>
+</section>
+
+<!-- 12 -->
+<section class="slide">
+  <div class="kicker">03 ｜ 初期設計</div>
+  <h2>コンセプト＝ <span class="em">誰の・何を・どう解決するか</span></h2>
+  <div class="cards c3">
+    <div class="card is-blue"><div class="num-badge">W</div><h3>Who（誰の）</h3>
+      <p>「整体師」では広すぎます。<b>開業3年目で、単価を上げられず疲弊している人</b>——ここまで絞ります。</p></div>
+    <div class="card is-blue"><div class="num-badge">W</div><h3>What（何を）</h3>
+      <p>その人が<b>夜中に検索してしまう悩み</b>。技術の悩みか、集客の悩みか、値付けの悩みか。</p></div>
+    <div class="card is-blue"><div class="num-badge">H</div><h3>How（どう解決）</h3>
+      <p>上田さんだから言える解き方。<b>現役で結果を出している人の答え</b>という一点が武器になります。</p></div>
+  </div>
+  <div class="statement" style="margin-top:20px;padding:18px 30px">
+    <div class="s1" style="font-size:26px">絞るほど、届く人は<span class="em">増えます</span>。</div>
+    <div class="s2">「全員に向けた発信」は、誰の心にも刺さらないからです</div>
+  </div>
+</section>
+
+<!-- 13 -->
+<section class="slide">
+  <div class="kicker">03 ｜ 初期設計</div>
+  <h2>同じジャンルの人に埋もれないために ——「独自性の掛け算」</h2>
+  <div class="cards c2">
+    <div class="card">
+      <h3>❌ 埋もれるパターン</h3>
+      <p style="margin-bottom:10px">「整体師向けに、集客のコツを発信します」</p>
+      <ul class="crosslist" style="font-size:16px">
+        <li>同じことを言っている人が、何十人もいる</li>
+        <li>誰から学んでも同じに見える</li>
+        <li>結果、<b>安いほうが選ばれる</b></li>
+      </ul>
+    </div>
+    <div class="card is-accent">
+      <h3>⭕️ 掛け算で抜けるパターン</h3>
+      <p style="margin-bottom:10px">上田さんにしかない要素を、<b>2〜3個かけ合わせます</b></p>
+      <div>
+        <span class="pill">現役で院を経営中</span>
+        <span class="pill">滋賀・地方で成立させた</span>
+        <span class="pill">〈上田さんの実績・数字〉</span>
+        <span class="pill">〈失敗して立て直した経験〉</span>
+      </div>
+      <p style="font-size:15px;margin-top:10px;color:var(--sub);font-weight:700">1つ1つは日本一でなくていい。<span class="m">掛け算になった瞬間、他にいなくなります</span>。</p>
+    </div>
+  </div>
+  <div class="whybox">この掛け算は、頭で考えても出てきません。<b>競合が何を言っていて、何を言っていないか</b>を調べて、初めて「空いている場所」が見えます。→ だから次はリサーチです。</div>
+</section>
+
+<!-- ══════════ D. 実行4ステップ ══════════ -->
+
+<!-- 14 -->
+<section class="slide">
+  <div class="kicker">04 ｜ 実行</div>
+  <h2 class="tight">やることは、この4つだけです</h2>
+  <div class="cards c4">
+    <div class="card is-blue"><div class="num-badge">1</div><h3>競合リサーチ</h3>
+      <p style="font-size:15px">整体スクール系で伸びているアカウントを分解する。<b>何が言われていて、何が空いているか</b>を数字で把握します。</p></div>
+    <div class="card is-accent"><div class="num-badge">2</div><h3>コンセプト確定</h3>
+      <p style="font-size:15px">リサーチを踏まえて、Who/What/How と独自性の掛け算を決める。<b>プロフィールまで作り切ります。</b></p></div>
+    <div class="card"><div class="num-badge">3</div><h3>台本化して撮る</h3>
+      <p style="font-size:15px">思いつきで喋らない。<b>冒頭2秒で止める型</b>に沿って台本を書き、撮って出す。ここを量産体制にします。</p></div>
+    <div class="card"><div class="num-badge">4</div><h3>導線を組む</h3>
+      <p style="font-size:15px">プロフィール・ハイライト・LINE・オプチャ・面談。<b>受け皿を先に作ってから</b>、流し込みます。</p></div>
+  </div>
+  <div class="whybox">この4つを、<b>1年かけてぐるぐる回します</b>。①②は最初の1〜2か月で固め、③を毎週、④を3か月目までに完成させる —— という進み方です。</div>
+</section>
+
+<!-- 15 -->
+<section class="slide">
+  <div class="kicker">04 ｜ 実行</div>
+  <h2>③ 台本 —— 伸びる投稿は、才能ではなく<span class="em">型</span>です</h2>
+  <div class="cards c2">
+    <div class="card">
+      <h3>やりがちな撮り方</h3>
+      <p style="margin-bottom:8px">カメラを回して、思いついたことを喋る。</p>
+      <ul class="crosslist" style="font-size:16px">
+        <li>冒頭が「こんにちは、整体師の上田です」</li>
+        <li>→ ここで<b>8割が離脱</b>します</li>
+        <li>撮り直しが多く、1本に2時間かかる</li>
+      </ul>
+    </div>
+    <div class="card is-accent">
+      <h3>型に沿った撮り方</h3>
+      <p style="margin-bottom:8px">書いてから撮る。順番が決まっています。</p>
+      <ul class="checklist" style="font-size:16.5px">
+        <li><b>冒頭2秒</b>：見たい人だけを掴む一言</li>
+        <li><b>共感</b>：「それ、自分だ」と思わせる</li>
+        <li><b>答え</b>：知らなかった事実を渡す</li>
+        <li><b>次の一歩</b>：プロフィールへ送る</li>
+      </ul>
+    </div>
+  </div>
+  <p class="lead" style="text-align:center;margin-top:18px">伸びている人の型を<span class="m">そのまま借りて、中身だけ上田さんのものに入れ替える</span>。これが一番速い。</p>
+</section>
+
+<!-- ══════════ E. 止まる問題とAI（山場） ══════════ -->
+
+<!-- 16 -->
+<section class="slide">
+  <div class="kicker">05 ｜ ここからが本題です</div>
+  <h2 style="text-align:center">ここまでの話、<br>正直どこかで聞いたことがあると思います</h2>
+  <div class="quiet">
+    <div class="s1">問題は「やり方を知らないこと」ではありません。<br>知っていても、<span style="color:#ffc7c7">実業をやりながらだと続かない</span>ことです。</div>
+    <div class="s2">僕が見てきた中で、脱落する人の理由は、ほぼ1つに集約されます</div>
+  </div>
+</section>
+
+<!-- 17 -->
+<section class="slide">
+  <div class="kicker">05 ｜ 一番多い失敗</div>
+  <h2 class="tight">質が低いから失敗するのではありません。<br><span class="em">止まるから</span>失敗します。</h2>
+  <div class="cards c3">
+    <div class="card"><div class="big">🌀</div><h3>原因① ネタ切れ</h3>
+      <p>最初の20本は勢いで出る。そこから<b>「何を撮ればいいか分からない」</b>で手が止まる。<br><span style="color:var(--sub);font-size:14.5px">リサーチする時間がないから、ネタが枯れる</span></p></div>
+    <div class="card"><div class="big">⏱</div><h3>原因② 台本に時間がかかる</h3>
+      <p>1本の台本に1〜2時間。施術が終わった夜に、その気力は残っていない。<br><span style="color:var(--sub);font-size:14.5px">「明日やろう」が3日、1週間、1か月になる</span></p></div>
+    <div class="card"><div class="big">📉</div><h3>原因③ 数字を見ない</h3>
+      <p>投稿しっぱなし。伸びた理由も、伸びなかった理由も分からない。<br><span style="color:var(--sub);font-size:14.5px">改善されないので、3か月後も同じ結果</span></p></div>
+  </div>
+  <div class="whybox">共通しているのは<b>「頭を使う前に、手間で潰れている」</b>こと。<span class="m">やる気の問題ではなく、作業量の問題</span>です。</div>
+</section>
+
+<!-- 18 -->
+<section class="slide">
+  <div class="kicker">05 ｜ 差別化ポイント</div>
+  <h2>だから僕は、<span class="em">作業そのものを減らします</span></h2>
+  <div class="vs">
+    <div class="side">
+      <div class="side__head">よくあるインスタコンサル</div>
+      <div class="side__body">
+        <div class="item">月1回、アドバイスをもらう</div>
+        <div class="item">「もっとリサーチしましょう」</div>
+        <div class="item">「台本を書いてから撮りましょう」</div>
+        <div class="item"><b>やるのは、全部あなた</b></div>
+        <div class="item">忙しさは、1ミリも解決していない</div>
+        <div class="pill-foot">正論はもらえる。でも、止まる。</div>
+      </div>
+    </div>
+    <div class="vs__mark">VS</div>
+    <div class="side is-good">
+      <div class="side__head">僕の並走サポート</div>
+      <div class="side__body">
+        <div class="item">上田さんのPCに<b>AIの作業環境を作ります</b></div>
+        <div class="item">リサーチ・台本・分析を、AIに任せる</div>
+        <div class="item">上田さんがやるのは<b>「喋る・決める」だけ</b></div>
+        <div class="item">環境構築も、使い方も、僕が全部やります</div>
+        <div class="item">パソコンが苦手でも問題ありません</div>
+        <div class="pill-foot">手が空くから、続く。</div>
+      </div>
+    </div>
+  </div>
+  <p class="lead" style="text-align:center;margin-top:16px">これは、<span class="m">多くの方をサポートしてきて辿り着いた解決策</span>です。他では受けられません。</p>
+</section>
+
+<!-- 19 -->
+<section class="slide">
+  <div class="kicker">05 ｜ 仕組み</div>
+  <h2 class="tight">Google Chrome × Claude Code —— <span class="em">話しかけるだけで、PCが働きます</span></h2>
+  <div class="cards c3">
+    <div class="card is-blue"><div class="big">🔍</div><h3>Chromeが、見る</h3>
+      <p>AIがブラウザを操作して、Instagramの競合アカウントを<b>実際に閲覧・収集</b>します。手でスクロールする必要がありません。</p></div>
+    <div class="card is-accent"><div class="big">🧠</div><h3>Claude Codeが、考える</h3>
+      <p>集めたリールをダウンロードして<b>全文文字起こし</b>し、なぜ伸びたのかを分解。1枚の報告書にまとめます。</p></div>
+    <div class="card"><div class="big">📄</div><h3>結果が、出てくる</h3>
+      <p>数時間かかる作業が、<b>話しかけて放置するだけ</b>。上田さんは出てきた報告書を読んで、決めるだけです。</p></div>
+  </div>
+  <div class="whybox">操作は<b>日本語で話しかけるだけ</b>です。コマンドを覚える必要も、設定をいじる必要もありません。<span class="m">環境は僕が作りに行きます。</span></div>
+</section>
+
+<!-- 20 -->
+<section class="slide">
+  <div class="kicker">05 ｜ LIVE DEMO</div>
+  <h2 style="text-align:center">実演します 🎬</h2>
+  <div class="demo-box">
+    <div class="d1">競合アカウントを<span class="em">その場で探して</span>、<br><span class="em">丸ごと分析</span>するところまでお見せします</div>
+    <div class="cmdbox">このアカウントを競合分析して ＋ URL</div>
+    <div class="d2">整体師向けの発信をしている人を今から検索 → プロフィールと再生数を収集 → 伸びているリールを文字起こし → 報告書がブラウザで開くまで</div>
+  </div>
+  <p class="lead" style="text-align:center;margin-top:18px">見てほしいのは <b>①話しかけるだけ ②あとは放置 ③手作業なら数時間の内容が出てくる</b></p>
+</section>
+
+<!-- 21 -->
+<section class="slide">
+  <div class="kicker">05 ｜ 実演のあとで</div>
+  <h2>これが、毎週タダで使える状態になります</h2>
+  <div class="ba">
+    <div class="barow"><span class="task">競合1アカウントの分析</span>
+      <span class="before">手作業 3〜4時間</span><span class="arw">▶</span><span class="after">15分・ほぼ放置</span></div>
+    <div class="barow"><span class="task">伸びたリールの分解・型抽出</span>
+      <span class="before">手作業 1〜2時間</span><span class="arw">▶</span><span class="after">10分</span></div>
+    <div class="barow"><span class="task">リール台本を1本書く</span>
+      <span class="before">手作業 1〜2時間</span><span class="arw">▶</span><span class="after">15分＋手直し</span></div>
+    <div class="barow"><span class="task">台本の添削・採点</span>
+      <span class="before">できない</span><span class="arw">▶</span><span class="after">3分・100点満点</span></div>
+    <div class="barow"><span class="task">投稿の振り返り・改善点出し</span>
+      <span class="before">やらずに放置</span><span class="arw">▶</span><span class="after">10分</span></div>
+  </div>
+  <p class="lead" style="text-align:center;margin-top:16px">週に<span class="m">5〜8時間</span>空きます。その時間を、施術と、喋ることに使ってください。</p>
+</section>
+
+<!-- ══════════ F. 並走プランとクロージング ══════════ -->
+
+<!-- 22 -->
+<section class="slide">
+  <div class="kicker">06 ｜ 1年間のロードマップ</div>
+  <h2 class="tight">1年、こう進みます</h2>
+  <div class="roadmap">
+    <div class="phase">
+      <div class="phase__h">0〜3か月<br>土台を作る</div>
+      <div class="phase__b">
+        <div class="goal">目標：発信が<br>週2本、止まらず回る</div>
+        <ul>
+          <li>競合リサーチ（AI環境の構築もここ）</li>
+          <li>コンセプト・独自性の確定</li>
+          <li>アカウント名・プロフィール作成</li>
+          <li>台本の型を体に入れる</li>
+          <li>最初の20本を出し切る</li>
+        </ul>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase__h">3〜6か月<br>数字を作る</div>
+      <div class="phase__b">
+        <div class="goal">目標：1本1万再生が<br>普通になる</div>
+        <ul>
+          <li>伸びた投稿の型を横展開</li>
+          <li>毎月の数値分析と改善</li>
+          <li>プロフィール改善（保存率・流入率）</li>
+          <li>LINE・オプチャの受け皿を構築</li>
+          <li>ストーリーズ運用を開始</li>
+        </ul>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase__h">6〜9か月<br>お金に変える</div>
+      <div class="phase__b">
+        <div class="goal">目標：面談から<br>入会が出る</div>
+        <ul>
+          <li>LINE配信のシナリオ設計</li>
+          <li>個別面談の台本づくり</li>
+          <li>セールスの流れを一緒に作る</li>
+          <li>初回の募集をかける</li>
+          <li>成約後のフォロー設計</li>
+        </ul>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase__h">9〜12か月<br>仕組みにする</div>
+      <div class="phase__b">
+        <div class="goal">目標：僕がいなくても<br>回る状態</div>
+        <ul>
+          <li>募集の型を再現可能にする</li>
+          <li>撮影・編集の外注化 or 効率化</li>
+          <li>年間の発信カレンダー化</li>
+          <li>次の商品・単価設計</li>
+          <li>卒業（自走できる状態へ）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <p class="lead" style="text-align:center;margin-top:14px">ゴールは「僕に依存させること」ではなく、<span class="m">1年後に自分で回せるようになること</span>です。</p>
+</section>
+
+<!-- 23 -->
+<section class="slide">
+  <div class="kicker">06 ｜ サポート内容</div>
+  <h2>1年間、こうやって並走します</h2>
+  <div class="incl" style="grid-template-columns:1fr 1fr;margin-top:0">
+    <div><b>◾️ Zoom個別面談 ── 回数無制限</b>（必要なときに、何度でも）</div>
+    <div><b>◾️ Discordで質問し放題</b>（気づいたときにすぐ聞ける）</div>
+    <div><b>◾️ AI作業環境の構築</b>（上田さんのPCに、僕が直接セットアップ）</div>
+    <div><b>◾️ 台本の添削</b>（撮る前に、何本でも）</div>
+    <div><b>◾️ 競合リサーチの代行・伴走</b>（初期設計はまるごと一緒に）</div>
+    <div><b>◾️ 月次の数値分析レポート</b>（何を直すかまで提示）</div>
+    <div><b>◾️ LINE・オプチャの導線設計</b>（受け皿の構築まで）</div>
+    <div><b>◾️ 個別面談・セールスの台本づくり</b>（売る場面まで一緒に）</div>
+  </div>
+  <div class="whybox" style="margin-top:16px">アドバイスだけで終わりません。<b>手が止まりそうなところは、僕が代わりに動かします。</b><span class="m">上田さんに残す仕事は「喋ること」と「決めること」だけ</span>にするのが方針です。</div>
+</section>
+
+<!-- 24 -->
+<section class="slide">
+  <div class="kicker">06 ｜ 費用</div>
+  <h2 style="text-align:center">1年間 並走サポート</h2>
+  <div class="pricebox">
+    <div class="pname">インスタ集客 × AI活用 1年並走コンサルティング</div>
+    <div class="pval"><span class="tbd">◯◯◯,◯◯◯</span><small>円（税込）</small></div>
+    <div class="pnote">お支払い方法：<b>銀行振込</b>　※クレジットカード決済は近日ご案内できる見込みです</div>
+  </div>
+  <div class="cards c3" style="margin-top:20px">
+    <div class="card"><h3 style="font-size:18px">回収の考え方</h3>
+      <p style="font-size:15px">スクールの単価から逆算すると、<b>入会が数名出た時点で回収</b>できる計算になります。ロードマップ通りなら6〜9か月目の水準です。</p></div>
+    <div class="card"><h3 style="font-size:18px">1年後に残るもの</h3>
+      <p style="font-size:15px">集客の<b>仕組み</b>と、AIが動く<b>作業環境</b>と、自分で回せる<b>スキル</b>。契約が終わっても、全部残ります。</p></div>
+    <div class="card is-accent"><h3 style="font-size:18px">定員について</h3>
+      <p style="font-size:15px">ここまで手を入れるので、<b>同時に見られるのは少人数</b>です。<span class="tbd">現在◯枠</span></p></div>
+  </div>
+</section>
+
+<!-- 25 -->
+<section class="slide">
+  <div class="kicker">06 ｜ まとめ</div>
+  <h2>他ではなく、僕と組む理由</h2>
+  <div class="cards c3">
+    <div class="card is-accent"><div class="num-badge">1</div><h3>初期設計から<br>一緒にやる</h3>
+      <p>「投稿のアドバイス」ではありません。<b>誰に何を売るか</b>という一番外せないところから、手を動かして一緒に決めます。</p></div>
+    <div class="card is-accent"><div class="num-badge">2</div><h3>AIで、<br>止まらなくする</h3>
+      <p>実業をやりながらの発信で一番の敵は「時間」。<b>作業そのものを半分にする環境</b>を、僕が構築します。ここが最大の違いです。</p></div>
+    <div class="card is-accent"><div class="num-badge">3</div><h3>売れるところまで<br>面倒を見る</h3>
+      <p>フォロワーを増やして終わりではありません。<b>LINE・面談・セールス</b>まで、入会が出るまで並走します。</p></div>
+  </div>
+  <div class="statement" style="margin-top:20px;padding:18px 30px">
+    <div class="s1" style="font-size:26px">上田さんには、<span class="em">材料が全部そろっています</span>。</div>
+    <div class="s2">現役の実績、売る商品、発信の経験 —— あとは、設計と続ける仕組みだけです</div>
+  </div>
+</section>
+
+<!-- 26 -->
+<section class="slide title-slide">
+  <div class="kicker">NEXT STEP</div>
+  <h2 style="font-size:44px;margin-bottom:26px">まず、<span class="em">初期設計だけでも</span><br>一緒にやってみませんか</h2>
+  <ul class="checklist" style="font-size:21px;text-align:left">
+    <li>競合リサーチを、僕のAI環境で<b>今週中に回します</b></li>
+    <li>その結果を見て、コンセプトの方向性を一緒に決めます</li>
+    <li>そこまで見てから、1年やるかを判断してもらって大丈夫です</li>
+  </ul>
+  <p class="lead" style="margin-top:28px">今日の資料は、あとでURLでお送りします。<br><span class="m">気になったところは、何でも聞いてください。</span></p>
+</section>
+
+<div class="pagenum"><span id="cur">1</span> / <span id="total">26</span></div>
+<div class="navhint">← → キーで移動 ／ クリックでも進みます</div>
+
+</div><!-- /stage -->
+
+<script>
+  var stage = document.getElementById('stage');
+  function fit(){
+    var s = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+    stage.style.transform = 'translate(-50%,-50%) scale(' + s + ')';
+  }
+  window.addEventListener('resize', fit);
+  fit();
+
+  var slides = document.querySelectorAll('.slide');
+  var cur = 0;
+  document.getElementById('total').textContent = slides.length;
+  function show(i){
+    cur = Math.max(0, Math.min(slides.length - 1, i));
+    slides.forEach(function(s, j){ s.classList.toggle('active', j === cur); });
+    document.getElementById('cur').textContent = cur + 1;
+    location.hash = cur + 1;
+  }
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') show(cur + 1);
+    if(e.key === 'ArrowLeft' || e.key === 'PageUp') show(cur - 1);
+    if(e.key === 'Home') show(0);
+    if(e.key === 'End') show(slides.length - 1);
+  });
+  document.addEventListener('click', function(e){
+    if(e.clientX > window.innerWidth / 2) show(cur + 1); else show(cur - 1);
+  });
+  show(parseInt(location.hash.slice(1), 10) - 1 || 0);
+</script>
+</body>
+</html>

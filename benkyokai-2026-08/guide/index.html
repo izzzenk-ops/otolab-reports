@@ -110,20 +110,26 @@
   <div class="prep">
     <h2>🧰 はじめる前に</h2>
     <ul>
-      <li><b>Claude Code が使える状態</b>にしておいてください。使い方は2通りあります：
-        <br><span class="mini">・<b>Claude デスクトップアプリ</b>（パソコンにインストールするアプリ）を開いて、左上の <b>「Code」</b> に切り替える　←ふだんはこちらが簡単です
-        <br>・または <b>ターミナル</b>（Macは「ターミナル」アプリ／Windowsは「Windows Terminal」）で <b>claude</b> と打って起動する
-        <br><b style="color:#e06c6c;">※この2つは別物です。</b>デスクトップアプリを入れても、ターミナルの <code class="inline">claude</code> は使えるようになりません（逆も同じ）。<b>どちらか片方でOK</b>ですが、動画編集スキルも使う Windows の方はターミナル版が必要です。<b>「まだ入っていない」「claude と打っても反応しない」方は下の折りたたみへ👇</b></span></li>
+      <li><b>使うのは「Claude デスクトップアプリ」です。</b>パソコンに入れるアプリを開いて、左上を <b>「Code」</b> に切り替えて使います。
+        <br><span class="mini">👉 <b>ダウンロードはこの公式ページから</b>（無料）：<br>
+        <a href="https://claude.com/ja-jp/download" target="_blank" rel="noopener" style="color:#e06c6c;font-weight:800;word-break:break-all;">https://claude.com/ja-jp/download</a><br>
+        ページを開いたら、<b>お使いのパソコンのボタン（Mac ／ Windows）を押すだけ</b>です。Mac は開いたファイルの Claude アイコンを「アプリケーション」フォルダにドラッグ、Windows はダウンロードしたファイルをダブルクリックして「次へ」で進めばOK。<b>Windows の方はボタンが2つ並んで迷うので、下の折りたたみ「どっちをダウンロードする？」を見てください👇</b><br>
+        ⚠️ 検索から入ると広告枠に<b>偽サイト</b>が混ざることがあります。URLが <code class="inline">claude.com</code> か確認してからダウンロードしてください。</span></li>
+      <li><b style="color:#e06c6c;">ターミナルのまま作業を続けないでください。</b>設定はターミナルで進めてもOKですが、<b>ふだん使うのはデスクトップアプリの「Code」</b>です。
+        <br><span class="mini">ターミナル（Macは「ターミナル」アプリ／Windowsは「Windows Terminal」）で <code class="inline">claude</code> と打っても Claude Code は動きます。ただし<b>ターミナルを使うのは、次の2つのときだけ</b>です：<br>
+        ・<b>① Claude Code を入れるとき</b>（デスクトップアプリを入れた方は不要。<b>ターミナルから入れた方も、入れ終わったらデスクトップアプリに戻ってください</b>）<br>
+        ・<b>② Windows で「動画編集」スキルを使うとき</b>（このときだけ Windows Terminal が必要です。→ 下の🎬）<br>
+        <b>デスクトップアプリとターミナルの <code class="inline">claude</code> は別物です。</b>片方を入れても、もう片方が使えるようにはなりません。<b>「まだ入っていない」「claude と打っても反応しない」方は下の折りたたみへ👇</b></span></li>
       <li><b>Mac の方</b>：そのまま進んでOKです。
         <br><span class="mini">「動画編集」スキルも使いたい場合のみ、先に <b>Homebrew</b> を入れておくと途中で止まりません（入れ方は下の折りたたみを参照）。分析・台本スキルだけなら不要です。</span></li>
       <li><b>Windows の方</b>：<b style="color:#e06c6c;">先に「Git」を入れてください。</b>これが無いと、Claude で自分のパソコンのファイルが扱えません（赤字で「ローカルセッションにはGitが必要です」と出ます）。<b>入れ方は下の折りたたみへ👇</b>
-        <br><span class="mini">また、<b>「Windows Terminal」から <code class="inline">claude</code> で起動</b>してください。デスクトップアプリの「Code」タブでは、動画編集スキルが動かないことをテストで確認しています（分析・台本スキルはどちらでも動きます）。「Windows Terminal」はスタートメニューで「terminal」と検索すると出てきます（無い場合は Microsoft Store から無料で入ります）。Homebrew は Mac 専用なので、Windows の方は不要です。</span></li>
+        <br><span class="mini">また、<b>「動画編集」スキルを使うときだけ「Windows Terminal」から <code class="inline">claude</code> で起動</b>してください。デスクトップアプリの「Code」タブでは、動画編集スキルが動かないことをテストで確認しています（<b>分析・台本・設計スキルはデスクトップアプリのままでOK</b>です）。「Windows Terminal」はスタートメニューで「terminal」と検索すると出てきます（無い場合は Microsoft Store から無料で入ります）。Homebrew は Mac 専用なので、Windows の方は不要です。</span></li>
     </ul>
 
     <details class="brew">
       <summary>🪟 Windows の方：どっちをダウンロードする？（64bit / arm64）</summary>
       <div class="brewbody">
-        <p class="mini">Claude デスクトップアプリのダウンロード画面で、Windows だけ<b>2つ並んでいて迷います</b>。結論から言うと <b style="color:#e06c6c;">上の「Windows」でOK</b> です。</p>
+        <p class="mini">ダウンロードページ（<a href="https://claude.com/ja-jp/download" target="_blank" rel="noopener" style="color:#e06c6c;font-weight:800;">https://claude.com/ja-jp/download</a>）を開くと、Windows だけボタンが<b>2つ並んでいて迷います</b>。結論から言うと <b style="color:#e06c6c;">上の「Windows」でOK</b> です。</p>
         <img src="images/windows-download.png" alt="Windowsのダウンロードは上の「Windows」を選ぶ" style="display:block;width:100%;border:1px solid #f0e8dd;border-radius:12px;margin:12px 0;">
         <p class="mini"><b>・「Windows」</b>…市販パソコンのほとんど（Intel／AMD）はこちら。迷ったらこれを選んでください。<br>
         <b>・「Windows (arm 64)」</b>…Snapdragon という部品を積んだ一部の機種だけ（Surface Pro X・一部の Copilot+ PC）。</p>
@@ -153,9 +159,11 @@
     </details>
 
     <details class="brew">
-      <summary>⚙️ Claude Code が入っていない・「claude」で反応しないとき（3分）</summary>
+      <summary>⚙️ ターミナルの「claude」でも使いたい方だけ（ふだんは不要）</summary>
       <div class="brewbody">
-        <p class="mini"><b>デスクトップアプリだけ入れていて、ターミナルで <code class="inline">claude</code> が使えない</b>のはよくあることです（別のソフト扱いなので）。ターミナル版を使いたいときは、下の1行を入れるだけです。</p>
+        <p class="mini"><b>ほとんどの方はこの作業は不要です。</b>デスクトップアプリの「Code」で全スキルが使えます。<br>
+        必要なのは <b>Windows で動画編集スキルを使う方</b>と、<b>どうしてもターミナルで動かしたい方</b>だけです。<br>
+        <b>デスクトップアプリだけ入れていて、ターミナルで <code class="inline">claude</code> が使えない</b>のはよくあることです（別のソフト扱いなので）。ターミナル版も使いたいときは、下の1行を入れるだけです。</p>
         <p class="mini"><b>【Mac の方】</b>「ターミナル」アプリを開いて、下を貼って実行してください。</p>
         <div class="cmd">
           <code id="i1">curl -fsSL https://claude.ai/install.sh | bash</code>
@@ -167,7 +175,7 @@
           <button class="copy" data-target="i2">コピー</button>
         </div>
         <p class="mini"><b>終わったら、ターミナルを一度閉じて開き直してから</b> <code class="inline">claude</code> と打ってください。Claude Code が立ち上がれば成功です。初回はログインを求められるので、いつものアカウントでログインしてください。</p>
-        <p class="mini">💡 デスクトップアプリの「Code」モードだけで進める方は、この作業は不要です（分析・台本スキルはどちらでも動きます）。</p>
+        <p class="mini"><b style="color:#e06c6c;">⚠️ 入れ終わったら、作業はデスクトップアプリに戻ってください。</b>ここでインストールしたのは「ターミナル版」です。ターミナルの黒い画面のまま進めてしまう方が多いのですが、<b>ふだんの作業はデスクトップアプリの「Code」</b>が正解です（画面が見やすく、ファイルのやりとりも楽です）。ターミナルを使い続けてよいのは <b>Windows で動画編集スキルを動かすときだけ</b>です。</p>
       </div>
     </details>
 
@@ -289,13 +297,13 @@ eval "$(/opt/homebrew/bin/brew shellenv)"</code>
       <li>初回に話しかけると、<b>編集ツールを自動でセットアップ</b>します（<b>数分〜十数分</b>／ネット接続が必要。2回目以降は速いです）。</li>
       <li>Mac の方は先に <b>Homebrew</b> を入れておくと途中で止まりません（上の「はじめる前に」参照）。</li>
       <li>途中で許可を聞かれたら <b>「常に許可（今後聞かない）」</b> を選ぶとスムーズです。</li>
-      <li>Windows の方は <b>「Windows Terminal」の <code class="inline">claude</code></b> で使ってください（アプリの「Code」タブでは動きません）。</li>
+      <li>Windows の方は <b>このスキルのときだけ「Windows Terminal」の <code class="inline">claude</code></b> で使ってください（アプリの「Code」タブでは動画編集だけ動きません）。<b>編集が終わったらデスクトップアプリに戻ってOK</b>です。</li>
     </ul>
   </div>
 
   <div class="help">💬 途中で止まったり、よく分からない画面が出たら —— その画面をスクショして、<b>いま開いている Claude Code にそのまま貼り付けて「これどうすればいい？」</b>と聞いてください。その場で教えてくれます。</div>
 
-  <footer>おとラボ スキル 導入ガイド ｜ 2026/07</footer>
+  <footer>おとラボ スキル 導入ガイド ｜ 2026/08</footer>
 </div>
 
 <script>

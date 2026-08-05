@@ -208,7 +208,7 @@
   <div class="kicker">02 ｜ PREPARATION</div>
   <h2>はじめる前のチェック</h2>
   <ul class="checklist">
-    <li><b>Claude Code が使える状態</b>（デスクトップアプリの「Code」モード、またはターミナルの claude）</li>
+    <li><b>Claude デスクトップアプリ</b>を入れて「Code」に切り替えた状態（<b>claude.com/ja-jp/download</b> から。<b>ふだん使うのはこちら</b>）</li>
     <li>Chrome に <b>Claude 拡張機能</b>（アカウント分析でインスタ画面を見るのに使います）</li>
     <li>Chrome で <b>Instagram にログイン</b>済み</li>
     <li>（Macで動画編集も使う人だけ）<b>Homebrew</b> — brew.sh から。分析・台本だけなら不要</li>
@@ -224,9 +224,9 @@
       <div class="big">①</div>
       <h3 style="font-size:19px">デスクトップアプリと<br>ターミナルの claude は<b style="color:#e06c6c">別物</b></h3>
       <p style="font-size:15px">アプリを入れても、ターミナルで <span class="mono">claude</span> は使えません（逆も同じ）。<br>
-      <b>「貼るだけ」で進めない＝あなたのせいではありません。</b></p>
-      <div class="cmdbox" style="font-size:13px;margin-top:6px;white-space:normal">curl -fsSL https://claude.ai/install.sh | bash</div>
-      <p style="font-size:13px;color:var(--sub);margin-top:5px">Windowsは <span class="mono">irm https://claude.ai/install.ps1 | iex</span></p>
+      <b style="color:#e06c6c">使うのはデスクトップアプリの「Code」。</b>ターミナルで入れた人も、<b>入れたらアプリに戻る。</b></p>
+      <div class="cmdbox" style="font-size:13px;margin-top:6px;white-space:normal">ターミナルでも使いたい人だけ：curl -fsSL https://claude.ai/install.sh | bash</div>
+      <p style="font-size:13px;color:var(--sub);margin-top:5px">Windowsは <span class="mono">irm https://claude.ai/install.ps1 | iex</span>（Windowsの動画編集はこちらが必要）</p>
     </div>
     <div class="card">
       <div class="big">②</div>
@@ -262,7 +262,7 @@
   <div class="kicker">02 ｜ WORK TIME（15分）</div>
   <h2>🖐 いっしょにやってみよう</h2>
   <ol class="worksteps">
-    <li>Claude Code を開く（アプリの「Code」モード、またはターミナルの <code>claude</code>）</li>
+    <li><b>Claude デスクトップアプリ</b>を開いて「Code」に切り替える（ターミナルの黒い画面ではありません）</li>
     <li>1行目 <code>/plugin marketplace add izzzenk-ops/otolab-skills</code> を貼って実行</li>
     <li>2行目 <code>/plugin install otolab-insta@otolab-skills</code> を貼って実行</li>
     <li>配布した<b>「初期設定プロンプト」</b>を貼って実行 —— Claude が質問しながら<b>あなた専用の設定</b>を作ります</li>

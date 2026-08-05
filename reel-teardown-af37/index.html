@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>参考リール解剖レポート｜43秒を1フレームずつ分解する</title>
+<style>
+:root{
+  --bg:#fdfcfa; --ink:#4a4a5a; --sub:#8a8a9a; --line:#edeae4; --line2:#e3e0d9;
+  --card:#fff; --dark:#3a3a46; --dark-light:#f1efec;
+  --accent:#ff9e9e; --accent-deep:#fb8b8b; --accent-light:#fff0f0;
+  --blue:#7eb8e6; --blue-deep:#5d9fd4; --blue-light:#eaf4fc;
+  --yellow:#ffe39e; --yellow-light:#fff9e8; --gold:#c29438;
+  --green:#7cc4a0; --green-light:#eaf7f1;
+  --grad:linear-gradient(135deg,#ff9e9e,#ffb88e);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Hiragino Maru Gothic ProN","Zen Maru Gothic","Hiragino Sans","Yu Gothic",sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.85;-webkit-font-smoothing:antialiased;
+  font-size:16px;padding-bottom:80px}
+.wrap{max-width:900px;margin:0 auto;padding:0 22px}
+
+/* ヘッダー */
+header{background:var(--grad);color:#fff;padding:52px 0 46px;margin-bottom:44px;
+  border-radius:0 0 26px 26px}
+header .wrap{text-align:center}
+.kicker{font-size:12px;letter-spacing:.28em;font-weight:800;opacity:.92;margin-bottom:14px}
+header h1{font-size:33px;font-weight:800;line-height:1.4;letter-spacing:.01em;margin-bottom:14px}
+header p{font-size:15px;opacity:.95;line-height:1.8}
+.src{display:inline-block;margin-top:16px;background:rgba(255,255,255,.22);
+  padding:7px 18px;border-radius:99px;font-size:12.5px;letter-spacing:.03em}
+
+/* セクション */
+section{margin-bottom:52px}
+h2{font-size:23px;font-weight:800;color:var(--dark);margin-bottom:8px;
+  padding-left:15px;border-left:6px solid var(--accent);line-height:1.5}
+.lead{color:var(--sub);font-size:14.5px;margin-bottom:24px;padding-left:15px}
+
+/* 数字カード */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:13px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:20px 14px;text-align:center}
+.stat .n{font-size:30px;font-weight:800;color:var(--accent-deep);line-height:1.2}
+.stat .n small{font-size:15px;font-weight:800}
+.stat .l{font-size:12.5px;color:var(--sub);margin-top:6px;letter-spacing:.04em}
+.stat.zero .n{color:var(--blue-deep)}
+
+/* 結論ボックス */
+.concl{background:var(--accent-light);border:1.5px solid #ffd4d4;border-radius:18px;
+  padding:26px 28px}
+.concl strong{color:var(--accent-deep);font-weight:800}
+.concl p+p{margin-top:12px}
+
+/* 画面設計図 */
+.mock-row{display:flex;gap:26px;align-items:flex-start;flex-wrap:wrap;justify-content:center}
+.mock{width:230px}
+.phone{width:230px;height:409px;background:linear-gradient(#dfe6ea,#cfd8dd);
+  border-radius:18px;position:relative;overflow:hidden;border:5px solid var(--dark);
+  box-shadow:0 8px 22px rgba(0,0,0,.12)}
+.phone .person{position:absolute;left:50%;transform:translateX(-50%);bottom:0;
+  width:96px;height:250px;background:#5a7a99;border-radius:44px 44px 0 0;opacity:.55}
+.phone .head{position:absolute;left:50%;transform:translateX(-50%);bottom:238px;
+  width:52px;height:52px;background:#5a7a99;border-radius:50%;opacity:.55}
+.tl{position:absolute;left:0;right:0;text-align:center;font-weight:900;
+  font-family:"Hiragino Sans","Yu Gothic",sans-serif;
+  text-shadow:0 0 6px #000,2px 2px 0 #000,-2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000}
+.tl.up{top:18%;font-size:17px;color:#fff}
+.tl.dn{top:46%;font-size:23px;color:#fff}
+.tl.red{color:#ff3b30}
+.tl.blue{color:#4da3ff}
+.guide{position:absolute;left:0;right:0;border-top:1px dashed var(--accent-deep);opacity:.85}
+.guide span{position:absolute;right:4px;top:-16px;font-size:9.5px;color:var(--accent-deep);
+  background:#fff;padding:0 5px;border-radius:6px;font-weight:800}
+.mock .cap{text-align:center;font-size:12.5px;color:var(--sub);margin-top:11px;line-height:1.7}
+
+/* 表 */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:620px}
+th{background:var(--dark-light);color:var(--dark);font-weight:800;padding:12px 10px;
+  text-align:left;font-size:12.5px;letter-spacing:.05em;white-space:nowrap}
+td{padding:11px 10px;border-top:1px solid var(--line);vertical-align:top}
+tr.sfx td{background:var(--yellow-light)}
+.t{color:var(--sub);font-size:12px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.w{font-weight:700}
+.c-red{color:#e04b3f;font-weight:800}
+.c-blue{color:var(--blue-deep);font-weight:800}
+.c-white{color:var(--dark);font-weight:700}
+.big{font-size:16px}
+.tag{display:inline-block;background:var(--gold);color:#fff;font-size:10.5px;
+  padding:2px 9px;border-radius:99px;font-weight:800;margin-left:6px;vertical-align:1px}
+
+/* ルールカード */
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:15px}
+.rule{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 20px 18px}
+.rule .rh{font-size:16px;font-weight:800;margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.chip{width:22px;height:22px;border-radius:7px;flex:none;border:1.5px solid rgba(0,0,0,.12)}
+.rule p{font-size:13.5px;line-height:1.85}
+.rule .ex{margin-top:11px;padding-top:11px;border-top:1px dashed var(--line2);
+  font-size:12.5px;color:var(--sub)}
+
+/* チェックリスト */
+.check{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:8px 24px}
+.check li{list-style:none;padding:15px 0 15px 34px;border-bottom:1px solid var(--line);
+  position:relative;font-size:14.5px}
+.check li:last-child{border-bottom:none}
+.check li::before{content:"";position:absolute;left:0;top:20px;width:19px;height:19px;
+  border-radius:6px;background:var(--accent-light);border:1.5px solid var(--accent)}
+.check li b{color:var(--accent-deep)}
+.check li span{display:block;font-size:12.5px;color:var(--sub);margin-top:3px}
+
+.note{background:var(--blue-light);border-left:5px solid var(--blue);border-radius:0 14px 14px 0;
+  padding:18px 22px;font-size:14px;margin-top:22px}
+.note b{color:var(--blue-deep)}
+
+footer{text-align:center;color:var(--sub);font-size:12.5px;margin-top:56px;
+  padding-top:26px;border-top:1px solid var(--line)}
+@media(max-width:600px){
+  header h1{font-size:25px}
+  h2{font-size:20px}
+  .phone{width:190px;height:338px}
+  .mock{width:190px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="kicker">REEL TEARDOWN</div>
+    <h1>参考リール解剖レポート<br>43秒を1フレームずつ分解する</h1>
+    <p>この動画の「編集」が何でできているかを、全1306フレームと音声全区間から実測しました。</p>
+    <div class="src">整体院リール ／ 43.53秒 ／ 1080×1920 ／ 30fps</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section>
+  <h2>実測サマリー</h2>
+  <p class="lead">推測ではなく、全フレーム走査とスペクトログラム解析で測った数字です。</p>
+  <div class="stats">
+    <div class="stat"><div class="n">43.53<small>秒</small></div><div class="l">尺</div></div>
+    <div class="stat zero"><div class="n">0<small>本</small></div><div class="l">カット</div></div>
+    <div class="stat"><div class="n">44<small>回</small></div><div class="l">テロップ切替</div></div>
+    <div class="stat"><div class="n">12<small>回</small></div><div class="l">2段になる回数</div></div>
+    <div class="stat"><div class="n">4<small>箇所</small></div><div class="l">効果音</div></div>
+    <div class="stat zero"><div class="n">0</div><div class="l">BGM</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>結論：この動画の「編集」はテロップ設計がすべて</h2>
+  <div class="concl">
+    <p>カットは<strong>1本もありません</strong>。固定カメラの一発撮りで、言葉の間（0.15〜0.55秒）も詰めずにそのまま残しています。つまり<strong>撮影の負担はほぼゼロ</strong>。</p>
+    <p>にもかかわらず最後まで見てしまうのは、テロップが<strong>上下2段・3色・サイズ可変・動きつき</strong>で設計され、要所に<strong>効果音</strong>が4回だけ入っているからです。凝った映像を撮る動画ではなく、<strong>喋りをどう見せるかだけで勝負している動画</strong>です。</p>
+    <p>裏を返すと、<strong>この型は素材が1本あれば再現できます</strong>。Bロールも小道具も要りません。</p>
+  </div>
+</section>
+
+<section>
+  <h2>画面の設計図</h2>
+  <p class="lead">テロップは画面の決まった2箇所にしか出ません。位置・大きさは実測値です。</p>
+  <div class="mock-row">
+    <div class="mock">
+      <div class="phone">
+        <div class="head"></div><div class="person"></div>
+        <div class="tl up">正常な判断が</div>
+        <div class="guide" style="top:14%"><span>上段 y22〜25%</span></div>
+      </div>
+      <div class="cap"><b>基本形（1段）</b><br>文の前半。文字高 80〜152px</div>
+    </div>
+    <div class="mock">
+      <div class="phone">
+        <div class="head"></div><div class="person"></div>
+        <div class="tl up">正常な判断が</div>
+        <div class="tl dn">しにくくなる</div>
+        <div class="guide" style="top:14%"><span>上段</span></div>
+        <div class="guide" style="top:42%"><span>下段 y50%前後</span></div>
+      </div>
+      <div class="cap"><b>オチ（2段）</b><br>上段を残したまま下段が出る。<br>文字高 100〜208px</div>
+    </div>
+    <div class="mock">
+      <div class="phone">
+        <div class="head"></div><div class="person"></div>
+        <div class="tl up red">整体院も</div>
+        <div class="tl dn red" style="font-size:38px">多い</div>
+        <div class="guide" style="top:14%"><span>上段</span></div>
+      </div>
+      <div class="cap"><b>強調（色＋特大）</b><br>短い言い切りほど大きくする</div>
+    </div>
+  </div>
+  <div class="note">
+    <b>ポイント：</b>上段は消えません。<b>上段を残したまま下段が足される</b>ので、視聴者は「前半→後半」を目で追うことになり、文が完成するまで離脱しにくくなります。これが1行テロップとの決定的な差です。
+  </div>
+</section>
+
+<section>
+  <h2>テロップ全44状態のタイムライン</h2>
+  <p class="lead">黄色の行は効果音が鳴っている箇所です。</p>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th style="width:104px">時刻</th><th>上段</th><th>下段</th></tr></thead>
+    <tbody>
+      <tr><td class="t">0.30–1.05</td><td class="c-white">正直</td><td>—</td></tr>
+      <tr><td class="t">1.35–2.15</td><td class="c-white">正直</td><td class="c-blue">後悔しています…</td></tr>
+      <tr><td class="t">2.15–3.05</td><td class="c-white">僕のところに来る</td><td>—</td></tr>
+      <tr><td class="t">3.05–4.00</td><td class="c-white">お客様で</td><td>—</td></tr>
+      <tr><td class="t">4.00–4.60</td><td class="c-red">回数券を</td><td>—</td></tr>
+      <tr><td class="t">4.60–5.85</td><td class="c-red">無理やり買わされる</td><td>—</td></tr>
+      <tr><td class="t">5.85–6.55</td><td class="c-red">その場で</td><td>—</td></tr>
+      <tr><td class="t">6.55–8.15</td><td class="c-red">回数券を契約</td><td>—</td></tr>
+      <tr><td class="t">8.15–9.10</td><td class="c-red">回数券を契約</td><td class="c-red big">してください</td></tr>
+      <tr><td class="t">9.10–9.85</td><td class="c-white">そう言われて</td><td>—</td></tr>
+      <tr><td class="t">9.85–10.70</td><td class="c-white">正直</td><td>—</td></tr>
+      <tr><td class="t">10.70–11.55</td><td class="c-white">正直</td><td class="c-white big">後悔する<span class="tag">最大208px</span></td></tr>
+      <tr><td class="t">11.55–12.25</td><td class="c-white">お客様が</td><td>—</td></tr>
+      <tr class="sfx"><td class="t">12.55–13.45</td><td class="c-white">お客様が</td><td class="c-white big">とても多いです<span class="tag">効果音</span></td></tr>
+      <tr><td class="t">13.45–14.25</td><td class="c-red">体の不調で</td><td>—</td></tr>
+      <tr><td class="t">14.25–15.35</td><td class="c-red">体の不調で</td><td class="c-red big">悩んでいる時は</td></tr>
+      <tr><td class="t">15.35–16.65</td><td class="c-white">正常な判断が</td><td>—</td></tr>
+      <tr class="sfx"><td class="t">16.80–17.65</td><td class="c-white">正常な判断が</td><td class="c-white big">しにくくなる<span class="tag">効果音</span></td></tr>
+      <tr><td class="t">17.65–18.60</td><td class="c-white">だからこそ</td><td>—</td></tr>
+      <tr><td class="t">18.60–19.30</td><td class="c-white">焦って</td><td>—</td></tr>
+      <tr><td class="t">19.30–20.45</td><td class="c-red">決める</td><td class="c-red big">必要ありません</td></tr>
+      <tr><td class="t">20.45–20.85</td><td class="c-white">本来</td><td>—</td></tr>
+      <tr><td class="t">20.85–21.95</td><td class="c-white">本来</td><td class="c-white big">回数券は</td></tr>
+      <tr><td class="t">21.95–23.95</td><td class="c-red">必要だから</td><td class="c-red big">選ぶものです</td></tr>
+      <tr><td class="t">23.95–25.20</td><td class="c-blue">不安を煽って</td><td>—</td></tr>
+      <tr><td class="t">25.20–26.60</td><td class="c-red">売上しかみない</td><td>—</td></tr>
+      <tr><td class="t">26.60–27.40</td><td class="c-red">整体院も</td><td>—</td></tr>
+      <tr><td class="t">27.40–28.75</td><td class="c-red">整体院も</td><td class="c-red big">多い<span class="tag">特大</span></td></tr>
+      <tr><td class="t">28.75–29.70</td><td class="c-white">安心して</td><td>—</td></tr>
+      <tr class="sfx"><td class="t">30.00–30.45</td><td class="c-white">安心して</td><td class="c-white big">通える事<span class="tag">効果音</span></td></tr>
+      <tr><td class="t">30.45–30.90</td><td class="c-white">それも</td><td>—</td></tr>
+      <tr><td class="t">30.90–32.15</td><td class="c-white">整体院選びの</td><td>—</td></tr>
+      <tr><td class="t">32.15–32.95</td><td class="c-white">大切な</td><td>—</td></tr>
+      <tr class="sfx"><td class="t">33.25–34.05</td><td class="c-white">大切な</td><td class="c-red big">基準です<span class="tag">効果音</span></td></tr>
+      <tr><td class="t">34.05–34.95</td><td class="c-white">当院は</td><td>—</td></tr>
+      <tr><td class="t">34.95–36.30</td><td class="c-white">回数券がなく</td><td>—</td></tr>
+      <tr><td class="t">36.30–37.25</td><td class="c-white">1回1回の</td><td>—</td></tr>
+      <tr><td class="t">37.25–37.95</td><td class="c-white">施術を</td><td>—</td></tr>
+      <tr><td class="t">37.95–39.40</td><td class="c-white">大切に行うことを</td><td>—</td></tr>
+      <tr><td class="t">39.40–40.50</td><td class="c-white">心がけています</td><td>—</td></tr>
+      <tr><td class="t">40.50–41.55</td><td class="c-white">気になった方は</td><td>—</td></tr>
+      <tr><td class="t">41.55–42.50</td><td class="c-white">是非一度</td><td>—</td></tr>
+      <tr><td class="t">42.50–43.55</td><td class="c-red">ご来院ください</td><td>—</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>色の使い分け（3色しか使っていない）</h2>
+  <p class="lead">色は気分で変えていません。言葉の役割で決まっています。</p>
+  <div class="rules">
+    <div class="rule">
+      <div class="rh"><span class="chip" style="background:#fff"></span>白 ＝ 地の文</div>
+      <p>状況説明・つなぎ・自己紹介。全体の6割。これが多数派だからこそ、色がついた瞬間に目が止まります。</p>
+      <div class="ex">例：僕のところに来る／そう言われて／だからこそ／当院は</div>
+    </div>
+    <div class="rule">
+      <div class="rh"><span class="chip" style="background:#ff3b30"></span>赤 ＝ 断定と警告</div>
+      <p>相手を脅かす事実、強い言い切り、CTA。<b>視聴者が身構える言葉</b>にだけ乗せています。</p>
+      <div class="ex">例：無理やり買わされる／必要ありません／売上しかみない／ご来院ください</div>
+    </div>
+    <div class="rule">
+      <div class="rh"><span class="chip" style="background:#4da3ff"></span>青 ＝ 負の感情そのもの</div>
+      <p>全43秒で<b>たった2回</b>。後悔・不安という感情語だけに使い、赤（事実）と役割を分けています。</p>
+      <div class="ex">例：後悔しています…／不安を煽って</div>
+    </div>
+  </div>
+  <div class="note">
+    <b>盗むべきはここ：</b>色数を3つに絞り、<b>白＝事実／赤＝警告／青＝感情</b>と役割を固定していること。色を増やすほど「どこが大事か」が消えます。
+  </div>
+</section>
+
+<section>
+  <h2>効果音は「言い切り」にしか鳴らない</h2>
+  <p class="lead">43秒でたった4回。しかも入れる場所に一貫したルールがあります。</p>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th style="width:80px">時刻</th><th style="width:150px">鳴る言葉</th><th>音の種類</th><th>その言葉の役割</th></tr></thead>
+    <tbody>
+      <tr><td class="t">12.3秒</td><td class="w">とても多いです</td><td>チャイム系</td><td>問題が自分にも起きうると気づかせる</td></tr>
+      <tr><td class="t">16.8秒</td><td class="w">しにくくなる</td><td>チャイム系</td><td>話の核心になる理屈の結論</td></tr>
+      <tr><td class="t">29.8秒</td><td class="w">通える事</td><td>キラーン系</td><td>この動画の主張そのもの</td></tr>
+      <tr><td class="t">33.0秒</td><td class="w">基準です</td><td>下降スウィープ</td><td>言い切って締める</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="note">
+    <b>重要：</b>下段テロップが出る回数は12回ありますが、効果音が鳴るのは<b>そのうち4回だけ</b>。しかも赤でも特大でもない白テロップに3回鳴っています。つまり効果音は<b>色や大きさとは別の軸で、「論の結論」にだけ当てている</b>ということです。<br>
+    音を鳴らす場所は「秒数」で決まるのではなく、<b>その言葉が決定打かどうか</b>で決まります。全部に鳴らすと、どれも決定打でなくなります。
+  </div>
+</section>
+
+<section>
+  <h2>動きの設計</h2>
+  <p class="lead">静止したテロップではありません。出現の仕方が2種類作り分けられています。</p>
+  <div class="rules">
+    <div class="rule">
+      <div class="rh">① 上段：ズームイン</div>
+      <p>大きめに出て、0.3〜0.5秒かけて標準サイズへ収まります。ポンと置くのではなく、勢いをつけて着地させる動き。</p>
+    </div>
+    <div class="rule">
+      <div class="rh">② 下段：右からスライドイン</div>
+      <p>画面右から滑り込み、行き過ぎてから戻って止まります。移動中は<b>横方向にブレる（モーションブラー）</b>ので、勢いが目に残ります。</p>
+    </div>
+    <div class="rule">
+      <div class="rh">③ 文字の塗り</div>
+      <p>ベタ塗りではなく<b>シルバーのグラデーション／石目調</b>。そこに太い黒縁と黒い影を重ねて、背景が白でも黒でも読める状態にしています。</p>
+    </div>
+    <div class="rule">
+      <div class="rh">④ 背後のグロー</div>
+      <p>強調したい下段の後ろに白いぼかしを敷いて、体の上に文字が乗っても沈まないようにしています。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>自分のリールで再現するときのチェックリスト</h2>
+  <ul class="check">
+    <li><b>撮影は一発撮り、固定カメラでいい</b><span>カットは0本。間も詰めていません。編集より「何を喋るか」に時間を使う型です。</span></li>
+    <li><b>テロップは1文を2つに割る</b><span>前半を上段に出し、後半（オチ）を下段に足す。上段は消さない。</span></li>
+    <li><b>色は3つまで。役割を固定する</b><span>白＝事実、赤＝警告と言い切り、青＝感情。青は動画に1〜2回だけ。</span></li>
+    <li><b>言い切りは短くして、大きくする</b><span>「多い」「後悔する」のような2〜4文字ほど文字を大きく。</span></li>
+    <li><b>効果音は4回まで</b><span>入れるのは「これが結論」という言葉だけ。数を増やすと効果が消えます。</span></li>
+    <li><b>BGMは無しでも成立する</b><span>この動画はBGMゼロ。声と効果音だけで最後まで持たせています。</span></li>
+  </ul>
+</section>
+
+<footer>
+  参考リールを全1306フレーム・音声全区間から実測して作成しました。
+</footer>
+
+</div>
+</body>
+</html>

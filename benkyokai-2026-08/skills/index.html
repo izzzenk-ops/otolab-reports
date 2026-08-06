@@ -26,6 +26,13 @@
   .install b{color:var(--accent-deep);}
   .install code{display:block;background:#2f3542;color:#e8eef5;border-radius:8px;padding:8px 12px;margin-top:6px;
     font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;overflow-x:auto;}
+  /* Discordで改訂連絡が来たときのアップデート案内 */
+  .update{margin-top:12px;background:var(--accent-soft);border:1px solid #f7dada;border-radius:14px;padding:14px 16px;font-size:13px;}
+  .update b{color:var(--accent-deep);}
+  .update .cmdrow{display:flex;align-items:center;gap:8px;margin-top:8px;}
+  .update code{flex:1;background:#2f3542;color:#e8eef5;border-radius:8px;padding:8px 12px;
+    font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;overflow-x:auto;}
+  .update .mini{display:block;font-size:11.5px;color:var(--sub);margin-top:7px;}
   .flow{margin:6px 0 22px;font-size:12.5px;color:var(--sub);text-align:center;}
   .flow b{color:var(--accent-deep);}
   .cat{font-size:15px;font-weight:800;margin:28px 0 12px;display:flex;align-items:center;gap:8px;}
@@ -118,6 +125,14 @@
       <b>導入は最初の1回だけ、この2行を Claude Code に打つだけ：</b>
       <code>/plugin marketplace add izzzenk-ops/otolab-skills</code>
       <code>/plugin install otolab-insta@otolab-skills</code>
+    </div>
+    <div class="update">
+      🔔 <b>スキルは、あとから増えたり改良されたりします。</b>けんじから <b>Discord に「スキルを更新しました」と連絡が来たら</b>、下の1行を Claude Code に貼って実行してください。それだけで最新の状態になります（入れ直しは不要です）。
+      <div class="cmdrow">
+        <code>/plugin marketplace update</code>
+        <button class="copybtn" type="button" id="updbtn">📋 コピー</button>
+      </div>
+      <span class="mini">うまくいくと「更新しました」と表示されます。連絡が来ていないときは実行しなくてOK。実行しても、作った成果物や初期設定は消えません。</span>
     </div>
   </header>
 
@@ -354,7 +369,7 @@
     </div>
   </div>
 
-  <footer>おとラボ スキル・ツール一覧（全16スキル）｜ 更新: 2026/07/30 ｜ 導入で困ったら、画面をスクショして Claude Code に貼って聞いてください</footer>
+  <footer>おとラボ スキル・ツール一覧（全16スキル）｜ 更新: 2026/08/06 ｜ 導入で困ったら、画面をスクショして Claude Code に貼って聞いてください</footer>
 </div>
 
 <!-- 画像の拡大表示（クリックで開く） -->
@@ -407,6 +422,10 @@ function makeCopyBtn(label, text, cls){
   });
   return btn;
 }
+
+// ヘッダーの「更新の受け取り方」のコピーボタン（Discordで改訂連絡が来たとき用）
+var updSlot = document.getElementById('updbtn');
+if(updSlot){ updSlot.parentNode.replaceChild(makeCopyBtn('📋 コピー', '/plugin marketplace update', 'copybtn'), updSlot); }
 
 document.querySelectorAll('.skill').forEach(function(card){
   var idEl = card.querySelector('.id');

@@ -35,8 +35,9 @@
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
   .skill{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 22px;}
   .skill h3{font-size:17px;font-weight:800;margin-bottom:3px;line-height:1.35;}
-  .id-row{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+  .id-row{display:flex;flex-direction:column;align-items:flex-start;gap:7px;margin-bottom:10px;}
   .id-row .id{margin-bottom:0;}
+  .btn-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
   .copybtn{flex:0 0 auto;background:var(--accent);color:#fff;border:none;border-radius:999px;
     padding:3px 11px;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap;font-family:inherit;transition:background .15s;}
   .copybtn:hover{background:var(--accent-deep);}
@@ -99,6 +100,7 @@
     header,.skill,.applied{break-inside:avoid;}
     .cat{break-after:avoid;}
     .copybtn{display:none;}  /* PDFではボタンは動かないので隠す（HTML版のみの機能） */
+    .btn-row{display:none;}  /* ボタン行ごと消して余白を残さない */
     .lb,.nav{display:none !important;}  /* 拡大表示・ページ内ナビはPDFでは不要 */
     .shot{max-height:150px;}            /* 紙では小さめに（雰囲気が伝わればよい） */
     .shotcap{display:none;}
@@ -419,10 +421,15 @@ document.querySelectorAll('.skill').forEach(function(card){
   idEl.parentNode.insertBefore(head, idEl);
   head.appendChild(idEl);
 
+  // ボタンは必ず名前の「下」に2つ並べる（スキル名の長さで配置がバラつかないように）
+  var btnRow = document.createElement('div');
+  btnRow.className = 'btn-row';
+  head.appendChild(btnRow);
+
   // ①推奨：日本語の起動ワード（そのまま貼って話しかけるだけ。/ を付ける余地がない）
-  head.appendChild(makeCopyBtn('📋 話しかける言葉をコピー', phrase, 'copybtn'));
+  btnRow.appendChild(makeCopyBtn('📋 話しかける言葉をコピー', phrase, 'copybtn'));
   // ②正式名：スラッシュで直接呼びたい人向け（プラグイン名まで含めないと動かない）
-  head.appendChild(makeCopyBtn('/ コマンドをコピー', '/' + PLUGIN + ':' + skillId, 'copybtn sub'));
+  btnRow.appendChild(makeCopyBtn('/ コマンドをコピー', '/' + PLUGIN + ':' + skillId, 'copybtn sub'));
 });
 </script>
 </body>

@@ -41,6 +41,20 @@
     padding:3px 11px;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap;font-family:inherit;transition:background .15s;}
   .copybtn:hover{background:var(--accent-deep);}
   .copybtn.done{background:var(--green);}
+  /* ②正式名（スラッシュ）用は控えめに。推奨はあくまで①の「話しかける言葉」 */
+  .copybtn.sub{background:#fff;color:var(--sub);border:1px solid var(--line);font-weight:700;}
+  .copybtn.sub:hover{background:#f7f3ec;color:var(--ink);}
+  .copybtn.sub.done{background:var(--green);color:#fff;border-color:var(--green);}
+  /* 呼び方の案内（ページ冒頭） */
+  .howto{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);
+    border-radius:0 16px 16px 0;padding:16px 20px;margin:0 0 22px;font-size:13.5px;}
+  .howto h4{font-size:14.5px;font-weight:800;margin-bottom:8px;}
+  .howto .way{margin-top:9px;padding-left:14px;position:relative;}
+  .howto .way::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--accent);}
+  .howto .ex{display:inline-block;background:var(--bg);border-radius:8px;padding:3px 11px;
+    font-family:ui-monospace,Menlo,monospace;font-size:12.5px;margin-top:3px;}
+  .howto .osusume{display:inline-block;background:var(--accent);color:#fff;border-radius:999px;
+    padding:1px 10px;font-size:10.5px;font-weight:800;margin-left:6px;vertical-align:middle;}
   .skill .id{font-size:15px;color:var(--accent-deep);font-weight:700;font-family:ui-monospace,monospace;margin-bottom:10px;letter-spacing:.2px;}
   .skill .what{font-size:13.5px;color:var(--ink);}
   .words{margin-top:12px;}
@@ -106,6 +120,17 @@
   </header>
 
   <div class="flow">運用の流れ：<b>① 設計</b> → <b>② 分析</b> → <b>③ 台本</b> → <b>④ 編集</b>（この一覧もその順番で並んでいます）</div>
+
+  <div class="howto">
+    <h4>💬 スキルの呼び方は2つ。どちらでもOKです</h4>
+    <div class="way"><b>ふつうに話しかける</b><span class="osusume">おすすめ</span><br>
+      各カードの<b>「📋 話しかける言葉をコピー」</b>を押して、Claude Code に貼るだけ。<b>／（スラッシュ）は付けません。</b><br>
+      <span class="ex">このリールを分析して https://www.instagram.com/reel/○○○</span></div>
+    <div class="way"><b>正式名で呼ぶ</b>（慣れてきた人向け）<br>
+      <b>「/ コマンドをコピー」</b>を押して貼ります。<b>スキル名だけでは動かず、頭の <span class="ex" style="margin:0">/otolab-insta:</span> まで必要</b>です。<br>
+      <span class="ex">/otolab-insta:bunseki-reel</span></div>
+    <div class="way" style="color:var(--sub);font-size:12.5px;">よくある失敗：<span class="ex" style="margin:0">/bunseki</span> のように<b>途中まで</b>だったり、<span class="ex" style="margin:0">/bunseki-reel</span> のように<b>頭の <span style="font-family:inherit">otolab-insta:</span> が抜けている</b>とエラーになります。迷ったら上の「話しかける」方でどうぞ。</div>
+  </div>
 
   <div class="nav">
     <a href="#sec-design">🎯 設計する</a>
@@ -360,31 +385,44 @@
 // 各スキルカードの名前の横に「コピー」ボタンを差し込む。
 // 押すとそのスキルの起動ワード（最初のワード）をコピーできるので、
 // Claude Code にそのまま貼り付けて使える。※クリップボードはHTML版でのみ動作（PDFは静的）。
+var PLUGIN = 'otolab-insta';  // スラッシュで呼ぶときは必ず「プラグイン名:スキル名」になる
+
+function makeCopyBtn(label, text, cls){
+  var btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = cls;
+  btn.textContent = label;
+  btn.title = '「' + text + '」をコピー';
+  btn.addEventListener('click', function(){
+    function done(){ var old = btn.textContent; btn.textContent = '✓ コピーした'; btn.classList.add('done');
+      setTimeout(function(){ btn.textContent = label; btn.classList.remove('done'); }, 1600); }
+    function fallback(){ var ta = document.createElement('textarea'); ta.value = text;
+      ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.focus(); ta.select();
+      try{ document.execCommand('copy'); }catch(e){} document.body.removeChild(ta); done(); }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } else { fallback(); }
+  });
+  return btn;
+}
+
 document.querySelectorAll('.skill').forEach(function(card){
   var idEl = card.querySelector('.id');
   if(!idEl) return;
-  var phrase = idEl.textContent.trim();  // 英語のスキル名（ID）。これ自体が起動フレーズなので貼れば動く
-  // 英語スキル名(ID)の「横」にコピーボタンを置く（同じ行に並べる）
+  var skillId = idEl.textContent.trim();          // 例: bunseki-reel
+  var firstPill = card.querySelector('.words .pill');
+  var phrase = firstPill ? firstPill.textContent.trim() : skillId;  // 例: このリールを分析して
+
+  // 英語スキル名(ID)の「横」にボタンを2つ並べる
   var head = document.createElement('div');
   head.className = 'id-row';
   idEl.parentNode.insertBefore(head, idEl);
   head.appendChild(idEl);
-  var btn = document.createElement('button');
-  btn.type = 'button';
-  btn.className = 'copybtn';
-  btn.textContent = '📋 コピー';
-  btn.title = 'スキル名「' + phrase + '」をコピー（Claude Codeに貼って使えます）';
-  btn.addEventListener('click', function(){
-    function done(){ btn.textContent = '✓ コピーした'; btn.classList.add('done');
-      setTimeout(function(){ btn.textContent = '📋 コピー'; btn.classList.remove('done'); }, 1600); }
-    function fallback(){ var ta = document.createElement('textarea'); ta.value = phrase;
-      ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.focus(); ta.select();
-      try{ document.execCommand('copy'); }catch(e){} document.body.removeChild(ta); done(); }
-    if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(phrase).then(done, fallback);
-    } else { fallback(); }
-  });
-  head.appendChild(btn);
+
+  // ①推奨：日本語の起動ワード（そのまま貼って話しかけるだけ。/ を付ける余地がない）
+  head.appendChild(makeCopyBtn('📋 話しかける言葉をコピー', phrase, 'copybtn'));
+  // ②正式名：スラッシュで直接呼びたい人向け（プラグイン名まで含めないと動かない）
+  head.appendChild(makeCopyBtn('/ コマンドをコピー', '/' + PLUGIN + ':' + skillId, 'copybtn sub'));
 });
 </script>
 </body>

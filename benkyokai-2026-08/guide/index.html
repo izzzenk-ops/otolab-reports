@@ -120,11 +120,33 @@
         ・<b>① Claude Code を入れるとき</b>（デスクトップアプリを入れた方は不要。<b>ターミナルから入れた方も、入れ終わったらデスクトップアプリに戻ってください</b>）<br>
         ・<b>② Windows で「動画編集」スキルを使うとき</b>（このときだけ Windows Terminal が必要です。→ 下の🎬）<br>
         <b>デスクトップアプリとターミナルの <code class="inline">claude</code> は別物です。</b>片方を入れても、もう片方が使えるようにはなりません。<b>「まだ入っていない」「claude と打っても反応しない」方は下の折りたたみへ👇</b></span></li>
+      <li><b>Chrome の拡張機能「Claude」も入れてください。</b>分析スキル（競合分析・バズ企画リサーチなど）が、あなたのChromeでInstagramの画面を見に行くために使います。<b>これが無いと分析系スキルが途中で止まります。</b>
+        <br><span class="mini">👉 <b>入れ方は下の折りたたみへ👇</b>（3分）。台本づくりや動画編集だけなら無くても動きます。</span></li>
       <li><b>Mac の方</b>：そのまま進んでOKです。
         <br><span class="mini">「動画編集」スキルも使いたい場合のみ、先に <b>Homebrew</b> を入れておくと途中で止まりません（入れ方は下の折りたたみを参照）。分析・台本スキルだけなら不要です。</span></li>
       <li><b>Windows の方</b>：<b style="color:#e06c6c;">先に「Git」を入れてください。</b>これが無いと、Claude で自分のパソコンのファイルが扱えません（赤字で「ローカルセッションにはGitが必要です」と出ます）。<b>入れ方は下の折りたたみへ👇</b>
         <br><span class="mini">また、<b>「動画編集」スキルを使うときだけ「Windows Terminal」から <code class="inline">claude</code> で起動</b>してください。デスクトップアプリの「Code」タブでは、動画編集スキルが動かないことをテストで確認しています（<b>分析・台本・設計スキルはデスクトップアプリのままでOK</b>です）。「Windows Terminal」はスタートメニューで「terminal」と検索すると出てきます（無い場合は Microsoft Store から無料で入ります）。Homebrew は Mac 専用なので、Windows の方は不要です。</span></li>
     </ul>
+
+    <details class="brew">
+      <summary>🧩 Chrome 拡張機能「Claude」の入れ方（分析スキルを使う方は必須・3分）</summary>
+      <div class="brewbody">
+        <p class="mini">競合アカウント分析やバズ企画リサーチは、<b>あなたのChromeでInstagramを開いて画面を読み取る</b>という動き方をします。そのための部品が拡張機能「Claude」です。<b>あなたがログイン済みのInstagramをそのまま見に行く</b>ので、新しくID・パスワードを入れる必要はありません。</p>
+        <p class="mini"><b>① Chrome ウェブストアから追加する</b>（下のリンクを開いて「Chromeに追加」→「拡張機能を追加」）</p>
+        <div class="cmd">
+          <code id="x1">https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn</code>
+          <button class="copy" data-target="x1">コピー</button>
+        </div>
+        <p class="mini">⚠️ 検索から入ると<b>似た名前の偽物</b>が混ざることがあります。上のリンクから入るのが安全です（提供元が <b>Anthropic</b> になっているか確認してください）。</p>
+        <p class="mini"><b>② 拡張機能にログインする</b><br>
+        Chrome右上のパズルのピース🧩をクリック →「Claude」を選び、<b>いつものアカウントでログイン</b>してください。<b>ピン留め（📌）しておく</b>と、次から一発で開けます。</p>
+        <p class="mini"><b>③ Chrome で Instagram にログインしておく</b><br>
+        分析スキルは「あなたが見ている状態のInstagram」を読みます。Chromeで <b>instagram.com</b> を開いてログイン済みにしておいてください。</p>
+        <p class="mini"><b>④ 初めて使うときは「許可」を聞かれます</b><br>
+        スキルがInstagramを見に行くとき、拡張機能が確認を出します。<b>「許可」を選べばOK</b>です。</p>
+        <p class="mini">💡 <b>Claudeの有料プラン（Pro など）が必要</b>です。うまく動かないときは、Claude Code に「<b>Chrome拡張がつながっているか確認して</b>」と聞くと、状態を調べて直し方を教えてくれます。</p>
+      </div>
+    </details>
 
     <details class="brew">
       <summary>🪟 Windows の方：どっちをダウンロードする？（64bit / arm64）</summary>

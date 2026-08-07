@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>参考リールの構成で書き直す｜「シミ出てきたな」台本｜構成移植レポート</title>
+<style>
+:root{
+  --ink:#3f4a5a; --sub:#8b93a3; --line:#f0e8dd; --bg:#f7f3ec; --card:#ffffff;
+  --accent:#ec8080; --accent-deep:#e06c6c; --accent-soft:#fdecec;
+  --blue:#6b9bd2; --blue-deep:#5b8ac4; --blue-soft:#e8f1fb;
+  --gold:#d9822b; --gold-soft:#fdf1e3;
+  --green:#57a773; --green-soft:#e9f6ee;
+  --purple:#9b7bd0; --purple-soft:#f1ebfa;
+  --grad:linear-gradient(135deg,#f19a9a,#f4b183);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",-apple-system,sans-serif;
+  line-height:1.85;font-size:15px;-webkit-text-size-adjust:100%}
+.wrap{max-width:840px;margin:0 auto;padding:0 18px 80px}
+
+header{background:var(--grad);color:#fff;padding:46px 18px 40px;text-align:center}
+header .eyebrow{font-size:12px;letter-spacing:.16em;opacity:.9;margin:0 0 12px}
+header h1{margin:0 0 14px;font-size:25px;line-height:1.5;font-weight:800}
+header p{margin:0;font-size:13.5px;opacity:.95;line-height:1.8}
+.pill{display:inline-block;background:rgba(255,255,255,.22);border-radius:999px;
+  padding:5px 15px;font-size:12px;margin:14px 5px 0}
+
+section{background:var(--card);border-radius:18px;padding:28px 24px;margin:22px 0;
+  box-shadow:0 2px 14px rgba(120,100,80,.07)}
+h2{margin:0 0 6px;font-size:19px;font-weight:800;display:flex;align-items:center;gap:10px;line-height:1.5}
+h2 .num{background:var(--accent);color:#fff;border-radius:999px;min-width:28px;height:28px;
+  display:inline-flex;align-items:center;justify-content:center;font-size:13px;flex:none}
+.lead{color:var(--sub);font-size:13.5px;margin:0 0 20px;padding-left:38px}
+h3{font-size:15.5px;margin:26px 0 10px;padding-left:11px;border-left:4px solid var(--blue);font-weight:700}
+
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:6px 0 4px}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+th,td{border-bottom:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
+th{background:var(--blue-soft);color:var(--blue-deep);font-weight:700;white-space:nowrap;font-size:12.5px}
+td.sec{white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--sub);font-size:12.5px}
+tr.key td{background:var(--accent-soft)}
+tr.key td.sec{color:var(--accent-deep);font-weight:700}
+
+.script{background:#fffdf9;border:2px dashed var(--line);border-radius:14px;
+  padding:22px 20px;white-space:pre-wrap;font-size:15.5px;line-height:2.15}
+.script .q{color:var(--accent-deep);font-weight:700}
+.script .sil{color:var(--sub);letter-spacing:.2em}
+.script .rep{background:linear-gradient(transparent 62%,#fde3e3 62%);font-weight:700}
+
+.copybar{display:flex;gap:9px;align-items:center;margin:14px 0 0;flex-wrap:wrap}
+button.copy{background:var(--accent);color:#fff;border:0;border-radius:999px;
+  padding:10px 22px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit}
+button.copy:hover{background:var(--accent-deep)}
+.copymsg{font-size:12.5px;color:var(--green);font-weight:700}
+.fallback{display:none;width:100%;margin-top:10px}
+.fallback textarea{width:100%;height:190px;font-family:inherit;font-size:13px;line-height:1.9;
+  padding:12px;border:2px solid var(--accent);border-radius:10px;background:#fff;color:var(--ink)}
+.fallback p{margin:6px 0 0;font-size:12.5px;color:var(--accent-deep);font-weight:700}
+
+.bad,.good{border-radius:12px;padding:15px 17px;margin:12px 0;font-size:14px}
+.bad{background:var(--accent-soft);border-left:5px solid var(--accent)}
+.good{background:var(--green-soft);border-left:5px solid var(--green)}
+.bad b,.good b{display:block;margin-bottom:5px;font-size:14.5px}
+.bad .arrow,.good .arrow{color:var(--sub);font-size:12.5px}
+
+ul{padding-left:20px;margin:10px 0}
+li{margin:7px 0}
+.note{background:var(--gold-soft);border-left:5px solid var(--gold);border-radius:12px;
+  padding:15px 17px;font-size:13.5px;margin:18px 0}
+.note b{color:#a8621f}
+.psy{background:var(--purple-soft);border-left:5px solid var(--purple);border-radius:12px;
+  padding:16px 18px;font-size:14px;margin:14px 0}
+.cap{background:#fffdf9;border:2px dashed var(--line);border-radius:14px;padding:20px;
+  white-space:pre-wrap;font-size:14px;line-height:1.95}
+.tag{display:inline-block;background:var(--blue-soft);color:var(--blue-deep);border-radius:999px;
+  padding:3px 12px;font-size:12px;margin:3px 4px 3px 0;font-weight:700}
+footer{text-align:center;color:var(--sub);font-size:12px;padding:34px 18px 0;line-height:2}
+@media(max-width:560px){
+  header h1{font-size:20px} section{padding:22px 16px} .lead{padding-left:0}
+  h2{font-size:17px} .script{font-size:15px;padding:18px 15px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">DAIHON COPY MAKE ／ 構成移植レポート</p>
+  <h1>参考リールの「型」で、<br>あなたの台本を書き直しました</h1>
+  <p>お題：母に言われた「うわ〜、シミ出てきたな」<br>参考：@obami30_beauty 初投稿リール（33秒）</p>
+  <div>
+    <span class="pill">参考は実測ずみ（文字起こし＋全テロップ）</span>
+    <span class="pill">33秒 / 14ブロック</span>
+    <span class="pill">2026-08-07</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section>
+  <h2><span class="num">1</span>まず、参考リールを分解しました</h2>
+  <p class="lead">「なんとなく似せる」ができないように、参考の33秒を1秒単位で実測しています。音声とテロップは違うので、両方見ています。</p>
+
+  <div class="scroll">
+  <table>
+    <tr><th>秒</th><th>ブロックの役割</th><th>参考の中身（実測）</th></tr>
+    <tr><td class="sec">0.0-3.2</td><td>他人のセリフで殴られる</td><td>私は／結婚4年目にして／夫にオバさんと言われた</td></tr>
+    <tr><td class="sec">3.2-4.8</td><td>自己紹介（1行だけ）</td><td>アラサー1児の母です。</td></tr>
+    <tr><td class="sec">4.8-7.9</td><td>状況（2行）</td><td>出産から1年経つけど／いまだに体重戻らん。</td></tr>
+    <tr><td class="sec">7.9-9.5</td><td>セリフ再生（カギカッコ）</td><td>「オバさんじゃん」／て言われた。</td></tr>
+    <tr><td class="sec">9.5-12.0</td><td>沈黙 → 本音</td><td>・・・。 → 腹立つー。</td></tr>
+    <tr><td class="sec">12.0-14.5</td><td>自問</td><td>私のどこが／オバさんなの・・／よ・・？</td></tr>
+    <tr class="key"><td class="sec">14.5-18.4</td><td>同じ一言を3回リフレイン</td><td>オバさんやん。／オバさんやん。／オバさんやん。（別カット＋エコー）</td></tr>
+    <tr><td class="sec">18.4-20.5</td><td>いちばん怖い一言</td><td>「女として見れなくなるかも。」／だとよ。</td></tr>
+    <tr><td class="sec">20.5-22.7</td><td>証拠の映像</td><td>最近、手繋いでない。（足元・子どもの手のカット）</td></tr>
+    <tr><td class="sec">22.7-24.8</td><td>沈黙 → 決意</td><td>・・・。 → このままじゃ終われねぇ!!</td></tr>
+    <tr class="key"><td class="sec">24.8-28.3</td><td>番組タイトル宣言</td><td>とある主婦が／夫と手繋ぎデートを／目指すお話。</td></tr>
+    <tr><td class="sec">28.3-30.6</td><td>決意の連打</td><td>もうオバさんって／言わせないぞ!!／よーし!!</td></tr>
+    <tr><td class="sec">30.6-31.3</td><td>日常に戻る一息（音声だけ）</td><td>お手て洗おか</td></tr>
+    <tr><td class="sec">31.3-32.9</td><td>次回予告</td><td>次回、ダメ出しで号泣!?</td></tr>
+  </table>
+  </div>
+
+  <h3>この参考がやっている「4つの仕掛け」</h3>
+  <ul>
+    <li><b>タイトル宣言は冒頭ではなく25秒目。</b>視聴者が感情移入し終わってから種明かしする。冒頭に置くと宣伝に見える。</li>
+    <li><b>テロップは1カット1行・10文字前後。</b>説明文が一度も出てこない。</li>
+    <li><b>刺さった一言を3回繰り返す。</b>「頭から離れない」と書かずに、実際に離れない体験をさせている。</li>
+    <li><b>顔がはっきり映るカットが33秒中ゼロ。</b>マスク・後ろ姿・足元・手のアップだけでドラマになっている。</li>
+  </ul>
+  <div class="note"><b>ここが一番大事：</b>参考の音声は全部で<b>184字</b>しかありません。30秒の尺に対して、これ以上詰めると成立しません。</div>
+</section>
+
+<section>
+  <h2><span class="num">2</span>元の台本、ここが崩れていました</h2>
+  <p class="lead">内容（素材）は良いです。実際、書き直し後もエピソードはほぼそのまま使っています。崩れていたのは中身ではなく<b>置き場所と分量</b>です。</p>
+
+  <div class="bad">
+    <b>① タイトル宣言を2行目に置いていた</b>
+    「これは、シミを諦めへん私の挑戦の話。」を冒頭に出していました。<br>
+    <span class="arrow">→ 参考では25秒目。感情の谷を通る前に決意を宣言すると演出臭くなって、そこで離脱します。</span>
+  </div>
+  <div class="bad">
+    <b>② 母のセリフが1回しか出てこない</b>
+    参考は同じ一言を3回繰り返しています。<br>
+    <span class="arrow">→ 代わりに「その一言が、頭から離れへん。」と<b>説明</b>していました。説明は感情を動かしません。3回言わせます。</span>
+  </div>
+  <div class="bad">
+    <b>③ 括弧の補足にフックを追い出していた</b>
+    「（1人目を産んで3カ月、実家に帰った日の話）」— この情報は1行目に必要なものです。<br>
+    <span class="arrow">→ 括弧の中は読まれません。参考は1文目に「経過年数＋誰に＋言われた言葉」を全部入れています。</span>
+  </div>
+  <div class="bad">
+    <b>④ 文字数が参考の2倍以上</b>
+    「あれから4年／3人目を出産／夜中の授乳／ほぼ寝てない」と、時間が飛ぶ情報を詰めすぎです。<br>
+    <span class="arrow">→ 30秒には184字しか入りません。エピソードを削るのではなく、<b>1行を短くする</b>のが正解。</span>
+  </div>
+  <div class="bad">
+    <b>⑤ 演出指示が台本の行に混ざっていた</b>
+    「（演出：一瞬だけテロップで出して〜）」が本文に入っていました。<br>
+    <span class="arrow">→ 撮影のとき読み上げてしまいます。演出は別欄に分けます。</span>
+  </div>
+
+  <div class="good">
+    <b>逆に、良かったところ</b>
+    「朝、鏡の前で3秒、目をそらしちゃった。」— これは<b>そのまま採用</b>しました。参考の「最近、手繋いでない。」に当たる“証拠の映像”で、感情を説明せずに見せられる最高の1行です。「3秒」という具体的な数字も効いています。<br>
+    「まずは、授乳しよ。」も採用。参考の「お手て洗おか」と同じ、決意のあとに日常へ戻る一息です。
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">3</span>書き直した台本（33秒）</h2>
+  <p class="lead"><span class="rep">ピンクの線</span>＝3回リフレインする行。<span class="sil">・・・。</span>＝音声を止めて、テロップだけ出すところ。</p>
+
+  <div class="script" id="scriptBox">私は
+1人目を産んで3カ月
+<span class="q">母に「シミ出てきたな」と言われた</span>
+
+30代3児の母です。
+
+産後3カ月、寝てへん。
+鏡なんて見てへん。
+
+<span class="q">「うわ〜、シミ出てきたな」</span>
+て言われた。
+
+<span class="sil">・・・。</span>
+動けんかった。
+
+私の顔、そんなに
+老けたん・・
+かな・・？
+
+<span class="rep">シミ出てきたな。</span>
+<span class="rep">シミ出てきたな。</span>
+<span class="rep">シミ出てきたな。</span>
+
+あれから4年。
+今度は何て言われる。
+
+朝、鏡から3秒 目をそらす。
+
+<span class="sil">・・・。</span>
+このままじゃ終われへん!!
+
+とある3児の母が
+母に「キレイになったね」を
+言わせるお話。
+
+もう「シミ出てきたな」って
+言わせへんで!!
+よーし!!
+
+……まずは、授乳しよ。
+
+次回、日焼け止め全部ランキング!?</div>
+
+  <div class="copybar">
+    <button class="copy" onclick="copyText('scriptSrc',this)">台本をコピー</button>
+    <span class="copymsg" id="msg-scriptSrc"></span>
+  </div>
+  <div class="fallback" id="fb-scriptSrc">
+    <textarea readonly></textarea>
+    <p>自動コピーができませんでした。上の枠の中を選んで、手でコピーしてください。</p>
+  </div>
+
+  <h3>参考のどこを、どう移植したか</h3>
+  <div class="scroll">
+  <table>
+    <tr><th>秒</th><th>参考</th><th>今回</th></tr>
+    <tr><td class="sec">0.0-3.2</td><td>夫にオバさんと言われた</td><td>母に「シミ出てきたな」と言われた</td></tr>
+    <tr><td class="sec">3.2-4.8</td><td>アラサー1児の母です。</td><td>30代3児の母です。</td></tr>
+    <tr><td class="sec">4.8-7.9</td><td>いまだに体重戻らん。</td><td>産後3カ月、寝てへん。／鏡なんて見てへん。</td></tr>
+    <tr><td class="sec">7.9-9.5</td><td>「オバさんじゃん」て言われた。</td><td>「うわ〜、シミ出てきたな」て言われた。</td></tr>
+    <tr><td class="sec">9.5-12.0</td><td>・・・。→ 腹立つー。</td><td>・・・。→ 動けんかった。</td></tr>
+    <tr><td class="sec">12.0-14.5</td><td>私のどこがオバさんなのよ・・？</td><td>私の顔、そんなに老けたん・・かな・・？</td></tr>
+    <tr class="key"><td class="sec">14.5-18.4</td><td>オバさんやん。×3</td><td>シミ出てきたな。×3</td></tr>
+    <tr><td class="sec">18.4-20.5</td><td>女として見れなくなるかも。だとよ。</td><td>あれから4年。／今度は何て言われる。</td></tr>
+    <tr><td class="sec">20.5-22.7</td><td>最近、手繋いでない。</td><td>朝、鏡から3秒 目をそらす。</td></tr>
+    <tr><td class="sec">22.7-24.8</td><td>このままじゃ終われねぇ!!</td><td>このままじゃ終われへん!!</td></tr>
+    <tr class="key"><td class="sec">24.8-28.3</td><td>とある主婦が夫と手繋ぎデートを目指すお話。</td><td>とある3児の母が母に「キレイになったね」を言わせるお話。</td></tr>
+    <tr><td class="sec">28.3-30.6</td><td>もうオバさんって言わせないぞ!! よーし!!</td><td>もう「シミ出てきたな」って言わせへんで!! よーし!!</td></tr>
+    <tr><td class="sec">30.6-31.3</td><td>お手て洗おか</td><td>……まずは、授乳しよ。</td></tr>
+    <tr><td class="sec">31.3-32.9</td><td>次回、ダメ出しで号泣!?</td><td>次回、日焼け止め全部ランキング!?</td></tr>
+  </table>
+  </div>
+  <div class="note"><b>文字数チェック：</b>参考184字 → 今回216字（1.17倍）。許容ライン（±20%＝147〜220字）に収まっています。元の台本は約440字＝2.4倍でした。</div>
+
+  <div class="psy">
+    <b>視聴者の中で何が起きるか</b><br>
+    冒頭3秒で「誰が・何を言ったか」を確定させて「その後どうなったん？」を植えます。9〜14秒の沈黙と自問で、視聴者を主人公と同じ位置まで降ろします。14〜18秒の3連リフレインが感情の谷で、ここで「頭から離れない」を説明せずに<b>体験</b>させます。谷を抜けた25秒でようやく番組宣言を出すので、宣伝ではなく<b>応援したくなる人の紹介</b>として届きます。最後は「決意 → 授乳」の落差で親近感を回収し、次回予告だけで引っ張ります。
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">4</span>撮影メモ</h2>
+  <p class="lead">台本の行には混ぜていません。撮るときだけ見てください。</p>
+  <ul>
+    <li><b>顔出しはしません。</b>参考は33秒中、顔がはっきり映るカットがゼロです。マスク・後ろ姿・足元・手のアップだけで撮れます。</li>
+    <li><b>0-3秒</b>／玄関のドアを開ける手 → 立ち尽くす後ろ姿 → 誰もいない廊下。<b>お母さんは一度も映しません。</b></li>
+    <li><b>7.9-9.5秒</b>／洗面所の鏡。頬だけ映します。テロップはカギカッコ付き。</li>
+    <li><b>「・・・。」の2か所</b>／体育座り、机に突っ伏すカットに乗せて、<b>音声は無音で3秒</b>止めます。</li>
+    <li><b>14.5-18.4秒のリフレイン</b>／3回とも<b>別カット・別アングル＋エコー</b>（洗面所／歩く／ブレたカット）。同じ画を3回使うと効きません。</li>
+    <li><b>20.5秒「鏡から3秒目をそらす」</b>／早朝の洗面所で実写。ここは参考の“足元の画”に当たる<b>証拠のカット</b>なので、絶対にテロップだけで済ませないこと。</li>
+    <li><b>25-28秒のタイトル宣言</b>／頬に日焼け止めを塗る手のアップ（参考は手を重ねるカット）。</li>
+    <li><b>SPF30以上・PA++++の話は本編に入れません。</b>参考リールの本編には情報が1個も入っていません。1本目は「情報」ではなく「これから変わる人」を見せる回です。キャプションに逃がしています。</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="num">5</span>キャプション</h2>
+  <p class="lead">参考と同じ役割（はじめましての挨拶＋背景＋参加のお願い）にしています。</p>
+  <div class="cap" id="capBox">はじめまして、○○です。
+
+母に「キレイになったね」と言わせるべく、シミケアに挑戦していきます！
+
+産後、自分のことが後回しになっているうちにシミが増えて、
+このままだと引き返せないと思って一歩踏み出しました。
+
+とりあえずSPF30以上・PA++++から始めてみます。
+おすすめの日焼け止めあったらコメントで教えてください！
+
+#30代ママ #3児のママ #シミ対策 #産後ケア #自分磨き #垢抜けたい #日焼け止め</div>
+  <div class="copybar">
+    <button class="copy" onclick="copyText('capSrc',this)">キャプションをコピー</button>
+    <span class="copymsg" id="msg-capSrc"></span>
+  </div>
+  <div class="fallback" id="fb-capSrc">
+    <textarea readonly></textarea>
+    <p>自動コピーができませんでした。上の枠の中を選んで、手でコピーしてください。</p>
+  </div>
+
+  <div class="note">
+    <b>本編から「フォローしてないと流れてこんから」を外しました。</b>
+    参考は次回予告だけで引っ張って、お願いはキャプションの「アドバイスください」に寄せています。1本目でフォローをお願いすると、押しつけが感情に勝ってしまいます。
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">6</span>次にやること</h2>
+  <ul>
+    <li>この台本で<b>1本撮る</b>。顔は出さなくていいので、今日のうちに撮れます。</li>
+    <li>撮る前に、<b>声に出して1回読む</b>。息が続かない行・自分が言わない言い回しがあれば、そこだけ直してOK。</li>
+    <li>次回分（日焼け止めランキング）は、<b>家にある日焼け止めを並べて撮っておく</b>。この1本を出したあと2〜3日以内に出せると連載として効きます。</li>
+  </ul>
+  <div>
+    <span class="tag">参考：@obami30_beauty</span>
+    <span class="tag">33秒 / 184字</span>
+    <span class="tag">今回：33秒 / 216字</span>
+  </div>
+</section>
+
+<footer>
+  台本コピー（daihon-copy-make）／構成移植レポート<br>
+  2026-08-07
+</footer>
+
+</div>
+
+<script>
+// コピー用の原文（表示用のspanタグが混ざらないよう、素のテキストを別に持つ）
+var SRC = {
+  scriptSrc: [
+    "私は","1人目を産んで3カ月","母に「シミ出てきたな」と言われた","",
+    "30代3児の母です。","",
+    "産後3カ月、寝てへん。","鏡なんて見てへん。","",
+    "「うわ〜、シミ出てきたな」","て言われた。","",
+    "・・・。","動けんかった。","",
+    "私の顔、そんなに","老けたん・・","かな・・？","",
+    "シミ出てきたな。","シミ出てきたな。","シミ出てきたな。","",
+    "あれから4年。","今度は何て言われる。","",
+    "朝、鏡から3秒 目をそらす。","",
+    "・・・。","このままじゃ終われへん!!","",
+    "とある3児の母が","母に「キレイになったね」を","言わせるお話。","",
+    "もう「シミ出てきたな」って","言わせへんで!!","よーし!!","",
+    "……まずは、授乳しよ。","",
+    "次回、日焼け止め全部ランキング!?"
+  ].join("\n"),
+  capSrc: [
+    "はじめまして、○○です。","",
+    "母に「キレイになったね」と言わせるべく、シミケアに挑戦していきます！","",
+    "産後、自分のことが後回しになっているうちにシミが増えて、",
+    "このままだと引き返せないと思って一歩踏み出しました。","",
+    "とりあえずSPF30以上・PA++++から始めてみます。",
+    "おすすめの日焼け止めあったらコメントで教えてください！","",
+    "#30代ママ #3児のママ #シミ対策 #産後ケア #自分磨き #垢抜けたい #日焼け止め"
+  ].join("\n")
+};
+
+function showFallback(key){
+  var fb = document.getElementById("fb-" + key);
+  fb.style.display = "block";
+  var ta = fb.querySelector("textarea");
+  ta.value = SRC[key];
+  ta.focus(); ta.select();
+}
+
+function copyText(key, btn){
+  var text = SRC[key];
+  var msg = document.getElementById("msg-" + key);
+  msg.textContent = "";
+
+  // 画面外のtextareaに入れて選択する（hidden要素は無音で失敗するため使わない）
+  var ta = document.createElement("textarea");
+  ta.value = text;
+  ta.setAttribute("readonly", "");
+  ta.style.position = "fixed";
+  ta.style.left = "-9999px";
+  ta.style.top = "0";
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  ta.setSelectionRange(0, text.length);
+
+  // 本当に選択できたかを確認する（できていなければコピーは成立しない）
+  var selected = (ta.selectionEnd - ta.selectionStart) === text.length;
+  var ok = false;
+  if (selected) {
+    try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+  }
+  document.body.removeChild(ta);
+
+  if (ok) {
+    msg.textContent = "✅ コピーしました";
+    setTimeout(function(){ msg.textContent = ""; }, 2600);
+    return;
+  }
+
+  if (!(navigator.clipboard && navigator.clipboard.writeText)) {
+    showFallback(key);
+    return;
+  }
+
+  // ⚠️ writeText の Promise は、フォーカスやユーザー操作の条件を満たさないと
+  // resolve も reject もせずに宙吊りになることがある（＝押しても無反応になる）。
+  // 必ず時間で打ち切って、手動コピー枠を出す。
+  var settled = false;
+  var giveUp = setTimeout(function(){
+    if (settled) return;
+    settled = true;
+    showFallback(key);
+  }, 800);
+
+  navigator.clipboard.writeText(text).then(function(){
+    if (settled) return;
+    settled = true; clearTimeout(giveUp);
+    msg.textContent = "✅ コピーしました";
+    setTimeout(function(){ msg.textContent = ""; }, 2600);
+  }).catch(function(){
+    if (settled) return;
+    settled = true; clearTimeout(giveUp);
+    showFallback(key);
+  });
+}
+</script>
+</body>
+</html>

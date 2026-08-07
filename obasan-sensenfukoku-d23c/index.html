@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
-<title>43点｜怒りの導線は上手い。入口と文体で落としている台本｜台本辛口添削</title>
+<title>78点｜フォロワー0から13万再生。勝因と取りこぼし｜台本辛口添削</title>
 <style>
   :root {
     --ink: #3f4a5a; --sub: #8b93a3; --line: #f0e8dd; --bg: #f7f3ec; --card: #ffffff;
@@ -22,7 +22,6 @@
   }
   .wrap { max-width: 1080px; margin: 0 auto; padding: 40px 24px 80px; }
 
-  /* ヘッダー */
   .report-head { background: var(--card); border: 1px solid var(--line);
     border-radius: 24px; padding: 36px 40px; margin-bottom: 28px; position: relative; overflow: hidden; }
   .report-head::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 8px; background: var(--grad); }
@@ -37,7 +36,6 @@
     border-left: 4px solid var(--accent); padding: 12px 16px; border-radius: 0 14px 14px 0; }
   .coach-note .tag { display: block; font-size: 10.5px; color: var(--accent-deep); letter-spacing: 1px; }
 
-  /* 総合スコアリング */
   .score-wrap { text-align: center; }
   .score-ring { --p: 0; width: 150px; height: 150px; border-radius: 50%; margin: 6px auto 0;
     background: conic-gradient(var(--accent-deep) calc(var(--p) * 1%), var(--line) 0);
@@ -49,7 +47,6 @@
   .grade { display: inline-block; margin-top: 10px; background: var(--grad); color: #fff;
     font-weight: 800; font-size: 13px; padding: 4px 18px; border-radius: 999px; }
 
-  /* セクション共通 */
   section { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 28px 32px; margin-bottom: 24px; }
   h2 { font-size: 19px; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; font-weight: 800; flex-wrap: wrap; }
   h2 .num { background: var(--accent); color: #fff; font-size: 12px; min-width: 26px; height: 26px; padding: 0 4px; border-radius: 999px;
@@ -59,7 +56,13 @@
   .note { font-size: 12.5px; color: var(--sub); margin-top: 12px; }
   .note b { color: var(--ink); }
 
-  /* 採点表（レーダー＋バー） */
+  /* 実測データ */
+  .fact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 14px; }
+  .fact { background: var(--bg); border-radius: 16px; padding: 14px 16px; text-align: center; }
+  .fact b { display: block; font-size: 22px; color: var(--accent-deep); line-height: 1.3; }
+  .fact span { font-size: 11.5px; color: var(--sub); }
+  .fact.hi { background: var(--green-soft); } .fact.hi b { color: var(--green); }
+
   .score-grid { display: grid; grid-template-columns: 360px 1fr; gap: 22px; align-items: center; }
   #radar svg { display: block; }
   .bar-list { list-style: none; }
@@ -70,7 +73,6 @@
   .bar-fill { height: 100%; background: var(--grad); border-radius: 999px; }
   .bar-list .one { font-size: 11.5px; color: var(--sub); }
 
-  /* 最優先トップ3 */
   .prio-list { list-style: none; counter-reset: pr; }
   .prio-list li { counter-increment: pr; background: var(--accent-soft); border-radius: 16px;
     padding: 14px 16px 14px 54px; margin-bottom: 10px; position: relative; font-size: 13.5px; }
@@ -81,13 +83,11 @@
   .prio-list li .gain { display: inline-block; margin-top: 4px; font-size: 11.5px; font-weight: 700;
     color: var(--green); background: var(--green-soft); border-radius: 999px; padding: 2px 12px; }
 
-  /* 感情の弧（サマリー） */
   .arc { background: var(--purple-soft); border-left: 4px solid var(--purple); border-radius: 0 14px 14px 0;
     padding: 14px 18px; font-size: 13.5px; margin-bottom: 6px; }
   .arc .tag { font-size: 10.5px; color: var(--purple); font-weight: 800; display: block; letter-spacing: 1px; }
   .arc b { color: var(--purple); }
 
-  /* ⭐1行ずつ解説 */
   .phase-legend { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
   .chip { font-size: 11px; font-weight: 800; padding: 2px 12px; border-radius: 999px; }
   .phase-hook    { background: var(--accent-soft); color: var(--accent-deep); }
@@ -116,7 +116,6 @@
   .chip.risk { background: #fff; color: var(--accent-deep); border: 1.5px dashed var(--accent-deep); }
   .line-row.risk { border: 1.5px dashed var(--accent); background: #fffafa; }
 
-  /* 保存・コメント・シェアの理由 */
   .eng-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
   .eng-card { border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; font-size: 13px; }
   .eng-name { font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
@@ -127,12 +126,10 @@
   .eng-how { margin-top: 8px; font-size: 12.5px; background: var(--bg); border-left: 3px solid var(--blue); border-radius: 0 10px 10px 0; padding: 8px 12px; }
   .eng-how .tag { font-size: 10.5px; font-weight: 800; color: var(--blue-deep); display: block; letter-spacing: 1px; }
 
-  /* 維持ポイント */
   .keep-list { list-style: none; }
   .keep-list li { background: var(--green-soft); border-radius: 14px; padding: 10px 14px; margin-bottom: 8px; font-size: 13.5px; }
   .keep-list li b { color: var(--green); }
 
-  /* リライト台本（元⇄リライトのブロック対比） */
   .rw-block { margin-bottom: 14px; }
   .rw-head { display: flex; align-items: center; gap: 10px; margin-bottom: 5px; flex-wrap: wrap; }
   .rw-head b { font-size: 13.5px; color: var(--accent-deep); }
@@ -148,7 +145,6 @@
   .mk-btn:active { opacity: .8; }
   .mk-btn.sub { background: var(--blue-soft); color: var(--blue-deep); }
 
-  /* チェックリスト */
   .check-list { list-style: none; }
   .check-list li { margin-bottom: 8px; }
   .check-list label { display: flex; gap: 10px; align-items: flex-start; background: var(--blue-soft);
@@ -156,7 +152,6 @@
   .check-list input { margin-top: 5px; accent-color: var(--accent-deep); }
   .check-list input:checked + span { text-decoration: line-through; color: var(--sub); }
 
-  /* 元台本折りたたみ */
   .tr-toggle { margin-top: 8px; border: none; cursor: pointer; font-family: inherit; background: var(--accent-soft);
     color: var(--accent-deep); font-size: 12.5px; font-weight: 700; padding: 7px 16px; border-radius: 999px; }
   .tr-toggle:hover { background: #fbdede; }
@@ -182,92 +177,104 @@
 <body>
 <div class="wrap">
 
-  <!-- ヘッダー -->
   <div class="report-head">
     <div class="head-grid">
       <div class="score-wrap">
         <div class="label">TOTAL SCORE</div>
-        <div class="score-ring" style="--p:43"><div class="in"><b>43</b><span>/ 100点</span></div></div>
-        <div class="grade">D｜作り直し推奨</div>
+        <div class="score-ring" style="--p:78"><div class="in"><b>78</b><span>/ 100点</span></div></div>
+        <div class="grade">B｜そのまま撮れる</div>
       </div>
       <div>
         <div class="label">台本 辛口添削</div>
-        <h1>怒り→自覚→決意の導線は上手い。<br>でも「名乗りスタート」と「語尾6種類」で、入口と中盤を落としている台本</h1>
-        <div class="username">おばさん宣戦布告（産後ママの連載Vlog・第1回）｜添削日: 2026/08/07</div>
+        <h1>フォロワー0人から13万再生。<br>入口は完勝している台本——取りこぼしているのは「出口」だけ</h1>
+        <div class="username">オバ美・第1話（産後ママの自分磨き連載）｜添削日: 2026/08/07</div>
         <div class="head-stats">
           <div><b>206字</b><span>台本の文字数</span></div>
           <div><b>約37秒</b><span>想定尺（5〜6字/秒目安）</span></div>
           <div><b>13行</b><span>フレーズ数</span></div>
-          <div><b>ナレーション</b><span>形式（連載プロローグ）</span></div>
+          <div><b>ナレーション</b><span>形式（共感・連載ドラマ系）</span></div>
         </div>
-        <div class="coach-note"><span class="tag">🔥 コーチから一言</span>感情の弧はちゃんと設計されています。特に8行目「確かに最近手繋いでない」——ここは才能です。でも、その名作の1行に辿り着く前に、視聴者は1行目の名乗りで降りている。素材は勝ってるのに、盛りつけで負けてる台本です。直すのは3つだけ。</div>
+        <div class="coach-note"><span class="tag">🔥 コーチから一言</span>まず言わせてください。<b>フォロワー0人スタートでこの数字は、フックが本物だった証拠</b>です。1行目・反復・語尾の崩れ、全部が計算どおりに効いています。だからこそ悔しい——<b>13万人が観たのに、フォローする理由もコメントする言葉も、最後の1行に置いてなかった。</b>直すのはそこだけです。</div>
       </div>
     </div>
   </div>
 
+  <!-- 0. 実測データ -->
+  <section>
+    <h2><span class="num">0</span>この台本の実測データ</h2>
+    <div class="sec-sub">採点の前に、この台本が現実に出した数字。ここが評価の土台です</div>
+    <div class="fact-grid">
+      <div class="fact hi"><b>0人</b><span>投稿時フォロワー<br>（アカウント第1投稿）</span></div>
+      <div class="fact hi"><b>約13万</b><span>再生数</span></div>
+      <div class="fact"><b>2,834</b><span>いいね（再生の2.2%）</span></div>
+      <div class="fact"><b>57</b><span>コメント（再生の0.04%）</span></div>
+    </div>
+    <p class="note"><b>読み方:</b> バズ判定の物差しは「フォロワー×10倍 or 100万再生」。<b>フォロワー0からの13万再生は、このラインを桁違いに超えています。</b>台本のフック力は実証済みと考えて読んでください。<br>
+    一方で<b>いいね2.2%は標準、コメント0.04%はバズリールとしてはむしろ低い</b>。「観られたけど、行動には変えきれなかった」——このギャップが、下の採点で⑥だけが落ちている理由です。</p>
+  </section>
+
   <!-- 1. 採点表 -->
   <section>
     <h2><span class="num">1</span>採点表（6つの評価軸）</h2>
-    <div class="sec-sub">固定の採点基準でつけています。誰の台本でも同じ基準＝甘くしません。※テロップ演出・音・カバーは動画添削（tensaku-reel）の担当で、ここは台本の言葉だけを見ています</div>
+    <div class="sec-sub">固定の採点基準でつけています。※この台本は<b>共感・連載ドラマ系</b>と判定しました。ノウハウ系の物差し（今回の持ち帰り・語尾統一・反復禁止）はこのジャンルには当てません。テロップ演出・音・カバーは動画添削（tensaku-reel）の担当で、ここは台本の言葉だけを見ています</div>
     <div class="score-grid">
       <div id="radar"
            data-labels="冒頭フック,1メッセージ,構成,感情設計,言葉,CTA"
-           data-scores="10,8,8,9,4,4"
+           data-scores="21,17,16,12,7,5"
            data-max="25,20,20,15,10,10"></div>
       <ul class="bar-list">
         <li>
-          <div class="bar-head"><span>① 冒頭フック</span><span class="pt">10 / 25</span></div>
-          <div class="bar-track"><div class="bar-fill" style="width:40%"></div></div>
-          <div class="one">名乗りスタート＋一番強い言葉が33字の文の真ん中に埋没。証拠つき欠陥2つで上限40%</div>
+          <div class="bar-head"><span>① 冒頭フック</span><span class="pt">21 / 25</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:84%"></div></div>
+          <div class="one">名乗りの中に事件を埋め込んだ「属性宣言型フック」。実測が証明済み。減点は「あらさん」の聞き取りだけ</div>
         </li>
         <li>
-          <div class="bar-head"><span>② 1メッセージ性</span><span class="pt">8 / 20</span></div>
-          <div class="bar-track"><div class="bar-fill" style="width:40%"></div></div>
-          <div class="one">冒頭は「体重が戻らない」、ゴールは「手繋ぎデート」。橋を渡す一言がなく、持ち帰れる具体はゼロ</div>
+          <div class="bar-head"><span>② 1メッセージ性</span><span class="pt">17 / 20</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:85%"></div></div>
+          <div class="one">「おばさんと言われた主婦が手繋ぎデートを目指す」で完全に1本。連載第1話として過不足なし</div>
         </li>
         <li>
-          <div class="bar-head"><span>③ 構成・展開</span><span class="pt">8 / 20</span></div>
-          <div class="bar-track"><div class="bar-fill" style="width:40%"></div></div>
-          <div class="one">3〜6行目の4行が同じ事実の言い換えで新情報ゼロ。置いた問いが2つとも未回収</div>
+          <div class="bar-head"><span>③ 構成・展開</span><span class="pt">16 / 20</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:80%"></div></div>
+          <div class="one">37秒で事件→怒り→反芻→突き落とし→自覚→宣言→予告。捨て行がない。反復も設計のうち</div>
         </li>
         <li>
-          <div class="bar-head"><span>④ 感情設計</span><span class="pt">9 / 15</span></div>
-          <div class="bar-track"><div class="bar-fill" style="width:60%"></div></div>
-          <div class="one">この台本の主戦力。怒り→自覚→決意の山はできている。ただし「よーしって。」で自分で温度を落とした</div>
+          <div class="bar-head"><span>④ 感情設計</span><span class="pt">12 / 15</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:80%"></div></div>
+          <div class="one">この台本の主戦力。8行目の転調と、夫という「悪役」が生む義憤。12行目だけ温度が読みにくい</div>
         </li>
         <li>
-          <div class="bar-head"><span>⑤ 言葉・リズム</span><span class="pt">4 / 10</span></div>
-          <div class="bar-track"><div class="bar-fill" style="width:40%"></div></div>
-          <div class="one">地の文だけで語尾が6種類（です／戻らん／なのよ／やん／終われねえ／ぞ）。1文が短いテンポは◎</div>
+          <div class="bar-head"><span>⑤ 言葉・リズム</span><span class="pt">7 / 10</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:70%"></div></div>
+          <div class="one">語尾の崩れは「仮面が剥がれる」設計として正しい。ただし1行目「あらさん一児の母」は音で意味が割れる</div>
         </li>
         <li>
-          <div class="bar-head"><span>⑥ CTA・締め</span><span class="pt">4 / 10</span></div>
-          <div class="bar-track"><div class="bar-fill" style="width:40%"></div></div>
-          <div class="one">次回予告があるので尻切れではない。ただし連載モノなのにフォローの理由が一言もない</div>
+          <div class="bar-head"><span>⑥ CTA・締め</span><span class="pt">5 / 10</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:50%"></div></div>
+          <div class="one">唯一の明確な弱点。次回予告はあるが、フォローする理由もコメントする言葉も置いていない</div>
         </li>
       </ul>
     </div>
-    <p class="note"><b>判定の理由:</b> 採点前の欠陥チェックリスト12項目のうち、<b>6項目がYes（証拠つき欠陥）</b>——②冒頭の題材と本題のズレ／⑤今回の持ち帰りゼロ／⑥同じ語の3回以上反復／⑦回収されない振り／⑩積み上げた温度を自分で崩す行／⑪語尾・文体の混在。加えて名乗りスタート。<br>
-    <b>入口キャップ適用:</b> 冒頭フックに証拠つき欠陥があるため、中身の出来に関わらず総合はC以下止まり。入口で降りた人は、8行目の名作に出会えないからです。<br>
-    <b>補足:</b> 発信プロフィール（誰に向けた発信か・この台本のゴール）が未登録のため、汎用基準で採点しています。ターゲットを「産後1年前後・夫との関係に引っかかりがあるママ」、ゴールを「連載フォロー獲得」と仮定しました。ここが違う場合は⑥の評価が変わります。</p>
+    <p class="note"><b>判定の理由:</b> 欠陥チェックリスト12項目のうち、Yesは<b>⑩（積み上げた温度を自分で崩す行＝「よーしって。」）の1つだけ</b>。実測が示すとおり入口は勝っているので入口キャップは適用しません。<br>
+    <b>Aに届かなかった理由はただ1つ、⑥です。</b>13万人が観て、いいねは2.2%押されたのに、コメントは0.04%。「行動の理由」を言葉にしていれば、この1本だけで数字がもう一段変わっていました。</p>
   </section>
 
   <!-- 2. 最優先で直すトップ3 -->
   <section>
     <h2><span class="num">2</span>最優先で直すトップ3</h2>
-    <div class="sec-sub">全部いっぺんに直さなくていい。効果の大きい順にこの3つだけ</div>
+    <div class="sec-sub">この台本は骨組みを変える必要がありません。<b>足すのは3つだけ</b>です</div>
     <ol class="prio-list">
-      <li><b>1行目の名乗りを消して、夫のセリフから始める</b>
-      「私は結婚4年目にして夫におばさんと言われた、あらさん一児の母です。」——この33字、視聴者の耳に最初に入るのは「私は結婚4年目にして」です。誰の話でもない情報。一番強い言葉「おばさんと言われた」が文の真ん中に埋まっています。<b>「おばさんじゃん」</b>の6文字から始めて、プロフィールは10行目の企画宣言に1秒だけ差し込む。
-      <span class="gain">冒頭0.5秒で事件が耳に入る→入口の離脱が止まる</span></li>
+      <li><b>最後にフォローする理由を1行足す</b>
+      「次回、ダメ出しで号泣。」で終わっているので、気になった13万人がそのまま次の動画に流れています。<b>「フォローしてね」とお願いするより「見逃す」と言うほうが押されます</b>（損失回避）。例:「続き、フォローしてないと流れてこないので。」
+      <span class="gain">再生はそのままで、フォロー転換だけが上がる</span></li>
 
-      <li><b>語尾を1つに決める（「じゃん」と「やん」を混ぜない）</b>
-      夫のセリフが「じゃん」で、あなたの心の声が「やん」——この書き分け自体はアリです。問題は<b>あなたの地の文の中で6種類が同居している</b>こと。「〜です」「戻らん」「なのよ？」「やん」「終われねえ」「言わせないぞ」。関西弁で通すのか標準語で通すのか、全13行どちらかに揃える。
-      <span class="gain">「誰が喋っているか」が定まる→キャラが立って連載として追われる</span></li>
+      <li><b>視聴者への問いを1行足す（コメント0.04%の伸びしろ）</b>
+      コメント欄はすでに「旦那さんが悪い」「私も頑張ります」で熱くなっています。<b>燃料はあるのに、着火する一言がない。</b>9行目の決意のあとに「みんなの旦那さんは、最後に手繋いだのいつ？」——全員が1秒で答えを持っていて、書くと自分が悔しくなるので指が動きます。
+      <span class="gain">コメント率が上がる＝発見欄での露出がさらに伸びる</span></li>
 
-      <li><b>3〜6行目の停滞をなくす（「おばさん」を7回言っている）</b>
-      3行目「おばさんじゃんって言われた」→5行目「私のどこがおばさんなのよ？」→6行目「おばさんやん」×3。<b>4行連続で同じ事実の言い換えだけ、新情報ゼロ</b>です。ここが一番指が動く区間。夫の返答（「全部やって」）と場面（スーパーで／写真見て）を足して、反復しながら情報を前に進める。
-      <span class="gain">中だるみの4行が"追い打ち"に変わる→8行目の山まで運べる</span></li>
+      <li><b>1行目の「あらさん一児の母」を1文に混ぜない</b>
+      音で聞くと<b>「あらさん」がお名前に聞こえて、アラサーの意味が伝わりません</b>。1行目は事件だけに集中させて、属性は次の文に切る。例:「私、結婚4年目にして夫におばさんと言われました。／アラサー、一児の母です。」
+      <span class="gain">冒頭の0.3秒の引っかかりが消えて、事件がまっすぐ届く</span></li>
     </ol>
   </section>
 
@@ -275,10 +282,11 @@
   <section>
     <h2><span class="num">3</span>視聴者の感情の設計図</h2>
     <div class="sec-sub">この台本が視聴者にどんな感情の流れを起こすか。伏線をどこで置き、どこで回収しているか（＝制作者の内心ではなく「視聴者に起きる効果」）</div>
-    <div class="arc"><span class="tag">🌀 感情の弧</span>事件（おばさんと言われた）→ <b>怒り</b>（うっざー）→ 自問 → 反芻 → <b>突き落とし</b>（女として見れなくなるかも）→ <b>自覚</b>（確かに最近手繋いでない）→ 決意 → 予告。<br>
-    <b>山は8行目「確かに最近手繋いでない」に来ています。</b>ここで感情が「怒り」から「内省」に転調し、視聴者が自分の家庭を振り返る。怒っている人は見ていて疲れますが、自分の非を1つ認めた瞬間に、視聴者は応援側に回ります。<b>この転調が設計できているのが、この台本の最大の武器です。</b><br>
-    ただし弧の入口（1〜2行目）が平坦で、出口（12行目「よーしって。」）で自分で温度を落としている。<b>山は良い。登り口と着地が惜しい。</b></div>
-    <p class="note"><b>伏線→回収:</b> ①2行目「未だに体重戻らん」→ <b>未回収</b>。10行目のゴールが「手繋ぎデート」に切り替わり、体重の話に戻ってきません。視聴者は「痩せる企画」だと思って入るので、ゴール提示でズレます（痩せると手を繋げる、の因果が一言もない）。②5行目「私のどこがおばさんなのよ？」→ <b>未回収</b>。夫の答えがないので、問いが宙吊りのまま次に進みます。③7行目「女として見れなくなるかも」→ 8行目で自分が裏付けてしまう＝これは効いている回収です。④13行目「次回、ダメ出しで号泣」→ 次回への新しい振り。連載の引きとして機能しています。</p>
+    <div class="arc"><span class="tag">🌀 感情の弧</span>事件（おばさんと言われた）→ <b>義憤</b>（旦那ひどい）→ 反芻 → <b>突き落とし</b>（女として見れなくなるかも）→ <b>自覚</b>（確かに最近手繋いでない）→ 決意 → 予告。<br>
+    山は2つあります。<b>1つ目は7行目「女として見れなくなるかも」</b>——ここで視聴者の怒りが最高潮になる。<b>2つ目が8行目「確かに最近手繋いでない」</b>——怒りが止まって内省に転調し、視聴者が自分の家庭を振り返る。<br>
+    <b>この2段構えが勝因です。</b>怒りだけなら「かわいそうな人」で終わりますが、自分の非を1つ認めた瞬間、視聴者は応援側に回ります。</div>
+    <p class="note"><b>🔑 この台本の隠れたエンジン＝「第三者の悪役」:</b> 視聴者を動かしているのは、あなたの主張ではなく<b>夫の一言</b>です。人は自分の意見を書くのは怖いけれど、<b>誰かの代わりに怒るのは怖くない</b>。実際のコメント欄はほぼ全部が「旦那さんはそんなに完璧なんですか」「私が代わりにしばきましょうか」——<b>視聴者があなたの代理人になっています。</b>連載を続けるとき、この「悪役の一言」を毎回1つ置けるかが再現性の鍵です。<br>
+    <b>伏線→回収:</b> ①2行目「体重戻らん」→ 10行目のゴール（手繋ぎデート）に直接は戻りませんが、産後ママの頭の中では「痩せる＝女に戻る＝手を繋げる」が自動で繋がるので、この層には成立しています。②5行目「私のどこがおばさんなのよ？」→ 本編では未回収。<b>ただしこれはコメント欄が代わりに回収しました</b>（「おばさんの何が悪いんですかね」）。③13行目「次回、ダメ出しで号泣」→ 次回への引きとして機能。</p>
   </section>
 
   <!-- 4. 保存・コメント・シェアの理由 -->
@@ -287,19 +295,19 @@
     <div class="sec-sub">伸びる台本には「保存する理由」「コメントする理由」「シェアする理由」が言葉で仕込まれています。この台本にあるかを判定（※上の採点6軸とは別の診断です）</div>
     <div class="eng-grid">
       <div class="eng-card">
-        <div class="eng-name">💾 保存する理由<span class="eng-badge no">❌ ない</span></div>
-        数字は「結婚4年目」「出産から1年」の2つだけで、どちらも後で見返す情報ではありません。手順・リスト・チェックできるものがゼロで、中身は全部「次回、ダメ出しで号泣」に先送りされています。連載のプロローグとしては狙い通りかもしれませんが、37秒観て手元に何も残らないと、保存フォルダには入りません。
-        <div class="eng-how"><span class="tag">💡 どう作るか</span>10行目の企画宣言の直後に、<b>今日やることを1行だけ渡す</b>。例:「まずやるのは3つ。①朝10分歩く ②部屋着で夫の前に出ない ③1日1回、名前で呼ぶ。」——プロローグでも"1つだけ具体"を置けば保存されます。連載は「宣言＋初日の一手」がセットで強い。</div>
+        <div class="eng-name">💾 保存する理由<span class="eng-badge weak">⚠️ 弱い</span></div>
+        手順・リスト・チェックできる情報がありません。ただし<b>連載第1話としては、これは弱点というより仕様</b>です。この回の役目は「値を渡すこと」ではなく「追ってもらうこと」なので。
+        <div class="eng-how"><span class="tag">💡 どう作るか</span>10行目の宣言の直後に<b>初日の一手を1行</b>。例:「まずやるのは3つ。朝10分歩く／部屋着で夫の前に出ない／1日1回、名前で呼ぶ。」——プロローグでも具体を1つ渡すと、保存フォルダに残って第2話の再生に効きます。</div>
       </div>
       <div class="eng-card">
-        <div class="eng-name">💬 コメントする理由<span class="eng-badge weak">⚠️ 弱い</span></div>
-        疑問形は5行目「私のどこがおばさんなのよ？」の1つだけ。ただしこれは<b>夫に向けた問い</b>なので、視聴者は答えを持っていません。視聴者への呼びかけが全13行でゼロなので、共感しても書く言葉が出てこない。
-        <div class="eng-how"><span class="tag">💡 どう作るか</span>9行目の決意の後に<b>全員が答えを持っている問い</b>を1行。例:「みんなの旦那さんは、最後に手繋いだのいつ？」——意見が割れる問いより、<b>思い出させる問い</b>のほうがコメント欄は伸びます。誰でも1秒で答えが出て、しかも書くと自分が悔しくなるので指が動く。</div>
+        <div class="eng-name">💬 コメントする理由<span class="eng-badge yes">✅ ある</span></div>
+        「夫におばさんと言われた」という<b>第三者の悪役</b>が、視聴者に義憤を発生させています。実測57件のコメントはほぼ全部が夫への怒りと本人への応援。理由は間違いなくあります。
+        <div class="eng-how"><span class="tag">💡 どう作るか</span>ただし<b>再生の0.04%は取りこぼし</b>。理由はあるのに<b>着火する一言がない</b>からです。呼びかけを1行足すだけで変わります:「みんなの旦那さんは、最後に手繋いだのいつ？」——意見が割れる問いより、<b>思い出させる問い</b>のほうがコメント欄は伸びます。</div>
       </div>
       <div class="eng-card">
         <div class="eng-name">📣 シェアする理由<span class="eng-badge weak">⚠️ 弱い</span></div>
-        「夫におばさんと言われた」は代弁力が強く、「これ、私だ」と思わせる力はあります。ただし人が送るのは<b>結末</b>か<b>言い返した名言</b>。この台本は11行目「もうおばさんって言わせないぞ」という自分への決意で終わっていて、持って行ける一言がありません。
-        <div class="eng-how"><span class="tag">💡 どう作るか</span>11行目を、<b>夫に実際にぶつけた宣戦布告</b>に変える。例:「100日後、あんたから手ぇ繋いでこさせたるわ。」——自分の努力宣言より、相手を動かす宣言のほうが「これ、うちの旦那にも見せたい」が発生します。</div>
+        「これ、私だ」の代弁力は非常に強い。ただし人が誰かに送るのは<b>結末</b>か<b>言い返した名言</b>です。11行目は「もうおばさんって言わせないぞ」という自分への誓いで終わっていて、持って行ける一言になっていません。
+        <div class="eng-how"><span class="tag">💡 どう作るか</span>11行目を<b>夫への宣戦布告</b>に変える。例:「100日後、あんたから手ぇ繋いでこさせるから。」——自分の努力宣言はスルーされますが、相手を動かす宣言は「これ、うちの旦那にも見せたい」を生みます。</div>
       </div>
     </div>
   </section>
@@ -307,7 +315,7 @@
   <!-- 5. 1行ずつ解説 -->
   <section>
     <h2><span class="num">5</span>1行ずつ解説（感情の動き・改善案・加えるワード）</h2>
-    <div class="sec-sub">台本を上から1フレーズずつ。「👀この行で視聴者に何が起きるか」「✍️どう直すか」「➕加えるといいワード」の3点で。良い行は🌱でそのまま残す印です</div>
+    <div class="sec-sub">台本を上から1フレーズずつ。「👀この行で視聴者に何が起きるか」「✍️どう直すか」「➕加えるといいワード」の3点で。<b>🌱が付いている行は、絶対に触らないでください</b>（実測で効いた部分です）</div>
     <div class="phase-legend">
       <span class="chip phase-hook">引き（好奇心）</span>
       <span class="chip phase-tension">緊張・期待</span>
@@ -317,96 +325,85 @@
       <span class="chip risk">⚠️ 離脱リスク（指が動く行）</span>
     </div>
 
-    <div class="line-row risk">
+    <div class="line-row">
       <div class="lr-head">
         <span class="ln">1</span>
         <span class="orig">私は結婚4年目にして夫におばさんと言われた、あらさん一児の母です。</span>
         <span class="chip phase-hook">引き（好奇心）</span>
-        <span class="chip risk">⚠️ 離脱リスク</span>
       </div>
       <div class="lr-body">
-        <div class="lr-cell lr-emo"><span class="tag">👀 視聴者に起きること</span><b>ここが最大の離脱ポイントです。</b>「私は〜です」の形に入った瞬間、視聴者の頭では「あ、自己紹介ね」と分類されて指が動きます。しかも耳に最初に届くのは「私は結婚4年目にして」——誰の話でもない情報です。一番強い「おばさんと言われた」は33字の文の真ん中に埋まっていて、そこに到達する前に半分が離脱している。もう一つ、<b>音で聞くと「あらさん一児の母」が名前を名乗ったように聞こえます</b>。「アラサー（30前後）」の意味なら、視聴者の頭は一瞬「あらさん？誰？」で止まる——この0.3秒の混乱が致命傷になります。</div>
-        <div class="lr-cell lr-fix"><span class="tag">✍️ 改善案</span><b>Before</b>「私は結婚4年目にして夫におばさんと言われた、あらさん一児の母です。」→ <b>After</b>「『おばさんじゃん』。結婚4年目、夫に言われた言葉です。」<br>名乗りは10行目の企画宣言のところに1秒だけ差し込めば十分。<b>1文目は事件だけ</b>にする。※「あらさん」がアラサーの意味なら「アラサー」とカタカナで、お名前なら「あらさん、一児の母。」と<b>別の1文に切って</b>ください。1文に混ぜると音で判別できません。</div>
-        <div class="lr-cell lr-word"><span class="tag">➕ 加えるといいワード</span><span class="w">「おばさんじゃん」</span><span class="w">結婚4年目</span> 夫のセリフをそのまま1文目に置くのが<b>常識破壊トリガー</b>（え、旦那がそれ言う？）。数字は具体的なほど強い＝<b>プライベート公開トリガー</b>。</div>
+        <div class="lr-cell lr-emo"><span class="tag">👀 視聴者に起きること</span><b>これは「名乗り」ではなく「属性宣言型フック」です。</b>自己紹介の形をしていますが、名乗る肩書きそのものが事件になっている（＝「夫におばさんと言われた人」）。産後ママの頭には「え、旦那がそれ言う？」が浮かんで、その瞬間には<b>もう当事者側に立っています</b>。<br>
+        普通の名乗り（「こんにちは、○○です」）は視聴者に何も起こさないので離脱しますが、この型は名乗りながら怒りを起動する。<b>フォロワー0からこの数字を引いたのは、この1行の構造のおかげ</b>です。</div>
+        <div class="lr-cell lr-fix"><span class="tag">✍️ 改善案</span>直すのは1箇所だけ。<b>「あらさん一児の母」が音で割れます</b>——「アラサー」なのか「あらさん」というお名前なのか、聞いて判別できません。ここで0.3秒、視聴者の頭が止まります。<br><b>Before</b>「…夫におばさんと言われた、あらさん一児の母です。」→ <b>After</b>「私、結婚4年目にして夫におばさんと言われました。／アラサー、一児の母です。」<b>1文目は事件だけ</b>にして、属性は次の文に切る。</div>
+        <div class="lr-cell lr-word"><span class="tag">➕ 加えるといいワード</span><span class="w">アラサー</span><span class="w">結婚4年目</span> 数字は具体的なほど強い（プライベート公開トリガー）。「4年目」は残してください、生活感が出ます。</div>
       </div>
     </div>
 
-    <div class="line-row">
+    <div class="line-row good">
       <div class="lr-head">
         <span class="ln">2</span>
         <span class="orig">出産から1年経つけど未だに体重戻らん。</span>
         <span class="chip phase-empathy">共感</span>
       </div>
       <div class="lr-body">
-        <div class="lr-cell lr-emo"><span class="tag">👀 視聴者に起きること</span>産後ママが「わかる、私も戻ってない」と自分ごとにする行。刺さる層にはちゃんと刺さります。<b>ただし同時に「これ、ダイエット企画だな」という期待が立ちます</b>——この期待が10行目「手繋ぎデートを目指すお話」で裏切られる。視聴者の頭に「あれ、体重の話じゃないんだ」が残ります。</div>
-        <div class="lr-cell lr-fix"><span class="tag">✍️ 改善案</span><b>Before</b>「未だに体重戻らん。」→ <b>After</b>「未だに体重、あと7キロ戻ってない。」<br>数字を1つ入れるだけで深刻さの伝わり方が変わります。さらに<b>10行目のゴールと橋を架けてください</b>——「痩せるためちゃう。手ぇ繋ぐために痩せる。」の一言があれば、体重の伏線が回収されてズレが消えます。</div>
-        <div class="lr-cell lr-word"><span class="tag">➕ 加えるといいワード</span><span class="w">あと◯キロ</span><span class="w">マイナス◯キロ</span> 数字＝<b>アンカリング</b>。「戻らん」だけだと個人差で流されますが、「あと7キロ」は誰の頭にも同じ重さで届きます。</div>
+        <div class="lr-cell lr-emo"><span class="tag">👀 視聴者に起きること</span>「わかる、私も戻ってない」で自分ごとになる行。<b>「戻らん」のぞんざいさが効いています</b>——1行目の「〜です」から急に崩れることで、丁寧に喋ろうとした人が本音を漏らした感じが出る。これが作り物っぽさを消します。</div>
+        <div class="lr-cell lr-word"><span class="tag">➕ 加えるといいワード</span><span class="w">あと◯キロ</span> 余力があれば数字を1つ。「あと7キロ戻ってない」は誰の頭にも同じ重さで届きます（アンカリング）。※なくても成立している行です。</div>
       </div>
     </div>
 
-    <div class="line-row">
+    <div class="line-row good">
       <div class="lr-head">
         <span class="ln">3</span>
         <span class="orig">おばさんじゃんって言われた。</span>
         <span class="chip phase-tension">緊張・期待</span>
       </div>
       <div class="lr-body">
-        <div class="lr-cell lr-emo"><span class="tag">👀 視聴者に起きること</span>事件が起きた瞬間として立つ<b>はずが</b>、1行目ですでに「夫におばさんと言われた」を聞いているので「さっき聞いたやつだ」となり、新情報として立ちません。<b>この台本で一番おいしい瞬間が、2回目の報告になってしまっている。</b></div>
-        <div class="lr-cell lr-fix"><span class="tag">✍️ 改善案</span>1行目を事件スタートに直すなら、この行は<b>その場面の再現</b>に変える。<b>Before</b>「おばさんじゃんって言われた。」→ <b>After</b>「『いや、もうおばさんじゃん』って、<b>笑いながら</b>。」<br>「笑いながら」の4文字で夫の絵が浮かんで、腹立ちが視聴者に伝染します。感情は説明せず、状況で見せる。</div>
-        <div class="lr-cell lr-word"><span class="tag">➕ 加えるといいワード</span><span class="w">笑いながら</span><span class="w">真顔で</span><span class="w">スマホ見たまま</span> 状況の一語＝感情を"説明せず"に伝える最短ルート。特に「スマホ見たまま」は既婚者全員が殺意を思い出します。</div>
+        <div class="lr-cell lr-emo"><span class="tag">👀 視聴者に起きること</span>1行目では要約だった事件が、ここで<b>夫の生のセリフ</b>になります。繰り返しではなく<b>解像度が上がっている</b>——「言われた」と「『おばさんじゃん』って言われた」は、視聴者に届く温度がまったく違う。<br>「じゃん」の軽さが、悪気なく言った感じを出していて、これが余計に腹立たしい。<b>ここでコメントを書きたくなる人が生まれています。</b></div>
+        <div class="lr-cell lr-word"><span class="tag">➕ 加えるといいワード</span><span class="w">笑いながら</span><span class="w">スマホ見たまま</span> 状況の一語を足すと夫の絵が浮かんで、義憤がさらに強まります。※今のままでも十分機能しています。</div>
       </div>
     </div>
 
-    <div class="line-row">
+    <div class="line-row good">
       <div class="lr-head">
         <span class="ln">4</span>
         <span class="orig">うっざー腹立つ。</span>
         <span class="chip phase-empathy">共感</span>
       </div>
       <div class="lr-body">
-        <div class="lr-cell lr-emo"><span class="tag">👀 視聴者に起きること</span>「わかる！」と代弁された感覚。台本が急に生の声になるので、ここで視聴者の温度が上がります。8文字の短さも効いている。</div>
-        <div class="lr-cell lr-fix"><span class="tag">✍️ 改善案</span>惜しいのは「腹立つ」が<b>感情のラベル貼り</b>になっていること。行動に変えると視聴者の頭に映像が生まれます。<b>Before</b>「うっざー腹立つ。」→ <b>After</b>「うっざ。……洗い物、わざと音立てた。」<br>「腹が立った」と言われるより、音を立てて洗い物する姿を見せられたほうが、視聴者の腹が立ちます。</div>
-        <div class="lr-cell lr-word"><span class="tag">➕ 加えるといいワード</span><span class="w">わざと</span><span class="w">その日の夜</span> 「わざと」は行動の中に感情を仕込む魔法の3文字。説明ゼロで怒りが伝わります。</div>
+        <div class="lr-cell lr-emo"><span class="tag">👀 視聴者に起きること</span><b>丁寧語の仮面が完全に剥がれる瞬間。</b>視聴者は「取り繕うのをやめた」と感じて、一気に距離が縮まります。8文字の短さも効いている。<br>教科書的には「腹立つは感情の説明だから行動で見せろ」ですが、<b>独白ジャンルではこの直球が正解</b>です。ここで作り込むと、逆に嘘っぽくなります。</div>
       </div>
     </div>
 
-    <div class="line-row">
+    <div class="line-row good">
       <div class="lr-head">
         <span class="ln">5</span>
         <span class="orig">私のどこがおばさんなのよ？</span>
         <span class="chip phase-tension">緊張・期待</span>
       </div>
       <div class="lr-body">
-        <div class="lr-cell lr-emo"><span class="tag">👀 視聴者に起きること</span>「たしかに、どこなんだろう？」と一瞬考えさせる問い。ただし<b>問いの向き先が夫なので、視聴者は答えを持っていません</b>。しかも答えが返ってこないまま次の行に進むので、宙吊りのまま流れます。<b>回収されない問いは、集中を切る側に働きます。</b></div>
-        <div class="lr-cell lr-fix"><span class="tag">✍️ 改善案</span><b>夫の返答を1つ足すだけで、振りが即回収されて怒りが跳ね上がります。</b><br><b>Before</b>「私のどこがおばさんなのよ？」→ <b>After</b>「私のどこがおばさんなん？って聞いたら、『全部』やって。」<br>——「全部」の2文字で視聴者が代わりにキレます。これが<b>振り→即回収</b>の型。宙吊りの問いは離脱、1秒で回収される問いは前のめりを作ります。</div>
-        <div class="lr-cell lr-word"><span class="tag">➕ 加えるといいワード</span><span class="w">って聞いたら</span><span class="w">『全部』</span> 疑問を置いたら<b>その行のうちに回収する</b>。次回に持ち越していいのは、13行目の予告だけです。</div>
+        <div class="lr-cell lr-emo"><span class="tag">👀 視聴者に起きること</span>夫への問いですが、<b>結果的にコメント欄への振りとして機能しました</b>。実際のコメントには「おばさんの何が悪いんですかね」「順番に歳を取るのは当たり前だよ」——<b>視聴者が代わりに答えています。</b><br>本編内で回収していないのに成立しているのは、答えを持っているのが本人ではなく<b>視聴者側</b>だからです。</div>
       </div>
     </div>
 
-    <div class="line-row risk">
+    <div class="line-row good">
       <div class="lr-head">
         <span class="ln">6</span>
         <span class="orig">おばさんやん、おばさんやん、おばさんやん。</span>
         <span class="chip phase-tension">緊張・期待</span>
-        <span class="chip risk">⚠️ 離脱リスク</span>
       </div>
       <div class="lr-body">
-        <div class="lr-cell lr-emo"><span class="tag">👀 視聴者に起きること</span><b>ここで指が動きます。</b>3行目・5行目と合わせて<b>4行連続、同じ事実の言い換えだけで新情報がゼロ</b>。頭の中で反芻している演出なのは分かりますが、視聴者は「おばさん」をこの時点で<b>7回</b>聞いています。「もうわかったから、で？」の状態。<br>さらに、直前の5行目が標準語（「なのよ？」）なのにこの行だけ関西弁（「やん」）に飛ぶので、<b>誰の声なのかも一瞬わからなくなる</b>。</div>
-        <div class="lr-cell lr-fix"><span class="tag">✍️ 改善案</span><b>3連発は残していい。ただし"新情報を足しながら"3回にする。</b><br><b>Before</b>「おばさんやん、おばさんやん、おばさんやん。」→ <b>After</b>「おばさんやん。／スーパーでも、おばさんやん。／……写真見ても、おばさんやん。」<br>3回とも場面が変わるので、繰り返しなのに情報が前に進む。しかも3回目で<b>自分で認めてしまう</b>流れになり、次の「女として見れなくなるかも」への落差が深くなります。</div>
-        <div class="lr-cell lr-word"><span class="tag">➕ 加えるといいワード</span><span class="w">スーパーでも</span><span class="w">写真見ても</span><span class="w">鏡の中も</span> 反復に"場所"を足すと、反芻が具体になって尺が持ちます。同じ言葉の繰り返しは、変化を1つ入れれば演出、入れなければ空白です。</div>
+        <div class="lr-cell lr-emo"><span class="tag">👀 視聴者に起きること</span><b>ここは情報ではなく音楽です。</b>頭の中で言葉がぐるぐる回っている状態がそのまま音になっていて、視聴者は意味ではなく<b>リズム</b>で受け取ります。<br>ノウハウ系なら「同じ語の3連発＝新情報ゼロ＝離脱」ですが、<b>共感・独白系では反復は感情の増幅装置</b>です。しかも「おばさん」を連呼することで、この言葉がアカウントの旗印になっている。<b>触らないでください。</b></div>
       </div>
     </div>
 
-    <div class="line-row">
+    <div class="line-row good">
       <div class="lr-head">
         <span class="ln">7</span>
         <span class="orig">女として見れなくなるかも、だとよ。</span>
         <span class="chip phase-tension">緊張・期待</span>
       </div>
       <div class="lr-body">
-        <div class="lr-cell lr-emo"><span class="tag">👀 視聴者に起きること</span>「え、そこまで言う？」で一気に温度が上がる、<b>この台本一番のパンチライン</b>。「だとよ」の投げ捨て方に、傷ついているのを隠している感じまで出ています。ここは強い。</div>
-        <div class="lr-cell lr-fix"><span class="tag">✍️ 改善案</span>言葉自体は直す必要なし。<b>検討してほしいのは位置</b>——「おばさん」より「女として見れなくなるかも」のほうが事件として重いので、これを冒頭2秒に持ってくる案もあります（フックの選択肢として持っておいてください）。<br>文体だけは揃える:関西弁で通すなら「だとよ」→「<b>やって</b>」。標準語で通すならこのままでOKです。</div>
-        <div class="lr-cell lr-word"><span class="tag">➕ 加えるといいワード</span><span class="w">やって</span><span class="w">らしいわ</span> 文体統一のため。※標準語ルートを選ぶなら「だとよ」を残して、6行目の「やん」のほうを直します。</div>
+        <div class="lr-cell lr-emo"><span class="tag">👀 視聴者に起きること</span><b>視聴者の怒りが最高潮になる行。</b>「おばさん」はまだ冗談の余地がありますが、これは関係の否定なので笑えません。「え、そこまで言う？」で温度が跳ね上がります。<br>そして<b>「だとよ」の投げ捨て方</b>——傷ついているのを隠そうとしているのが透けて、余計に痛い。ここが実際のコメント欄（「旦那さんはそんなに完璧な見た目なのでしょうか」）を生んだ行です。</div>
       </div>
     </div>
 
@@ -417,33 +414,33 @@
         <span class="chip phase-empathy">共感</span>
       </div>
       <div class="lr-body">
-        <div class="lr-cell lr-emo"><span class="tag">👀 視聴者に起きること</span><b>この台本で一番強い1行。絶対に触らないでください。</b>怒りが急に止まって、視聴者も一緒に「……あれ、うちは？」と自分の家庭を振り返ります。<br>怒っている人を見ると人は引きますが、<b>自分の非を1つ認めた瞬間に、視聴者は応援側に回る</b>。ここで「私も繋いでないかも」とコメントを書く手が動きます。12文字でこの転調を作れているのは、正直かなり上手いです。</div>
+        <div class="lr-cell lr-emo"><span class="tag">👀 視聴者に起きること</span><b>この台本で一番強い1行です。</b>怒りが急に止まって、視聴者も一緒に「……あれ、うちは？」と自分の家庭を振り返る。<br>ここまで怒りっぱなしだったら「かわいそうな人の愚痴」で終わっていました。<b>自分の非を1つ認めた瞬間に、視聴者は観客から応援団に変わります。</b>12文字でこの転調を作れているのは、technique というより感覚の良さです。連載の毎回に1つ置いてください。</div>
       </div>
     </div>
 
-    <div class="line-row">
+    <div class="line-row good">
       <div class="lr-head">
         <span class="ln">9</span>
         <span class="orig">このままじゃ終われねえ。</span>
         <span class="chip phase-tension">緊張・期待</span>
       </div>
       <div class="lr-body">
-        <div class="lr-cell lr-emo"><span class="tag">👀 視聴者に起きること</span>「何かやるんだな」と期待が立ちます。決意表明として機能している行。<br>ただし「終われ<b>ねえ</b>」は関東寄りの男言葉で、1行目「〜です」・6行目「やん」に続いて<b>3人目の人格</b>に聞こえます。視聴者は無意識に「この人、誰？」を処理させられる。</div>
-        <div class="lr-cell lr-fix"><span class="tag">✍️ 改善案</span>意味はそのまま、文体だけ揃える。<b>Before</b>「このままじゃ終われねえ。」→ <b>After</b>「このままじゃ終われへん。」（関西ルート）／「このままじゃ終われない。」（標準語ルート）<br>さらに根拠を1語足すと決意が本気になります:「まだ29やぞ。このままじゃ終われへん。」</div>
-        <div class="lr-cell lr-word"><span class="tag">➕ 加えるといいワード</span><span class="w">まだ◯歳やぞ</span><span class="w">1年も</span> 決意の前に年齢や期間を置くと、感情に根拠が乗って空回りしなくなります。</div>
+        <div class="lr-cell lr-emo"><span class="tag">👀 視聴者に起きること</span>「何かやるんだな」で期待が立ちます。<b>「終われねえ」の荒い語尾が、覚悟の本気度を上げている</b>——ここで急に丁寧語に戻ったら嘘になるので、崩れているのが正解です。</div>
+        <div class="lr-cell lr-fix"><span class="tag">✍️ 改善案</span>この直後が<b>コメント誘導の最適位置</b>です。決意で温度が上がりきった瞬間に、視聴者へ問いを1つ投げる。<br><b>After（追加）</b>「みんなの旦那さんは、最後に手繋いだのいつ？」——全員が1秒で答えを持っていて、思い出すと悔しくなるので指が動きます。</div>
+        <div class="lr-cell lr-word"><span class="tag">➕ 加えるといいワード</span><span class="w">みんなの旦那さんは</span><span class="w">最後に〜したのいつ？</span> 意見を求める問いより<b>思い出させる問い</b>。誰も間違えないので、書くハードルがゼロになります。</div>
       </div>
     </div>
 
-    <div class="line-row">
+    <div class="line-row good">
       <div class="lr-head">
         <span class="ln">10</span>
         <span class="orig">これは、とある主婦が夫と手繋ぎデートを目指すお話。</span>
         <span class="chip phase-hook">引き（好奇心）</span>
       </div>
       <div class="lr-body">
-        <div class="lr-cell lr-emo"><span class="tag">👀 視聴者に起きること</span>「この人が何を目指すのか」が1行でわかり、連載として追う理由ができます。<b>この宣言があること自体は教科書的に正解。</b><br>引っかかるのは2行目との接続——「体重が戻らない」で入った視聴者の頭には「あれ、痩せる話じゃないの？」が残ります。<b>ゴールが変わったように見える。</b></div>
-        <div class="lr-cell lr-fix"><span class="tag">✍️ 改善案</span>ゴールに<b>期限</b>を足して、体重の伏線を回収する。<br><b>Before</b>「これは、とある主婦が夫と手繋ぎデートを目指すお話。」→ <b>After</b>「これは、産後1年で"おばさん"と言われた主婦が、<b>100日で</b>夫と手を繋ぐまでの<b>記録</b>。／痩せるためちゃう。手ぇ繋ぐために痩せる。」<br>期限があると視聴者に"見届ける理由"ができます。「目指すお話」より「までの記録」のほうが、達成が約束されていて追いやすい。</div>
-        <div class="lr-cell lr-word"><span class="tag">➕ 加えるといいワード</span><span class="w">100日で</span><span class="w">〜までの記録</span><span class="w">痩せるためちゃう</span> 期限＝見届ける理由。連載モノは「ゴール＋期限＋今日の一歩」の3点セットが揃うとフォローされます。</div>
+        <div class="lr-cell lr-emo"><span class="tag">👀 視聴者に起きること</span>「この人が何を目指すのか」が1行でわかり、<b>連載として追う理由が立ちます</b>。三人称（「とある主婦が」）に切り替えることで、愚痴が急に<b>物語</b>になるのが上手い。ここで視聴者の役割が「聞き役」から「見届け人」に変わります。</div>
+        <div class="lr-cell lr-fix"><span class="tag">✍️ 改善案</span>余力があれば<b>期限</b>を1つ。<b>Before</b>「夫と手繋ぎデートを目指すお話。」→ <b>After</b>「夫と手繋ぎデートするまでの、100日の記録。」<br>期限があると「いつ終わるか」が見えて、見届ける動機が強くなります。「目指すお話」は終わりが見えないぶん、離脱の口実にもなり得る。</div>
+        <div class="lr-cell lr-word"><span class="tag">➕ 加えるといいワード</span><span class="w">100日</span><span class="w">〜までの記録</span> 期限＝見届ける理由。連載モノは「ゴール＋期限」の2点が揃うと、フォローが「予約」に変わります。</div>
       </div>
     </div>
 
@@ -454,35 +451,35 @@
         <span class="chip phase-tension">緊張・期待</span>
       </div>
       <div class="lr-body">
-        <div class="lr-cell lr-emo"><span class="tag">👀 視聴者に起きること</span>決意の再確認。ただし9行目「このままじゃ終われねえ」で一度決意しているので、視聴者には<b>同じ情報の2回目</b>に聞こえます。「さっき聞いた」で温度が上がりきらない。</div>
-        <div class="lr-cell lr-fix"><span class="tag">✍️ 改善案</span>2回目の決意にするなら、<b>自分への誓いではなく夫への宣戦布告</b>に変える。<br><b>Before</b>「もうおばさんって言わせないぞ。」→ <b>After</b>「100日後、<b>あんたから</b>手ぇ繋いでこさせたるわ。」<br>決意が「自分ががんばる」から「相手を動かす」に変わると、視聴者は結末を見たくなります。<b>ここがシェアされる一言になる場所</b>です。</div>
-        <div class="lr-cell lr-word"><span class="tag">➕ 加えるといいワード</span><span class="w">あんたから</span><span class="w">〜させたるわ</span><span class="w">100日後</span> 宣戦布告の型。努力宣言はスルーされますが、宣戦布告は結末が気になるので保存・シェアされます。</div>
-      </div>
-    </div>
-
-    <div class="line-row risk">
-      <div class="lr-head">
-        <span class="ln">12</span>
-        <span class="orig">よーしって。</span>
-        <span class="chip phase-cta">行動（CTA）</span>
-        <span class="chip risk">⚠️ 離脱リスク</span>
-      </div>
-      <div class="lr-body">
-        <div class="lr-cell lr-emo"><span class="tag">👀 視聴者に起きること</span><b>ここまで積み上げた温度が、この6文字で落ちます。</b>9〜11行目で緊張を上げてきたのに、「よーし<b>って。</b>」の「〜って。」で自分のセリフを他人事みたいに引用してしまい、決意が急にコントのオチになる。<br>視聴者の中の「見届けよう」が「あ、ネタなんだ」に変わる行です。感情のクライマックスを、書いた本人が照れて崩している状態。</div>
-        <div class="lr-cell lr-fix"><span class="tag">✍️ 改善案</span><b>丸ごと削るのが一番効きます。</b>どうしても間が欲しいなら、言葉ではなく画で置き換える。<br><b>Before</b>「よーしって。」→ <b>After</b>「（削除。決意の直後に<b>無音1秒</b>。画は鏡の前で拳を握る）」<br>決意のあとの沈黙は、どんな掛け声より強いです。照れずに、真顔で終わってください。</div>
+        <div class="lr-cell lr-emo"><span class="tag">👀 視聴者に起きること</span>決意の再宣言。9行目とほぼ同じ方向なので、<b>視聴者にとっては2回目の情報</b>になります。悪くはないが、ここは伸びしろ。</div>
+        <div class="lr-cell lr-fix"><span class="tag">✍️ 改善案</span><b>自分への誓いを、夫への宣戦布告に変える。</b><br><b>Before</b>「もうおばさんって言わせないぞ。」→ <b>After</b>「100日後、<b>あんたから</b>手ぇ繋いでこさせるから。」<br>「自分ががんばる」はスルーされますが、「相手を動かす」は結末が気になります。<b>ここが唯一、シェアされる一言になり得る場所</b>です。</div>
+        <div class="lr-cell lr-word"><span class="tag">➕ 加えるといいワード</span><span class="w">あんたから</span><span class="w">〜させるから</span> 宣戦布告の型。視聴者の中に「その日を見たい」が生まれます。</div>
       </div>
     </div>
 
     <div class="line-row">
       <div class="lr-head">
-        <span class="ln">13</span>
-        <span class="orig">次回、ダメ出しで号泣。</span>
+        <span class="ln">12</span>
+        <span class="orig">よーしって。</span>
         <span class="chip phase-cta">行動（CTA）</span>
       </div>
       <div class="lr-body">
-        <div class="lr-cell lr-emo"><span class="tag">👀 視聴者に起きること</span>「え、何をダメ出しされて泣くの？」で続きが気になります。<b>予告としてはよく効いている</b>——11文字で次回への振りを作れているのは good。<br>ただし<b>フォローの一言がゼロ</b>なので、気になったまま指が次の動画に流れて終わります。「気になる」と「フォローする」の間には、ちゃんと橋が要ります。</div>
-        <div class="lr-cell lr-fix"><span class="tag">✍️ 改善案</span>予告のあとに導線を1行。<b>Before</b>「次回、ダメ出しで号泣。」→ <b>After</b>「次回、ダメ出しで号泣。／<b>続き、フォローしてへんかったら流れてこうへんよ。</b>」<br>「フォローしてね」とお願いするより、<b>「見逃す」と言うほうが押されます</b>（損失回避）。お願いは無視できますが、損は無視できません。</div>
-        <div class="lr-cell lr-word"><span class="tag">➕ 加えるといいワード</span><span class="w">流れてこうへんよ</span><span class="w">見逃したくない人だけ</span><span class="w">続きはプロフィールから</span> 損失回避＝フォローの理由づくり。連載モノは13行目が唯一のフォロー獲得ポイントなので、ここを空けたままにしないこと。</div>
+        <div class="lr-cell lr-emo"><span class="tag">👀 視聴者に起きること</span>ここは<b>撮ってみないと判断できない行</b>です。文字だけで読むと、「〜って。」で自分のセリフを引用する形になるので、決意の温度がふっと下がって見える。<br>ただし<b>表情と声しだいで、照れくささが愛嬌になって親近感に転ぶ</b>行でもあります。深刻になりすぎた空気を、意図的に緩めているとも読めます。</div>
+        <div class="lr-cell lr-fix"><span class="tag">✍️ 改善案</span><b>撮ったあとに自分で観て決めてください。</b>——「勢いが削がれて見えた」なら削って無音1秒（画は鏡の前で拳を握る）に置き換える。「かわいく決まっている」ならそのまま残す。<br>台本の文字だけで削るには惜しい行です。<b>迷ったら両方撮って、観比べるのが一番早い。</b></div>
+      </div>
+    </div>
+
+    <div class="line-row risk">
+      <div class="lr-head">
+        <span class="ln">13</span>
+        <span class="orig">次回、ダメ出しで号泣。</span>
+        <span class="chip phase-cta">行動（CTA）</span>
+        <span class="chip risk">⚠️ 離脱リスク</span>
+      </div>
+      <div class="lr-body">
+        <div class="lr-cell lr-emo"><span class="tag">👀 視聴者に起きること</span>予告としては<b>よく効いています</b>——「え、何をダメ出しされて泣くの？」で続きが気になる。11文字でこの引きを作れているのは good。<br><b>問題はその直後です。</b>「気になる」まで作ったのに、<b>そこから何をすればいいかを言っていない</b>。だから13万人が「気になったな」で終わって、指が次の動画に流れました。<b>この台本で唯一、明確に取りこぼしている場所です。</b></div>
+        <div class="lr-cell lr-fix"><span class="tag">✍️ 改善案</span>予告のあとに導線を1行だけ。<br><b>Before</b>「次回、ダメ出しで号泣。」→ <b>After</b>「次回、ダメ出しで号泣。／続き、<b>フォローしてないと流れてこない</b>ので。」<br>「フォローしてね」はお願いなので無視できますが、<b>「見逃す」は損なので無視できません</b>（損失回避）。台詞1行、尺2秒の追加です。</div>
+        <div class="lr-cell lr-word"><span class="tag">➕ 加えるといいワード</span><span class="w">流れてこない</span><span class="w">見逃したくない人だけ</span><span class="w">第2話から追える</span> 連載モノは13行目が唯一のフォロー獲得ポイント。ここを空けたまま出すと、伸びるほど取りこぼしが大きくなります。</div>
       </div>
     </div>
   </section>
@@ -490,128 +487,133 @@
   <!-- 6. 維持してほしい良いところ -->
   <section>
     <h2><span class="num">6</span>🌱 維持してほしい良いところ</h2>
-    <div class="sec-sub">次の台本でも作り変えないでほしい部分。ここは武器です</div>
+    <div class="sec-sub">実測で効いた部分です。次の台本でも作り変えないでください</div>
     <ul class="keep-list">
-      <li><b>8行目「確かに最近手繋いでない。」の転調:</b> 怒りっぱなしで終わる台本は共感されませんが、この12文字で「自分の非を認める」に切り替わり、視聴者が自分の家庭を振り返ります。<b>これは技術というより感覚の良さ</b>で、真似しようとしてもなかなか出せない1行です。次の回でも、怒った後に必ずこの"自分に返ってくる1行"を置いてください。</li>
-      <li><b>10行目のゴール宣言:</b> 「これは、とある主婦が夫と手繋ぎデートを目指すお話。」——連載モノで<b>ゴールを1行で言語化している</b>のは正解です。多くの人はここを言わずに始めて、2回目以降で誰にも追われなくなります。この宣言は毎回入れる価値があります。</li>
-      <li><b>1行8〜25字の短文テンポ:</b> 全13行、息継ぎができる長さで切れています。ナレーションとして読んだときに詰まらない。<b>この短さは武器</b>なので、改善案を足すときも1行が30字を超えないように守ってください。</li>
+      <li><b>「第三者の悪役」を1人置く設計:</b> 視聴者を動かしたのはあなたの主張ではなく<b>夫の一言</b>です。人は自分の意見を書くのは怖いけれど、誰かの代わりに怒るのは怖くない。コメント欄がほぼ全部「旦那さんが悪い」で埋まったのがその証拠。<b>連載を続けるとき、毎回この「悪役の一言」を1つ置けるかが再現性の鍵</b>です。</li>
+      <li><b>8行目「確かに最近手繋いでない。」の転調:</b> 怒りっぱなしなら「愚痴」で終わっていました。自分の非を1つ認めた瞬間、視聴者は観客から応援団になります。<b>怒り→自覚の2段構えを毎回入れてください。</b></li>
+      <li><b>語尾がわざと崩れていくこと:</b> 「〜です」→「戻らん」→「うっざー」→「やん」→「終われねえ」。これは不統一ではなく、<b>丁寧に喋ろうとした人の仮面が感情で剥がれていく設計</b>です。ここを揃えると、生々しさが消えて作り物になります。<b>直さないでください。</b></li>
+      <li><b>「おばさん」の反復:</b> 情報としては同じでも、感情としては増幅装置です。しかもこの連呼がアカウントの旗印になっている。<b>反復＝手抜きではなく、独白ジャンルの主武器</b>です。</li>
     </ul>
   </section>
 
   <!-- 7. リライト台本 -->
   <section>
     <h2><span class="num">7</span>私が直すならこうする（リライト台本）</h2>
-    <div class="sec-sub">同じネタ・同じ出来事のまま、構成と言葉だけ組み直した完全版。<b>左＝元の台本、右＝リライト</b>。何をどう変えたかを見比べて学べます。※文体は「関西ルート」で統一しました（「戻らん」「やん」があるので、こちらが地の言葉だと判断）</div>
+    <div class="sec-sub">この台本は<b>骨組みを変えません</b>。13行のうち10行はそのまま。<b>左＝元の台本、右＝リライト</b>で、何を足したかだけ見比べてください</div>
 
     <div class="rw-block">
-      <div class="rw-head"><b>【フック 0-2s】</b><span class="rw-change">名乗りを削って、夫のセリフから開始</span></div>
+      <div class="rw-head"><b>【フック 0-3s】</b><span class="rw-change">1文を2つに切るだけ（事件と属性を分ける）</span></div>
       <div class="ba-grid">
         <div class="ba before"><b>BEFORE（元の台本）</b>私は結婚4年目にして夫におばさんと言われた、あらさん一児の母です。</div>
-        <div class="ba after"><b>AFTER（リライト）</b>「もう、おばさんやん」<br>結婚4年目。夫に言われた言葉です。<br>（画: 鏡の前・無表情のアップ）</div>
+        <div class="ba after"><b>AFTER（リライト）</b>私、結婚4年目にして夫におばさんと言われました。<br>アラサー、一児の母です。<br>（画: すっぴん・鏡の前。テロップは「おばさんて言われた。」を大きく単独で）</div>
       </div>
     </div>
 
     <div class="rw-block">
-      <div class="rw-head"><b>【共感 2-7s】</b><span class="rw-change">数字を具体化＋名乗りをここに1秒だけ</span></div>
+      <div class="rw-head"><b>【共感 3-7s】</b><span class="rw-change">数字を1つ足すだけ（任意）</span></div>
       <div class="ba-grid">
         <div class="ba before"><b>BEFORE（元の台本）</b>出産から1年経つけど未だに体重戻らん。</div>
-        <div class="ba after"><b>AFTER（リライト）</b>産後1年。体重、あと7キロ戻ってへん。<br>アラサー、一児の母です。<br>（※「あらさん」がお名前なら「あらさん、一児の母です。」に。音で"アラサー"と紛れるので1文に混ぜない）</div>
+        <div class="ba after"><b>AFTER（リライト）</b>出産から1年経つけど、あと7キロ戻らん。</div>
       </div>
     </div>
 
     <div class="rw-block">
-      <div class="rw-head"><b>【怒り 7-16s】</b><span class="rw-change">感情説明→行動に／問いを即回収／反復に場面を足す</span></div>
+      <div class="rw-head"><b>【怒り 7-18s】</b><span class="rw-change keep">維持（1文字も変えない）</span></div>
       <div class="ba-grid">
         <div class="ba before"><b>BEFORE（元の台本）</b>おばさんじゃんって言われた。<br>うっざー腹立つ。<br>私のどこがおばさんなのよ？<br>おばさんやん、おばさんやん、おばさんやん。</div>
-        <div class="ba after"><b>AFTER（リライト）</b>「いや、もうおばさんやん」って、笑いながら。<br>うっざ。……洗い物、わざと音立てた。<br>私のどこがおばさんなん？って聞いたら、<br>「全部」やって。<br>スーパーでも、おばさんやん。<br>……写真見ても、おばさんやん。</div>
+        <div class="ba after"><b>AFTER（リライト）</b>おばさんじゃんって言われた。<br>うっざー腹立つ。<br>私のどこがおばさんなのよ？<br>おばさんやん、おばさんやん、おばさんやん。</div>
       </div>
     </div>
 
     <div class="rw-block">
-      <div class="rw-head"><b>【突き落とし 16-22s】</b><span class="rw-change">文体だけ統一（だとよ→やって）</span></div>
+      <div class="rw-head"><b>【突き落とし 18-23s】</b><span class="rw-change keep">維持</span></div>
       <div class="ba-grid">
         <div class="ba before"><b>BEFORE（元の台本）</b>女として見れなくなるかも、だとよ。</div>
-        <div class="ba after"><b>AFTER（リライト）</b>「女として見れなくなるかも」やって。<br>……そこまで言う？</div>
+        <div class="ba after"><b>AFTER（リライト）</b>女として見れなくなるかも、だとよ。</div>
       </div>
     </div>
 
     <div class="rw-block">
-      <div class="rw-head"><b>【自覚＝山 22-27s】</b><span class="rw-change keep">維持（この台本の最強の1行）</span></div>
+      <div class="rw-head"><b>【自覚＝山 23-27s】</b><span class="rw-change keep">維持（最強の1行）</span></div>
       <div class="ba-grid">
         <div class="ba before"><b>BEFORE（元の台本）</b>確かに最近手繋いでない。</div>
-        <div class="ba after"><b>AFTER（リライト）</b>確かに最近、手繋いでない。<br>（画: 無音1.5秒・夫の後ろ姿）</div>
+        <div class="ba after"><b>AFTER（リライト）</b>確かに最近手繋いでない。<br>（画: 無音1.5秒・夫の後ろ姿）</div>
       </div>
     </div>
 
     <div class="rw-block">
-      <div class="rw-head"><b>【宣言 27-36s】</b><span class="rw-change">期限を足す／体重の伏線を回収／宣戦布告に変換</span></div>
+      <div class="rw-head"><b>【決意＋コメント誘導 27-33s】</b><span class="rw-change">視聴者への問いを1行新設</span></div>
       <div class="ba-grid">
-        <div class="ba before"><b>BEFORE（元の台本）</b>このままじゃ終われねえ。<br>これは、とある主婦が夫と手繋ぎデートを目指すお話。<br>もうおばさんって言わせないぞ。<br>よーしって。</div>
-        <div class="ba after"><b>AFTER（リライト）</b>このままじゃ終われへん。<br>これは、産後1年で"おばさん"と言われた主婦が、100日で夫と手を繋ぐまでの記録。<br>痩せるためちゃう。手ぇ繋ぐために痩せる。<br>100日後、あんたから繋いでこさせたるわ。<br>（画: 鏡の前で拳を握る・無音1秒。「よーしって。」は削除）</div>
+        <div class="ba before"><b>BEFORE（元の台本）</b>このままじゃ終われねえ。<br>（※視聴者への問いは該当なし・新設）</div>
+        <div class="ba after"><b>AFTER（リライト）</b>このままじゃ終われねえ。<br>ねえ、みんなの旦那さんは、最後に手繋いだのいつ？</div>
       </div>
     </div>
 
     <div class="rw-block">
-      <div class="rw-head"><b>【コメント誘導＋予告 36-42s】</b><span class="rw-change">視聴者への問い＋フォローの理由を新設</span></div>
+      <div class="rw-head"><b>【宣言 33-40s】</b><span class="rw-change">期限を足す／誓いを宣戦布告に</span></div>
       <div class="ba-grid">
-        <div class="ba before"><b>BEFORE（元の台本）</b>次回、ダメ出しで号泣。<br>（※視聴者への問い・フォロー導線は該当なし）</div>
-        <div class="ba after"><b>AFTER（リライト）</b>みんなの旦那さんは、最後に手繋いだのいつ？<br>次回、ダメ出しで号泣。<br>続き、フォローしてへんかったら流れてこうへんよ。</div>
+        <div class="ba before"><b>BEFORE（元の台本）</b>これは、とある主婦が夫と手繋ぎデートを目指すお話。<br>もうおばさんって言わせないぞ。<br>よーしって。</div>
+        <div class="ba after"><b>AFTER（リライト）</b>これは、とある主婦が夫と手繋ぎデートするまでの、100日の記録。<br>100日後、あんたから手ぇ繋いでこさせるから。<br>よーしって。<br>（※「よーしって。」は撮って観てから判断。勢いが削がれて見えたら削って無音1秒＋拳を握る画に）</div>
       </div>
     </div>
 
-    <pre id="rewrite-script" hidden>「もう、おばさんやん」
-結婚4年目。夫に言われた言葉です。
+    <div class="rw-block">
+      <div class="rw-head"><b>【予告＋フォロー導線 40-45s】</b><span class="rw-change">フォローする理由を1行新設（最重要）</span></div>
+      <div class="ba-grid">
+        <div class="ba before"><b>BEFORE（元の台本）</b>次回、ダメ出しで号泣。<br>（※フォロー導線は該当なし・新設）</div>
+        <div class="ba after"><b>AFTER（リライト）</b>次回、ダメ出しで号泣。<br>続き、フォローしてないと流れてこないので。</div>
+      </div>
+    </div>
 
-産後1年。体重、あと7キロ戻ってへん。
+    <pre id="rewrite-script" hidden>私、結婚4年目にして夫におばさんと言われました。
 アラサー、一児の母です。
 
-「いや、もうおばさんやん」って、笑いながら。
-うっざ。……洗い物、わざと音立てた。
-私のどこがおばさんなん？って聞いたら、
-「全部」やって。
-スーパーでも、おばさんやん。
-……写真見ても、おばさんやん。
+出産から1年経つけど、あと7キロ戻らん。
 
-「女として見れなくなるかも」やって。
-……そこまで言う？
+おばさんじゃんって言われた。
+うっざー腹立つ。
+私のどこがおばさんなのよ？
+おばさんやん、おばさんやん、おばさんやん。
 
-確かに最近、手繋いでない。
+女として見れなくなるかも、だとよ。
 
-このままじゃ終われへん。
-これは、産後1年で"おばさん"と言われた主婦が、100日で夫と手を繋ぐまでの記録。
-痩せるためちゃう。手ぇ繋ぐために痩せる。
-100日後、あんたから繋いでこさせたるわ。
+確かに最近手繋いでない。
 
-みんなの旦那さんは、最後に手繋いだのいつ？
+このままじゃ終われねえ。
+ねえ、みんなの旦那さんは、最後に手繋いだのいつ？
+
+これは、とある主婦が夫と手繋ぎデートするまでの、100日の記録。
+100日後、あんたから手ぇ繋いでこさせるから。
+よーしって。
+
 次回、ダメ出しで号泣。
-続き、フォローしてへんかったら流れてこうへんよ。</pre>
+続き、フォローしてないと流れてこないので。</pre>
     <button class="mk-btn" onclick="copyRewrite(this)">📋 リライト台本をコピー</button>
     <button class="mk-btn sub" data-prompt="この添削を踏まえて台本を作り直して（daihon-copy-makeスキル・改稿モード）。添削レポート: /Users/miyabekenji/Documents/Claude/Projects/台本添削/おばさん宣戦布告_20260807/report.html（元台本と指摘が入っています）。★指摘の継ぎ足しではなく、参考にする台本の型に沿って書き直してください。参考にする台本（文字起こし全文 or 分析フォルダのパス）: " onclick="mkPrompt(this)">🎬 この添削で台本を作り直す（プロンプトをコピー）</button>
-    <p class="note"><b>リライトの狙い:</b> 残したのは「怒り→自覚→決意」の弧と、8行目の転調、そして1行を短く切るテンポ。変えたのは<b>入口（名乗り→夫のセリフ）</b>・<b>中盤の停滞（反復に場面を足して情報を前へ）</b>・<b>文体（関西で統一）</b>・<b>出口（ゴールに期限、決意を宣戦布告に、フォローの理由を新設）</b>の4点です。<br>※文体は「標準語ルート」でも成立します。その場合は「やん→じゃん」「終われへん→終われない」「〜やって→〜だとよ」で全行揃えてください。<b>大事なのはどちらを選ぶかではなく、13行とも同じ人が喋っていること</b>です。</p>
+    <p class="note"><b>リライトの狙い:</b> <b>13行のうち10行は1文字も変えていません。</b>怒りの4行・突き落とし・自覚・「よーしって。」は実測で効いた部分なので触りません。<br>やったのは<b>足し算だけ</b>——①1行目を2文に切って「アラサー」を聞こえるように ②決意の直後にコメント誘導を1行 ③ゴールに期限（100日）を足して誓いを宣戦布告に ④最後にフォローの理由を1行。<b>尺は約5秒増えるだけで、取りこぼしていた出口が塞がります。</b></p>
   </section>
 
   <!-- 8. 次回チェックリスト -->
   <section>
     <h2><span class="num">8</span>次に台本を書く前のチェックリスト</h2>
-    <div class="sec-sub">今回の指摘をチェック項目にしました。次の台本はこれを全部つぶしてから撮影</div>
+    <div class="sec-sub">この連載を続けるためのチェック項目です。<b>勝ちパターンを毎回再現するための確認</b>と考えてください</div>
     <ul class="check-list">
-      <li><label><input type="checkbox"><span>1文目に「私は〜です」の名乗りが入っていない（事件・セリフ・数字から始めた）</span></label></li>
-      <li><label><input type="checkbox"><span>一番強い言葉が、1文目の<b>頭</b>にある（文の真ん中に埋めていない）</span></label></li>
-      <li><label><input type="checkbox"><span>地の文の語尾が1つに揃っている（関西弁か標準語か、どちらかに決めた）</span></label></li>
-      <li><label><input type="checkbox"><span>同じ言葉を3回以上繰り返している区間に、場面や情報の変化を入れた</span></label></li>
-      <li><label><input type="checkbox"><span>途中で置いた「？」の問いを、その場か数行以内に回収した（次回送りにしていない）</span></label></li>
-      <li><label><input type="checkbox"><span>冒頭で約束した題材（体重など）と、ゴールが繋がっている一言を入れた</span></label></li>
-      <li><label><input type="checkbox"><span>感情を「腹立つ」「悲しい」と説明せず、行動（わざと音を立てた等）で見せた</span></label></li>
-      <li><label><input type="checkbox"><span>決意やクライマックスの直後に、温度を下げる照れ隠し（「〜って。」「よーし」）を置いていない</span></label></li>
-      <li><label><input type="checkbox"><span>この1本だけで持ち帰れる具体（数字・手順・today の一手）を1つ渡した</span></label></li>
-      <li><label><input type="checkbox"><span>視聴者への問いが1つある／フォローする理由を言葉にした（予告だけで終わっていない）</span></label></li>
+      <li><label><input type="checkbox"><span><b>「第三者の悪役」の一言</b>を1つ置いた（視聴者が代わりに怒れる材料）</span></label></li>
+      <li><label><input type="checkbox"><span><b>怒り→自覚の転調</b>がある（自分の非を1つ認める行を入れた）</span></label></li>
+      <li><label><input type="checkbox"><span>1文目が<b>事件そのもの</b>になっている（空の挨拶で始めていない）</span></label></li>
+      <li><label><input type="checkbox"><span>1文目に、音で意味が割れる言葉を混ぜていない（同音の名前・略語）</span></label></li>
+      <li><label><input type="checkbox"><span><b>視聴者への問いを1つ</b>入れた（意見ではなく「思い出させる」問い）</span></label></li>
+      <li><label><input type="checkbox"><span><b>フォローする理由</b>を最後に1行入れた（「見逃す」の言い方で）</span></label></li>
+      <li><label><input type="checkbox"><span>次回への引きが具体的（「次回、○○で号泣」のように事件を予告した）</span></label></li>
+      <li><label><input type="checkbox"><span>語尾を無理に統一していない（感情で崩れるのは残す）</span></label></li>
+      <li><label><input type="checkbox"><span>連載の何話目かが伝わる（第◯話の表示・ゴールの再提示）</span></label></li>
     </ul>
     <div class="tr-box">
       <button class="tr-toggle" onclick="trToggle(this)">📝 今回の元台本を見る</button>
       <div class="tr-body" hidden>
         <div class="tr-actions">
           <button onclick="trCopy(this)">📋 コピー</button>
-          <button onclick="trDownload(this, 'おばさん宣戦布告_台本')">⬇ .txt保存</button>
+          <button onclick="trDownload(this, 'オバ美_第1話_台本')">⬇ .txt保存</button>
         </div>
         <pre class="tr-text">私は結婚4年目にして夫におばさんと言われた、あらさん一児の母です。
 出産から1年経つけど未だに体重戻らん。
@@ -631,12 +633,11 @@
   </section>
 
   <footer>
-    台本辛口添削レポート ｜ 対象: おばさん宣戦布告（産後ママの連載Vlog・第1回） ｜ 添削: 2026/08/07<br>
+    台本辛口添削レポート ｜ 対象: オバ美・第1話（産後ママの自分磨き連載） ｜ 添削: 2026/08/07<br>
     採点は固定基準による台本テキストの評価で、伸びを保証するものではありません。テロップ・音・カバーなど動画としての出来は含みません（動画の添削は tensaku-reel）。
   </footer>
 </div>
 <script>
-/* 6軸レーダー（data-scores / data-max / data-labels から描画） */
 (function () {
   const el = document.getElementById('radar');
   if (!el) return;
@@ -676,7 +677,6 @@
   el.innerHTML = s;
 })();
 
-/* --- コピー共通処理（file:// やアプリ内ブラウザで clipboard API が拒否されても確実に動く） --- */
 async function __copyText(text) {
   if (!text) return false;
   try { await navigator.clipboard.writeText(text); return true; } catch (e) {}

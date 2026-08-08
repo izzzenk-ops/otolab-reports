@@ -76,6 +76,15 @@ li{margin:7px 0}
 .note b{color:#a8621f}
 .psy{background:var(--purple-soft);border-left:5px solid var(--purple);border-radius:12px;
   padding:16px 18px;font-size:14px;margin:14px 0}
+.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:6px 0 4px}
+.thumb{border:2px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+.thumb .pic{background:#4a4a52;color:#fff;padding:20px 16px;min-height:118px}
+.thumb .pic b{font-size:19px;font-weight:800;line-height:1.5;display:block}
+.thumb .meta{padding:12px 14px;font-size:13px;line-height:1.7}
+.thumb .kata{display:inline-block;background:var(--blue-soft);color:var(--blue-deep);
+  border-radius:999px;padding:2px 11px;font-size:11.5px;font-weight:700;margin-bottom:7px}
+.thumb .why{color:var(--sub)}
+
 .cap{background:#fffdf9;border:2px dashed var(--line);border-radius:14px;padding:20px;
   white-space:pre-wrap;font-size:14px;line-height:1.95}
 .tag{display:inline-block;background:var(--blue-soft);color:var(--blue-deep);border-radius:999px;
@@ -84,6 +93,7 @@ footer{text-align:center;color:var(--sub);font-size:12px;padding:34px 18px 0;lin
 @media(max-width:560px){
   header h1{font-size:20px} section{padding:22px 16px} .lead{padding-left:0}
   h2{font-size:17px} .script{font-size:15px;padding:18px 15px}
+  .thumbs{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -235,9 +245,23 @@ footer{text-align:center;color:var(--sub);font-size:12px;padding:34px 18px 0;lin
   </div>
 </section>
 
-<!-- ============ 4. 撮影メモ ============ -->
+<!-- ============ 4. サムネ（カバー）の文字案 ============ -->
 <section>
-  <h2><span class="num">4</span>撮影メモ</h2>
+  <h2><span class="num">4</span>サムネの文字、3案</h2>
+  <p class="lead">参考アカウントのリール一覧を実測して、伸びているカバーの型に1案ずつ当てています。文字だけの案です（画像の作り方は次の撮影メモ）。</p>
+
+  <div class="thumbs">
+    <div class="thumb"><div class="pic"><b>母に言われた。<br>「シミ出てきたな」</b></div><div class="meta"><span class="kata">引用型</span><br>言われた一言をそのまま置く。参考の1文目と同じ武器で、状況が2秒で伝わる。<br><span class="why">いちばん外さない。迷ったらこれ。</span></div></div>
+    <div class="thumb"><div class="pic"><b>だって、<br>3人産んだんやで。</b></div><div class="meta"><span class="kata">内心の反論型</span><br>参考アカウントで119.6万・115.6万を出しているのがこの型（「美人の友達と会う。」「だって、まだ心は20代」）。<br><span class="why">刺さる人が限定される代わりに、刺さった人は必ず止まる。</span></div></div>
+    <div class="thumb"><div class="pic"><b>30代3児、<br>シミが怖い。</b></div><div class="meta"><span class="kata">属性＋恐怖型</span><br>自分の属性と、いちばん怖いことを並べる。同じ属性の人が「私のことや」と止まる。<br><span class="why">連載として続けるならこの型が回を重ねやすい。</span></div></div>
+  </div>
+
+  <div class="note"><b>3案に共通のルール（参考の実測から）：</b>2行・1行9文字以内・句点で言い切る・白の極太ゴシックを画面の上1/3に置く。<b>「◯選」「方法」「理由」は入れない。</b>同じアカウントでも、ノウハウ語を入れたカバーは10万台、感情を言い切ったカバーは110万超と10倍の差が出ています。左下に「第1話」の白丸バッジを入れると、連載として追ってもらえます。</div>
+</section>
+
+<!-- ============ 5. 撮影メモ ============ -->
+<section>
+  <h2><span class="num">5</span>撮影メモ</h2>
   <p class="lead">台本の行には混ぜていません。撮るときだけ見てください。</p>
   <ul>
     <li><b>顔出しはしません。</b>参考は33秒中、顔がはっきり映るカットがゼロです。マスク・後ろ姿・足元・手のアップだけで撮れます。</li>
@@ -251,9 +275,9 @@ footer{text-align:center;color:var(--sub);font-size:12px;padding:34px 18px 0;lin
   </ul>
 </section>
 
-<!-- ============ 5. キャプション ============ -->
+<!-- ============ 6. キャプション ============ -->
 <section>
-  <h2><span class="num">5</span>キャプション</h2>
+  <h2><span class="num">6</span>キャプション</h2>
   <p class="lead">参考と同じ役割（はじめましての挨拶＋背景＋参加のお願い）にしています。</p>
   <div class="cap" id="capBox">はじめまして、○○です。
 
@@ -277,9 +301,9 @@ footer{text-align:center;color:var(--sub);font-size:12px;padding:34px 18px 0;lin
   <div class="note"><b>本編から「フォローしてないと流れてこんから」を外しました。</b>参考は次回予告だけで引っ張って、お願いはキャプションの「アドバイスください」に寄せています。1本目でフォローをお願いすると、押しつけが感情に勝ってしまいます。</div>
 </section>
 
-<!-- ============ 6. 次にやること ============ -->
+<!-- ============ 7. 次にやること ============ -->
 <section>
-  <h2><span class="num">6</span>次にやること</h2>
+  <h2><span class="num">7</span>次にやること</h2>
   <ul>
     <li>この台本で<b>1本撮る</b>。顔は出さなくていいので、今日のうちに撮れます。</li>
     <li>撮る前に、<b>声に出して1回読む</b>。息が続かない行・自分が言わない言い回しがあれば、そこだけ直してOK。</li>

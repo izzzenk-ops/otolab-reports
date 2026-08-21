@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>大阪サウナDESSE 公式LINE ご確認用</title>
+<style>
+:root{
+  --ink:#141a20; --sub:#6b7482; --mute:#98a1ae; --line:#e6e9ee; --bg:#f6f7f9; --card:#fff;
+  --dark:#14181d; --dark2:#1d232a; --fire:#e2571f; --fire2:#ff8a4c; --ok:#1f8a5f;
+  --hl:#fff3d6; --hlb:#e8b23a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);line-height:1.75;
+  font-family:"Hiragino Sans","Noto Sans JP","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:960px;margin:0 auto;padding:0 18px 90px}
+
+header{padding:46px 0 26px;text-align:center}
+.eyebrow{font-size:11.5px;letter-spacing:.26em;color:var(--fire);font-weight:800}
+h1{font-size:clamp(22px,4.4vw,31px);font-weight:800;margin-top:10px;letter-spacing:.01em}
+.lead{color:var(--sub);font-size:14px;margin-top:10px}
+.stamp{display:inline-block;margin-top:14px;font-size:12px;color:var(--mute);
+  border:1px solid var(--line);background:#fff;border-radius:99px;padding:5px 14px}
+
+/* tabs */
+.tabs{position:sticky;top:0;z-index:20;background:rgba(246,247,249,.94);
+  backdrop-filter:blur(8px);padding:10px 0;margin-bottom:22px;border-bottom:1px solid var(--line)}
+.tabs-inner{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px}
+.tabs-inner::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;border:1px solid var(--line);background:#fff;color:var(--sub);
+  border-radius:99px;padding:9px 17px;font-size:13.5px;font-weight:700;cursor:pointer;
+  white-space:nowrap;transition:.15s;font-family:inherit}
+.tab:hover{border-color:var(--fire2);color:var(--ink)}
+.tab[aria-selected="true"]{background:var(--fire);border-color:var(--fire);color:#fff;
+  box-shadow:0 4px 14px rgba(226,87,31,.28)}
+.panel{display:none;animation:fade .22s ease}
+.panel.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 24px;margin-bottom:20px}
+h2{font-size:19px;font-weight:800;display:flex;align-items:center;gap:10px;margin-bottom:8px}
+h2::before{content:"";width:4px;height:19px;background:var(--fire);border-radius:2px;flex:0 0 auto}
+h3{font-size:15.5px;font-weight:800;margin:24px 0 8px}
+.note{font-size:13.5px;color:var(--sub);margin-bottom:18px}
+p{font-size:14.5px}
+p+p{margin-top:12px}
+ul{margin:10px 0 0 20px;font-size:14.5px}
+li{margin-bottom:6px}
+.callout{border-left:3px solid var(--fire);background:#fff7f3;border-radius:0 10px 10px 0;
+  padding:14px 16px;font-size:14px;margin:16px 0}
+.callout.blue{border-color:#3b82f6;background:#f2f7ff}
+.callout.green{border-color:var(--ok);background:#f1f9f5}
+.callout b{font-weight:800}
+
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:6px}
+th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#fafbfc;font-size:12.5px;color:var(--sub);font-weight:800;white-space:nowrap}
+.scroll{overflow-x:auto}
+code{background:#f1f3f6;padding:2px 7px;border-radius:5px;font-size:12.5px;word-break:break-all}
+
+/* rich menu */
+.menu{aspect-ratio:2500/1686;display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr;
+  background:var(--dark);border-radius:10px;overflow:hidden;box-shadow:0 10px 28px rgba(0,0,0,.15)}
+.cell{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:1.5%;padding:6%;text-align:center;color:#fff;
+  border-right:1px solid rgba(255,255,255,.09);border-bottom:1px solid rgba(255,255,255,.09)}
+.cell:nth-child(3n){border-right:none}
+.cell:nth-child(n+4){border-bottom:none;background:var(--dark2)}
+.cell:nth-child(-n+3)::after{content:"";position:absolute;left:0;top:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--fire),var(--fire2))}
+.cell .lb{font-weight:800;font-size:clamp(11px,2.1vw,19px)}
+.cell .sb{font-size:clamp(8px,1.32vw,12px);color:rgba(255,255,255,.62)}
+.cell:nth-child(n+4) .lb{color:rgba(255,255,255,.88)}
+.badge{position:absolute;top:7%;left:7%;font-size:clamp(8px,1.2vw,11px);font-weight:800;
+  color:var(--fire2);letter-spacing:.06em}
+
+/* chat */
+.chat{background:#8ba2b8;border-radius:14px;padding:16px 14px;display:flex;flex-direction:column;gap:9px}
+.chat .who{font-size:11px;color:rgba(255,255,255,.85);font-weight:700;text-align:center;margin-bottom:2px}
+.bub{background:#fff;border-radius:14px;padding:12px 14px;font-size:13.5px;line-height:1.85;
+  max-width:88%;box-shadow:0 1px 2px rgba(0,0,0,.09);white-space:pre-wrap}
+.bub.me{background:#8de055;align-self:flex-end;max-width:60%}
+.bub .ttl{font-weight:800;display:block;margin-bottom:2px}
+.bub a{color:#1666c8;word-break:break-all}
+.hl{background:var(--hl);border-bottom:1.5px dashed var(--hlb);padding:0 2px;border-radius:2px}
+.legend{font-size:13px;color:var(--sub);line-height:1.9;
+  background:#fffdf6;border:1px solid #f0e2be;border-radius:10px;padding:12px 15px;margin-bottom:18px}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+.tag{display:inline-block;background:#eef1f5;color:var(--sub);border-radius:99px;
+  padding:3px 11px;font-size:11.5px;font-weight:800;margin-bottom:10px}
+.tag.fire{background:#fdece4;color:var(--fire)}
+.tag.wait{background:#fff3d6;color:#9a6b0b}
+.when{font-size:12.5px;color:var(--mute);margin-top:10px}
+.spec{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:11px;margin-top:8px}
+.spec div{background:#fafbfc;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.spec b{display:block;font-size:11px;color:var(--sub);letter-spacing:.07em;margin-bottom:3px}
+.spec span{font-size:15.5px;font-weight:800}
+.chk{list-style:none;margin-left:0}
+.chk li{padding-left:28px;position:relative;margin-bottom:11px;font-size:14.5px}
+.chk li::before{content:"";position:absolute;left:0;top:5px;width:16px;height:16px;
+  border:2px solid var(--hlb);border-radius:4px}
+footer{text-align:center;color:var(--mute);font-size:12px;padding-top:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">OSAKA SAUNA DESSE ／ OFFICIAL LINE</div>
+  <h1>公式LINE 運用のご確認</h1>
+  <p class="lead">リッチメニューの中身、実際に送るメッセージ、リンク先をまとめました</p>
+  <div class="stamp">2026年8月21日 ／ SNS運用チーム</div>
+</header>
+
+<div class="tabs"><div class="tabs-inner" role="tablist">
+  <button class="tab" role="tab" aria-selected="true" data-p="p1">1. 全体像</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="p2">2. リッチメニュー</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="p3">3. 自動で返すメッセージ</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="p4">4. 配信の事例</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="p5">5. リンク先一覧</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="p6">6. ご確認いただきたいこと</button>
+</div></div>
+
+<!-- 1 -->
+<section class="panel on" id="p1">
+  <div class="card">
+    <h2>このLINEで取りにいく3つ</h2>
+    <p class="note">DESSE様はすでにInstagramとYouTubeで「新しい人に見つけてもらう力」をお持ちです。公式LINEが担うのは、もう知ってくださっている方に、こちらのタイミングで声をかける役割です。</p>
+    <table>
+      <tr><th>1</th><td><b>平日・閑散時間のご来店を増やす</b><br>平日昼や深夜の空き枠は、埋まらなければその日のうちに消えてしまう在庫です。声をかける手段があれば、ここに人を流せます。</td></tr>
+      <tr><th>2</th><td><b>新規の方の初回来店を増やす</b><br>「何を持っていけばいいか分からない」を、登録直後の自動メッセージで先に解消します。</td></tr>
+      <tr><th>3</th><td><b>サ飯を知っていただく</b><br>サウナに入らなくても食べに来られることを、毎回添えてお伝えします。</td></tr>
+    </table>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>送るもの</h2>
+      <ul>
+        <li>確定している予定（レディースデー・イベント・休館日）</li>
+        <li>新しいサ飯、季節メニューの開始と終了</li>
+        <li>施設の裏側の話（つくった理由、スタッフの話）</li>
+        <li>友だち限定のプレゼント</li>
+      </ul>
+      <p class="when">頻度は週1〜2回、月に4〜6通まで。</p>
+    </div>
+    <div class="card">
+      <h2>送らないもの</h2>
+      <ul>
+        <li><b>リアルタイムの空き状況・混雑情報</b></li>
+        <li>値引きを毎回の中心に置くこと</li>
+        <li>予約や在庫の確約</li>
+        <li>23時から翌7時の配信</li>
+      </ul>
+      <div class="callout" style="margin-top:14px">空き状況は、外れたときに「LINEの情報は当てにならない」と一度で信用を失います。<b>確定している予定だけ</b>で平日に来ていただく理由をつくります。</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>すでにある仕組みとつなぎます</h2>
+    <p class="note">LINEのために新しく情報を集めるのではなく、<b>すでに動いている仕組みから流し込みます</b>。DESSE様に新しい手間が増えないようにするためです。</p>
+    <div class="scroll"><table>
+      <tr><th>情報の出どころ</th><th>LINEでの使い道</th></tr>
+      <tr><td><b>イベント企画の仕組み</b>（別途構築中）</td><td>企画が確定したら、そのまま<b>型3の先行案内の下書きが自動で作られます</b>。二重に企画を考える必要はありません</td></tr>
+      <tr><td>公式サイトのカレンダー</td><td>型1（平日に来る理由）の材料。リッチメニューからも常時ご覧いただけます</td></tr>
+      <tr><td>公式サイトのフードページ</td><td>型2（サ飯の一皿）の材料</td></tr>
+      <tr><td>ウェブストア</td><td>新作アパレル・物販のお知らせ</td></tr>
+      <tr><td>Instagramで反響の大きかった投稿</td><td>型4（裏側の話）としてLINE向けに短くして再利用</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h2>お客様から見た流れ</h2>
+    <div class="scroll"><table>
+      <tr><th>店内でQRを読む</th><td>受付・休憩スペース・メニュー表などに掲示</td></tr>
+      <tr><th>友だち追加</th><td><b>すぐに自動であいさつメッセージが届く</b>（初回ガイド＋登録プレゼント）</td></tr>
+      <tr><th>いつでも</th><td>下部のリッチメニューから、サ飯・料金・カレンダー・チケットを自分で見られる</td></tr>
+      <tr><th>週1〜2回</th><td>こちらから配信（平日の予定・サ飯・イベント・裏側の話）</td></tr>
+      <tr><th>再来店</th><td>受付で「LINEを見た」とお伝えいただき、特典をご利用</td></tr>
+    </table></div>
+  </div>
+</section>
+
+<!-- 2 -->
+<section class="panel" id="p2">
+  <div class="card">
+    <h2>リッチメニュー（実際の見え方）</h2>
+    <p class="note">トーク画面の下半分に常に表示されます。友だち追加した方全員が、毎回いちばん最初に目にする場所です。現在、嶋田さんにデザインをご依頼する準備ができています。</p>
+    <div class="menu">
+      <div class="cell"><span class="badge">1</span><div class="lb">はじめての方へ</div><div class="sb">持ち物ゼロでOK</div></div>
+      <div class="cell"><span class="badge">2</span><div class="lb">サ飯メニュー</div><div class="sb">全メニューを見る</div></div>
+      <div class="cell"><span class="badge">3</span><div class="lb">登録プレゼント</div><div class="sb">友だち限定</div></div>
+      <div class="cell"><span class="badge">4</span><div class="lb">料金・カレンダー</div><div class="sb">営業日と料金</div></div>
+      <div class="cell"><span class="badge">5</span><div class="lb">チケット購入</div><div class="sb">事前購入でスムーズ</div></div>
+      <div class="cell"><span class="badge">6</span><div class="lb">最新情報・イベント</div><div class="sb">レディースデーほか</div></div>
+    </div>
+    <p class="when">上の数字は説明用です。実際の画像には入りません。デザインはDESSE様のブランドに合わせて嶋田さんに制作いただきます。</p>
+  </div>
+
+  <div class="card">
+    <h2>押したときに何が起きるか</h2>
+    <div class="scroll"><table>
+      <tr><th>ボタン</th><th>動き</th><th>行き先・返す内容</th></tr>
+      <tr><td><b>1. はじめての方へ</b></td><td>自動で返信</td><td>持ち物・水着の要否・料金の選び方・サウナの回り方・アクセス</td></tr>
+      <tr><td><b>2. サ飯メニュー</b></td><td>ページを開く</td><td><code>desse.osaka/journal/food/</code></td></tr>
+      <tr><td><b>3. 登録プレゼント</b></td><td>自動で返信</td><td>友だち限定特典（内容はご承認待ち）</td></tr>
+      <tr><td><b>4. 料金・カレンダー</b></td><td>ページを開く</td><td><code>desse.osaka/schedule/</code></td></tr>
+      <tr><td><b>5. チケット購入</b></td><td>ページを開く</td><td><span class="hl">新しいURLの共有をお待ちしています</span></td></tr>
+      <tr><td><b>6. 最新情報・イベント</b></td><td>ページを開く</td><td><code>desse.osaka/journal/</code></td></tr>
+    </table></div>
+    <div class="callout blue"><b>リンク先を公式サイトのページにしてあります。</b>サイトが更新されれば、メニューの中身も自動的に最新になります。デザインの作り直しは基本的に発生しません。</div>
+  </div>
+
+  <div class="card">
+    <h2>設計の考え方</h2>
+    <h3>押される場所に、取りにいくものを置いています</h3>
+    <p>リッチメニューは上段が圧倒的に押されます。そこで上段に「新規の方の不安をなくす」「サ飯を知っていただく」「登録した価値を感じていただく」の3つを並べました。</p>
+    <h3>中身が古くならないものだけを置いています</h3>
+    <p>空き状況のように日々変わるものは置きません。押したときの答えが古いと、そのボタンは一度で信用を失うためです。</p>
+    <h3>絵文字は使いません</h3>
+    <p>機種によって見え方が変わるためです。アイコンを入れる場合は塗りのピクトグラムでお願いしています。</p>
+    <h3>制作条件（LINEの仕様で固定）</h3>
+    <div class="spec">
+      <div><b>画像サイズ</b><span>2500 × 1686 px</span></div>
+      <div><b>形式</b><span>PNG / JPEG</span></div>
+      <div><b>ファイルサイズ</b><span>1MB 以下</span></div>
+      <div><b>1マス</b><span>833 × 843 px</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="panel" id="p3">
+  <div class="legend"><span class="hl">黄色の箇所</span>は、DESSE様にご確認・ご提供をお願いしたい部分です。ここが埋まれば、そのまま配信できます。</div>
+
+  <div class="card">
+    <h2>登録された瞬間に届くメッセージ</h2>
+    <p class="note">友だち追加の直後に自動で届きます。<b>このメッセージには費用がかかりません</b>（あいさつメッセージは通数にカウントされないため）。いちばん熱い瞬間なので、ここに一番厚い情報を置きます。</p>
+    <div class="chat">
+      <div class="who">大阪サウナDESSE</div>
+      <div class="bub">友だち追加ありがとうございます。
+大阪サウナDESSEの公式LINEです。
+
+このLINEでは、
+・新しいサ飯と季節メニュー
+・レディースデーやイベントの先行案内
+・友だち限定のプレゼント
+を、週に1〜2回だけお送りします。
+
+＜はじめての方へ＞
+手ぶらでお越しいただけます。<span class="hl">タオル・館内着・アメニティは館内にご用意しています</span>。
+<span class="hl">水着は不要です</span>。
+
+料金と営業カレンダー
+https://desse.osaka/schedule/
+
+下のメニューから、サ飯も料金もいつでもご覧いただけます。</div>
+      <div class="bub"><span class="ttl">友だち限定プレゼント</span><span class="hl">（ご承認後にここへ入ります。推し案：平日限定・ドリンク1本無料）</span>
+
+ご来店の際に、受付でこの画面をお見せください。</div>
+    </div>
+    <p class="when">プレゼントの内容が決まる前でも運用は開始できます。文言の差し替えだけで対応でき、リッチメニューの画像を作り直す必要はありません。</p>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>「はじめての方へ」を押したとき</h2>
+      <p class="note">自動返信のため、何回押されても費用は0円です。</p>
+      <div class="chat">
+        <div class="bub me">はじめて</div>
+        <div class="bub"><span class="ttl">はじめてのDESSEへ</span>◾️持ち物
+手ぶらで大丈夫です。<span class="hl">タオル・館内着・アメニティは館内にご用意</span>しています。
+<span class="hl">水着は不要です</span>。
+
+◾️料金の選び方
+<span class="hl">ご滞在時間に応じてお選びいただけます（1時間／2時間／フリー）。料金の詳細はカレンダーページをご覧ください。</span>
+https://desse.osaka/schedule/
+
+◾️サウナの回り方
+<span class="hl">温度と湿度の違うサウナがあります。おすすめの順番をご記入ください。</span>
+
+◾️アクセス
+大阪市中央区南船場3-6-18 ケーズビル心斎橋4階
+心斎橋駅から徒歩3分
+
+ご不明な点は、このままメッセージをお送りください。</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>「登録プレゼント」を押したとき</h2>
+      <p class="note">来店時に探せない特典は使われません。何度でも見返せるようにします。</p>
+      <div class="chat">
+        <div class="bub me">プレゼント</div>
+        <div class="bub"><span class="ttl">友だち限定プレゼント</span><span class="hl">平日限定・ドリンク1本無料（ご承認待ちの案です）</span>
+
+＜ご利用方法＞
+受付でこの画面をお見せください。
+
+＜対象＞
+<span class="hl">平日◯時〜◯時のご来店</span>
+
+＜期限＞
+<span class="hl">なし／◯月◯日まで</span></div>
+      </div>
+      <div class="callout green" style="margin-top:16px">受付での「LINEの画面をお見せください」の運用が、<b>そのままLINE経由のご来店数のカウント</b>になります。この数字が、公式LINEの効果を示す唯一の材料になります。</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>そのほか、キーワードで自動返信するもの</h2>
+    <p class="note">お客様が言葉を送ってきた場合にも、自動でお答えします。すべて費用は0円です。</p>
+    <div class="scroll"><table>
+      <tr><th>送られた言葉</th><th>返すもの</th></tr>
+      <tr><td>はじめて／初めて</td><td>初回ガイド</td></tr>
+      <tr><td>プレゼント／特典</td><td>登録プレゼントの内容</td></tr>
+      <tr><td>サ飯／ご飯／メニュー</td><td>フードのご案内とメニュー一覧</td></tr>
+      <tr><td>料金／値段／カレンダー</td><td>料金とスケジュールページ</td></tr>
+      <tr><td>チケット／予約</td><td>事前購入ページのご案内</td></tr>
+      <tr><td>アクセス／場所</td><td>住所・最寄り駅・地図</td></tr>
+      <tr><td>営業時間／休み</td><td>営業時間と休館日</td></tr>
+    </table></div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="panel" id="p4">
+  <div class="legend"><span class="hl">黄色の箇所</span>は、毎回DESSE様から共有いただく情報（決まっている予定・新メニューなど）が入る部分です。</div>
+
+  <div class="card">
+    <h2>配信は、この6つの型だけを回します</h2>
+    <p class="note">毎回ゼロから考えるのではなく、型を決めておくことで、質を落とさずに続けられます。以下はすべて、実際に送る文面の見本です。</p>
+  </div>
+
+  <div class="card">
+    <span class="tag fire">型1</span>
+    <h2>平日に来る理由をつくる</h2>
+    <p class="note">確定している予定だけで、平日に足を運んでいただく理由をつくります。混雑予測は使いません。</p>
+    <div class="chat">
+      <div class="who">大阪サウナDESSE</div>
+      <div class="bub"><span class="ttl">今週のDESSEのお知らせです</span>・<span class="hl">◯月◯日（木）はレディースデーです</span>
+・<span class="hl">◯月◯日（水）から秋の新メニューが始まります</span>
+・<span class="hl">今週の休館日はありません</span>
+
+金曜と土曜の夜は、どうしても混み合います。
+ゆっくりお過ごしになりたい方は、平日の昼から夕方がおすすめです。
+
+営業カレンダーはこちら
+https://desse.osaka/schedule/</div>
+    </div>
+    <p class="when">配信タイミング：火曜または水曜の11時（その週の予定が決まる前にお届けするため）／週1回</p>
+  </div>
+
+  <div class="card">
+    <span class="tag fire">型2</span>
+    <h2>サ飯の一皿</h2>
+    <p class="note">1通につき1皿だけをご紹介します。「サウナに入らなくても食べに来られる」を必ず添えます。</p>
+    <div class="chat">
+      <div class="who">大阪サウナDESSE</div>
+      <div class="bub"><span class="ttl">サウナ上がりの一杯目に、これを頼む方が多いです</span><span class="hl">（メニュー名）</span>
+
+<span class="hl">（この一皿がなぜサウナ上がりの体に合うのか、つくり手のこだわりを2〜3行。例：汗をかいた後の体に塩味が沁みるように、隠し味に◯◯を使っています）</span>
+
+<span class="hl">◯◯円／◯月末までの季節限定です</span>
+
+サウナに入らなくても、お食事だけでお立ち寄りいただけます。
+心斎橋駅から徒歩3分です。
+
+メニュー一覧はこちら
+https://desse.osaka/journal/food/</div>
+    </div>
+    <p class="when">配信タイミング：金曜の17時（夜のご予定が決まる直前）／隔週</p>
+  </div>
+
+  <div class="card">
+    <span class="tag fire">型3</span>
+    <h2>イベント・レディースデーの先行案内</h2>
+    <p class="note">確定したイベントを、公式サイトやInstagramより先にLINEでお知らせします。「LINEに入っていると早い」という体験が、登録の価値になります。</p>
+    <div class="chat">
+      <div class="who">大阪サウナDESSE</div>
+      <div class="bub"><span class="ttl">LINEの方に先にお知らせします</span><span class="hl">◯月◯日（◯）にレディースデーを開催します。</span>
+
+<span class="hl">（当日の内容を3行ほど。特別なアメニティ、フード、イベントなど）</span>
+
+<span class="hl">ご予約は不要です／ご予約はこちらから</span>
+
+詳細はこちら
+https://desse.osaka/journal/</div>
+    </div>
+    <p class="when">配信タイミング：イベントの10日前と前日／月1〜2回</p>
+  </div>
+
+  <div class="card">
+    <span class="tag fire">型4</span>
+    <h2>裏側の話（何も売らない回）</h2>
+    <p class="note">売り込みだけのアカウントはブロックされます。月1回、何も売らない回を必ず入れます。これがブロック率を抑えるいちばん確実な方法です。Instagramで反響の大きかった話を、LINE向けに短くしてお届けします。</p>
+    <div class="chat">
+      <div class="who">大阪サウナDESSE</div>
+      <div class="bub"><span class="ttl">なぜ、サウナの中に川をつくったのか</span><span class="hl">（施設や設備をつくった理由、当時の迷い、スタッフの話などを5〜6行。Instagramで反響のあった内容の再利用で構いません）</span>
+
+今日は宣伝ではなく、この話だけをお伝えしたくて送りました。
+
+またお会いできるのを楽しみにしています。</div>
+    </div>
+    <p class="when">配信タイミング：第4週の平日／月1回</p>
+  </div>
+
+  <div class="card">
+    <span class="tag wait">型5・ご承認待ち</span>
+    <h2>登録プレゼント・特典のご案内</h2>
+    <p class="note">内容は文社長のご承認をいただいてから配信します。値引きではなく、原価が小さく体験が増えるものを推奨しています。</p>
+    <div class="chat">
+      <div class="who">大阪サウナDESSE</div>
+      <div class="bub"><span class="ttl">LINEにご登録いただいている方へ</span><span class="hl">平日にご来店の方に、ドリンクを1本お付けします。（ご承認待ちの案です）</span>
+
+受付でこの画面をお見せください。
+
+<span class="hl">◯月◯日まで／平日◯時〜◯時</span>
+
+平日の昼から夕方は比較的ゆったりお過ごしいただけます。</div>
+    </div>
+    <p class="when">配信タイミング：月1回まで／ご承認後</p>
+  </div>
+
+  <div class="card">
+    <span class="tag fire">型6</span>
+    <h2>新作アパレル・物販のお知らせ</h2>
+    <p class="note">ウェブストアの新作を、写真1枚と短い文でお知らせします。会場に来られない方にも届く、数少ない売上導線です。</p>
+    <div class="chat">
+      <div class="who">大阪サウナDESSE</div>
+      <div class="bub"><span class="ttl">新しいアイテムが入りました</span><span class="hl">（アイテム名）</span>
+
+<span class="hl">（つくった理由やこだわりを2〜3行）</span>
+
+<span class="hl">◯◯円／店頭とウェブストアで販売中です</span>
+
+ウェブストアはこちら
+https://desse.osaka/sauna-web-store</div>
+    </div>
+    <p class="when">配信タイミング：新作が出たとき／月1回まで。それ以外はLINE VOOMでお知らせします（下記）</p>
+  </div>
+
+  <div class="card">
+    <h2>細かいお知らせは、こうやって届けます</h2>
+    <p class="note">日々のスケジュール、アウフグースのプログラム、小さなお知らせなど、<b>1件ずつ配信すると通数もブロック率も跳ね上がるもの</b>は、費用のかからない場所に逃がします。</p>
+    <div class="scroll"><table>
+      <tr><th>お知らせの種類</th><th>届け方</th><th>費用</th></tr>
+      <tr><td><b>日々のスケジュール</b><br>アウフグースのプログラム</td><td>公式サイトのカレンダーが正。<b>リッチメニューの「料金・カレンダー」から、いつでもご覧いただけます</b></td><td><b>0円</b></td></tr>
+      <tr><td>今週のプログラムの見どころ</td><td>週1回の型1の中に<b>1〜2行だけ束ねて</b>入れます</td><td>週1通に含む</td></tr>
+      <tr><td>新作アパレル・物販</td><td>月1回まで配信。それ以外は<b>LINE VOOM</b>へ投稿</td><td>VOOMは0円</td></tr>
+      <tr><td>単発の小さなお知らせ</td><td><b>LINE VOOM</b>（友だちのフィードに表示されます）</td><td><b>0円</b></td></tr>
+      <tr><td>急ぎのお知らせ（休館・設備トラブルなど）</td><td>臨時で配信</td><td>1通分</td></tr>
+    </table></div>
+    <div class="callout"><b>細かいものを1件ずつ配信しない理由</b><br>配信の費用は「1通 × 友だちの人数」でかかります。友だち1,000人なら、小さなお知らせ1件でも1,000通です。さらに通知が多いアカウントはブロックされます。<br><b>週1回にまとめて束ねるほうが、費用も届く率も良くなります。</b></div>
+    <div class="callout blue">友だちが増えてきた段階では、<b>興味のある方だけに送り分ける</b>こともできるようになります（アパレルに反応した方だけ、女性の方だけ、など）。通数を2分の1から3分の1に減らしながら、内容はより刺さるようになります。</div>
+  </div>
+
+  <div class="card">
+    <h2>標準的な1か月</h2>
+    <div class="scroll"><table>
+      <tr><th>週</th><th>曜日・時刻</th><th>型</th></tr>
+      <tr><td>第1週</td><td>水 11:00</td><td>型1 平日に来る理由をつくる</td></tr>
+      <tr><td>第1週</td><td>金 17:00</td><td>型2 サ飯の一皿</td></tr>
+      <tr><td>第2週</td><td>水 11:00</td><td>型1 平日に来る理由をつくる</td></tr>
+      <tr><td>第3週</td><td>水 11:00</td><td>型3 イベント・レディースデー先行案内</td></tr>
+      <tr><td>第3週</td><td>金 17:00</td><td>型2 サ飯の一皿</td></tr>
+      <tr><td>第4週</td><td>水または木 11:00</td><td>型4 裏側（または型5 特典）</td></tr>
+    </table></div>
+    <div class="callout"><b>上限は週2通までとします。</b>週3通以上になるとブロック率が跳ね上がります。新作アパレルや細かいお知らせは、この枠の中に束ねるか、LINE VOOMへ回します。</div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="panel" id="p5">
+  <div class="card">
+    <h2>リッチメニューと配信で使うリンク</h2>
+    <p class="note">すべて公式サイトの既存ページです。新しくページを作っていただく必要はありません。</p>
+    <div class="scroll"><table>
+      <tr><th>用途</th><th>リンク先</th><th>状態</th></tr>
+      <tr><td>サ飯メニュー一覧</td><td><a href="https://desse.osaka/journal/food/">desse.osaka/journal/food/</a></td><td>確認済み</td></tr>
+      <tr><td>料金・カレンダー</td><td><a href="https://desse.osaka/schedule/">desse.osaka/schedule/</a></td><td>確認済み（料金表も同ページ内）</td></tr>
+      <tr><td>最新情報・イベント</td><td><a href="https://desse.osaka/journal/">desse.osaka/journal/</a></td><td>確認済み（イベントのみなら <code>/journal/event/</code>）</td></tr>
+      <tr><td>施設案内</td><td><a href="https://desse.osaka/facilities/">desse.osaka/facilities/</a></td><td>初回ガイドの補足に使用</td></tr>
+      <tr><td>ウェブストア</td><td><a href="https://desse.osaka/sauna-web-store">desse.osaka/sauna-web-store</a></td><td>物販のご案内に使用</td></tr>
+      <tr><td><b>チケット事前購入</b></td><td><span class="hl">新しいURLの共有をお待ちしています</span></td><td>作成中とうかがっています</td></tr>
+    </table></div>
+    <div class="callout blue">チケットのURLは、リッチメニューの設定画面でリンクを差し替えるだけです（所要1分）。<b>画像の作り直しは不要ですので、URLをお待ちする間も制作は進められます。</b></div>
+  </div>
+
+  <div class="card">
+    <h2>友だち追加のQRコード</h2>
+    <p class="note">LINEは<b>登録された経路ごとに別のQRコードを発行できます</b>。3種類に分けて、どこから登録された方が実際にご来店くださるかを測ります。</p>
+    <div class="scroll"><table>
+      <tr><th>QRの種類</th><th>掲示場所</th><th>お客様にお伝えする一言</th></tr>
+      <tr><td>店内用</td><td>受付・脱衣所ロッカー・休憩スペース・サ飯のメニュー表</td><td>「LINEに登録プレゼントがあります」</td></tr>
+      <tr><td>Instagram用</td><td>プロフィールのリンク・ストーリーズ</td><td>運用チームで対応します</td></tr>
+      <tr><td>YouTube用</td><td>概要欄の1行目</td><td>運用チームで対応します</td></tr>
+    </table></div>
+    <div class="callout"><b>いちばん登録率が高いのは休憩スペースです。</b>ととのった直後が最も気分の良い瞬間のため、卓上POPの設置をご検討いただけますと幸いです。</div>
+  </div>
+</section>
+
+<!-- 6 -->
+<section class="panel" id="p6">
+  <div class="card">
+    <h2>ご承認をお願いしたいこと</h2>
+    <ul class="chk">
+      <li><b>登録プレゼントの内容</b>（推し案：平日限定・ドリンク1本無料）</li>
+      <li><b>特典の原価上限</b>（お1人あたり・月あたり）</li>
+    </ul>
+    <h3>登録プレゼントの候補</h3>
+    <div class="scroll"><table>
+      <tr><th>推奨</th><th>案</th><th>原価の目安</th><th>理由</th></tr>
+      <tr><td><b>推し案</b></td><td><b>平日限定・ドリンク1本無料</b></td><td>数十円〜100円台</td><td>「平日に来る理由」と「LINEに入る理由」を1つでつくれます。受付でお渡しするだけで、原価も最小です</td></tr>
+      <tr><td>高</td><td>平日限定・サ飯1品サービス</td><td>数百円</td><td>閑散帯の集客とフード認知を同時に取れます。平日限定なら土日の売上を削りません</td></tr>
+      <tr><td>中</td><td>レンタルタオル無料</td><td>洗濯代のみ</td><td>手ぶらで来られるハードルを直接下げます</td></tr>
+      <tr><td>中</td><td>オリジナルアメニティのサンプル</td><td>仕入れ次第</td><td>ウェブストアの商品購入につながります</td></tr>
+      <tr><td>低</td><td>入館料の割引</td><td>直接的な減収</td><td>最後の手段とし、常態化させません</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h2>ご提供をお願いしたい情報</h2>
+    <ul class="chk">
+      <li><b>チケット事前購入の新しいURL</b>（決まり次第）</li>
+      <li><b>初回ガイドの内容</b>（持ち物・水着の要否・料金の選び方・おすすめの回り方）</li>
+      <li><b>週1回、決まっている予定を共有いただくスタッフの方</b>（3行程度で構いません）</li>
+      <li>現在の友だち数と契約プラン</li>
+      <li>1日の平均ご来店数（目標設定の前提として）</li>
+      <li>リッチメニューのデザインの希望納期</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>店舗でお願いしたいこと</h2>
+    <ul class="chk">
+      <li><b>店内でQRを掲示できる場所のご確認</b>（受付・脱衣所・休憩スペース・メニュー表）</li>
+      <li><b>受付での「LINEを見た」のカウント</b>にご協力いただけるか</li>
+      <li>スタッフの皆さまへ、お声かけ台本の共有</li>
+    </ul>
+    <div class="callout">お声かけ台本はこの1行だけです。<br><br>「よかったらLINEだけ入れておいてください。<b>新しいサ飯とイベントのお知らせだけ</b>送っています。登録プレゼントもあります。」</div>
+    <p>値引きを前面に出さないようにしています。値引きで登録を集めると、値引きがないとご来店いただけないお客様が増えてしまうためです。</p>
+  </div>
+
+  <div class="card">
+    <h2>毎月ご報告する内容</h2>
+    <div class="scroll"><table>
+      <tr><th>1</th><td>友だち数（増加・減少・純増）と流入経路の内訳</td></tr>
+      <tr><th>2</th><td>ブロック率（月10%以内を目安。超えた場合は配信頻度を落とします）</td></tr>
+      <tr><th>3</th><td>配信ごとのクリック率（どの型が効いたか）</td></tr>
+      <tr><th>4</th><td><b>LINE経由のご来店数</b>（特典利用時のカウント）</td></tr>
+      <tr><th>5</th><td>特典の利用回数と原価合計</td></tr>
+      <tr><th>6</th><td>平日昼帯のご来店数の推移</td></tr>
+      <tr><th>7</th><td>翌月の配信カレンダー案</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h2>費用の目安</h2>
+    <p class="note">通数は「配信回数 × 届いた人数」で数えます。友だち200人に1回配信すると200通です。</p>
+    <div class="scroll"><table>
+      <tr><th>友だち数</th><th>月5通配信した場合</th><th>必要なプラン</th><th>月額</th></tr>
+      <tr><td>500人</td><td>2,500通</td><td>ライト</td><td>5,500円</td></tr>
+      <tr><td>1,000人</td><td>5,000通</td><td>ライト（上限ちょうど）</td><td>5,500円</td></tr>
+      <tr><td>1,500人</td><td>7,500通</td><td>スタンダード</td><td>15,000円</td></tr>
+      <tr><td>3,000人</td><td>15,000通</td><td>スタンダード</td><td>15,000円</td></tr>
+    </table></div>
+    <div class="callout green"><b>あいさつメッセージ・自動返信・リッチメニューは、通数にカウントされません。</b>よくあるご質問はすべてそちらに逃がし、有料の配信枠は「こちらからお届けしたいこと」だけに使います。</div>
+  </div>
+</section>
+
+<footer>大阪サウナDESSE 公式LINE 運用設計 ／ ご不明な点や「ここは違う」という箇所があれば、遠慮なくお知らせください</footer>
+</div>
+
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  function show(id){
+    tabs.forEach(function(t){t.setAttribute('aria-selected', t.dataset.p===id ? 'true':'false');});
+    [].forEach.call(document.querySelectorAll('.panel'),function(p){p.classList.toggle('on',p.id===id);});
+    window.scrollTo({top:0,behavior:'smooth'});
+    if(history.replaceState) history.replaceState(null,'','#'+id);
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){show(t.dataset.p);});});
+  var h=(location.hash||'').replace('#','');
+  if(h && document.getElementById(h)) show(h);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,344 @@
+/* 講座スライドの図解ルール（正本は 図解ルール.md）。
+   グラデーションを使うのは【外枠だけ】。中身の色・強調は教科書の図解と同じルールに揃える。
+   サイズはすべて cqw（スライド幅の%）なので、1200pxでも1920pxでも同じ見た目になる。 */
+:root{
+	--ig-grad:linear-gradient(125deg,#5851db 0%,#833ab4 32%,#c13584 62%,#e1306c 84%,#f77737 100%);
+	--bg:#fdfcfa; --ink:#4a4a5a; --ink-soft:#8a8a9a; --line:#edeae4;
+	--coral:#ff9e9e; --coral-deep:#fb8b8b; --coral-light:#fff0f0;
+	--blue:#4a87bc; --blue-light:#e8f1f9;
+	--dark:#3a3a46; --dark-light:#f1efec;
+}
+*{ box-sizing:border-box; margin:0; padding:0 }
+/* 日本語は意味の切れ目でだけ改行する。文字の途中で切らせない。
+   入りきらないものは横にはみ出すので、_check.html の「横」で必ずNGとして出る（→.nwで割って直す） */
+.slide, .slide *{ word-break:keep-all; overflow-wrap:normal; line-break:strict }
+body{
+	font-family:"Hiragino Maru Gothic ProN","Hiragino Sans","Yu Gothic",sans-serif;
+	background:#f2f0ec; color:var(--ink); padding:40px 24px 80px; line-height:1.7;
+}
+.wrap{ max-width:1100px; margin:0 auto }
+.page-head h1{ font-size:26px; font-weight:800 }
+.page-head p{ margin-top:8px; color:var(--ink-soft); font-size:14px; font-weight:700 }
+.deck{ display:grid; gap:24px; margin-top:36px }
+.cap{ font-size:13px; font-weight:800; color:var(--ink-soft); margin-bottom:-14px }
+
+/* ===== スライド枠：外周だけグラデーション ===== */
+.slide{
+	position:relative; width:100%; aspect-ratio:16/9; background:var(--ig-grad);
+	padding:.85cqw; border-radius:1.6cqw; box-shadow:0 8px 28px rgba(74,74,90,.14);
+	container-type:inline-size;
+}
+.inner{
+	height:100%; background:var(--bg); border-radius:1cqw;
+	padding:3.6cqw 4.4cqw 3.4cqw; display:flex; flex-direction:column; overflow:hidden;
+}
+
+.step{ align-self:center; background:var(--coral-light); color:var(--coral-deep); font-size:1.55cqw;
+	font-weight:800; letter-spacing:.1em; padding:.55cqw 2cqw; border-radius:99px }
+.title{ text-align:center; font-size:4.1cqw; font-weight:800; letter-spacing:.03em; line-height:1.35;
+	margin-top:1.4cqw; text-wrap:balance }
+.lead{ text-align:center; margin-top:.9cqw; font-size:1.8cqw; font-weight:700; color:var(--ink-soft);
+	text-wrap:balance }
+
+/* 強調（役割で固定。黄マーカー=一番覚える一語／コーラル=結論／青=視点の転換／黒=ネガ） */
+.m{ background:linear-gradient(#ffe39e,#ffe39e) no-repeat 0 .46em / 100% .6em; font-weight:800; padding:0 2px }
+.b{ font-weight:800; color:var(--dark) }
+.bc{ font-weight:800; color:var(--coral-deep) }
+.bb{ font-weight:800; color:var(--blue) }
+.m,.b,.bc,.bb,.nw{ display:inline-block; white-space:nowrap }
+
+/* ===== 型1：一覧カード ===== */
+.cards{ display:grid; grid-template-columns:repeat(2,1fr); gap:1.5cqw 2cqw; margin:auto 0 }
+.card{ display:grid; grid-template-columns:15cqw 1fr; align-items:stretch; position:relative;
+	border:.18cqw solid var(--coral); border-radius:1cqw; background:#fff; overflow:hidden }
+.card__head{ background:var(--coral); color:#fff; font-weight:800; font-size:2cqw; letter-spacing:.03em;
+	display:grid; place-items:center; text-align:center; padding:1cqw .6cqw; white-space:nowrap }
+.card__body{ padding:1.5cqw 1.6cqw; display:grid; align-items:center }
+.point{ position:relative; padding-left:2.6cqw; font-size:1.75cqw; font-weight:600; line-height:1.65;
+	color:#7a7a88; word-break:keep-all }
+.point::before{ content:"✓"; position:absolute; left:0; top:.35cqw; width:2cqw; height:2cqw;
+	border-radius:.5cqw; background:var(--coral); color:#fff; font-size:1.3cqw; display:grid; place-items:center }
+.num{ position:absolute; right:.6cqw; bottom:-1.4cqw; font-size:4.4cqw; font-weight:800;
+	color:var(--coral); opacity:.22; font-family:Verdana,sans-serif }
+
+/* ===== 型2：工程（順番に進むもの） ===== */
+.flow{ display:grid; grid-template-columns:repeat(4,1fr); gap:1.6cqw 2.2cqw; margin:auto 0 }
+.node{ border:.18cqw solid var(--line); border-radius:1cqw; background:#fff; padding:1.2cqw .8cqw;
+	text-align:center; position:relative }
+.node.is-now{ border-color:var(--coral); background:var(--coral-light) }
+.node__no{ width:2.4cqw; height:2.4cqw; margin:0 auto; border-radius:50%; background:var(--dark-light);
+	color:var(--ink-soft); font-weight:800; font-size:1.3cqw; display:grid; place-items:center }
+.node.is-now .node__no{ background:var(--coral); color:#fff }
+.node__text{ margin-top:.7cqw; font-size:1.6cqw; font-weight:800; color:#7a7a88; white-space:nowrap }
+.node.is-now .node__text{ color:var(--coral-deep) }
+/* 矢印は全ノードに用意しておき、列数ごとに content だけ出し分ける
+   （位置指定を持たないルールで content を足すと、文字の下に「›」が落ちる） */
+.node::after{ content:none; position:absolute; right:-1.5cqw; top:50%;
+	transform:translateY(-50%); font-size:2.4cqw; font-weight:800; color:#c9c5cf; line-height:.8 }
+.flow .node:not(:nth-child(4n)):not(:last-child)::after{ content:"›" }
+
+/* ===== 型3：数字の表 ===== */
+.diag{ margin:auto 0; display:grid; grid-template-columns:1fr auto; gap:2.4cqw; align-items:center }
+.diag__table{ border:.18cqw solid var(--coral); border-radius:1cqw; overflow:hidden; background:#fff }
+.diag__row{ display:grid; grid-template-columns:11cqw 1fr; align-items:center }
+.diag__row + .diag__row{ border-top:.12cqw solid var(--line) }
+.diag__row > b{ background:var(--coral); color:#fff; text-align:center; font-size:1.55cqw; font-weight:800;
+	padding:1.2cqw .4cqw; align-self:stretch; display:grid; place-items:center }
+.diag__row > div{ padding:1cqw 1.6cqw; font-size:1.9cqw; font-weight:800 }
+.diag__row > div small{ display:block; font-size:1.5cqw; font-weight:600; color:#7a7a88; margin-top:.2cqw }
+.diag img{ height:16cqw; width:auto }
+
+/* ===== 型4：結論ブロック ===== */
+.breakout{ margin:auto 0; display:grid; grid-template-columns:auto 1fr; gap:2.4cqw; align-items:center;
+	border:.22cqw dashed var(--coral); border-radius:1.2cqw; background:var(--coral-light);
+	padding:1.8cqw 2.6cqw }
+.breakout img{ height:17cqw; width:auto }
+.breakout .big{ font-size:7cqw; font-weight:800; line-height:1.12; color:var(--coral-deep) }
+.breakout p{ font-size:2.1cqw; font-weight:800; line-height:1.5; margin-top:.6cqw }
+.breakout small{ display:block; margin-top:.6cqw; font-size:1.6cqw; font-weight:700; color:var(--ink-soft) }
+
+/* ===== 型5：棒グラフ（数の差そのものが本体のとき） ===== */
+.bars{ margin:auto 0; display:grid; grid-template-columns:1fr 28cqw; gap:3.4cqw; align-items:center }
+.bars__plot{ display:grid; grid-template-columns:repeat(2,1fr); gap:6cqw; align-items:end; height:23cqw;
+	border-bottom:.18cqw solid #ded9d2; padding:0 2cqw }
+.bar{ display:flex; flex-direction:column; justify-content:flex-end; align-items:center; height:100% }
+.bar__val{ font-size:2.1cqw; font-weight:800; color:var(--ink-soft); white-space:nowrap }
+.bar__fill{ width:78%; border-radius:.8cqw .8cqw 0 0; background:var(--dark-light); margin-top:.6cqw }
+.bar.is-now .bar__fill{ background:var(--coral) }
+.bar.is-now .bar__val{ color:var(--coral-deep) }
+.bars__axis{ display:grid; grid-template-columns:repeat(2,1fr); gap:6cqw; margin-top:.9cqw; padding:0 2cqw }
+.bars__axis span{ text-align:center; font-size:1.6cqw; font-weight:800; color:#7a7a88; white-space:nowrap }
+.bars__drop{ text-align:center; margin-top:1.2cqw; font-size:1.7cqw; font-weight:800 }
+.bars__note{ border-left:.4cqw solid var(--coral); padding-left:1.6cqw; font-size:1.8cqw; font-weight:800;
+	line-height:1.6 }
+.bars__note small{ display:block; margin-top:.5cqw; font-size:1.5cqw; font-weight:600; color:var(--ink-soft) }
+
+/* ===== 型6：帯グラフ（同じ物差しの上で、複数の値を見比べる） ===== */
+.stack{ margin:auto 0; display:grid; gap:1.8cqw }
+.stack__row{ display:grid; grid-template-columns:20cqw 1fr 13cqw; gap:2cqw; align-items:center }
+.stack__name{ font-size:1.75cqw; font-weight:800; text-align:right; color:var(--ink); white-space:nowrap }
+.stack__name small{ display:block; font-size:1.35cqw; font-weight:600; color:var(--ink-soft) }
+.stack__track{ height:4.4cqw; border-radius:.7cqw; background:var(--dark-light); overflow:hidden }
+.stack__fill{ height:100%; border-radius:.7cqw }
+.stack__fill.is-voice{ background:var(--blue) }
+.stack__fill.is-bgm{ background:var(--coral) }
+.stack__val{ font-size:1.9cqw; font-weight:800; white-space:nowrap }
+.stack__val.is-voice{ color:var(--blue) }
+.stack__val.is-bgm{ color:var(--coral-deep) }
+.stack__scale{ display:grid; grid-template-columns:20cqw 1fr 13cqw; gap:2cqw }
+.stack__scale span:nth-child(2){ display:flex; justify-content:space-between; font-size:1.3cqw;
+	font-weight:700; color:#b3aeb8 }
+.stack__note{ margin-top:.8cqw; text-align:center; font-size:1.7cqw; font-weight:800 }
+
+/* ===== 型7：円グラフ（全体を100として、内訳を見せる） ===== */
+.pie{ margin:auto 0; display:grid; grid-template-columns:auto 1fr; gap:4.4cqw; align-items:center;
+	justify-content:center }
+.pie__chart{ position:relative; width:24cqw; height:24cqw; border-radius:50%;
+	background:conic-gradient(var(--coral) 0 72.6%, var(--dark) 72.6% 87.3%, var(--blue) 87.3% 97.9%,
+	#ded9d2 97.9% 100%) }
+.pie__hole{ position:absolute; inset:27%; border-radius:50%; background:var(--bg); display:grid;
+	place-items:center; text-align:center }
+.pie__hole b{ font-size:3cqw; font-weight:800; color:var(--ink); line-height:1.1 }
+.pie__hole small{ display:block; font-size:1.4cqw; font-weight:700; color:var(--ink-soft) }
+.pie__legend{ display:grid; gap:1.4cqw }
+.pie__item{ display:grid; grid-template-columns:2cqw 1fr; gap:1.4cqw; align-items:start;
+	font-size:1.85cqw; font-weight:800 }
+.pie__item i{ width:2cqw; height:2cqw; border-radius:.5cqw; margin-top:.5cqw }
+.pie__item i.is-1{ background:var(--coral) }
+.pie__item i.is-2{ background:var(--dark) }
+.pie__item i.is-3{ background:var(--blue) }
+.pie__item i.is-4{ background:#ded9d2 }
+.pie__item small{ display:block; font-size:1.45cqw; font-weight:600; color:#7a7a88; margin-top:.2cqw }
+
+/* ===== 型8：インフォグラフ（覚える数字をアイコンで並べる） ===== */
+.info{ margin:auto 0; display:grid; grid-template-columns:repeat(3,1fr); gap:2.4cqw }
+.info__item{ border:.18cqw solid var(--line); border-radius:1.2cqw; background:#fff; padding:2cqw 1.4cqw;
+	text-align:center }
+.info__item img{ height:7.4cqw; width:auto }
+.info__num{ margin-top:1cqw; font-size:3.4cqw; font-weight:800; color:var(--coral-deep); line-height:1.1;
+	white-space:nowrap }
+.info__label{ margin-top:.6cqw; font-size:1.6cqw; font-weight:800; color:var(--ink) }
+.info__sub{ margin-top:.3cqw; font-size:1.4cqw; font-weight:600; color:#7a7a88 }
+
+/* ===== 表紙 ===== */
+.cover .inner{ justify-content:center }
+.cover__body{ display:grid; grid-template-columns:1fr auto; gap:3cqw; align-items:center }
+.cover .title{ text-align:left; font-size:6.4cqw; margin-top:1.4cqw }
+.cover .lead{ text-align:left; font-size:2.1cqw; margin-top:1.4cqw }
+.cover .step{ align-self:flex-start }
+.cover img{ height:26cqw; width:auto }
+
+/* ===== 型9：対比（AとBを並べる） ===== */
+.vs{ margin:auto 0; display:grid; grid-template-columns:1fr auto 1fr; gap:2cqw; align-items:stretch }
+.vs__mark{ align-self:center; font-size:2.4cqw; font-weight:800; color:var(--ink-soft) }
+.side{ border:.22cqw solid var(--dark); border-radius:1cqw; background:#fff; overflow:hidden;
+	display:flex; flex-direction:column }
+.side.is-good{ border-color:var(--coral) }
+.side__head{ background:var(--dark); color:#fff; text-align:center; font-weight:800; padding:1cqw .8cqw;
+	font-size:2cqw }
+.side.is-good .side__head{ background:var(--coral) }
+.side__body{ padding:1.6cqw 1.8cqw; display:grid; gap:1cqw; flex:1; align-content:center }
+.side__body p{ position:relative; padding-left:1.8cqw; font-size:1.7cqw; font-weight:600; color:#7a7a88;
+	line-height:1.6; word-break:keep-all }
+.side__body p::before{ content:"・"; position:absolute; left:0; color:var(--dark) }
+.side.is-good .side__body p::before{ color:var(--coral) }
+.side__pill{ margin-top:.6cqw; background:var(--dark-light); border-radius:.7cqw; padding:1cqw;
+	text-align:center; font-weight:800; font-size:1.75cqw; color:var(--ink) }
+.side.is-good .side__pill{ background:var(--coral-light) }
+
+/* ===== 型10：上下2段（旗と足元・現状と理想） ===== */
+.layer{ margin:auto 0; display:grid; justify-items:stretch }
+.layer__box{ border:.22cqw solid var(--line); border-radius:1cqw; background:#fff; padding:1.8cqw 2.4cqw;
+	display:grid; grid-template-columns:13cqw 1fr; gap:2cqw; align-items:center }
+.layer__box.is-top{ border-color:var(--coral); background:var(--coral-light) }
+.layer__tag{ text-align:center; font-size:1.75cqw; font-weight:800; color:var(--ink) }
+.layer__box.is-top .layer__tag{ color:var(--coral-deep) }
+.layer__body{ font-size:1.9cqw; font-weight:800; line-height:1.5 }
+.layer__body small{ display:block; margin-top:.4cqw; font-size:1.5cqw; font-weight:600; color:#7a7a88 }
+.layer__arrow{ text-align:center; font-size:2.6cqw; font-weight:800; color:var(--coral); padding:.8cqw 0;
+	line-height:1 }
+
+/* ===== 型11：やってはいけない3つ（黒） ===== */
+.ng{ margin:auto 0; display:grid; grid-template-columns:repeat(3,1fr); gap:2cqw }
+.ng__card{ border:.22cqw solid var(--dark); border-radius:1cqw; background:#fff; overflow:hidden;
+	position:relative }
+.ng__head{ background:var(--dark); color:#fff; text-align:center; font-weight:800; font-size:1.9cqw;
+	padding:1cqw .6cqw }
+.ng__body{ padding:1.6cqw 1.6cqw 2cqw; font-size:1.6cqw; font-weight:600; color:#7a7a88; line-height:1.65;
+	position:relative; padding-left:4.4cqw; word-break:keep-all }
+.ng__body::before{ content:"✕"; position:absolute; left:1.4cqw; top:1.7cqw; width:1.8cqw; height:1.8cqw;
+	border-radius:.5cqw; background:var(--dark); color:#fff; font-size:1.2cqw; display:grid; place-items:center }
+
+/* ===== 型12：折れ線（形だけを見せる概念図。目盛りは書かない） ===== */
+.line{ margin:auto 0; display:grid; grid-template-columns:1fr 26cqw; gap:3.4cqw; align-items:center }
+.line svg{ width:100%; height:auto; display:block }
+.line__note{ border-left:.4cqw solid var(--coral); padding-left:1.6cqw; font-size:1.8cqw; font-weight:800;
+	line-height:1.6 }
+.line__note small{ display:block; margin-top:.5cqw; font-size:1.5cqw; font-weight:600; color:var(--ink-soft) }
+
+/* ===== 型13：ピラミッド（勝ち上がりの段階） ===== */
+.pyramid{ margin:auto 0; display:grid; grid-template-columns:1fr 26cqw; gap:3.4cqw; align-items:center }
+.pyramid__stack{ display:grid; gap:1cqw; justify-items:center }
+.pyramid__row{ border-radius:.8cqw; padding:1.2cqw 1.6cqw; text-align:center; font-size:1.8cqw;
+	font-weight:800; color:#fff; white-space:nowrap }
+.pyramid__row small{ display:block; font-size:1.4cqw; font-weight:700; opacity:.85 }
+.pyramid__row.is-1{ background:#cfc9d6; width:100% }
+.pyramid__row.is-2{ background:var(--coral); width:64% }
+.pyramid__row.is-3{ background:var(--coral-deep); width:36% }
+.pyramid__note{ border-left:.4cqw solid var(--coral); padding-left:1.6cqw; font-size:1.8cqw; font-weight:800;
+	line-height:1.6 }
+.pyramid__note small{ display:block; margin-top:.5cqw; font-size:1.5cqw; font-weight:600; color:var(--ink-soft) }
+
+/* ===== 型14：計算式（かけ算で決まるもの） ===== */
+.formula{ margin:auto 0; display:flex; align-items:stretch; justify-content:center; gap:1.4cqw; flex-wrap:nowrap }
+.formula__item{ border:.22cqw solid var(--coral); border-radius:1cqw; background:#fff; padding:1.6cqw 1.2cqw;
+	text-align:center; min-width:14cqw }
+.formula__item b{ display:block; font-size:1.9cqw; font-weight:800; color:var(--coral-deep); white-space:nowrap }
+.formula__item small{ display:block; margin-top:.4cqw; font-size:1.4cqw; font-weight:600; color:#7a7a88 }
+.formula__op{ align-self:center; font-size:2.4cqw; font-weight:800; color:var(--ink-soft) }
+
+/* ===== 並び方のバリエーション ===== */
+.cards.is-3{ grid-template-columns:1fr }
+.flow.is-3{ grid-template-columns:repeat(3,1fr) }
+.flow.is-3 .node:not(:nth-child(3n)):not(:last-child)::after{ content:"›" }
+.flow.is-3 .node:nth-child(3n)::after{ content:none }
+.flow.is-5{ grid-template-columns:repeat(5,1fr) }
+.flow.is-5 .node:not(:nth-child(5n)):not(:last-child)::after{ content:"›" }
+.flow.is-5 .node:nth-child(5n)::after{ content:none }
+.flow.is-5 .node__text{ font-size:1.4cqw }
+
+/* レッスンの見出し（スライドではなくページ上の仕切り） */
+.lesson{ margin-top:44px; border-top:2px solid #ddd8d0; padding-top:22px }
+.lesson h2{ font-size:20px; font-weight:800 }
+.lesson p{ font-size:13px; font-weight:700; color:#8a8a9a; margin-top:4px }
+
+/* 本体ブロックと注記をひとかたまりで上下中央に置く（別々だと注記だけ下に落ちる） */
+.mid{ margin:auto 0 }
+.mid > .flow, .mid > .cards, .mid > .bars, .mid > .layer, .mid > .vs{ margin:0 }
+.mid > .bars__drop{ margin-top:1.6cqw }
+
+/* 表紙: タイトルが長い回でもイラストを押し出さない */
+.cover__body > div{ min-width:0 }
+.cover .title{ font-size:5.8cqw }
+.cover img{ height:24cqw }
+
+/* ===== 型15：進行タブ（STEP内の現在地。旧講座の❶❷タブの移植・2026-08-20） ===== */
+.tabs{ display:flex; justify-content:center; gap:.6cqw; margin-bottom:.2cqw }
+/* タブ行が増えたぶん、上の余白を詰めて16:9に収める */
+.slide:has(.tabs) .inner{ padding-top:1.9cqw }
+.tab{ font-size:1.3cqw; font-weight:800; letter-spacing:.03em; padding:.3cqw 1.2cqw; border-radius:99px;
+	background:var(--dark-light); color:var(--ink-soft); white-space:nowrap }
+.tab.is-done{ background:var(--coral-light); color:var(--coral-deep) }
+.tab.is-now{ background:var(--coral); color:#fff }
+
+/* ===== 型16：よくある質問（受講生の生質問→結論で一撃。旧講座の反論処理の移植） ===== */
+.qa{ margin:auto 0; display:grid; gap:1.4cqw }
+.qa__q{ position:relative; border:.18cqw solid var(--blue); background:var(--blue-light); border-radius:1.2cqw;
+	padding:2.2cqw 2.4cqw 1.8cqw; font-size:2.15cqw; font-weight:800; line-height:1.65; text-align:center }
+.qa__q::before{ content:"よくある質問"; position:absolute; top:-1.1cqw; left:2cqw; background:var(--blue);
+	color:#fff; font-size:1.3cqw; padding:.25cqw 1.4cqw; border-radius:99px }
+.qa__arrow{ text-align:center; font-size:2.2cqw; font-weight:800; color:var(--coral); line-height:1 }
+.qa__a{ position:relative; border:.22cqw dashed var(--coral); background:var(--coral-light); border-radius:1.2cqw;
+	padding:2.2cqw 2.4cqw 1.8cqw; font-size:2.5cqw; font-weight:800; text-align:center }
+.qa__a::before{ content:"結論"; position:absolute; top:-1.1cqw; left:2cqw; background:var(--coral-deep);
+	color:#fff; font-size:1.3cqw; padding:.25cqw 1.4cqw; border-radius:99px }
+.qa__a small{ display:block; margin-top:.7cqw; font-size:1.6cqw; font-weight:700; color:var(--ink-soft) }
+
+/* ===== 型17：スマホ設定画面の再現（実物スクショの代替。数値は原稿の実物のみ） ===== */
+.mock{ margin:auto 0; display:grid; grid-template-columns:32cqw 1fr; gap:3.4cqw; align-items:center }
+.mock__phone{ background:#f2f2f7; border:.22cqw solid var(--line); border-radius:2cqw; overflow:hidden;
+	box-shadow:0 .5cqw 1.8cqw rgba(74,74,90,.14) }
+.mock__bar{ background:#fff; text-align:center; font-size:1.75cqw; font-weight:800; padding:1cqw 0;
+	border-bottom:.12cqw solid #e5e5ea; color:#111 }
+.mock__row{ display:flex; justify-content:space-between; align-items:center; background:#fff;
+	padding:1.2cqw 1.7cqw; font-size:1.6cqw; font-weight:700; color:#111; gap:1cqw }
+.mock__row + .mock__row{ border-top:.12cqw solid #e5e5ea }
+.mock__row b{ color:#8e8e93; font-weight:700; white-space:nowrap }
+.mock__row .on{ color:#2ea44f; font-weight:800 }
+.mock__note{ font-size:1.9cqw; font-weight:800; line-height:1.9 }
+.mock__note small{ display:block; margin-top:.8cqw; font-size:1.5cqw; font-weight:600; color:#7a7a88 }
+
+/* ============================================================
+   18. 実物スクショを入れるスマホ枠（2026-08-26）
+   画像は 素材/実物スクショ/*.png（検索で見つけた第三者アカウントの画面）
+   ============================================================ */
+.shot{ margin:auto 0; display:grid; grid-template-columns:24cqw 1fr; gap:3.6cqw; align-items:center }
+.shot--r{ grid-template-columns:1fr 24cqw }
+.shot--pair{ grid-template-columns:24cqw 24cqw; justify-content:center; gap:5cqw }
+.shot__phone{ border:.75cqw solid #1c1c22; border-radius:3cqw; overflow:hidden; background:#1c1c22;
+	box-shadow:0 .6cqw 2cqw rgba(74,74,90,.18);
+	/* 実機同等の縦横比で固定。縦に長い画像は上端を残して下を切る＝スマホの画面らしく収まる */
+	aspect-ratio:614/822 }
+.shot__phone img{ display:block; width:100%; height:100%; object-fit:cover; object-position:top center }
+.shot__phone--full{ aspect-ratio:auto }
+.shot__phone--full img{ height:auto; object-fit:fill }
+.shot__body{ font-size:1.95cqw; font-weight:800; line-height:1.9 }
+.shot__body small{ display:block; margin-top:.9cqw; font-size:1.5cqw; font-weight:600; color:#7a7a88 }
+.shot__cap{ margin-top:1.1cqw; text-align:center; font-size:1.4cqw; font-weight:700; color:#7a7a88 }
+
+/* ============================================================
+   19. インサイト画面のイメージ図（2026-08-26）
+   実物は撮れない（他人のインサイトは本人にしか見えない）ので、
+   数字は仮説で置いたイメージ図として描く。詳しくは 図解ルール.md §10-3
+   ============================================================ */
+.insrow{ margin:auto 0; display:grid; grid-template-columns:34cqw 1fr; gap:3.6cqw; align-items:center }
+.insrow--r{ grid-template-columns:1fr 34cqw }
+.ins{ background:#fff; border:.22cqw solid var(--line); border-radius:2cqw; overflow:hidden;
+	box-shadow:0 .5cqw 1.8cqw rgba(74,74,90,.14) }
+.ins__bar{ background:#fafafa; border-bottom:.12cqw solid #e5e5ea; padding:1cqw 1.6cqw;
+	font-size:1.6cqw; font-weight:800; color:#111; display:flex; justify-content:space-between; align-items:center }
+.ins__bar span{ color:#8e8e93; font-weight:700 }
+.ins__nums{ display:grid; grid-template-columns:repeat(3,1fr) }
+.ins__num{ padding:1.6cqw 1.2cqw; text-align:center }
+.ins__num + .ins__num{ border-left:.12cqw solid #e5e5ea }
+.ins__num b{ display:block; font-size:3.1cqw; font-weight:900; color:#111; line-height:1.2 }
+.ins__num small{ display:block; margin-top:.4cqw; font-size:1.4cqw; font-weight:700; color:#8e8e93 }
+.ins__curve{ border-top:.12cqw solid #e5e5ea; padding:1.6cqw }
+.ins__curve h4{ font-size:1.5cqw; font-weight:800; color:#8e8e93; margin-bottom:1cqw }
+.ins__curve svg{ display:block; width:100%; height:auto }
+.ins__line{ fill:none; stroke:var(--coral); stroke-width:2.4; stroke-linejoin:round; stroke-linecap:round }
+.ins__fill{ fill:var(--coral); opacity:.1 }
+.ins__grid{ stroke:#e5e5ea; stroke-width:1 }
+.ins__mark{ stroke:var(--blue); stroke-width:1.6; stroke-dasharray:4 3 }
+.ins__lbl{ font-size:9px; font-weight:700; fill:#8e8e93 }
+.ins__hit{ font-size:9.5px; font-weight:800; fill:var(--blue) }

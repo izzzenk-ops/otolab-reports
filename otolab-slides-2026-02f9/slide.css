@@ -345,29 +345,32 @@ body{
 
 /* ============================================================
    20. プレゼンモード（2026-08-27）
-   けんじさんが解説動画を撮るときに使う。Pで開始／←→で送る／Escで戻る。
-   1レッスンずつ撮るので、**その回の最後の1枚に「ここまで」の印**を出す。
+   解説動画の収録用。Pで開始／←→で送る／Escで戻る。
+   **画面の単位（vw/vh）で組むと環境によって文字が小さくなるので、
+   スライドは実寸1200pxで描いて、JSで倍率をかけて拡大する。**
+   こうすると、ふだんの編集画面と同じ見た目のまま大きくなる。
    ============================================================ */
 .pm-hint{ position:fixed; right:16px; bottom:14px; z-index:50; font-size:13px; font-weight:800;
 	color:#8a8a9a; background:#fff; border:1px solid var(--line); border-radius:999px; padding:7px 14px;
 	box-shadow:0 4px 14px rgba(74,74,90,.12) }
-body.present{ overflow:hidden; background:#111 }
+body.present{ overflow:hidden; background:#0e0e12 }
 body.present .wrap{ visibility:hidden }
 body.present .pm-hint{ display:none }
-/* 表示中の1枚だけを画面いっぱいに。中身は cqw なので、幅を決めれば全部ついてくる */
 body.present .slide.is-live{
-	visibility:visible; position:fixed; left:50%; top:50%; transform:translate(-50%,-50%);
-	width:min(100vw, calc(100vh * 16 / 9)); height:auto; z-index:60; border-radius:0; box-shadow:none;
+	visibility:visible; position:fixed; left:50%; top:50%;
+	width:1200px;                      /* 実寸。倍率はJSが transform で掛ける */
+	transform-origin:50% 50%;
+	z-index:60; border-radius:0; box-shadow:none;
 }
 body.present .slide.is-live *{ visibility:visible }
-/* 現在地。「5-1　12 / 17」 */
-.pm-bar{ position:fixed; left:0; right:0; bottom:0; z-index:70; display:flex; justify-content:center;
-	gap:14px; align-items:center; padding:10px 0; background:linear-gradient(transparent,rgba(0,0,0,.55));
-	color:#fff; font-size:15px; font-weight:800; letter-spacing:.04em; pointer-events:none }
-.pm-bar .pm-lesson{ background:rgba(255,255,255,.16); border-radius:999px; padding:4px 12px }
-.pm-bar .pm-num{ font-variant-numeric:tabular-nums }
-/* その回の最後の1枚。撮影を止める合図 */
-.pm-end{ position:fixed; left:50%; bottom:56px; transform:translateX(-50%); z-index:71;
-	background:var(--coral-deep); color:#fff; font-size:17px; font-weight:900; letter-spacing:.06em;
-	border-radius:999px; padding:9px 24px; box-shadow:0 6px 20px rgba(0,0,0,.3) }
-.pm-end small{ display:block; font-size:12px; font-weight:700; opacity:.9; letter-spacing:0 }
+
+/* スライドの中の右下に出す現在地。ふだんの画面には出さない。
+   受講生が動画で見ても、ページ番号にしか見えない見た目にする */
+.pm-mark{ display:none }
+body.present .slide.is-live .pm-mark{
+	display:block; position:absolute; right:2.2cqw; bottom:1.8cqw; z-index:5;
+	font-size:1.45cqw; font-weight:800; letter-spacing:.06em; color:#b9b4ad;
+	font-variant-numeric:tabular-nums; pointer-events:none;
+}
+/* その回の最後の1枚だけ色が変わる。撮影を止める合図（見た目はページ番号のまま） */
+body.present .slide.is-live .pm-mark.is-end{ color:var(--coral-deep) }

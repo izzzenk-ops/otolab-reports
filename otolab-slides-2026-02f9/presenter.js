@@ -5,9 +5,14 @@
 //   L … 次のレッスンの先頭へ            Shift+L … 前のレッスンの先頭へ
 //   F … ブラウザの全画面のON/OFF
 //
-// 1レッスンずつ撮るので、**その回の最後の1枚には「この回はここまで」を出す**。
-// PDFに書き出さなくていいように作ってある（直したら次に開いた瞬間から最新）。
+// 現在地は**スライドの中の右下**に出す（画面の外に帯を出さない）。
+// 受講生が動画で見てもページ番号にしか見えない見た目にして、
+// **その回の最後の1枚だけ色が変わる**＝収録を止める合図にしている。
+//
+// 拡大は vw/vh ではなく「実寸1200pxで描いて transform で倍率をかける」方式。
+// 画面の単位で組むと、ウィンドウの形やブラウザのズームによって文字が小さくなることがあるため。
 (() => {
+	const BASE_W = 1200; // 実寸。slide.css の .pm-* と揃えること
 	const slides = [...document.querySelectorAll(".slide")];
 	if (!slides.length) return;
 
@@ -27,39 +32,58 @@
 		return { label: "", no: slides.indexOf(el) + 1, total: slides.length, last: false };
 	};
 
+	// 現在地の表示を1枚ずつに埋め込む（スライドの中に入れるので、拡大すると一緒に大きくなる）
+	slides.forEach((s) => {
+		const inner = s.querySelector(".inner") || s;
+		if (inner.querySelector(".pm-mark")) return;
+		const mark = document.createElement("span");
+		mark.className = "pm-mark";
+		inner.append(mark);
+	});
+
 	let at = 0;
 	let on = false;
-	const bar = document.createElement("div");
-	bar.className = "pm-bar";
-	const end = document.createElement("div");
-	end.className = "pm-end";
-	end.innerHTML = 'この回はここまで<small>収録を止めてください</small>';
+
+	// ウィンドウに収まる倍率を出して拡大する
+	const fit = () => {
+		const el = slides[at];
+		if (!el) return;
+		const h = el.getBoundingClientRect().height / (el.dataset.pmScale || 1);
+		const nat = h || (BASE_W * 9) / 16;
+		const k = Math.min(window.innerWidth / BASE_W, window.innerHeight / nat);
+		el.dataset.pmScale = k;
+		el.style.transform = `translate(-50%,-50%) scale(${k})`;
+	};
 
 	const draw = () => {
-		slides.forEach((s) => s.classList.remove("is-live"));
+		slides.forEach((s) => {
+			s.classList.remove("is-live");
+			s.style.transform = "";
+			delete s.dataset.pmScale;
+		});
 		const cur = slides[at];
 		cur.classList.add("is-live");
-		cur.scrollIntoView({ block: "center" });
 		const i = infoOf(cur);
-		bar.innerHTML =
-			`<span class="pm-lesson">${i.label || "表紙"}</span>` +
-			`<span class="pm-num">${i.no} / ${i.total}</span>` +
-			`<span class="pm-num" style="opacity:.55">全体 ${at + 1} / ${slides.length}</span>`;
-		end.style.display = i.last ? "block" : "none";
+		const mark = cur.querySelector(".pm-mark");
+		if (mark) {
+			mark.textContent = i.label ? `${i.label}　${i.no} / ${i.total}` : `${i.no} / ${slides.length}`;
+			mark.classList.toggle("is-end", i.last);
+		}
+		fit();
 	};
 
 	const start = () => {
 		on = true;
 		document.body.classList.add("present");
-		document.body.append(bar, end);
 		draw();
 	};
 	const stop = () => {
 		on = false;
 		document.body.classList.remove("present");
-		slides.forEach((s) => s.classList.remove("is-live"));
-		bar.remove();
-		end.remove();
+		slides.forEach((s) => {
+			s.classList.remove("is-live");
+			s.style.transform = "";
+		});
 		if (document.fullscreenElement) document.exitFullscreen();
 		slides[at].scrollIntoView({ block: "center" });
 	};
@@ -71,11 +95,14 @@
 	const jumpLesson = (d) => {
 		const heads = lessons.map((L) => slides.indexOf(L.slides[0])).filter((i) => i >= 0);
 		const next = d > 0 ? heads.find((i) => i > at) : [...heads].reverse().find((i) => i < at);
-		if (next !== undefined) { at = next; draw(); }
+		if (next !== undefined) {
+			at = next;
+			draw();
+		}
 	};
 
 	document.addEventListener("keydown", (e) => {
-		if (e.key === "p" || e.key === "P") { on ? stop() : start(); return; }
+		if (e.key === "p" || e.key === "P") return on ? stop() : start();
 		if (!on) return;
 		if (e.key === "Escape") return stop();
 		if (e.key === "f" || e.key === "F") {
@@ -90,8 +117,8 @@
 		if (!on) return;
 		go(e.clientX < window.innerWidth * 0.25 ? -1 : 1);
 	});
+	window.addEventListener("resize", () => on && fit());
 
-	// 使い方の案内（プレゼン中は消える）
 	const hint = document.createElement("div");
 	hint.className = "pm-hint";
 	hint.textContent = "P で全画面プレゼン（←→ で送る）";

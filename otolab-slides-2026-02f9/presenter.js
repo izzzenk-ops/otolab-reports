@@ -66,7 +66,8 @@
 		const i = infoOf(cur);
 		const mark = cur.querySelector(".pm-mark");
 		if (mark) {
-			mark.textContent = i.label ? `${i.label}　${i.no} / ${i.total}` : `${i.no} / ${slides.length}`;
+			// レッスン番号は出さない（スライドに STEP 4-1 のピルが既にあるので重複する）
+			mark.textContent = i.label ? `${i.no} / ${i.total}` : `${i.no} / ${slides.length}`;
 			mark.classList.toggle("is-end", i.last);
 		}
 		fit();

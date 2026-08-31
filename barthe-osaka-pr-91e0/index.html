@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>BARTHE OSAKA 2026 集客PR 企画書</title>
+<style>
+:root{
+  --bg:#0d0d0f; --bg2:#15151a; --card:#1b1b21; --line:#2e2e37;
+  --fg:#f2f0ec; --sub:#a8a49c; --fire:#ff5a1f; --fire2:#ffa02c;
+  --blue:#4ea3ff; --ok:#3ecf8e; --warn:#ffd166; --ng:#ff6b6b;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif;
+  line-height:1.85;font-size:16px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:920px;margin:0 auto;padding:0 20px 120px}
+header{padding:72px 0 48px;border-bottom:1px solid var(--line)}
+.eyebrow{color:var(--fire);font-size:13px;letter-spacing:.18em;font-weight:700;margin:0 0 14px}
+h1{font-size:clamp(26px,5vw,40px);line-height:1.35;margin:0 0 18px;font-weight:800;letter-spacing:.01em}
+h1 .hl{color:var(--fire2)}
+.lead{color:var(--sub);font-size:15px;margin:0}
+.meta{margin-top:26px;display:flex;flex-wrap:wrap;gap:8px}
+.tag{border:1px solid var(--line);border-radius:999px;padding:5px 13px;font-size:12.5px;color:var(--sub)}
+section{padding:56px 0;border-bottom:1px solid var(--line)}
+h2{font-size:clamp(20px,3.6vw,26px);margin:0 0 8px;font-weight:800;letter-spacing:.01em}
+h2 .num{color:var(--fire);font-size:14px;display:block;letter-spacing:.14em;margin-bottom:8px;font-weight:700}
+.sec-lead{color:var(--sub);font-size:14.5px;margin:0 0 28px}
+h3{font-size:17.5px;margin:32px 0 12px;font-weight:700}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 16px;padding-left:1.25em}
+li{margin-bottom:8px}
+strong{color:#fff;font-weight:700}
+.fire{color:var(--fire2)}
+.muted{color:var(--sub)}
+small{color:var(--sub);font-size:12.5px;line-height:1.7;display:block}
+
+.grid{display:grid;gap:14px}
+@media(min-width:700px){.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.stat .n{font-size:clamp(24px,4.6vw,32px);font-weight:800;color:var(--fire2);line-height:1.2}
+.stat .n.b{color:var(--blue)} .stat .n.g{color:var(--ok)}
+.stat .l{font-size:13px;color:var(--sub);margin-top:6px}
+.stat .s{font-size:12px;color:#6f6b64;margin-top:8px;line-height:1.6}
+.stat .h{color:var(--fg);font-size:15px;font-weight:700;margin-top:8px}
+
+table{width:100%;border-collapse:collapse;margin:8px 0 20px;font-size:14px;display:block;overflow-x:auto;white-space:nowrap}
+@media(min-width:700px){table{display:table;white-space:normal}}
+th,td{border-bottom:1px solid var(--line);padding:11px 12px;text-align:left;vertical-align:top}
+th{color:var(--sub);font-weight:600;font-size:12.5px;letter-spacing:.04em;background:var(--bg2)}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.win td{background:rgba(62,207,142,.05)}
+tr.lose td{color:var(--sub)}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;margin:18px 0}
+.card.rec{border-color:var(--fire);box-shadow:0 0 0 1px rgba(255,90,31,.25)}
+.card-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.badge{font-size:11.5px;font-weight:800;letter-spacing:.08em;padding:5px 11px;border-radius:999px;white-space:nowrap}
+.b-rec{background:var(--fire);color:#140b06}
+.b-a{background:rgba(62,207,142,.16);color:var(--ok);border:1px solid rgba(62,207,142,.4)}
+.b-n{background:rgba(78,163,255,.14);color:var(--blue);border:1px solid rgba(78,163,255,.4)}
+.card h3{margin:0;font-size:clamp(18px,3vw,22px);font-weight:800;line-height:1.45}
+.hook{background:#0a0a0c;border-left:3px solid var(--fire);border-radius:0 10px 10px 0;padding:14px 18px;margin:18px 0;font-size:15px}
+.hook .lbl{font-size:11.5px;color:var(--fire);letter-spacing:.1em;font-weight:700;display:block;margin-bottom:4px}
+.rows{margin-top:18px}
+.row{display:grid;gap:4px;padding:13px 0;border-top:1px solid var(--line)}
+@media(min-width:640px){.row{grid-template-columns:150px 1fr;gap:16px}}
+.row .k{font-size:12.5px;color:var(--sub);font-weight:600;padding-top:2px}
+.row .v{font-size:14.5px}
+.refs{margin-top:16px;background:#0a0a0c;border-radius:12px;padding:14px 18px}
+.refs .lbl{font-size:11.5px;color:var(--ok);letter-spacing:.1em;font-weight:700;display:block;margin-bottom:8px}
+.refs ul{margin:0;padding-left:1.1em}
+.refs li{font-size:13.5px;margin-bottom:6px}
+.refs b{color:var(--ok);font-variant-numeric:tabular-nums}
+
+.note{border:1px solid var(--line);background:var(--bg2);border-radius:12px;padding:18px 20px;margin:18px 0;font-size:14px}
+.note.warn{border-color:rgba(255,209,102,.45)}
+.note.ok{border-color:rgba(62,207,142,.4)}
+.note .t{font-weight:800;margin-bottom:8px;font-size:14px}
+.note.warn .t{color:var(--warn)} .note.ok .t{color:var(--ok)}
+
+.tl{position:relative;margin:22px 0 0;padding-left:26px}
+.tl::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.tl-item{position:relative;padding:0 0 26px}
+.tl-item::before{content:"";position:absolute;left:-24px;top:7px;width:11px;height:11px;border-radius:50%;background:var(--fire);border:2px solid var(--bg)}
+.tl-date{font-size:12.5px;color:var(--fire2);font-weight:700;letter-spacing:.05em}
+.tl-title{font-weight:700;margin:3px 0 5px}
+.tl-body{font-size:14px;color:var(--sub)}
+
+.ask{background:linear-gradient(180deg,#1c1208,#15151a);border:1px solid rgba(255,90,31,.4);border-radius:16px;padding:26px}
+.ask ol{margin:0;padding-left:1.2em}
+.ask li{margin-bottom:14px}
+.ask b{color:var(--fire2)}
+footer{padding:40px 0 0;color:#5f5c56;font-size:12.5px}
+a{color:var(--blue);word-break:break-all}
+@media print{
+  body{background:#fff;color:#111}
+  .stat,.card,.note,.ask,.refs,.hook{background:#fff;border-color:#ccc;box-shadow:none}
+  th{background:#f2f2f2;color:#333}
+  h1,strong{color:#000}.muted,small{color:#555}
+  section{border-color:#ddd;padding:28px 0}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">BARTHE OSAKA 2026 ／ SNS集客PR ご提案</p>
+  <h1>残り<span class="hl">61日</span>で、<br>「サウンドバース」を<span class="hl">大阪で通じる名前</span>にします。</h1>
+  <p class="lead">音声・YouTube運用に加えて、サウンドバースのPR補助として入らせてください。<br>今回のゴールはチケット完売ではなく、<strong>拡散させて、イベントの存在を知ってもらうこと</strong>に絞ります。</p>
+  <div class="meta">
+    <span class="tag">作成 2026-08-31</span>
+    <span class="tag">提案先 大阪サウナDESSE 御中</span>
+    <span class="tag">本番まで 61日</span>
+    <span class="tag">チケット販売終了まで 60日</span>
+  </div>
+</header>
+
+<section>
+  <h2><span class="num">01 ／ 現在地</span>いまの数字（すべて実測です）</h2>
+  <p class="sec-lead">提案の前に、8月31日時点で外から見える数字を確認しました。推測ではなく、公式ページとアカウントから拾った実数です。</p>
+
+  <div class="grid g3">
+    <div class="stat"><div class="n b">913<span style="font-size:15px">人</span></div><div class="l">BARTHE公式IG フォロワー</div><div class="s">@barthe_world・投稿132件。リールは1本。<b>動画の伸びしろがそのまま残っている</b>状態</div></div>
+    <div class="stat"><div class="n">2.3<span style="font-size:15px">万人</span></div><div class="l">DESSE本体IG フォロワー</div><div class="s">@desse.osaka・リールは平常1〜2万再生、最高18.3万</div></div>
+    <div class="stat"><div class="n g">1,554<span style="font-size:15px">名</span></div><div class="l">前回2025の動員実績</div><div class="s">公式リリース記載。今年は会場も規模も拡大</div></div>
+  </div>
+
+  <h3>イベントの確定情報</h3>
+  <table>
+    <tr><th>項目</th><th>内容</th></tr>
+    <tr><td>日程</td><td>2026年10月31日(土)・11月1日(日)　11:00〜18:00（有料エリア受付 10:30〜17:00）</td></tr>
+    <tr><td>会場</td><td>クリエイティブセンター大阪（名村造船所跡地）／北加賀屋駅 徒歩10分</td></tr>
+    <tr><td>チケット</td><td>通常 7,000円（当日7,500円）／VIP 15,000円（当日16,000円・数量限定）</td></tr>
+    <tr><td>販売</td><td>Peatix　7/31 18:00 〜 <b>10/30 23:59</b></td></tr>
+    <tr><td>無料エリア</td><td>フードエリア・マーケットエリアは入場無料</td></tr>
+    <tr><td>花火</td><td>2日目（11/1）</td></tr>
+    <tr><td>出演・出店</td><td>Coming soon...（8/31時点で未発表）</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2><span class="num">02 ／ 伸びしろ</span>いま手を入れると、いちばん効く3か所</h2>
+  <p class="sec-lead">現状のアカウント運用は「これから動画を始める」段階です。裏を返すと、<strong>まだ何も使っていない打ち手が3つ残っている</strong>ということでもあります。</p>
+
+  <div class="grid g3">
+    <div class="stat"><div class="n b">01</div><div class="h">BARTHE公式を育てる余地</div><div class="s">現在913人・リール1本。ここに動画を積むだけで、来年の発表時に「初速が出るアカウント」が手に入ります。今年の投資が来年そのまま効きます。</div></div>
+    <div class="stat"><div class="n b">02</div><div class="h">TikTokがまだ空いている</div><div class="s">フォロワー0からでも外部リーチが取れる唯一の場所。61日で新しい人に届けるなら、ここが一番速い。</div></div>
+    <div class="stat"><div class="n b">03</div><div class="h">地域を狙った広告</div><div class="s">大阪近郊に絞ったメタ広告は、時間がない今回いちばん確実にリーチを買える手段。オーガニックと掛け算できます。</div></div>
+  </div>
+
+  <div class="note warn">
+    <div class="t">先に決まると助かること：出演ラインナップ</div>
+    Peatix上でも「Coming soon」のままなので、9月上旬に1組でも発表できると、動画のネタが一気に増えます。ここだけは主催側のご判断が必要です。
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">03 ／ ゴール</span>今回追う数字</h2>
+  <p class="sec-lead">正直に申し上げると、61日で「チケット完売」を数字でお約束することはできません。そのかわり、拡散と認知はコントロールできます。ここを目標にします。</p>
+
+  <table>
+    <tr><th>区分</th><th>指標</th><th>目標</th><th>考え方</th></tr>
+    <tr><td><b class="fire">主KPI</b></td><td>10/30までの合計リーチ</td><td class="num"><b>50万（最低ライン）<br>100万（狙う線）</b></td><td>オーガニック30〜60万＋広告10〜20万の合算</td></tr>
+    <tr><td>副KPI</td><td>投稿本数</td><td class="num">週2本 × 8.5週 ＝ 約17本</td><td>唯一100%コントロールできる数字。<b>まとめ撮りで現場負担を抑えます</b></td></tr>
+    <tr><td>副KPI</td><td>BARTHE公式フォロワー</td><td class="num">913 → 3,000人</td><td>今年の集客より<b>来年の初速</b>のための資産</td></tr>
+    <tr><td>参考</td><td>Peatix遷移数・前売り枚数</td><td class="num">計測して見る</td><td>どの動画から売れたかを紐づけるため</td></tr>
+  </table>
+
+  <div class="note">
+    <div class="t">今年の投資が返ってくる場所</div>
+    本来イベント集客は半年前から仕込みます。今年は時間がないので、回収先は <b>①当日の来場者の上積み ②来年のBARTHEを「発表した瞬間に売れる」状態にする資産（フォロワー・当たった動画の型・当日の素材）</b> の2つに置いています。
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">04 ／ リサーチ</span>いま実際に回っている型／回っていない型</h2>
+  <p class="sec-lead">企画を考える前に、ショート動画で実際に数字が出ている企画を調べました。<strong>数字はすべて実測（YouTubeショート）で、リンクから現物が確認できます。</strong>リール・TikTokでも同じ型が量産されている領域です。</p>
+
+  <h3>回っている型</h3>
+  <table>
+    <tr><th>型</th><th>実例</th><th>再生数</th></tr>
+    <tr class="win"><td rowspan="4"><b>① 10秒ぴったりチャレンジ<br>（成功したらタダ）</b></td><td><a href="https://youtube.com/shorts/XZS59Ek7hEI">10秒ピッタリで止めればスイーツ無料</a></td><td class="num"><b>426万</b></td></tr>
+    <tr class="win"><td><a href="https://youtube.com/shorts/Z-7iC7PrLfQ">ピッタリ10秒で…ピザがタダ!?</a></td><td class="num"><b>48万</b></td></tr>
+    <tr class="win"><td><a href="https://youtube.com/shorts/Iy_KOPYYPdk">10秒ぴったりでアサイー無料</a></td><td class="num"><b>14万</b></td></tr>
+    <tr class="win"><td><a href="https://youtube.com/shorts/OAif6sIBcCQ">10秒ぴったりならケバブが無料</a></td><td class="num"><b>2.9万</b></td></tr>
+    <tr class="win"><td rowspan="3"><b>② サイコロで運命が決まる</b></td><td><a href="https://youtube.com/shorts/It_EKvfbrB4">サイコロで出た数字で買い物させてみた</a></td><td class="num"><b>1,352万</b></td></tr>
+    <tr class="win"><td><a href="https://youtube.com/shorts/6yHFaHFGP_s">同・第2弾（同じ型で再現）</a></td><td class="num"><b>1,183万</b></td></tr>
+    <tr class="win"><td><a href="https://www.youtube.com/watch?v=gxJL-iVuo0U">サイコロの出た目しかお金が使えない旅</a></td><td class="num"><b>139万</b></td></tr>
+    <tr class="win"><td rowspan="3"><b>③ 街頭で聞くだけ<br>（準備ゼロ・その場で撮れる）</b></td><td><a href="https://youtube.com/shorts/4LlB9_m32bM">オタクに聞く「誰ペンですか？」in 大阪・鶴橋</a></td><td class="num"><b>125万</b></td></tr>
+    <tr class="win"><td><a href="https://youtube.com/shorts/UNbOZTbygh0">大阪・関西万博 街頭インタビュー</a></td><td class="num"><b>79万</b></td></tr>
+    <tr class="win"><td><a href="https://youtube.com/shorts/xVlyqh8JDmU">同・別カット</a></td><td class="num"><b>37万</b></td></tr>
+  </table>
+
+  <h3>回っていない型（＝今回やらないと決めたもの）</h3>
+  <table>
+    <tr><th>型</th><th>実例</th><th>再生数</th><th>なぜ回らないか</th></tr>
+    <tr class="lose"><td><b>サウナの専門ネタ</b></td><td><a href="https://www.youtube.com/watch?v=rf69YSMc7xg">水風呂は何秒がベスト？</a><br><a href="https://youtube.com/shorts/ysAzVG0Gjgk">水風呂からスタートしても整うのか検証</a></td><td class="num">574回<br>2,277回</td><td>サウナ好きの内輪の話。<b>知らない人は言葉の時点で離脱する</b></td></tr>
+    <tr class="lose"><td><b>じゃんけんで勝ったら無料</b></td><td><a href="https://youtube.com/shorts/wgnjR8G3eWY">じゃんけん勝ったらラーメン無料（大阪）</a><br><a href="https://youtube.com/shorts/8jF7GCMW5bM">じゃんけん勝ったらかぶと焼き無料（新宿）</a></td><td class="num">3,261回<br>8,043回</td><td>運だけで<b>緊張の間（ま）が生まれない</b>。1秒で結果が出て、見る側が力まない</td></tr>
+  </table>
+
+  <div class="note ok">
+    <div class="t">この調査から立てた3つの条件</div>
+    <b>①「あと0.1秒」の悔しさが生まれること</b>（じゃんけんが負けて、10秒ぴったりが勝つ理由）／
+    <b>② 説明がいらないこと</b>（サウナ用語を使った瞬間に離脱する）／
+    <b>③ 撮影が一発勝負で終わること</b>（1人30秒・その場で完結・台本なし）。<br>
+    この3つを満たす企画を、下の3案として設計しました。
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">05 ／ 企画</span>候補3案</h2>
+  <p class="sec-lead">いずれも <b>スマホ1台・固定カメラ1台・台本なし</b> で撮れて、1日でまとめ撮りできる形にしています。賞品をBARTHEのチケットにすることで、動画の中に必ずイベント名と日付が入ります。</p>
+
+  <div class="card rec">
+    <div class="card-head"><span class="badge b-rec">本命</span><span class="badge b-a">実績 426万 / 48万 / 14万</span></div>
+    <h3>企画A：「10秒ぴったりで止めたら、サウナフェスのチケットあげます」</h3>
+    <div class="hook"><span class="lbl">冒頭3秒</span>「これ10秒ぴったりで止めたら、7,000円のチケット、タダです」（ストップウォッチをアップで）</div>
+    <p>DESSEの受付前、または心斎橋の路上（私有地内）にストップウォッチを1台。通行人・来館者に声をかけて、その場で挑戦してもらうだけ。<b>成功＝チケット進呈、失敗＝500円割引券</b>。全員が何かもらえるので断られにくく、失敗の悔しさがそのままコンテンツになります。</p>
+    <div class="rows">
+      <div class="row"><div class="k">なぜ回るか</div><div class="v">① 「0.1秒足りなかった」の悔しさで最後まで見る＝視聴維持が伸びる<br>② ルール説明が3秒で終わる＝サウナを知らない人も離脱しない<br>③ 同じ型が<b>複数の店舗で再現している</b>（426万／48万／14万／2.9万）＝一発屋の型ではない</div></div>
+      <div class="row"><div class="k">撮影</div><div class="v">1人あたり30秒。<b>1日で10〜15人撮れば、2〜3週間ぶんの投稿が確保できます。</b>カメラは固定1台、あとはスマホ</div></div>
+      <div class="row"><div class="k">賞品コスト</div><div class="v">成功率はおおむね10人に1〜2人。招待チケットなので現金支出はほぼ発生しません</div></div>
+      <div class="row"><div class="k">派生</div><div class="v">「サウナの砂時計を10秒で止める」会場版／当日は現地でも実施して、その場でUGCを生む</div></div>
+    </div>
+    <div class="refs"><span class="lbl">参考（実測）</span><ul>
+      <li><a href="https://youtube.com/shorts/XZS59Ek7hEI">10秒ピッタリで止めればスイーツ無料</a> <b>426万回</b></li>
+      <li><a href="https://youtube.com/shorts/Z-7iC7PrLfQ">ピッタリ10秒で…ピザがタダ!?</a> <b>48万回</b></li>
+      <li><a href="https://youtube.com/shorts/Iy_KOPYYPdk">10秒ぴったりでアサイー無料</a> <b>14万回</b></li>
+    </ul></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="badge b-a">実績 1,352万 / 1,183万</span></div>
+    <h3>企画B：「サイコロの出た目で、当日の運命が決まる」</h3>
+    <div class="hook"><span class="lbl">冒頭3秒</span>「このサイコロで6が出たら、サウナフェスのVIPチケット。1が出たら……」</div>
+    <p>サイコロ1個で完結します。出た目でもらえるものが変わる（6＝VIP15,000円／4-5＝通常チケット／1-3＝DESSE割引券）。もらう側の期待と落胆が全部顔に出るので、編集はほぼカットだけで成立します。</p>
+    <div class="rows">
+      <div class="row"><div class="k">なぜ回るか</div><div class="v">① 転がっているサイコロを<b>最後まで見ずにいられない</b>＝視聴完了率が上がる<br>② 同じ型で1,352万・1,183万と<b>2本続けて跳ねている</b>＝運任せの一発ではない<br>③ 見る側が「自分ならどれが出るか」を想像する＝コメントが伸びる</div></div>
+      <div class="row"><div class="k">撮影</div><div class="v">サイコロ1個と手元カメラ。企画Aと<b>同じ撮影日に同時に撮れます</b></div></div>
+      <div class="row"><div class="k">派生</div><div class="v">「出た目の秒数だけ水風呂に入れたらチケット」／「出た目の金額分だけ物販で買い物」（＝出た目しか使えない旅・139万回の型）</div></div>
+    </div>
+    <div class="refs"><span class="lbl">参考（実測）</span><ul>
+      <li><a href="https://youtube.com/shorts/It_EKvfbrB4">サイコロで出た数字で買い物させてみた</a> <b>1,352万回</b></li>
+      <li><a href="https://youtube.com/shorts/6yHFaHFGP_s">同・第2弾</a> <b>1,183万回</b></li>
+      <li><a href="https://www.youtube.com/watch?v=gxJL-iVuo0U">出た目しかお金が使えない旅</a> <b>139万回</b></li>
+    </ul></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="badge b-a">実績 125万 / 79万 / 37万</span></div>
+    <h3>企画C：「大阪の人に、サウナフェス知ってるか聞いてみた」</h3>
+    <div class="hook"><span class="lbl">冒頭3秒</span>「11月1日に大阪で日本最大のサウナフェスがあるの、知ってます？」→「え、知らない」（→ 知らない反応こそが素材）</div>
+    <p>準備ゼロ・その場で撮れる唯一の企画です。心斎橋・難波で聞くだけ。<b>知らないという反応が、そのまま「まだ知られていないイベント」というフックになります。</b>最後の3秒で日付と会場を出す。</p>
+    <div class="rows">
+      <div class="row"><div class="k">なぜ回るか</div><div class="v">① 街頭インタビューは<b>大阪ローカルの文脈</b>で回る（鶴橋の例＝125万回）<br>② 人の顔と生の声＝作り込みゼロでも見られる<br>③ 撮影が突発でできるので、<b>予定が空いた日にそのまま埋められる</b></div></div>
+      <div class="row"><div class="k">撮影</div><div class="v">スマホ1台。1〜2時間で5〜8本ぶん。企画A・Bの撮影日の前後に足せます</div></div>
+      <div class="row"><div class="k">注意</div><div class="v">撮影は必ず許可を取ってから。街頭は場所の管理者の許可が要る場合があるため、DESSE前や商業施設の私有地内が安全です</div></div>
+    </div>
+    <div class="refs"><span class="lbl">参考（実測）</span><ul>
+      <li><a href="https://youtube.com/shorts/4LlB9_m32bM">オタクに聞く「誰ペンですか？」in 大阪・鶴橋</a> <b>125万回</b></li>
+      <li><a href="https://youtube.com/shorts/UNbOZTbygh0">大阪・関西万博 街頭インタビュー</a> <b>79万回</b></li>
+    </ul></div>
+  </div>
+
+  <h3 style="margin-top:40px">賞品設計：招待チケット20枚の使い方</h3>
+  <p class="sec-lead" style="margin-bottom:18px">20枚あれば2ヶ月は回せます。ただし当たり条件を決めずに撮り始めると、初回の撮影日だけで半分なくなります。<b>「1撮影日あたり上限2枚」</b>のルールで管理します。</p>
+  <table>
+    <tr><th>用途</th><th>枚数</th><th>当たり条件と考え方</th></tr>
+    <tr><td><b>企画A（10秒チャレンジ）</b></td><td class="num">6枚</td><td>10.00ちょうどのみ当たり（想定成功率5〜10%）。惜しかった人には<b>DESSE500円割引券</b>を渡すので、全員が手ぶらで帰らない。<b>1撮影日あたり2枚まで</b></td></tr>
+    <tr><td><b>企画B（サイコロ）</b></td><td class="num">6枚</td><td>6が出たら当たり（1/6）。1〜5は割引券やドリンク券。確率が見えているぶん、参加者が挑戦しやすい</td></tr>
+    <tr><td><b>フォロー＆シェア抽選</b></td><td class="num">5枚</td><td>BARTHE公式アカウントで2回実施（各2〜3枚）。<b>913→3,000人の目標に一番効くのがこれ</b>。伸びた動画の直後に打つと効率が良い</td></tr>
+    <tr><td><b>予備</b></td><td class="num">3枚</td><td>想定外に伸びた回の追加プレゼント用。使わなければ当日スタッフ枠に戻す</td></tr>
+  </table>
+  <div class="note">
+    <div class="t">2点だけ、先に決めておきたいこと</div>
+    <b>① VIPチケット（15,000円）を1〜2枚含められるか。</b>「VIPが当たるかもしれない」という一言が入るだけで、参加率も視聴維持も上がります。数量限定商品なので、可否のご判断をいただきたいです。<br>
+    <b>② 当日（10/31・11/1）の会場では、チケットを賞品にしません。</b>すでに来場している方に配っても意味がないため、当日の10秒チャレンジは<b>物販・ドリンク・来年の招待</b>に置き換えます。<br>
+    <small style="margin-top:10px">※ 想定より早く消費するとしたら、それは動画が当たっている時です。その場合に <b>+10枚まで追加できるか</b> だけ、あらかじめ握らせていただけると止まらずに回せます。</small>
+  </div>
+
+  <div class="note ok">
+    <div class="t">おすすめの回し方</div>
+    <b>A と B を同じ撮影日にまとめ撮り</b>（月2回・1回半日）して週2本のうち1本に充て、もう1本を C（突発で撮れる街頭）かイベント情報に充てます。<br>
+    最初の2週間で数字を見て、<b>伸びた方に10月を全振り</b>します。3案とも走らせ続けるのではなく、勝った型に寄せるのが今回のやり方です。
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">06 ／ 発信設計</span>どこから出すか</h2>
+  <p class="sec-lead">DESSE本体の世界観を崩さないように、役割をはっきり分けます。</p>
+  <table>
+    <tr><th>アカウント</th><th>役割</th><th>出すもの</th></tr>
+    <tr><td><b class="fire">@barthe_world</b><br><small>913人・メイン</small></td><td><b>今回の主戦場。</b>企画A・B・Cはすべてここから発信</td><td>企画動画の全本数／出演発表／広告の配信元</td></tr>
+    <tr><td><b>@desse.osaka</b><br><small>2.3万人・サブ</small></td><td><b>親和性のあるものだけシェア。</b>施設アカウントのトーンを崩さない範囲で</td><td>いちばん反応が良かった1本を転載／館内で撮った企画／ストーリーズでの拡散</td></tr>
+    <tr><td><b>TikTok</b><br><small>新規開設</small></td><td>外部リーチの本命。フォロワー0でも回る面</td><td>リールと同素材をそのまま。同時投稿ツールで運用負担ゼロ</td></tr>
+    <tr><td><b>YouTubeショート</b></td><td>同素材を流す。ゲーム性のある企画はショートとも相性が良い</td><td>企画A・Bをそのまま。本編は当日のアフタームービー</td></tr>
+  </table>
+  <h3>今週やる小さな作業</h3>
+  <ul>
+    <li>BARTHE公式のプロフィール文を、<b>先頭3行で「日付・会場・価格」</b>が分かる形に（検索から来た人が1秒で判断できるように）</li>
+    <li>プロフィールリンクをPeatixに（現状はlit.link経由）</li>
+    <li>TikTokアカウント開設＋同時投稿の設定</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="num">07 ／ 広告</span>大阪近郊に絞ったメタ広告</h2>
+  <p class="sec-lead">61日という制約では、広告がいちばん確実にリーチを買える手段です。BARTHE公式アカウントから配信します。</p>
+  <table>
+    <tr><th>項目</th><th>設定案</th></tr>
+    <tr><td>配信面</td><td>Instagram＋Facebook（Meta広告マネージャ）／リール面を中心に</td></tr>
+    <tr><td>エリア</td><td>大阪市を中心に半径30〜40km（京都市・神戸市を含む）</td></tr>
+    <tr><td>ターゲット</td><td>18〜44歳／興味関心：サウナ・温浴・音楽フェス・アウトドア・大阪のおでかけ</td></tr>
+    <tr><td>9月の目的</td><td><b>動画の再生（認知）。</b>まず数字を集めて、当たるクリエイティブを見つける</td></tr>
+    <tr><td>10月の目的</td><td><b>トラフィック（Peatixへ）＋リターゲティング。</b>「動画を50%以上見た人」に絞って締切告知を当てる</td></tr>
+    <tr><td>予算配分（案）</td><td>9月 3万円（テスト）／10月 7万円（刈り取り）＝<b>計10万円</b></td></tr>
+    <tr><td>見込み</td><td>10万円で<b>10〜20万リーチ</b>（大阪近郊・動画配信の一般的な単価から算出した目安）</td></tr>
+  </table>
+  <div class="note ok">
+    <div class="t">広告でいちばん大事な原則</div>
+    新しく広告用の動画を作らないこと。<b>オーガニックで実際に伸びた1本に、そのまま広告費を足す</b>のが最も効率が良いです。だから最初の2週間はオーガニックでテストし、当たりが出てから配信量を増やします。<br>
+    <small style="margin-top:8px">※ インフルエンサー施策は、交渉と調整に時間がかかるため今回は見送ります。</small>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">08 ／ 導線</span>公式LINEを使わずに追いかける</h2>
+  <table>
+    <tr><th>手段</th><th>やること</th><th>効果</th></tr>
+    <tr><td><b>ストーリーズのリマインダー</b></td><td>イベント日を設定して投稿。押した人にIGから当日プッシュ通知が飛ぶ</td><td>LINEの代わりになる無料プッシュ。全投稿に付ける</td></tr>
+    <tr><td><b>広告のリターゲティング</b></td><td>動画を50%以上見た人・プロフィールに来た人に、10月に再度当てる</td><td>一度触れた人を追いかける、今回の実質的な「追客リスト」</td></tr>
+    <tr><td><b>Peatixのフォロー</b></td><td>主催者フォローを促す（現在279人）</td><td>Peatix側から通知が届く。購入に一番近い層</td></tr>
+    <tr><td><b>館内動線</b></td><td>DESSE来館者にQRとPOP（受付・ロッカー・休憩スペース）</td><td>いちばん確実に売れるチャネル。毎日サウナ好きが目の前にいる</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2><span class="num">09 ／ 体制と費用</span>誰が何をやるか</h2>
+  <table>
+    <tr><th>担当</th><th>役割</th></tr>
+    <tr><td><b>宮部（PR補助）</b></td><td><b>企画・台本・撮影指示書・投稿設計・数値のふりかえりに専念します。</b>初回の撮影だけ現場に入って手ほどきをし、2回目以降はDESSE様で回していただく形が理想です</td></tr>
+    <tr><td><b>DESSE様</b></td><td>撮影（2回目以降）／投稿／賞品チケットの手配／広告費のご判断</td></tr>
+    <tr><td><b>外注編集</b></td><td><b>1本2,000円。</b>こちらから編集者をご紹介できます。週2本＝月8本で<b>月16,000円</b></td></tr>
+  </table>
+  <table>
+    <tr><th>費用（2ヶ月）</th><th>金額</th><th>備考</th></tr>
+    <tr><td>編集外注</td><td class="num">約32,000円</td><td>2,000円 × 週2本 × 8週</td></tr>
+    <tr><td>メタ広告</td><td class="num">100,000円</td><td>9月3万／10月7万。金額はご判断次第で調整可</td></tr>
+    <tr><td>賞品</td><td class="num">実費なし</td><td>招待チケット・割引券で対応</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2><span class="num">10 ／ 進行</span>本番までの61日（週2本）</h2>
+  <div class="tl">
+    <div class="tl-item">
+      <div class="tl-date">9/1 - 9/7　準備週</div>
+      <div class="tl-title">土台づくり＋初回撮影に同行</div>
+      <div class="tl-body">TikTok開設／プロフィール導線の修正／広告アカウントの準備／<b>初回のまとめ撮り（企画A＋Bを半日で10〜15本）</b>に入って、撮り方をお渡しします</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">9月　テストフェーズ</div>
+      <div class="tl-title">週2本 ＝ 8本／広告3万円</div>
+      <div class="tl-body">企画A・B・Cを並べて出し、どれが伸びるかを見ます。撮影日は<b>月2回のまとめ撮りだけ</b>。9月末に数字で勝ち型を決めます</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">10月　刈り取りフェーズ</div>
+      <div class="tl-title">週2本 ＝ 8本／広告7万円</div>
+      <div class="tl-body">勝った型に全振り。伸びた動画に広告を足す。10/20以降は「前売りは10/30まで」の締切告知とリターゲティングに切り替えます</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">10/31 - 11/1　当日</div>
+      <div class="tl-title">回すより、貯める</div>
+      <div class="tl-body">現地でも企画A（10秒チャレンジ）を実施してその場のUGCを作りつつ、<b>主目的は来年用の素材確保</b>（150人サウナの引き画・花火・来場者の顔）</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">11 ／ ご判断いただきたいこと</span></h2>
+  <div class="ask">
+    <ol>
+      <li><b>ゴールの合意。</b>今年はチケット完売ではなく「拡散・認知＋来年の資産」を目標に置くこと。</li>
+      <li><b>企画A・B・Cのうち、どれから走るか。</b>推奨はA＋Bの同時まとめ撮りです。</li>
+      <li><b>招待チケット20枚の配分と、VIP枠の可否。</b>配分案は上記のとおり（企画A 6／企画B 6／抽選 5／予備 3）。VIPを1〜2枚含められるか、伸びた場合に+10枚追加できるかもあわせてご判断ください。</li>
+      <li><b>メタ広告の予算。</b>案は2ヶ月で10万円。配信元はBARTHE公式アカウントになります。</li>
+      <li><b>撮影担当をどなたにするか。</b>初回はこちらが入り、2回目以降を回していただきます。</li>
+      <li><b>出演ラインナップを9月上旬に1組でも発表できるか。</b></li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  イベント情報・アカウントの数値は2026年8月31日時点の公開情報からの実測です（Peatix公式ページ／プレスリリース／Instagram）。<br>
+  企画の参考実績は、縦型ショート動画の実測再生数（YouTubeショート）です。リンクから現物をご確認いただけます。<br>
+  広告の見込みリーチは一般的な配信単価からの目安であり、保証値ではありません。
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>おとラボ スタートガイド｜上田さん</title>
+<style>
+  :root{
+    --ink:#3f4a5a; --sub:#8b93a3; --line:#f0e8dd; --bg:#f7f3ec; --card:#fff;
+    --accent:#ec8080; --accent-deep:#e06c6c; --accent-soft:#fdecec;
+    --blue:#6b9bd2; --blue-deep:#5b8ac4; --blue-soft:#e8f1fb;
+    --gold:#d9822b; --gold-soft:#fdf1e3; --green:#57a773; --green-soft:#e9f6ee;
+    --grad:linear-gradient(135deg,#f19a9a,#f4b183);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:"Hiragino Maru Gothic ProN","Zen Maru Gothic","Hiragino Sans","Yu Gothic",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.85;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 18px 80px;}
+
+  header{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:30px 26px 26px;margin-bottom:18px;position:relative;overflow:hidden;}
+  header::before{content:"";position:absolute;top:0;left:0;right:0;height:8px;background:var(--grad);}
+  .label{font-size:12px;letter-spacing:2px;color:var(--accent-deep);font-weight:700;}
+  header h1{font-size:24px;font-weight:800;margin:6px 0 10px;line-height:1.4;}
+  header p{font-size:14px;color:var(--sub);}
+  .progress{margin-top:14px;background:#f6f2eb;border-radius:999px;height:10px;overflow:hidden;}
+  .progress span{display:block;height:100%;width:0;background:var(--grad);transition:width .3s;}
+  .progress-text{font-size:12px;color:var(--sub);margin-top:6px;font-weight:700;}
+
+  .intro{background:var(--blue-soft);border:1px solid #d5e6f7;border-radius:16px;padding:16px 20px;margin-bottom:22px;font-size:14px;}
+  .intro b{color:var(--blue-deep);}
+
+  h2.sec{font-size:15px;font-weight:800;margin:30px 0 12px;display:flex;align-items:center;gap:8px;}
+  h2.sec::after{content:"";flex:1;height:1px;background:var(--line);}
+
+  .task{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 22px;margin-bottom:12px;transition:.2s;}
+  .task.done{opacity:.55;}
+  .task .head{display:flex;align-items:flex-start;gap:11px;}
+  .task input[type=checkbox]{appearance:none;flex:0 0 auto;width:24px;height:24px;margin-top:3px;border:2px solid #dcd3c6;
+    border-radius:7px;cursor:pointer;position:relative;background:#fff;transition:.15s;}
+  .task input[type=checkbox]:checked{background:var(--green);border-color:var(--green);}
+  .task input[type=checkbox]:checked::after{content:"✓";position:absolute;inset:0;color:#fff;font-size:16px;font-weight:800;
+    display:flex;align-items:center;justify-content:center;}
+  .task h3{font-size:17px;font-weight:800;flex:1;line-height:1.5;}
+  .task .num{display:inline-flex;align-items:center;justify-content:center;width:27px;height:27px;border-radius:50%;
+    background:var(--grad);color:#fff;font-weight:800;font-size:13px;margin-right:8px;flex:0 0 auto;}
+  .task .body{padding-left:35px;margin-top:10px;}
+  @media (max-width:520px){ .task .body{padding-left:0;} }
+  .task ul{list-style:none;font-size:14px;}
+  .task li{padding:4px 0 4px 19px;position:relative;}
+  .task li::before{content:"•";position:absolute;left:4px;color:var(--accent);font-weight:800;}
+  .task ol{font-size:14px;padding-left:20px;}
+  .task ol li{padding:4px 0;}
+  .task ol li::before{content:none;}
+  .memo{font-size:13px;color:var(--sub);margin-top:8px;}
+
+  .links{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .links a{display:inline-flex;align-items:center;gap:6px;background:var(--blue-soft);border:1px solid #d5e6f7;
+    color:var(--blue-deep);text-decoration:none;font-size:13px;font-weight:700;border-radius:999px;padding:7px 16px;transition:.15s;}
+  .links a:hover{background:var(--blue-deep);color:#fff;border-color:var(--blue-deep);}
+
+  .cmd{display:flex;align-items:stretch;gap:8px;margin-top:10px;}
+  .cmd code{flex:1;min-width:0;background:#2f3542;color:#e8eef5;border-radius:10px;padding:11px 14px;
+    font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;overflow-x:auto;white-space:nowrap;display:flex;align-items:center;}
+  .cmd.multi{align-items:flex-start;}
+  .cmd.multi code{white-space:pre-wrap;display:block;line-height:1.85;}
+  .copy{flex:0 0 auto;border:none;cursor:pointer;background:var(--accent);color:#fff;font-weight:800;
+    border-radius:10px;padding:0 15px;font-size:12px;font-family:inherit;transition:.15s;white-space:nowrap;}
+  .copy:hover{background:var(--accent-deep);}
+  .copy.done{background:var(--green);}
+  code.inline{background:#f3ede4;color:#8a5a1a;border-radius:6px;padding:1px 7px;font-size:12.5px;font-family:ui-monospace,monospace;}
+
+  .note{background:var(--gold-soft);border:1px solid #f2ddba;border-radius:14px;padding:13px 18px;font-size:13.5px;margin-top:12px;}
+  .note b{color:var(--gold);}
+  .goal{background:var(--green-soft);border:1px solid #cfe8d8;border-radius:12px;padding:9px 15px;font-size:13px;margin-top:12px;}
+  .goal b{color:#3f8a5c;}
+  .course{display:flex;gap:12px;align-items:flex-start;background:#fffdfa;border:1px solid var(--line);border-radius:14px;padding:13px 16px;margin-top:9px;}
+  .course .ico{font-size:22px;flex:0 0 auto;}
+  .course .t{font-weight:800;font-size:14.5px;}
+  .course .d{font-size:13px;color:var(--sub);}
+
+  .reset{display:block;margin:26px auto 0;background:none;border:1px solid var(--line);color:var(--sub);
+    font-family:inherit;font-size:12px;border-radius:999px;padding:8px 20px;cursor:pointer;}
+  footer{text-align:center;font-size:12px;color:var(--sub);margin-top:24px;line-height:1.9;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="label">OTOLAB ｜ START GUIDE</div>
+    <h1>上田さん専用 スタートガイド</h1>
+    <p>今日はこのページを一緒に見ながら進めます。チェックは自動で保存されるので、あとで見返すときもそのまま続きから使えます。</p>
+    <div class="progress"><span id="bar"></span></div>
+    <div class="progress-text" id="ptext">0 / 0 完了</div>
+  </header>
+
+  <div class="intro">
+    🎯 <b>今日90分でできあがる状態</b><br>
+    ① 講座サイトにログインできて、4つの講座が全部見られる<br>
+    ② 進捗管理シートが自分用になっていて、提出できている<br>
+    ③ AI（Claude）が自分のパソコンで動いて、今日から相談できる
+    <div class="memo">※わからない言葉が出てきたら、その場で止めて聞いてください。今日は「わかったフリ」をしないのが一番大事です。</div>
+  </div>
+
+  <h2 class="sec">✅ 今日やること</h2>
+
+  <div class="task" data-id="u1">
+    <div class="head">
+      <input type="checkbox">
+      <h3><span class="num">①</span>講座サイトに登録して、ログインする</h3>
+    </div>
+    <div class="body">
+      <ul>
+        <li>けんじが登録ページを開きます。<b>メールアドレス・お名前・パスワード</b>を決めて登録してください</li>
+        <li>パスワードは<b>8文字以上</b>で、忘れないものにしてください（このあとずっと使います）</li>
+        <li>登録できたら、一度ログアウトして<b>もう一度自分でログイン</b>してみましょう</li>
+      </ul>
+      <div class="links">
+        <a href="https://otolabo.keji-insta.workers.dev/login" target="_blank">🔗 講座サイト ログインページ</a>
+      </div>
+      <div class="note">📌 <b>このページはブックマークしておいてください。</b>毎日ここから講座に入ります。</div>
+      <div class="goal">🎯 <b>できたら</b>：ライブラリに講座が4つ並んでいればOK</div>
+    </div>
+  </div>
+
+  <div class="task" data-id="u2">
+    <div class="head">
+      <input type="checkbox">
+      <h3><span class="num">②</span>4つの講座の「どれから見るか」を決める</h3>
+    </div>
+    <div class="body">
+      <div class="course"><div class="ico">📱</div><div><div class="t">インスタ講座ーおとラボ（95本）</div><div class="d">本編。<b>まずはここの「はじめに」→「STEP1 ジャンル選定」から順番に</b></div></div></div>
+      <div class="course"><div class="ico">🤖</div><div><div class="t">Instagram AI活用講座（60本）</div><div class="d">今日やるAIの続きが全部ここに。STEP1〜8が「Claude Codeの教科書」です</div></div></div>
+      <div class="course"><div class="ico">🎨</div><div><div class="t">canvaデザイン講座（40本）</div><div class="d">サムネイルやバナーを作るときに開く</div></div></div>
+      <div class="course"><div class="ico">✨</div><div><div class="t">STORIES完全攻略講座（34本）</div><div class="d">ストーリーズを始めるとき。今すぐでなくて大丈夫</div></div></div>
+      <div class="links">
+        <a href="https://otolabo.keji-insta.workers.dev/library" target="_blank">🔗 ライブラリ（講座一覧）</a>
+        <a href="https://otolabo.keji-insta.workers.dev/learn/otolab" target="_blank">🔗 本編：おとラボ</a>
+        <a href="https://otolabo.keji-insta.workers.dev/learn/instagram-ai" target="_blank">🔗 Instagram AI活用講座</a>
+      </div>
+      <div class="memo">💡 レッスンを見終わったら、ページ下の「受講済みにする」を押すと進み具合が残ります。</div>
+      <div class="goal">🎯 <b>できたら</b>：明日どのレッスンから見るかが決まっている</div>
+    </div>
+  </div>
+
+  <div class="task" data-id="u3">
+    <div class="head">
+      <input type="checkbox">
+      <h3><span class="num">③</span>進捗管理シートを自分用にして、提出する</h3>
+    </div>
+    <div class="body">
+      <p style="font-size:14px">やることの順番と、今どこにいるかが分かるシートです。<b>コピーして自分専用にしてから</b>使います。</p>
+      <ol>
+        <li>下のシートを開く</li>
+        <li>左上の <code class="inline">ファイル</code> → <code class="inline">コピーを作成</code>（これで自分のシートになります）</li>
+        <li>シートに<b>自分の名前</b>を書く</li>
+        <li>右上の<b>共有</b> → 「リンクを知っている全員」→ 権限を<b>「編集者」</b>に変更</li>
+        <li><b>リンクをコピー</b>して、Discordに「上田です。進捗管理シートです」と送る</li>
+      </ol>
+      <div class="links">
+        <a href="https://docs.google.com/spreadsheets/d/10y_1rSq2GhLAp4D20FO3SWW0RVTMTdfMn1m10rrLQR0/edit?usp=sharing" target="_blank">🔗 進捗管理シート</a>
+        <a href="https://docs.google.com/spreadsheets/d/1Kdw-rDQDQpFmbIDFWKaJ6ggMTAS1dqSzANC2OgWFO8Q/edit?gid=0#gid=0" target="_blank">🔗 台本管理シート</a>
+      </div>
+      <div class="note">📝 <b>台本管理シート</b>も同じ手順（ファイル→コピーを作成）で自分用にしておいてください。台本を書き始めるときに使います。</div>
+      <div class="goal">🎯 <b>できたら</b>：Discordにシートのリンクが送れている</div>
+    </div>
+  </div>
+
+  <div class="task" data-id="u4">
+    <div class="head">
+      <input type="checkbox">
+      <h3><span class="num">④</span>Discordに入る</h3>
+    </div>
+    <div class="body">
+      <ul>
+        <li>課題の提出、質問、添削のやりとりは全部ここでします</li>
+        <li>入ったら<b>自己紹介をひとこと</b>書いておきましょう</li>
+        <li>スマホにもアプリを入れておくと、返信に気づけます</li>
+      </ul>
+      <div class="links">
+        <a href="https://discord.gg/j4EEmPE5jw" target="_blank">🔗 Discord に参加する</a>
+      </div>
+      <div class="goal">🎯 <b>できたら</b>：Discordで発言できている</div>
+    </div>
+  </div>
+
+  <div class="task" data-id="u5">
+    <div class="head">
+      <input type="checkbox">
+      <h3><span class="num">⑤</span>AI（Claude）を自分のパソコンで使えるようにする</h3>
+    </div>
+    <div class="body">
+      <p style="font-size:14px">分析・台本づくり・添削を手伝ってくれる、いわば<b>「もう一人の自分」</b>を用意します。ここが今日の山場です。</p>
+      <p class="memo" style="margin-top:10px"><b>STEP 1｜アプリを入れる</b></p>
+      <ul>
+        <li>下の公式ページから <b>Claude デスクトップアプリ</b> をダウンロードします（Mac／Windows のボタンを押すだけ）</li>
+        <li>入れたらアプリを開いて、<b>左上を「Code」に切り替え</b>ます。<b>ここが一番大事</b>です</li>
+        <li>アカウントを作って、<b>有料プラン（Pro）</b>に申し込みます</li>
+      </ul>
+      <div class="links">
+        <a href="https://claude.com/ja-jp/download" target="_blank">🔗 Claudeアプリ ダウンロード（公式）</a>
+      </div>
+      <div class="note">⚠️ 検索から入ると<b>にせサイト</b>が混ざることがあります。必ず上のリンクから開いて、URLが <code class="inline">claude.com</code> であることを確認してください。</div>
+
+      <p class="memo" style="margin-top:16px"><b>STEP 2｜おとラボのスキルを入れる（2行はりつけるだけ）</b></p>
+      <p style="font-size:14px">Claudeの「Code」画面に、下の2つを<b>1行ずつ</b>貼って実行します。</p>
+      <div class="cmd">
+        <code id="k1">/plugin marketplace add izzzenk-ops/otolab-skills</code>
+        <button class="copy" data-target="k1">コピー</button>
+      </div>
+      <div class="cmd">
+        <code id="k2">/plugin install otolab-insta@otolab-skills</code>
+        <button class="copy" data-target="k2">コピー</button>
+      </div>
+
+      <p class="memo" style="margin-top:16px"><b>STEP 3｜自分用の設定をする（そのまま貼るだけ）</b></p>
+      <p style="font-size:14px">下の文章をまるごとコピーして貼ると、Claudeが質問しながら、あなた専用の保存フォルダとプロフィールを作ってくれます。</p>
+      <div class="cmd multi">
+        <code id="k3">おとラボスキルを使うための初期設定をお願いします。以下を順番に実行してください。
+
+1. ホームの「Documents/Claude/Projects」フォルダを作成する（すでにあればそのまま使う）。今後、分析報告書・台本などの成果物はすべてこの中に保存される。
+
+2. 「Documents/Claude/CLAUDE.md」を次の内容で作成する（すでにあれば内容を壊さずにこのルールを追記する）：
+- 成果物は必ず Projects/&lt;プロジェクト名&gt;/ の中に作る。Documents/Claude の直下にファイルを直接置かない
+- 一時ファイルはセッションのscratchpadを使い、このフォルダには置かない
+- ファイルやフォルダの削除・移動は勝手にせず、必ず提案して許可を得てから行う
+
+3. 私に1問ずつ質問しながら「Documents/Claude/Projects/発信プロフィール/profile.md」を作成する。聞いてほしい項目：
+- 名前（ニックネームOK）
+- Instagramのアカウント名（まだなければ「これから」でOK）
+- 発信ジャンル
+- 誰に向けて発信するか（ターゲット）
+- 発信の目的（フォロワーを増やしたい・集客につなげたい など）
+- 口調・キャラの希望（あれば）
+回答を profile.md にきれいにまとめて保存する。
+
+4. 最後に、作成したフォルダ構成をツリーで見せて「初期設定完了」と報告する。</code>
+        <button class="copy" data-target="k3">コピー</button>
+      </div>
+
+      <p class="memo" style="margin-top:16px"><b>STEP 4｜Chromeの拡張機能を入れる（分析を使うとき必要）</b></p>
+      <ul>
+        <li>下のリンクから「Chromeに追加」→ 拡張機能にログイン</li>
+        <li>ChromeでInstagramにログインしておいてください（AIはその画面を見に行きます）</li>
+      </ul>
+      <div class="links">
+        <a href="https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn" target="_blank">🔗 Chrome拡張機能「Claude」</a>
+      </div>
+      <div class="note">🪟 <b>Windowsをお使いの場合</b>、赤い字で「ローカルセッションにはGitが必要です」と出ることがあります。そのときは「Windows Terminal」を開いて下を実行し、Claudeを開き直せば消えます。
+        <div class="cmd" style="margin-top:8px">
+          <code id="k4">winget install -e --id Git.Git</code>
+          <button class="copy" data-target="k4">コピー</button>
+        </div>
+      </div>
+      <div class="goal">🎯 <b>できたら</b>：Claudeの「Code」に話しかけて、返事が返ってくる</div>
+    </div>
+  </div>
+
+  <h2 class="sec">🗓 今週やること</h2>
+  <div class="task" data-id="u6">
+    <div class="head">
+      <input type="checkbox">
+      <h3>次に会うまでの宿題</h3>
+    </div>
+    <div class="body">
+      <ul>
+        <li><b>本編「はじめに」〜STEP1（ジャンル選定）</b>まで動画を見る</li>
+        <li>進捗管理シートの<b>①自己分析</b>を書いて、Discordに提出する</li>
+        <li>時間があれば <b>Instagram AI活用講座 STEP1〜4</b> を見る（今日の続きです）</li>
+      </ul>
+      <div class="note">💡 全部を完璧にやらなくて大丈夫です。<b>止まったらすぐ聞く</b>のが一番早く進みます。</div>
+    </div>
+  </div>
+
+  <h2 class="sec">🆘 困ったときは</h2>
+  <div class="task" data-id="u7">
+    <div class="head">
+      <input type="checkbox">
+      <h3>この2つだけ覚えてください</h3>
+    </div>
+    <div class="body">
+      <ul>
+        <li><b>パソコンの画面で困ったら</b> → その画面をスクリーンショットして、開いているClaudeにそのまま貼り付けて「これどうすればいい？」と聞く。だいたいその場で解決します</li>
+        <li><b>講座の内容・課題で迷ったら</b> → Discordでけんじに質問する</li>
+      </ul>
+      <div class="links">
+        <a href="https://discord.gg/j4EEmPE5jw" target="_blank">🔗 Discord</a>
+        <a href="https://otolabo.keji-insta.workers.dev/login" target="_blank">🔗 講座サイト</a>
+      </div>
+    </div>
+  </div>
+
+  <button class="reset" id="reset">チェックを全部リセット</button>
+  <footer>おとラボ スタートガイド ｜ 上田さん専用<br>このページはいつでも見返せます。ブックマークしておいてください。</footer>
+</div>
+
+<script>
+  var KEY = 'otolab-start-ueda';
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e){ saved = {}; }
+  var tasks = Array.prototype.slice.call(document.querySelectorAll('.task'));
+  function paint(){
+    var done = 0;
+    tasks.forEach(function(t){
+      var cb = t.querySelector('input[type=checkbox]');
+      if (cb.checked){ done++; t.classList.add('done'); } else { t.classList.remove('done'); }
+    });
+    var pct = tasks.length ? Math.round(done / tasks.length * 100) : 0;
+    document.getElementById('bar').style.width = pct + '%';
+    document.getElementById('ptext').innerText = done + ' / ' + tasks.length + ' 完了';
+  }
+  tasks.forEach(function(t){
+    var id = t.dataset.id;
+    var cb = t.querySelector('input[type=checkbox]');
+    cb.checked = !!saved[id];
+    cb.addEventListener('change', function(){
+      saved[id] = cb.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch(e){}
+      paint();
+    });
+  });
+  paint();
+  document.getElementById('reset').addEventListener('click', function(){
+    saved = {};
+    try { localStorage.removeItem(KEY); } catch(e){}
+    tasks.forEach(function(t){ t.querySelector('input[type=checkbox]').checked = false; });
+    paint();
+  });
+  function feedback(btn){
+    var old = btn.dataset.label || btn.innerText;
+    btn.dataset.label = old;
+    btn.innerText = 'コピー済み ✓';
+    btn.classList.add('done');
+    setTimeout(function(){ btn.innerText = old; btn.classList.remove('done'); }, 1600);
+  }
+  function legacyCopy(text){
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;left:-9999px;top:0;width:1px;height:1px;padding:0;border:0;margin:0;font-size:16px;';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    try { ta.setSelectionRange(0, text.length); } catch(e){}
+    var selected = (ta.selectionEnd - ta.selectionStart) === text.length;
+    var ok = false;
+    if (selected) { try { ok = document.execCommand('copy'); } catch(e){ ok = false; } }
+    document.body.removeChild(ta);
+    return ok;
+  }
+  function manualCopy(btn, text){
+    var cmd = btn.parentNode;
+    var wrap = cmd.nextElementSibling;
+    if (!wrap || wrap.className !== 'copy-manual-wrap'){
+      wrap = document.createElement('div');
+      wrap.className = 'copy-manual-wrap';
+      var msg = document.createElement('p');
+      msg.textContent = '自動コピーができませんでした。下の枠は選択してあるので、そのままコピー（⌘C / Ctrl+C）してください。';
+      msg.style.cssText = 'margin:10px 0 4px;font-size:12.5px;color:#e06c6c;font-weight:700;';
+      var ta = document.createElement('textarea');
+      ta.readOnly = true;
+      ta.style.cssText = 'display:block;width:100%;box-sizing:border-box;min-height:130px;padding:10px;'
+        + 'border:2px solid #ef8a7a;border-radius:10px;font:13px/1.7 inherit;background:#fff;color:#4a3f3b;';
+      wrap.appendChild(msg); wrap.appendChild(ta);
+      cmd.insertAdjacentElement('afterend', wrap);
+    }
+    var box = wrap.querySelector('textarea');
+    box.value = text; box.focus(); box.select();
+    var old = btn.dataset.label || btn.innerText;
+    btn.dataset.label = old;
+    btn.innerText = '手でコピー';
+    setTimeout(function(){ btn.innerText = old; }, 6000);
+  }
+  document.querySelectorAll('.copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var text = document.getElementById(btn.dataset.target).innerText.replace(/ /g, ' ').trim();
+      if (!text) return;
+      if (legacyCopy(text)) { feedback(btn); return; }
+      if (!(navigator.clipboard && navigator.clipboard.writeText)) { manualCopy(btn, text); return; }
+      var settled = false;
+      var giveUp = setTimeout(function(){ if (settled) return; settled = true; manualCopy(btn, text); }, 800);
+      navigator.clipboard.writeText(text).then(function(){
+        if (settled) return; settled = true; clearTimeout(giveUp); feedback(btn);
+      }).catch(function(){
+        if (settled) return; settled = true; clearTimeout(giveUp); manualCopy(btn, text);
+      });
+    });
+  });
+</script>
+</body>
+</html>

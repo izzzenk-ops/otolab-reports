@@ -41,12 +41,48 @@
   .brewbody .mini:first-child{margin-top:0;}
   .brewbody .cmd code{font-size:11.5px;white-space:pre-wrap;}
 
+  /* 貼る場所（一番大事） */
+  .where{background:#fff;border:2px solid var(--accent);border-radius:22px;padding:24px 26px;margin-bottom:24px;}
+  .where h2{font-size:19px;font-weight:800;color:var(--accent-deep);margin-bottom:6px;}
+  .where .lead{font-size:13.5px;margin-bottom:16px;}
+  .mock{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fbfaf8;margin:6px 0 4px;}
+  .mock .bar{display:flex;gap:6px;align-items:center;padding:9px 12px;background:#f3efe9;border-bottom:1px solid var(--line);}
+  .mock .dot{width:9px;height:9px;border-radius:50%;background:#dcd5cb;}
+  .mock .tabs{margin-left:10px;display:flex;gap:6px;}
+  .mock .tab{font-size:11.5px;font-weight:800;color:var(--sub);background:#fff;border:1px solid var(--line);
+    border-radius:999px;padding:2px 12px;}
+  .mock .tab.on{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .mock .body{padding:16px 14px 14px;}
+  .mock .inputbox{border:2px solid var(--accent);border-radius:12px;background:#fff;padding:11px 13px;
+    font-size:12.5px;color:var(--sub);display:flex;justify-content:space-between;align-items:center;}
+  .mock .caption{font-size:12px;font-weight:800;color:var(--accent-deep);margin-top:9px;text-align:center;}
+  .nope{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;}
+  .nope div{background:#f6f6f7;border:1px solid #e4e3e6;border-radius:14px;padding:12px 14px;font-size:12.5px;}
+  .nope div b{display:block;color:#9aa0aa;font-size:12px;margin-bottom:2px;}
+  .where .kome{font-size:12.5px;color:var(--sub);margin-top:14px;}
+
+  /* OS分岐 */
+  .osrow{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:26px;}
+  .oscard{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px 24px;}
+  .oscard.win{border-left:6px solid var(--blue);}
+  .oscard.mac{border-left:6px solid var(--green);}
+  .oscard h2{font-size:17px;font-weight:800;margin-bottom:4px;}
+  .oscard .sub{font-size:12.5px;color:var(--sub);margin-bottom:12px;}
+  .oscard ol{margin-left:19px;font-size:13.5px;}
+  .oscard li{margin-bottom:10px;}
+  .oscard li b.t{display:block;font-size:14px;}
+  .oscard .note{font-size:12.5px;color:var(--sub);display:block;}
+  .must{background:var(--accent-soft);border:1px solid #f6d5d5;border-radius:12px;padding:10px 14px;
+    font-size:12.5px;margin:8px 0;color:var(--accent-deep);font-weight:700;}
+
   /* STEP */
   .step{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px 26px;margin-bottom:16px;position:relative;}
   .step .num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;
     background:var(--grad);color:#fff;font-weight:800;font-size:15px;margin-right:10px;vertical-align:middle;}
   .step h2{display:inline;font-size:18px;font-weight:800;}
   .step .desc{font-size:13.5px;color:var(--sub);margin:10px 0 14px;}
+  .step .ok{background:var(--green-soft);border:1px solid #cfe9d8;border-radius:12px;padding:9px 14px;
+    font-size:12.5px;color:#3d8159;font-weight:700;margin-top:12px;}
 
   .cmd{display:flex;align-items:stretch;gap:8px;margin-top:10px;}
   .cmd code{flex:1;background:#2f3542;color:#e8eef5;border-radius:10px;padding:12px 15px;
@@ -77,6 +113,17 @@
   .pill{display:inline-block;background:#fff;color:#3d8159;border:1px solid #cfe9d8;border-radius:999px;
     padding:4px 13px;font-size:12.5px;font-weight:700;margin:0 5px 6px 0;}
 
+  /* 困ったとき */
+  .fix{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px 26px;margin-bottom:16px;}
+  .fix h2{font-size:17px;font-weight:800;margin-bottom:4px;}
+  .fix .sub{font-size:12.5px;color:var(--sub);margin-bottom:14px;}
+  .case{border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:10px;background:#fdfcfa;}
+  .case .sym{font-size:13px;font-weight:800;color:var(--accent-deep);display:block;margin-bottom:6px;}
+  .case .err{background:#2f3542;color:#e8eef5;border-radius:8px;padding:8px 11px;font-size:11.5px;
+    font-family:ui-monospace,Menlo,Consolas,monospace;white-space:pre-wrap;word-break:break-all;margin-bottom:8px;}
+  .case p{font-size:12.5px;}
+  .case .ans{font-weight:700;}
+
   /* 動画編集の注意 */
   .warn{background:var(--gold-soft);border:1px solid #f2ddba;border-radius:18px;padding:20px 24px;margin-bottom:16px;}
   .warn h2{font-size:15px;font-weight:800;color:var(--gold);display:flex;align-items:center;gap:8px;margin-bottom:8px;}
@@ -84,17 +131,20 @@
   .warn li{padding:4px 0 4px 22px;position:relative;}
   .warn li::before{content:"•";position:absolute;left:6px;color:var(--gold);font-weight:800;}
   .warn code.inline{background:#efe4cf;color:#8a5a1a;border-radius:6px;padding:1px 7px;font-size:12px;font-family:ui-monospace,monospace;}
+  code.inline{background:#f1ece4;color:#8a5a1a;border-radius:6px;padding:1px 7px;font-size:12px;font-family:ui-monospace,monospace;}
 
   .help{text-align:center;background:var(--accent-soft);border-radius:16px;padding:16px 22px;font-size:13.5px;color:var(--accent-deep);font-weight:700;margin-top:8px;}
   footer{text-align:center;font-size:11.5px;color:var(--sub);margin-top:28px;}
-  @media(max-width:560px){.cmd{flex-direction:column;}.copy{padding:10px;}}
+  @media(max-width:560px){.cmd{flex-direction:column;}.copy{padding:10px;}.nope{grid-template-columns:1fr;}}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
   @media print{
     body{background:#fff;}
     .wrap{max-width:none;padding:12px 16px 20px;}
-    header,.step,.prep,.done-card,.warn,.help{break-inside:avoid;}
+    header,.step,.prep,.done-card,.warn,.help,.where,.oscard,.fix,.case{break-inside:avoid;}
     .copy{display:none;}
     .cmd code{white-space:normal;word-break:break-all;}
+    .cmd code.multi{max-height:none;overflow:visible;white-space:pre-wrap;}
+    details{break-inside:avoid;}
   }
 </style>
 </head>
@@ -104,29 +154,85 @@
   <header>
     <div class="label">OTOLAB SKILLS ｜ SETUP</div>
     <h1>おとラボ スキル 導入ガイド</h1>
-    <p>Claude Code に貼るのは <b>3つ</b> だけ（スキル導入の2行＋初期設定）。分析・台本・動画編集の全スキルが、あなた仕様で使えるようになります。</p>
+    <p>やることは <b>準備 → 2つ貼る</b> だけ。<b>ふだんの作業に黒い画面（ターミナル）は使いません。</b>（動画編集の下準備をするときだけ、最後のおまけページで1回だけ触ります）</p>
   </header>
 
+  <div class="where">
+    <h2>🚦 いちばん大事：貼る場所はここです</h2>
+    <p class="lead">このガイドで出てくる文字列は、<b>すべて「Claude デスクトップアプリ」の「Code」タブの入力欄</b>に貼ります。ここを間違えると、何をやってもエラーになります。</p>
+
+    <div class="mock">
+      <div class="bar">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="tabs">
+          <span class="tab">Chat</span>
+          <span class="tab">Cowork</span>
+          <span class="tab on">Code</span>
+        </span>
+      </div>
+      <div class="body">
+        <div class="inputbox"><span>ここに貼る（ふだんの会話をする入力欄）</span><span>▶</span></div>
+      </div>
+    </div>
+    <p class="caption" style="font-size:12.5px;font-weight:800;color:var(--accent-deep);margin-top:9px;text-align:center;">⭕ Claudeアプリ → 上の「Code」に切り替え → 下の入力欄</p>
+
+    <div class="nope">
+      <div><b>❌ 黒い画面</b>PowerShell・ターミナル・コマンドプロンプト。<b>この導入手順は黒い画面では動きません。</b>貼ると「用語 …は認識されません」と出ます。</div>
+      <div><b>❌ 「Chat」「Cowork」タブ</b>同じアプリでも動きません（この2つは、あなたのパソコンのファイルを触れないため）。<b>必ず「Code」</b>に切り替えてください。</div>
+    </div>
+
+    <p class="kome">💡 このガイドで貼るのは<b>Claudeへのお願いの文章</b>であって、パソコンへの命令ではありません。黒い画面に貼ると「<b>用語 …は認識されません</b>」と出ます。出てしまった方は、その画面を閉じてアプリに戻れば大丈夫です。</p>
+  </div>
+
+  <div class="osrow">
+
+    <div class="oscard win">
+      <h2>🪟 Windows の方：準備は3つ</h2>
+      <div class="sub">上から順に。ここさえ済めば、あとは Mac と同じです。</div>
+      <ol>
+        <li><b class="t">① Claude デスクトップアプリを入れて、ログインする</b>
+          <span class="note">公式ページ → <a href="https://claude.com/ja-jp/download" target="_blank" rel="noopener" style="color:#e06c6c;font-weight:800;word-break:break-all;">https://claude.com/ja-jp/download</a><br>
+          ダウンロードしたファイルをダブルクリックして「次へ」で進めばOK。<b>ボタンが2つ並んで迷う方は下の折りたたみへ👇</b><br>
+          入れたらアプリを開いて、<b>いつものアカウントでログイン</b>してください。<br>
+          ⚠️ 検索から入ると広告枠に<b>偽サイト</b>が混ざります。URLが <code class="inline">claude.com</code> か確認してください。</span>
+          <div class="must">💳 <b>Claude の有料プラン（Pro など）が必要です。</b>無料プランのままだと「Code」を押したときにアップグレードを求められて、ここから先に進めません。</div>
+          <div class="ok" style="margin-top:6px;">✅ こうなったら成功：アプリが開いてログインでき、画面の上に <b>Chat / Cowork / Code</b> が並んで見える</div></li>
+
+        <li><b class="t">② Git を入れる（Windows だけ必須）</b>
+          <span class="note">これが無いと Code タブが開けません（赤字で「<b>ローカルセッションには Git が必要です</b>」と出ます）。<b>裏方のソフトなので、入れたあとに操作することはありません。</b><br>
+          👉 <a href="https://git-scm.com/downloads/win" target="_blank" rel="noopener" style="color:#e06c6c;font-weight:800;word-break:break-all;">https://git-scm.com/downloads/win</a> を開いて「<b>64-bit Git for Windows Setup</b>」をダウンロード → ダブルクリック → 出てくる画面は<b>すべてそのまま「Next」</b>→ 最後に「Install」。</span>
+          <div class="must">⚠️ 入れ終わったら、<b>Claude アプリをいったん完全に閉じて、開き直してください。</b>これをしないと、Git を入れても赤い警告が消えません（ここで詰まる方がいちばん多いです）。</div></li>
+
+        <li><b class="t">③ Chrome 拡張機能「Claude」を入れる</b>
+          <span class="note">分析スキルが、あなたのChromeでInstagramを見に行くために使います。<b>入れ方は下の折りたたみへ👇</b>（3分）。台本づくり・動画編集だけなら無くても動きます。</span></li>
+      </ol>
+      <div class="must" style="background:var(--blue-soft);border-color:#d5e6f7;color:var(--blue-deep);">
+        💡 <b>Node.js・npm・winget は不要です。</b>アプリの中に Claude Code が入っているので、黒い画面での準備はいりません。
+      </div>
+    </div>
+
+    <div class="oscard mac">
+      <h2>🍎 Mac の方：準備は2つ</h2>
+      <div class="sub">Git は<b>ほとんどの Mac に最初から入っている</b>ので、Windows の②は不要です。</div>
+      <ol>
+        <li><b class="t">① Claude デスクトップアプリを入れて、ログインする</b>
+          <span class="note">公式ページ → <a href="https://claude.com/ja-jp/download" target="_blank" rel="noopener" style="color:#e06c6c;font-weight:800;word-break:break-all;">https://claude.com/ja-jp/download</a><br>
+          開いたファイルの Claude アイコンを「アプリケーション」フォルダにドラッグ → アプリを開いて<b>いつものアカウントでログイン</b>してください。<br>
+          💡「開発元を検証できないため開けません」と出たら、アプリのアイコンを<b>右クリック →「開く」</b>を選び、もう一度「開く」を押してください。</span>
+          <div class="must">💳 <b>Claude の有料プラン（Pro など）が必要です。</b>無料プランのままだと「Code」を押したときにアップグレードを求められて、ここから先に進めません。</div>
+          <div class="ok" style="margin-top:6px;">✅ こうなったら成功：アプリが開いてログインでき、画面の上に <b>Chat / Cowork / Code</b> が並んで見える</div></li>
+        <li><b class="t">② Chrome 拡張機能「Claude」を入れる</b>
+          <span class="note">分析スキルに必須です。<b>入れ方は下の折りたたみへ👇</b>（3分）。</span></li>
+      </ol>
+      <div class="must" style="background:var(--blue-soft);border-color:#d5e6f7;color:var(--blue-deep);">
+        💡 もし作業中に「<b>"git" コマンドには開発者ツールが必要です</b>」という画面が出たら、そのまま<b>「インストール」</b>を押してください（数分で終わります）。このガイドの手順では git は使いませんが、まれに他の場面で出ることがあります。
+      </div>
+      <span class="note" style="font-size:12.5px;color:var(--sub);">「動画編集」スキルも使う方だけ、先に <b>Homebrew</b> を入れておくと途中で止まりません（下の折りたたみ🍺）。分析・台本スキルだけなら不要です。</span>
+    </div>
+  </div>
+
   <div class="prep">
-    <h2>🧰 はじめる前に</h2>
-    <ul>
-      <li><b>使うのは「Claude デスクトップアプリ」です。</b>パソコンに入れるアプリを開いて、左上を <b>「Code」</b> に切り替えて使います。
-        <br><span class="mini">👉 <b>ダウンロードはこの公式ページから</b>（無料）：<br>
-        <a href="https://claude.com/ja-jp/download" target="_blank" rel="noopener" style="color:#e06c6c;font-weight:800;word-break:break-all;">https://claude.com/ja-jp/download</a><br>
-        ページを開いたら、<b>お使いのパソコンのボタン（Mac ／ Windows）を押すだけ</b>です。Mac は開いたファイルの Claude アイコンを「アプリケーション」フォルダにドラッグ、Windows はダウンロードしたファイルをダブルクリックして「次へ」で進めばOK。<b>Windows の方はボタンが2つ並んで迷うので、下の折りたたみ「どっちをダウンロードする？」を見てください👇</b><br>
-        ⚠️ 検索から入ると広告枠に<b>偽サイト</b>が混ざることがあります。URLが <code class="inline">claude.com</code> か確認してからダウンロードしてください。</span></li>
-      <li><b style="color:#e06c6c;">ターミナルのまま作業を続けないでください。</b>設定はターミナルで進めてもOKですが、<b>ふだん使うのはデスクトップアプリの「Code」</b>です。
-        <br><span class="mini">ターミナル（Macは「ターミナル」アプリ／Windowsは「Windows Terminal」）で <code class="inline">claude</code> と打っても Claude Code は動きます。ただし<b>ターミナルを使うのは、次の2つのときだけ</b>です：<br>
-        ・<b>① Claude Code を入れるとき</b>（デスクトップアプリを入れた方は不要。<b>ターミナルから入れた方も、入れ終わったらデスクトップアプリに戻ってください</b>）<br>
-        ・<b>② Windows で「動画編集」スキルを使うとき</b>（このときだけ Windows Terminal が必要です。→ 下の🎬）<br>
-        <b>デスクトップアプリとターミナルの <code class="inline">claude</code> は別物です。</b>片方を入れても、もう片方が使えるようにはなりません。<b>「まだ入っていない」「claude と打っても反応しない」方は下の折りたたみへ👇</b></span></li>
-      <li><b>Chrome の拡張機能「Claude」も入れてください。</b>分析スキル（競合分析・バズ企画リサーチなど）が、あなたのChromeでInstagramの画面を見に行くために使います。<b>これが無いと分析系スキルが途中で止まります。</b>
-        <br><span class="mini">👉 <b>入れ方は下の折りたたみへ👇</b>（3分）。台本づくりや動画編集だけなら無くても動きます。</span></li>
-      <li><b>Mac の方</b>：そのまま進んでOKです。
-        <br><span class="mini">「動画編集」スキルも使いたい場合のみ、先に <b>Homebrew</b> を入れておくと途中で止まりません（入れ方は下の折りたたみを参照）。分析・台本スキルだけなら不要です。</span></li>
-      <li><b>Windows の方</b>：<b style="color:#e06c6c;">先に「Git」を入れてください。</b>これが無いと、Claude で自分のパソコンのファイルが扱えません（赤字で「ローカルセッションにはGitが必要です」と出ます）。<b>入れ方は下の折りたたみへ👇</b>
-        <br><span class="mini">また、<b>「動画編集」スキルを使うときだけ「Windows Terminal」から <code class="inline">claude</code> で起動</b>してください。デスクトップアプリの「Code」タブでは、動画編集スキルが動かないことをテストで確認しています（<b>分析・台本・設計スキルはデスクトップアプリのままでOK</b>です）。「Windows Terminal」はスタートメニューで「terminal」と検索すると出てきます（無い場合は Microsoft Store から無料で入ります）。Homebrew は Mac 専用なので、Windows の方は不要です。</span></li>
-    </ul>
+    <h2>📎 準備の詳しい手順（必要な人だけ開いてください）</h2>
 
     <details class="brew">
       <summary>🧩 Chrome 拡張機能「Claude」の入れ方（分析スキルを使う方は必須・3分）</summary>
@@ -164,44 +270,6 @@
     </details>
 
     <details class="brew">
-      <summary>🪟 Git の入れ方（Windows の方は必須・3分）</summary>
-      <div class="brewbody">
-        <p class="mini">Claude で「<b style="color:#e06c6c;">ローカルセッションには Git が必要です</b>」と赤字が出たら、<b>Git というソフトが入っていないだけ</b>です。入れれば消えます。<b>裏方のソフトなので、入れたあとに操作することはありません。</b></p>
-        <p class="mini"><b>① スタートメニューで「terminal」と検索</b>して「Windows Terminal」を開き、下を貼って実行してください。</p>
-        <div class="cmd">
-          <code id="w1">winget install -e --id Git.Git</code>
-          <button class="copy" data-target="w1">コピー</button>
-        </div>
-        <p class="mini"><b>② 終わったら、Windows Terminal と Claude を「両方とも」いったん閉じて</b>、Claude を開き直してください。赤い警告が消えていれば成功です。</p>
-        <p class="mini"><b>③ winget が使えなかった場合</b>は、公式サイトから直接入れられます：<br>
-        <b>https://git-scm.com/download/win</b><br>
-        「64-bit Git for Windows Setup」をダウンロードし、出てくる画面は<b>すべてそのまま「Next」</b>で進めてOKです。終わったら Claude を開き直してください。</p>
-        <p class="mini">💡 Mac の方はこの作業は不要です（Git は最初から入っています）。</p>
-      </div>
-    </details>
-
-    <details class="brew">
-      <summary>⚙️ ターミナルの「claude」でも使いたい方だけ（ふだんは不要）</summary>
-      <div class="brewbody">
-        <p class="mini"><b>ほとんどの方はこの作業は不要です。</b>デスクトップアプリの「Code」で全スキルが使えます。<br>
-        必要なのは <b>Windows で動画編集スキルを使う方</b>と、<b>どうしてもターミナルで動かしたい方</b>だけです。<br>
-        <b>デスクトップアプリだけ入れていて、ターミナルで <code class="inline">claude</code> が使えない</b>のはよくあることです（別のソフト扱いなので）。ターミナル版も使いたいときは、下の1行を入れるだけです。</p>
-        <p class="mini"><b>【Mac の方】</b>「ターミナル」アプリを開いて、下を貼って実行してください。</p>
-        <div class="cmd">
-          <code id="i1">curl -fsSL https://claude.ai/install.sh | bash</code>
-          <button class="copy" data-target="i1">コピー</button>
-        </div>
-        <p class="mini"><b>【Windows の方】</b>「Windows Terminal」を開いて、下を貼って実行してください。</p>
-        <div class="cmd">
-          <code id="i2">irm https://claude.ai/install.ps1 | iex</code>
-          <button class="copy" data-target="i2">コピー</button>
-        </div>
-        <p class="mini"><b>終わったら、ターミナルを一度閉じて開き直してから</b> <code class="inline">claude</code> と打ってください。Claude Code が立ち上がれば成功です。初回はログインを求められるので、いつものアカウントでログインしてください。</p>
-        <p class="mini"><b style="color:#e06c6c;">⚠️ 入れ終わったら、作業はデスクトップアプリに戻ってください。</b>ここでインストールしたのは「ターミナル版」です。ターミナルの黒い画面のまま進めてしまう方が多いのですが、<b>ふだんの作業はデスクトップアプリの「Code」</b>が正解です（画面が見やすく、ファイルのやりとりも楽です）。ターミナルを使い続けてよいのは <b>Windows で動画編集スキルを動かすときだけ</b>です。</p>
-      </div>
-    </details>
-
-    <details class="brew">
       <summary>🍺 Homebrew の入れ方（Mac で動画編集を使う方だけ・3分）</summary>
       <div class="brewbody">
         <p class="mini"><b>Homebrew（ホームブリュー）</b>は、動画編集に必要な部品を自動で入れてくれる道具です。1回入れれば、あとはずっと使えます。</p>
@@ -229,29 +297,65 @@ eval "$(/opt/homebrew/bin/brew shellenv)"</code>
   </div>
 
   <div class="step">
-    <span class="num">1</span><h2>マーケットプレイスを登録</h2>
-    <div class="desc">おとラボのスキル置き場を Claude Code に教えます。下の1行をコピーして、Claude Code に貼って実行してください。</div>
-    <div class="cmdlabel">Claude Code に貼る ①</div>
+    <span class="num">1</span><h2>「Code」タブで作業フォルダを選ぶ</h2>
+    <div class="desc">スキルを入れる前に、Claude に「どのフォルダで作業するか」を教えます。ここを飛ばすと、次のSTEP2を貼っても反応しません。</div>
+    <p style="font-size:13.5px;">アプリを開いて、上の <b>「Code」</b> をクリック → <b>「Local」</b>（自分のパソコン）を選び → <b>「フォルダを選択」</b>を押します。</p>
+    <p style="font-size:13.5px;">フォルダを選ぶ画面が開いたら、<b>書類（Documents）</b>を選んで、<b>そこに新しいフォルダを作ります</b>：<br>
+    ・<b>Mac</b>：画面の左下（または右上）の<b>「新規フォルダ」</b>ボタンを押す<br>
+    ・<b>Windows</b>：画面の上の<b>「新しいフォルダー」</b>を押す<br>
+    名前を <b>Claude</b> にして作り、そのフォルダを選んで「選択」「フォルダーの選択」を押してください。<b>中身は空でOK</b>です。</p>
+    <div class="ok">✅ こうなったら成功：画面の下に、ふだんの会話と同じ<b>入力欄</b>が出る</div>
+  </div>
+
+  <div class="step">
+    <span class="num">2</span><h2>スキルを入れる（貼るのはこれ1つ）</h2>
+    <div class="desc">下の文章を<b>まるごとコピー</b>して、さっきの入力欄に貼って実行（Enter）してください。<b>ダウンロードも置き場所の準備も、全部 Claude がやります。</b>あなたがファイルを触ることはありません（ターミナルも git も使いません）。</div>
+    <div class="must">⚠️ <b>実行すると「これを実行してもいい？」という確認が1〜数回出ます。すべて「許可」を押してください。</b>（「常に許可」があればそれでOK）<br>
+    とくに、スキルの置き場所は STEP1 で選んだフォルダの<b>外</b>にあるので、「作業フォルダの外です」という確認が出ます。これも<b>「許可」</b>で進めてください。ここで「拒否」を押すと途中で止まります。</div>
+    <div class="cmdlabel">Code タブの入力欄に貼る ①（全文コピー）</div>
     <div class="cmd">
-      <code id="c1">/plugin marketplace add izzzenk-ops/otolab-skills</code>
+      <code id="c1" class="multi">おとラボのスキルを入れてください。私（受講生）はターミナルを触りません。以下はあなた（Claude）が全部やってください。コマンド実行の許可は出します。
+
+1. https://github.com/izzzenk-ops/otolab-skills/archive/refs/heads/main.zip をダウンロードして展開する
+　・git clone は使わないでください（受講生のパソコンに git が入っていない場合があるため）
+　・ダウンロードと展開は、あなたの内部コマンド（curl / unzip など）で構いません
+　・一時フォルダは、いま開いている作業フォルダの中ではなく、システムの一時領域（Macなら /tmp、Windowsなら %TEMP%）に作ること
+
+2. 展開した otolab-skills-main/plugins/otolab-insta/skills/ の中のフォルダを全部、ユーザーのホームフォルダ直下の .claude/skills/ にコピーする
+　・Mac は ~/.claude/skills/ ／ Windows は C:\Users\&lt;ユーザー名&gt;\.claude\skills\
+　・※ここは「ホーム直下の .claude」です。いま開いている作業フォルダの中や Documents の中ではありません
+　・.claude/skills が無ければ作る
+　・コピーするのはフォルダ（ディレクトリ）だけです。skills/ の直下にファイルがあっても無視してください
+　・コピー先に同じ名前のスキルフォルダがあるときは、その1つのスキルフォルダだけを削除してから丸ごとコピーする（中身のマージはしない）
+　・⚠️ .claude/skills フォルダそのものは絶対に削除しないでください。私が自分で入れた別のスキルが入っていることがあります
+
+3. コピー元（otolab-skills-main/plugins/otolab-insta/skills/）にあったフォルダが、コピー先の .claude/skills/ に全部そろっているか1つずつ確認する
+　・コピー元と同じフォルダが全部そろっていて、それぞれの中に SKILL.md があればOKです
+　・私が自分で入れた別のスキルが .claude/skills/ にあっても、それはエラーにしないでください
+　・足りないフォルダがあるときだけ、その名前を挙げて「コピーできていないスキルがあります」と言って止まる
+
+4. 確認が終わってから、ダウンロードしたzipと展開した一時フォルダを削除する（今あなたが作ったファイルなので、確認せず削除してよい）
+
+5. 最後に、今回コピーしたスキル名の一覧と、その個数を表示して、こう伝える：「スキル導入 完了（◯個）。反映するには Claude をいったん完全に終了して、開き直してください」</code>
       <button class="copy" data-target="c1">コピー</button>
     </div>
+    <div class="ok">✅ こうなったら成功：スキル名の一覧が表示され、<b>「スキル導入 完了」</b>と報告される（2026年9月時点は16個です）</div>
+    <p style="font-size:12.5px;color:var(--sub);margin-top:10px;">💡 文章の中の「zip」「展開」「ホームフォルダ」は<b>Claudeへの指示</b>です。意味が分からなくても大丈夫、あなたの操作はありません。<br>
+    💡「コピーできていないスキルがあります」と言われたら、そのまま「<b>もう一度やり直してください</b>」と返信すれば入れ直してくれます。</p>
   </div>
 
   <div class="step">
-    <span class="num">2</span><h2>スキルを一括インストール</h2>
-    <div class="desc">全スキルが入った「otolab-insta」を入れます。同じく下の1行を貼って実行してください。</div>
-    <div class="cmdlabel">Claude Code に貼る ②</div>
-    <div class="cmd">
-      <code id="c2">/plugin install otolab-insta@otolab-skills</code>
-      <button class="copy" data-target="c2">コピー</button>
-    </div>
+    <span class="num">3</span><h2>アプリを開き直す</h2>
+    <div class="desc">入れたスキルは、Claude を起動し直したときに読み込まれます。</div>
+    <p style="font-size:13.5px;"><b>Claude アプリをいったん完全に終了して、もう一度開いてください。</b><br>
+    （Mac は <b>Claude メニュー →「Claudeを終了」</b>／Windows は <b>タスクバーのアイコンを右クリック →「閉じる」</b>）</p>
+    <div class="ok">✅ こうなったら成功：開き直したあと「<b>どんなスキルが使える？</b>」と聞くと、おとラボのスキルが並ぶ</div>
   </div>
 
   <div class="step">
-    <span class="num">3</span><h2>初期設定（あなた専用にする）</h2>
-    <div class="desc">最後に、下の文章を<b>まるごとコピー</b>して Claude Code に貼って実行してください。Claude が1問ずつ質問しながら、成果物の保存フォルダと<b>あなたの発信プロフィール</b>を作ってくれます。これで台本・分析スキルが<b>あなた仕様</b>で動くようになります。</div>
-    <div class="cmdlabel">Claude Code に貼る ③（全文コピー）</div>
+    <span class="num">4</span><h2>初期設定（あなた専用にする）</h2>
+    <div class="desc">最後に、下の文章を<b>まるごとコピー</b>して同じ入力欄に貼って実行してください。Claude が1問ずつ質問しながら、成果物の保存フォルダと<b>あなたの発信プロフィール</b>を作ってくれます。これで台本・分析スキルが<b>あなた仕様</b>で動くようになります。</div>
+    <div class="cmdlabel">Code タブの入力欄に貼る ②（全文コピー）</div>
     <div class="cmd">
       <code id="c3" class="multi">おとラボスキルを使うための初期設定をお願いします。以下を順番に実行してください。
 
@@ -274,17 +378,17 @@ eval "$(/opt/homebrew/bin/brew shellenv)"</code>
 4. 最後に、作成したフォルダ構成をツリーで見せて「初期設定完了」と報告する。</code>
       <button class="copy" data-target="c3">コピー</button>
     </div>
-    <div class="discord folder" style="margin-top:12px;">
+    <div class="discord folder">
       📁 <b>レポートが保存される場所（ここだけ覚えてください）</b><br>
       分析レポートや台本などの成果物は、<b>どのフォルダから Claude Code を起動しても、必ずここに保存されます</b>👇<br>
-      <b>書類（Documents） → Claude → Projects</b><br>
-      <span class="mini2" style="color:#8b93a3;">デスクトップなど別の場所に「Claude」フォルダを作って使っている方も、そのままで大丈夫です。スキルは正常に動きます。ただし<b>レポートを探すときは上の「書類」フォルダ</b>を見てください。<br>💡 次回から Claude Code を開くときに、作業フォルダとして「書類 → Claude」を選んでおくと、フォルダの決まりごとも効いていちばんスムーズです。</span>
+      <span class="mini2"><b>書類（Documents） → Claude → Projects</b><br>
+      デスクトップなど別の場所に「Claude」フォルダを作って使っている方も、そのままで大丈夫です。スキルは正常に動きます。ただし<b>レポートを探すときは上の「書類」フォルダ</b>を見てください。</span>
     </div>
   </div>
 
   <div class="done-card">
     <h2>🎉 これで完了です</h2>
-    <p>分析・設計・台本・動画編集の <b>全スキルがそのまま使えます</b>。<b style="color:#e06c6c;">スキルは／（スラッシュ）では呼びません。</b>ふだんのチャットに、こう話しかけるだけです：</p>
+    <p>分析・設計・台本のスキルは<b>いますぐ使えます</b>（動画編集だけ、初めて使うときに数分〜十数分の下準備が入ります → 下の🎬）。<b>スキル名を覚える必要はありません。</b>ふだんのチャットに、こう話しかけるだけです：</p>
     <div class="try">
       <span class="pill">このリールを分析して＋URL</span>
       <span class="pill">この投稿バズってる？＋URL</span>
@@ -294,16 +398,14 @@ eval "$(/opt/homebrew/bin/brew shellenv)"</code>
       <span class="pill">アフレコ動画を編集して</span>
       <span class="pill">このリールを完コピしたい＋URL</span>
     </div>
-
-    <div class="discord folder" style="margin-top:12px;">
+    <div class="seemore">
       💬 <b>スキルの呼び方は2つ。どちらでもOKです</b><br>
-      <b>① ふつうに話しかける（おすすめ）</b>／（スラッシュ）は付けません。上の言葉をそのまま貼るだけ。<br>
-      <span class="mini2" style="color:#8b93a3;">例：<code class="inline">このリールを分析して https://www.instagram.com/reel/○○○</code></span><br>
-      <b>② 正式名で呼ぶ（慣れてきた人向け）</b>スキル名だけでは動きません。<b>頭に <code class="inline">/otolab-insta:</code> が必要</b>です。<br>
-      <span class="mini2" style="color:#8b93a3;">例：<code class="inline">/otolab-insta:bunseki-reel</code>　❌ <code class="inline">/bunseki</code>（途中まで）／❌ <code class="inline">/bunseki-reel</code>（頭が抜けている）はエラーになります。<br>
-      💡 スキル一覧ページのコピーボタンを使えば、どちらも正確な文字列がコピーできます。</span>
+      <span class="mini2"><b>① ふつうに話しかける（おすすめ）</b>／（スラッシュ）は付けません。上の言葉をそのまま貼るだけ。<br>
+      例：<b>このリールを分析して https://www.instagram.com/reel/○○○</b></span>
+      <span class="mini2"><b>② 正式名で呼ぶ（慣れてきた人向け）</b>入力欄で <b>/</b> を打つと候補が出るので、そこから選ぶのが確実です。<br>
+      例：<b>/bunseki-reel</b>　❌<b>/bunseki</b>（途中まで）はエラーになります。</span>
+      <span class="mini2">💡 スキル一覧ページのコピーボタンを使えば、どちらも正確な文字列がコピーできます。</span>
     </div>
-
     <div class="seemore">
       📖 <b>どんなスキルがあるか・どんな報告書がもらえるかは、こちらで全部見られます</b>
       <a href="https://otolabo.keji-insta.workers.dev/guides/skills" target="_blank" rel="noopener">https://otolabo.keji-insta.workers.dev/guides/skills</a>
@@ -311,40 +413,185 @@ eval "$(/opt/homebrew/bin/brew shellenv)"</code>
     </div>
   </div>
 
+  <div class="fix">
+    <h2>❓ うまくいかないとき（症状べつ）</h2>
+    <div class="sub">実際に受講生さんがつまずいたところです。上から順に見てください。</div>
+
+    <div class="case">
+      <span class="sym">「Code」を押すとアップグレードを求められる／Codeタブが開けない</span>
+      <p class="ans">👉 <b>Claude の有料プラン（Pro など）が必要です。</b>無料プランでは Code タブは使えません。契約したあと、アプリをいったん閉じて開き直してください。<br>
+      「403」や認証のエラーが出るときは、<b>いったんサインアウトして、もう一度サインイン</b>し、アプリを完全に終了してから開き直すと直ります。</p>
+    </div>
+
+    <div class="case">
+      <span class="sym">STEP2 の途中で止まった／「作業フォルダの外です」と言われた</span>
+      <p class="ans">👉 <b>確認に「拒否」を押していませんか。</b>スキルの置き場所は、STEP1 で選んだフォルダの<b>外</b>にあります。もう一度 STEP2 の文章を貼って、出てくる確認は<b>すべて「許可」</b>を押してください。<br>
+      それでも止まるときは、そのまま「<b>ホームフォルダの .claude/skills に置いてください。許可します</b>」と返信してください。</p>
+    </div>
+
+    <div class="case">
+      <span class="sym">スキルが16個そろわない／一部しか入っていない</span>
+      <p class="ans">👉 そのまま「<b>足りないので、もう一度やり直してください</b>」と返信すれば入れ直してくれます。数が合ったら<b>アプリを開き直して</b>ください。</p>
+    </div>
+
+    <div class="case">
+      <span class="sym">アプリが開かない（Mac）「開発元を検証できないため開けません」</span>
+      <p class="ans">👉 アプリのアイコンを<b>右クリック →「開く」</b>を選び、出てきた画面でもう一度<b>「開く」</b>を押してください。初回だけ必要な操作です。</p>
+    </div>
+
+    <div class="case">
+      <span class="sym">「/plugin isn't available in this environment.」と出た</span>
+      <div class="err">/plugin isn't available in this environment.</div>
+      <p class="ans">👉 <b><code class="inline">/plugin</code> ではじまる2行は、古い手順です。</b>いまのアプリでは使えません。このガイドの <b>STEP2 の文章</b>（日本語のほう）を貼ってください。それで同じスキルが入ります。</p>
+    </div>
+
+    <div class="case">
+      <span class="sym">「用語 '/plugin' は、コマンドレット…として認識されません」と出た</span>
+      <div class="err">/plugin : 用語 '/plugin' は、コマンドレット、関数、スクリプト ファイル、
+または操作可能なプログラムの名前として認識されません。</div>
+      <p class="ans">👉 <b>黒い画面（PowerShell）に貼っています。</b>その画面は閉じてOKです。Claude アプリを開いて <b>「Code」タブ</b>に切り替え、フォルダを選んでから、下の<b>入力欄</b>に貼り直してください。</p>
+    </div>
+
+    <div class="case">
+      <span class="sym">「用語 'claude' は…認識されません」と出た</span>
+      <div class="err">claude : 用語 'claude' は、コマンドレット、関数、スクリプト ファイル、
+または操作可能なプログラムの名前として認識されません。   ← Windows
+zsh: command not found: claude                              ← Mac</div>
+      <p class="ans">👉 <b>黒い画面でこの作業をする必要はありません。</b>アプリの中に Claude Code が入っています。アプリを開いて「Code」タブから進めてください。<b>Node.js も npm も要りません。</b></p>
+    </div>
+
+    <div class="case">
+      <span class="sym">赤字で「ローカルセッションには Git が必要です」が消えない（Windows）</span>
+      <p class="ans">👉 <b>Git を入れたあと、Claude アプリを閉じて開き直しましたか？</b> Windows は、開いたままのアプリに新しいソフトの情報が伝わりません。<b>タスクバーのアイコンを右クリック →「閉じる」で完全に終了 → もう一度起動</b>してください。それでも消えないときは、パソコンを再起動すると確実です。</p>
+    </div>
+
+    <div class="case">
+      <span class="sym">貼っても何も起きない／「使えません」と言われる</span>
+      <p class="ans">👉 <b>作業フォルダを選んでいない可能性があります。</b>STEP1 に戻って、「Code」タブで <b>Local → フォルダを選択</b> を先に済ませてください。入力欄が出ていない状態では、STEP2は動きません。</p>
+    </div>
+
+    <div class="case">
+      <span class="sym">スキルを入れたのに、名前を呼んでも反応しない</span>
+      <p class="ans">👉 <b>スキル名を手打ちしないでください。</b>「このリールを分析して＋URL」のように<b>ふつうの日本語</b>で話しかけるのが確実です。／で呼びたいときは、入力欄で <b>/</b> を打って<b>出てくる候補から選んで</b>ください（例：<code class="inline">/bunseki-reel</code>）。途中まで手打ちするとエラーになります。</p>
+    </div>
+
+    <div class="case">
+      <span class="sym">動画編集で「ffmpeg が見つかりません」などと出る（Mac／Windows共通）</span>
+      <p class="ans">👉 <b>入れたばかりの部品を、開いたままのアプリは見つけられません。</b>Claude アプリをいったん完全に終了して、開き直してからもう一度お願いしてください。</p>
+    </div>
+
+    <div class="case">
+      <span class="sym">それでも直らないとき</span>
+      <p class="ans">👉 <b>その画面をスクショして、いま開いている Claude にそのまま貼り付けて「これどうすればいい？」</b>と聞いてください。その場で読み取って教えてくれます。それでも進まなければ Discord で聞いてください。</p>
+    </div>
+  </div>
+
   <div class="step">
     <span class="num">＋</span><h2>スキルが増えたら（更新の受け取り方）</h2>
-    <div class="desc">おとラボのスキルは<b>あとから増えたり、改良されたりします</b>。<b>スキルを追加・更新したときは Discord でお知らせします</b>ので、その連絡が来たら下の1行を貼って実行してください。それだけで<b>最新の状態</b>になります（入れ直す必要はありません）。うまくいくと「更新しました」と表示されます。</div>
-    <div class="cmdlabel">Claude Code に貼る（更新したいとき）</div>
+    <div class="desc">おとラボのスキルは<b>あとから増えたり、改良されたりします</b>。<b>スキルを追加・更新したときは Discord でお知らせします</b>ので、その連絡が来たら <b>STEP2 とまったく同じ文章</b>をもう一度貼ってください。新しい内容で上書きされます（作った成果物や初期設定は消えません）。</div>
+    <div class="cmdlabel">Code タブの入力欄に貼る（更新したいとき／STEP2と同じ文章）</div>
     <div class="cmd">
-      <code id="c4">/plugin marketplace update</code>
+      <code id="c4" class="multi">おとラボのスキルを入れてください。私（受講生）はターミナルを触りません。以下はあなた（Claude）が全部やってください。コマンド実行の許可は出します。
+
+1. https://github.com/izzzenk-ops/otolab-skills/archive/refs/heads/main.zip をダウンロードして展開する
+　・git clone は使わないでください（受講生のパソコンに git が入っていない場合があるため）
+　・ダウンロードと展開は、あなたの内部コマンド（curl / unzip など）で構いません
+　・一時フォルダは、いま開いている作業フォルダの中ではなく、システムの一時領域（Macなら /tmp、Windowsなら %TEMP%）に作ること
+
+2. 展開した otolab-skills-main/plugins/otolab-insta/skills/ の中のフォルダを全部、ユーザーのホームフォルダ直下の .claude/skills/ にコピーする
+　・Mac は ~/.claude/skills/ ／ Windows は C:\Users\&lt;ユーザー名&gt;\.claude\skills\
+　・※ここは「ホーム直下の .claude」です。いま開いている作業フォルダの中や Documents の中ではありません
+　・.claude/skills が無ければ作る
+　・コピーするのはフォルダ（ディレクトリ）だけです。skills/ の直下にファイルがあっても無視してください
+　・コピー先に同じ名前のスキルフォルダがあるときは、その1つのスキルフォルダだけを削除してから丸ごとコピーする（中身のマージはしない）
+　・⚠️ .claude/skills フォルダそのものは絶対に削除しないでください。私が自分で入れた別のスキルが入っていることがあります
+
+3. コピー元（otolab-skills-main/plugins/otolab-insta/skills/）にあったフォルダが、コピー先の .claude/skills/ に全部そろっているか1つずつ確認する
+　・コピー元と同じフォルダが全部そろっていて、それぞれの中に SKILL.md があればOKです
+　・私が自分で入れた別のスキルが .claude/skills/ にあっても、それはエラーにしないでください
+　・足りないフォルダがあるときだけ、その名前を挙げて「コピーできていないスキルがあります」と言って止まる
+
+4. 確認が終わってから、ダウンロードしたzipと展開した一時フォルダを削除する（今あなたが作ったファイルなので、確認せず削除してよい）
+
+5. 最後に、今回コピーしたスキル名の一覧と、その個数を表示して、こう伝える：「スキル導入 完了（◯個）。反映するには Claude をいったん完全に終了して、開き直してください」</code>
       <button class="copy" data-target="c4">コピー</button>
     </div>
-    <div class="discord">💬 <b>お知らせは Discord に流します。</b>新しいスキルが増えたとき・使い方が変わったときにお伝えするので、<b>Discord の通知はオンにしておいてください</b>。</div>
-    <div class="desc" style="margin-top:8px;">💡 連絡が来ていないときは実行不要です。実行しても、作った成果物や初期設定は消えません。</div>
+    <p style="font-size:12.5px;color:var(--sub);margin-top:10px;">終わったら<b>アプリを開き直して</b>ください。<br>
+    💡 「最新にして」とだけ伝えても Claude は<b>どこから取ってくるか分かりません</b>（上のURLが要ります）。この文章ごと貼ってください。</p>
+    <div class="discord">
+      💬 <b>お知らせは Discord に流します。</b>新しいスキルが増えたとき・使い方が変わったときにお伝えするので、<b>Discord の通知はオンにしておいてください</b>。
+      <span class="mini2">💡 連絡が来ていないときは実行不要です。実行しても、作った成果物や初期設定は消えません。</span>
+    </div>
   </div>
 
   <div class="warn">
     <h2>🎬 「動画編集」を初めて使うときだけ</h2>
     <ul>
       <li>初回に話しかけると、<b>編集ツールを自動でセットアップ</b>します（<b>数分〜十数分</b>／ネット接続が必要。2回目以降は速いです）。</li>
-      <li>Mac の方は先に <b>Homebrew</b> を入れておくと途中で止まりません（上の「はじめる前に」参照）。</li>
+      <li><b>Mac の方</b>は先に <b>Homebrew</b> を入れておくと途中で止まりません（上の折りたたみ🍺）。</li>
       <li>途中で許可を聞かれたら <b>「常に許可（今後聞かない）」</b> を選ぶとスムーズです。</li>
-      <li>Windows の方は <b>このスキルのときだけ「Windows Terminal」の <code class="inline">claude</code></b> で使ってください（アプリの「Code」タブでは動画編集だけ動きません）。<b>編集が終わったらデスクトップアプリに戻ってOK</b>です。</li>
+      <li><b>セットアップが終わったら、いったん Claude アプリを閉じて開き直してください。</b>（Mac も Windows も。開いたままだと、入ったばかりの部品をアプリが見つけられません）</li>
+      <li>再起動しても <b>Windows</b> で「見つかりません」が続く場合だけ、<b>下の折りたたみ⚙️</b>の手順で「Windows Terminal」から使ってください。<b>終わったらデスクトップアプリに戻ってOK</b>です。</li>
     </ul>
   </div>
 
-  <div class="help">💬 途中で止まったり、よく分からない画面が出たら —— その画面をスクショして、<b>いま開いている Claude Code にそのまま貼り付けて「これどうすればいい？」</b>と聞いてください。その場で教えてくれます。</div>
+  <details class="brew" style="margin-bottom:16px;">
+    <summary>⚙️ ターミナル（黒い画面）で使いたい方だけ ── ふだんは開かなくてOK</summary>
+    <div class="brewbody">
+      <p class="mini"><b style="color:#e06c6c;">ほとんどの方はこのページを読む必要はありません。</b>デスクトップアプリの「Code」タブで全スキルが使えます。<br>
+      必要なのは <b>Windows で動画編集スキルを使う方</b>だけです。</p>
 
-  <footer>おとラボ スキル 導入ガイド ｜ 2026/08</footer>
+      <p class="mini"><b>■ デスクトップアプリと、ターミナルの <code class="inline">claude</code> は別物です</b><br>
+      アプリを入れても、黒い画面で <code class="inline">claude</code> は使えるようになりません（逆も同じ）。ターミナル版も使いたいときだけ、下を実行してください。</p>
+
+      <p class="mini"><b>【Windows の方】</b>スタートメニューで「terminal」と検索 →「Windows Terminal」を開き、下の1行を貼って実行。</p>
+      <div class="cmd">
+        <code id="i2">irm https://claude.ai/install.ps1 | iex</code>
+        <button class="copy" data-target="i2">コピー</button>
+      </div>
+      <p class="mini"><b>【Mac の方】</b>「ターミナル」アプリを開いて、下を貼って実行。</p>
+      <div class="cmd">
+        <code id="i1">curl -fsSL https://claude.ai/install.sh | bash</code>
+        <button class="copy" data-target="i1">コピー</button>
+      </div>
+
+      <p class="mini"><b>■ 入れ終わったら、必ずターミナルを閉じて開き直してください</b><br>
+      Windows も Mac も、<b>開いたままの画面には新しいソフトが反映されません</b>。閉じて開き直してから <code class="inline">claude</code> と打つと立ち上がります。</p>
+
+      <p class="mini"><b>■ 初回起動は4つの画面が出ます（全部通さないとチャット画面になりません）</b><br>
+      ① テーマ選択（Dark / Light）→ ② ログイン方法（<b>1. Claude account with subscription</b> を選ぶ → ブラウザでログイン）→ ③ セキュリティの注意（Enter）→ ④ <b>このフォルダを信頼しますか</b><br>
+      <b style="color:#e06c6c;">④は「No, exit」が最初から選ばれています。</b>矢印キーで <b>「Yes, I trust this folder」</b> に変えて Enter を押してください。ここで Enter を押すだけだと終了してしまいます。</p>
+
+      <p class="mini"><b>■ <code class="inline">npm install -g</code> でエラーが出たとき（Windows）</b><br>
+      npm で入れようとすると「<b>このシステムではスクリプトの実行が無効になっているため…npm.ps1 を読み込むことができません</b>」と出ることがあります。Windows の初期設定によるものです。<b>上の <code class="inline">irm</code> の1行で入れれば、この問題は起きません。</b>どうしても npm で入れたい場合は、先に下を実行してから入れ直してください（この画面の中だけ一時的に許可する、安全な方法です）。</p>
+      <div class="cmd">
+        <code id="i3">Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass</code>
+        <button class="copy" data-target="i3">コピー</button>
+      </div>
+      <p class="mini">💡 npm で入れたときに <code class="inline">npm warn allow-scripts</code> という黄色い警告が出ることがありますが、<b>動作に問題はありません</b>。そのまま進めて大丈夫です。</p>
+
+      <p class="mini"><b style="color:#e06c6c;">⚠️ 用が済んだら、作業はデスクトップアプリに戻ってください。</b>黒い画面のまま進めてしまう方が多いのですが、<b>ふだんの作業はアプリの「Code」タブ</b>が正解です（画面が見やすく、ファイルのやりとりも楽です）。</p>
+    </div>
+  </details>
+
+  <div class="help">💬 途中で止まったり、よく分からない画面が出たら —— その画面をスクショして、<b>いま開いている Claude にそのまま貼り付けて「これどうすればいい？」</b>と聞いてください。その場で教えてくれます。</div>
+
+  <footer>おとラボ スキル 導入ガイド ｜ 2026/09</footer>
 </div>
 
 <script>
+  // 印刷・PDF化のときは折りたたみを全部開く（紙で読む人が中身を見られるように）
+  window.addEventListener('beforeprint', function(){
+    document.querySelectorAll('details').forEach(function(d){ d.dataset.wasOpen = d.open ? '1':'0'; d.open = true; });
+  });
+  window.addEventListener('afterprint', function(){
+    document.querySelectorAll('details').forEach(function(d){ if(d.dataset.wasOpen==='0'){ d.open = false; } });
+  });
   function feedback(btn){
-    var old = btn.dataset.label || btn.innerText;
-    btn.dataset.label = old;
-    btn.innerText = 'コピー済み ✓';
+    var old = btn.textContent;
+    btn.textContent = '✅ コピーしました';
     btn.classList.add('done');
-    setTimeout(function(){ btn.innerText = old; btn.classList.remove('done'); }, 1600);
+    setTimeout(function(){ btn.textContent = old; btn.classList.remove('done'); }, 1600);
   }
   function legacyCopy(text){
     var ta = document.createElement('textarea');

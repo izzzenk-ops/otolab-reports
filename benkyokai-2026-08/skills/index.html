@@ -130,17 +130,16 @@
     <h1>おとラボ スキル・ツール一覧</h1>
     <p>Claude Code で使える、インスタ運用＆動画編集のスキル集（全16点）</p>
     <div class="install">
-      <b>導入は最初の1回だけ、この2行を Claude Code に打つだけ：</b>
-      <code>/plugin marketplace add izzzenk-ops/otolab-skills</code>
-      <code>/plugin install otolab-insta@otolab-skills</code>
+      <b>導入は最初の1回だけ。</b>Claude デスクトップアプリの<b>「Code」タブの入力欄</b>に、導入ガイドの文章を貼るだけです（ターミナルは使いません）。
+      <code>導入ガイド → https://otolabo.keji-insta.workers.dev/guides/setup</code>
     </div>
     <div class="update">
-      🔔 <b>スキルは、あとから増えたり改良されたりします。</b>けんじから <b>Discord に「スキルを更新しました」と連絡が来たら</b>、下の1行を Claude Code に貼って実行してください。それだけで最新の状態になります（入れ直しは不要です）。
+      🔔 <b>スキルは、あとから増えたり改良されたりします。</b>けんじから <b>Discord に「スキルを更新しました」と連絡が来たら</b>、下の1行を「Code」タブの入力欄に貼って実行してください。それだけで最新の状態になります。
       <div class="cmdrow">
-        <code>/plugin marketplace update</code>
+        <code>導入ガイドの「STEP2」とまったく同じ文章を、もう一度そのまま貼ってください（新しい内容で上書きされます）</code>
         <button class="copybtn" type="button" id="updbtn">📋 コピー</button>
       </div>
-      <span class="mini">うまくいくと「更新しました」と表示されます。連絡が来ていないときは実行しなくてOK。実行しても、作った成果物や初期設定は消えません。</span>
+      <span class="mini">終わったらアプリを開き直してください。連絡が来ていないときは実行しなくてOK。実行しても、作った成果物や初期設定は消えません。</span>
     </div>
   </header>
 
@@ -152,9 +151,9 @@
       各カードの<b>「📋 話しかける言葉をコピー」</b>を押して、Claude Code に貼るだけ。<b>／（スラッシュ）は付けません。</b><br>
       <span class="ex">このリールを分析して https://www.instagram.com/reel/○○○</span></div>
     <div class="way"><b>正式名で呼ぶ</b>（慣れてきた人向け）<br>
-      <b>「/ コマンドをコピー」</b>を押して貼ります。<b>スキル名だけでは動かず、頭の <span class="ex" style="margin:0">/otolab-insta:</span> まで必要</b>です。<br>
-      <span class="ex">/otolab-insta:bunseki-reel</span></div>
-    <div class="way" style="color:var(--sub);font-size:12.5px;">よくある失敗：<span class="ex" style="margin:0">/bunseki</span> のように<b>途中まで</b>だったり、<span class="ex" style="margin:0">/bunseki-reel</span> のように<b>頭の <span style="font-family:inherit">otolab-insta:</span> が抜けている</b>とエラーになります。迷ったら上の「話しかける」方でどうぞ。</div>
+      <b>「/ コマンドをコピー」</b>を押して貼ります。入力欄で <b>/</b> を打つと候補が出るので、そこから選ぶのが確実です。<br>
+      <span class="ex">/bunseki-reel</span></div>
+    <div class="way" style="color:var(--sub);font-size:12.5px;">よくある失敗：<span class="ex" style="margin:0">/bunseki</span> のように<b>途中まで</b>だと、スキル名として認識されずエラーになります。迷ったら上の「話しかける」方でどうぞ。</div>
   </div>
 
   <div class="nav">
@@ -414,7 +413,7 @@
 // 各スキルカードの名前の横に「コピー」ボタンを差し込む。
 // 押すとそのスキルの起動ワード（最初のワード）をコピーできるので、
 // Claude Code にそのまま貼り付けて使える。※クリップボードはHTML版でのみ動作（PDFは静的）。
-var PLUGIN = 'otolab-insta';  // スラッシュで呼ぶときは必ず「プラグイン名:スキル名」になる
+var PLUGIN = '';  // ~/.claude/skills に直接入れる方式なので、スキル名の頭に付けるものは無い
 
 function makeCopyBtn(label, text, cls){
   var btn = document.createElement('button');
@@ -437,7 +436,7 @@ function makeCopyBtn(label, text, cls){
 
 // ヘッダーの「更新の受け取り方」のコピーボタン（Discordで改訂連絡が来たとき用）
 var updSlot = document.getElementById('updbtn');
-if(updSlot){ updSlot.parentNode.replaceChild(makeCopyBtn('📋 コピー', '/plugin marketplace update', 'copybtn'), updSlot); }
+if(updSlot){ updSlot.parentNode.replaceChild(makeCopyBtn('📋 導入ガイドを開く', 'https://otolabo.keji-insta.workers.dev/guides/setup', 'copybtn'), updSlot); }
 
 // アカウント設計のWeb版・招待コードのコピーボタン
 var codeSlot = document.getElementById('webcodebtn');
@@ -464,7 +463,7 @@ document.querySelectorAll('.skill').forEach(function(card){
   // ①推奨：日本語の起動ワード（そのまま貼って話しかけるだけ。/ を付ける余地がない）
   btnRow.appendChild(makeCopyBtn('📋 話しかける言葉をコピー', phrase, 'copybtn'));
   // ②正式名：スラッシュで直接呼びたい人向け（プラグイン名まで含めないと動かない）
-  btnRow.appendChild(makeCopyBtn('/ コマンドをコピー', '/' + PLUGIN + ':' + skillId, 'copybtn sub'));
+  btnRow.appendChild(makeCopyBtn('/ コマンドをコピー', '/' + skillId, 'copybtn sub'));
 });
 </script>
 </body>

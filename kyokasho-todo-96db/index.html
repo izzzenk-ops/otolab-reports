@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<!-- ★1: タイトルを差し替える -->
+<title>インスタの教科書 やることリスト</title>
+<style>
+  :root{
+    --ink:#3f4a5a; --sub:#8b93a3; --line:#f0e8dd; --bg:#f7f3ec; --card:#fff;
+    --accent:#ec8080; --accent-deep:#e06c6c; --accent-soft:#fdecec;
+    --blue:#6b9bd2; --blue-deep:#5b8ac4; --blue-soft:#e8f1fb;
+    --gold:#d9822b; --gold-soft:#fdf1e3; --green:#57a773; --green-soft:#e9f6ee;
+    --grad:linear-gradient(135deg,#f19a9a,#f4b183);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:"Hiragino Maru Gothic ProN","Zen Maru Gothic","Hiragino Sans","Yu Gothic",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.8;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:840px;margin:0 auto;padding:36px 22px 80px;}
+
+  header{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:30px 32px 26px;margin-bottom:20px;position:relative;overflow:hidden;}
+  header::before{content:"";position:absolute;top:0;left:0;right:0;height:8px;background:var(--grad);}
+  .label{font-size:12px;letter-spacing:2px;color:var(--accent-deep);font-weight:700;}
+  header h1{font-size:25px;font-weight:800;margin:6px 0 8px;}
+  header p{font-size:13.5px;color:var(--sub);}
+  .progress{margin-top:14px;background:#f6f2eb;border-radius:999px;height:10px;overflow:hidden;}
+  .progress span{display:block;height:100%;width:0;background:var(--grad);transition:width .3s;}
+  .progress-text{font-size:12px;color:var(--sub);margin-top:6px;font-weight:700;}
+
+  .order{background:var(--blue-soft);border:1px solid #d5e6f7;border-radius:16px;padding:14px 20px;margin-bottom:22px;font-size:13.5px;}
+  .order b{color:var(--blue-deep);}
+
+  h2.sec{font-size:15px;font-weight:800;margin:26px 0 12px;display:flex;align-items:center;gap:8px;}
+  h2.sec::after{content:"";flex:1;height:1px;background:var(--line);}
+
+  .task{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 22px;margin-bottom:12px;transition:.2s;}
+  .task.done{opacity:.5;}
+  .task .head{display:flex;align-items:flex-start;gap:11px;}
+  .task input[type=checkbox]{appearance:none;flex:0 0 auto;width:22px;height:22px;margin-top:3px;border:2px solid #dcd3c6;
+    border-radius:7px;cursor:pointer;position:relative;background:#fff;transition:.15s;}
+  .task input[type=checkbox]:checked{background:var(--green);border-color:var(--green);}
+  .task input[type=checkbox]:checked::after{content:"✓";position:absolute;inset:0;color:#fff;font-size:15px;font-weight:800;
+    display:flex;align-items:center;justify-content:center;}
+  .task h3{font-size:16px;font-weight:800;flex:1;}
+  .task .num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;
+    background:var(--grad);color:#fff;font-weight:800;font-size:13px;margin-right:8px;flex:0 0 auto;}
+  .task .body{padding-left:33px;margin-top:8px;}
+  .task ul{list-style:none;font-size:13.5px;}
+  .task li{padding:3px 0 3px 18px;position:relative;}
+  .task li::before{content:"•";position:absolute;left:4px;color:var(--accent);font-weight:800;}
+  .task .memo{font-size:12.5px;color:var(--sub);margin-top:6px;}
+
+  .links{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px;}
+  .links a{display:inline-flex;align-items:center;gap:6px;background:var(--blue-soft);border:1px solid #d5e6f7;
+    color:var(--blue-deep);text-decoration:none;font-size:12.5px;font-weight:700;border-radius:999px;padding:6px 15px;transition:.15s;}
+  .links a:hover{background:var(--blue-deep);color:#fff;border-color:var(--blue-deep);}
+  .links a.folder{background:var(--gold-soft);border-color:#f0dcc0;color:#b8762a;}
+  .links a.folder:hover{background:var(--gold);color:#fff;border-color:var(--gold);}
+
+  .cmd{display:flex;align-items:stretch;gap:8px;margin-top:10px;}
+  .cmd code{flex:1;background:#2f3542;color:#e8eef5;border-radius:10px;padding:10px 14px;
+    font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;overflow-x:auto;white-space:nowrap;display:flex;align-items:center;}
+  /* 複数行を貼らせるとき（Discord文面など）は .cmd に multi を足す。
+     既定の nowrap のままだと改行が潰れて1行でコピーされる */
+  .cmd.multi{align-items:flex-start;}
+  .cmd.multi code{white-space:pre-wrap;display:block;line-height:1.85;}
+  .copy{flex:0 0 auto;border:none;cursor:pointer;background:var(--accent);color:#fff;font-weight:800;
+    border-radius:10px;padding:0 15px;font-size:12px;font-family:inherit;transition:.15s;white-space:nowrap;}
+  .copy:hover{background:var(--accent-deep);}
+  .copy.done{background:var(--green);}
+  code.inline{background:#f3ede4;color:#8a5a1a;border-radius:6px;padding:1px 7px;font-size:12px;font-family:ui-monospace,monospace;}
+
+  .note{background:var(--gold-soft);border:1px solid #f2ddba;border-radius:14px;padding:12px 18px;font-size:13px;margin-top:10px;}
+  .note b{color:var(--gold);}
+  .hold{background:#f4f1fb;border:1px solid #ddd6f3;border-radius:18px;padding:18px 22px;font-size:13.5px;}
+  .hold h3{font-size:15px;font-weight:800;color:#6b5bb5;margin-bottom:8px;}
+
+  .reset{display:block;margin:26px auto 0;background:none;border:1px solid var(--line);color:var(--sub);
+    font-family:inherit;font-size:12px;border-radius:999px;padding:7px 18px;cursor:pointer;}
+  .reset:hover{background:#fff;}
+  footer{text-align:center;font-size:11.5px;color:var(--sub);margin-top:22px;}
+
+  .who{display:inline-block;font-size:11px;font-weight:800;border-radius:999px;padding:2px 10px;margin-left:6px;vertical-align:2px;}
+  .w-all{background:var(--accent-soft);color:var(--accent-deep);}
+  .w-k{background:var(--blue-soft);color:var(--blue-deep);}
+  .w-c{background:var(--green-soft);color:var(--green);}
+  .w-split{background:var(--gold-soft);color:var(--gold);}
+  .sum{background:var(--card);border:2px solid var(--accent);border-radius:20px;padding:20px 24px;margin-bottom:20px;}
+  .sum h2{font-size:15px;color:var(--accent-deep);margin-bottom:10px;}
+  .boxes{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;}
+  .box{background:var(--bg);border-radius:14px;padding:10px;text-align:center;}
+  .box b{display:block;font-size:26px;line-height:1.2;}
+  .box span{font-size:11.5px;color:var(--sub);}
+  .look{font-size:13.5px;}
+  .look li{margin:4px 0 4px 20px;}
+  .members{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px;font-size:12.5px;}
+  .members div{background:var(--blue-soft);border-radius:12px;padding:6px 12px;}
+  details{margin-top:8px;font-size:13px;}
+  summary{cursor:pointer;color:var(--blue-deep);font-weight:700;}
+  @media(max-width:560px){.boxes{grid-template-columns:repeat(2,1fr);}.members{grid-template-columns:1fr;}.wrap{padding:24px 16px 60px;}}
+.szbox{margin-top:8px;font-size:13px;line-height:1.6}.szbox p{margin:6px 0}.szh{font-weight:bold;margin-top:14px!important;border-left:4px solid #ff8a80;padding-left:8px}.szq{background:#f5f5f5;padding:6px 10px;border-radius:8px}table.sz{border-collapse:collapse;min-width:560px;margin:6px 0}table.sz th,table.sz td{border:1px solid #eee;padding:4px 6px;text-align:left;vertical-align:top}table.sz th{background:#ffe5e0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="label">インスタの教科書 ｜ TODO</div>
+    <h1>📚 インスタの教科書 やることリスト</h1>
+    <p>メンバー全員で分担する用。チェックは自動で保存されます（このパソコンのChromeに記憶）。</p>
+    <div class="progress"><span id="bar"></span></div>
+    <div class="progress-text" id="ptext">0 / 0 完了</div>
+  </header>
+
+  <div class="sum">
+    <h2>📌 決まったこと：残りの作業は25件。半分は「素材を出す・撮る」作業です</h2>
+    <div class="boxes">
+      <div class="box"><b>7</b><span>メンバー</span></div>
+      <div class="box"><b>4</b><span>分担を決めて撮る</span></div>
+      <div class="box"><b>10</b><span>けんじさん</span></div>
+      <div class="box"><b>4</b><span>Claude</span></div>
+    </div>
+    <div class="look"><b>ここだけ見てください</b>
+      <ol>
+        <li><b>赤バッジが残っている4か所</b>（4-5・9-2・1-2・15-1）は、素材が届けばすぐ消せます → 1・2・12・13</li>
+        <li><b>撮影の分担</b>（STEP9の22点・STEP10の10点・動画42本）を次の会議で決めると一気に進みます → 8〜10</li>
+        <li>けんじさんの<b>判断待ちが10件</b>たまっています → 21（まとめて返事でOK）</li>
+      </ol>
+    </div>
+    <div class="members">
+      <div>🏠 じゅんさん：家づくり／2児の会社員</div>
+      <div>🧘 ちよみさん：ダイエット／元ヨガの先生</div>
+      <div>✂️ みんみんさん：工作紹介／工作教室の先生</div>
+      <div>👗 まいさん：ダイエット／元アパレル店長</div>
+    </div>
+  </div>
+  <h2 class="sec">👭 メンバー4人それぞれが出すもの</h2>
+  <div class="task" data-id="m-tieup">
+    <div class="head"><input type="checkbox"><h3><span class="num">1</span>タイアップ実績を書いて送る<span class="who w-all">メンバー全員</span></h3></div>
+    <div class="body"><ul><li>商品名／金額の決め方／よかったこと・失敗したこと の3つ</li><li>1人ずつLINEで送る（文章でも音声でもOK）</li><li><b>終わりの目安：</b>4人分が15-1ほかに入り、【事例】の赤バッジが消える</li></ul></div>
+  </div>
+  <div class="task" data-id="m-tripod">
+    <div class="head"><input type="checkbox"><h3><span class="num">2</span>おすすめの三脚・スタンドを1人1つ出す<span class="who w-all">メンバー全員</span></h3></div>
+    <div class="body"><ul><li>Amazon・楽天のアフィリンク</li><li>実物の写真1枚（使っているところ）</li><li><b>終わりの目安：</b>9-2に4つのリンクと写真が入り、赤バッジが消える</li></ul></div>
+  </div>
+  <div class="task" data-id="m-intro">
+    <div class="head"><input type="checkbox"><h3><span class="num">3</span>「はじめに」に載せる自己紹介を出す<span class="who w-all">メンバー全員</span></h3></div>
+    <div class="body"><ul><li>紹介文（200字くらい・始める前と今）</li><li>インスタのURL</li><li>けんじさんとの関係（どこで出会ったか）</li><li><b>終わりの目安：</b>STEP0に5人の登場人物紹介ページができる</li></ul></div>
+  </div>
+  <div class="task" data-id="m-voice">
+    <div class="head"><input type="checkbox"><h3><span class="num">4</span>2-4に入れる声を録り直す<span class="who w-all">メンバー全員</span></h3></div>
+    <div class="body"><ul><li>スマホのボイスメモで録ってLINEで送る</li><li>8/28の会議で直すと決めたところを反映した内容で</li><li><b>終わりの目安：</b>2-4で4人の声が再生できる</li></ul><p class="memo">💡 今ある文字起こしは会議前（8/19）のもの。録り直しが済んでいる人はチェックだけ付けてください。</p></div>
+  </div>
+  <div class="task" data-id="m-photo">
+    <div class="head"><input type="checkbox"><h3><span class="num">5</span>訴求用の写真を30枚ずつ集める<span class="who w-all">メンバー全員</span></h3></div>
+    <div class="body"><ul><li>STEP13・16のストーリーズ見本に使う実物の写真</li><li>顔が写っていなくてOK。手元・商品・部屋など</li><li><b>終わりの目安：</b>4人分の写真がそろい、ローンチの型の見本ができる</li></ul></div>
+  </div>
+  <div class="task" data-id="m-lp">
+    <div class="head"><input type="checkbox"><h3><span class="num">6</span>販売ページ（LP）用の受講生事例を出す<span class="who w-all">メンバー全員</span></h3></div>
+    <div class="body"><ul><li>始める前→今の数字（フォロワー・収益の伝え方は各自の判断で）</li><li>ひとこと感想</li><li><b>終わりの目安：</b>LPの事例3件の空欄が埋まる</li></ul></div>
+  </div>
+  <div class="task" data-id="m-chiyomi">
+    <div class="head"><input type="checkbox"><h3><span class="num">7</span>「始める前の私」を書き足す<span class="who w-all">ちよみさん</span></h3></div>
+    <div class="body"><ul><li>「さらっとしすぎ」と本人が言っていた2-4のパート</li><li>音声で追加の話を送ってもらう</li><li><b>終わりの目安：</b>2-4のちよみさんパートが加筆される</li></ul></div>
+  </div>
+  <h2 class="sec">🎥 分担を決めて撮るもの</h2>
+  <div class="task" data-id="s-step9">
+    <div class="head"><input type="checkbox"><h3><span class="num">8</span>STEP9（撮影）の実演素材22点を撮る<span class="who w-split">分担を決める</span></h3></div>
+    <div class="body"><ul><li>写真と画面録画。1人5〜6点ずつに分ける</li><li>どれを誰が撮るかは素材リストを見て決める</li><li><b>終わりの目安：</b>22点が本文に入る（今は0点）</li></ul><div class="note"><details><summary>📁 STEP9 素材リストを見る</summary><div class="szbox"><p class="szh">STEP9 撮影：実演素材リスト（メンバー分担用）</p>
+<p class="szq"><b>STEP4〜STEP17まで含めた動画の全体リスト（全42本）はNotionにあります</b> → 「教科書に入れる動画リスト（撮影・分担用）」（インスタの教科書管理ページ &gt; 制作資料など）。このファイルはそのうちSTEP9の静止画・短尺素材を細かく分解したものです。Notion側の<b>14〜20番</b>がSTEP9の動画にあたります。</p>
+<p>2026-09-10のMTGで決まったもの。けんじさん「<i>なるさんのやつは動画があってすごい具体で分かりやすかった</i>」「<i>こういう素材を撮りなさいみたいなリストを作ってもらって、みんなで分業</i>」「<i>10秒とかで撮れるものが多い</i>」。</p>
+<p><b>使い方</b></p>
+<div class="szl">・1人が全部やらない。<b>表の「候補」を見て、自分のジャンルで自然に撮れるものを取る</b>（料理の人は料理のまま、宅トレの人は宅トレのままでOK）</div>
+<div class="szl">・<b>上手に撮らない。</b>悪い例はむしろ雑に。<i>教材で見せたいのは「違いが分かること」だけ</i></div>
+<div class="szl">・撮ったら<b>そのままLINEに送る</b>。差し込みとトリミングはこちらでやる</div>
+<div class="szl">・<b>第三者のアカウント名・顔・実名は映さない</b>（公開ページに載るため）。自分の画面を録る場合は<i>他人の投稿が出ている状態を避ける</i></div>
+<p><b>形式の書き方</b></p>
+<div class="szl">・📷＝写真1枚　📱＝スマホの画面録画　🎬＝短い動画（3〜10秒）　🔁＝before/afterの2枚1組</div>
+<p class="szh">9-1 撮影はセンスではなく、段取りで決まります（id 97）</p>
+<div style="overflow-x:auto"><table class="sz"><tr><th></th><th>何を用意するか</th><th>形式</th><th>尺・枚数</th><th>差し込みたい場所</th><th>候補</th></tr><tr><td>①</td><td><b>撮った直後に、その場で見返している様子</b>（プレビューを開いて指で拡大してピントを見る）</td><td>📱</td><td>10秒</td><td>9-5「1カット撮るたびに、見返す」の直前（2026-09-12に9-1から移動）</td><td>全員</td></tr><tr><td>②</td><td><b>ピントが合っていない手元／合っている手元</b></td><td>🔁📷</td><td>2枚</td><td>9-5「1カット撮るたびに、見返す」の①ピント（9-1から移動）</td><td>手元がよく映る人</td></tr><tr><td>③</td><td><b>端に生活感が映り込んだ画／整理した画</b>（洗濯物・指・影）</td><td>🔁📷</td><td>2枚</td><td>9-5「1カット撮るたびに、見返す」の③見切れ（9-1から移動）</td><td>家で撮る人</td></tr><tr><td>④</td><td><b>尺が足りないカット</b>（1秒だけのクリップ。前後を切ると使えないのが分かるもの）</td><td>🎬</td><td>3秒</td><td>9-1「② 撮る」の「1呼吸おいて」の段落（失敗3つは折りたたみに入ったため）</td><td>全員</td></tr></table></div>
+<p class="szh">9-2 機材はまだ買わない。スマホの設定だけ整える（id 98）</p>
+<div style="overflow-x:auto"><table class="sz"><tr><th></th><th>何を用意するか</th><th>形式</th><th>尺・枚数</th><th>差し込みたい場所</th><th>候補</th></tr><tr><td>⑤</td><td><b>カメラ設定画面のスクショ</b>（画質4K・30fps）</td><td>📷</td><td>iPhone 1枚／Android 1枚</td><td>「まず、スマホのカメラ設定を3つ整える」</td><td>iPhoneの人＋Androidの人</td></tr><tr><td>⑥</td><td><b>グリッドをオンにした撮影画面</b>（線が出ている状態）</td><td>📷</td><td>1枚</td><td>「③ グリッドをオンにする」</td><td>全員</td></tr><tr><td>⑦</td><td><b>加工アプリのカメラで撮った画／スマホのカメラで撮った画</b></td><td>🔁📷</td><td>2枚</td><td>「撮るときは、スマホのカメラで撮る」</td><td>加工アプリを使っている人</td></tr><tr><td>⑧</td><td><b>三脚・スタンドの実物</b>（①三脚 ②関節が2か所あるアーム ③マグネット式 ④壁に貼るタイプ）</td><td>📷</td><td>各1枚</td><td>「三脚は、早めに買ってください」＝<b>赤バッジのところ</b></td><td>持っている人（アフィリンクとセット）</td></tr><tr><td>⑨</td><td><b>0円の固定の実演</b>（棚・本の山・コップにスマホを立てかけている状態）</td><td>📷</td><td>1〜2枚</td><td>「三脚が届くまでは、0円の固定で始める」</td><td>全員</td></tr><tr><td>⑩</td><td><b>逆光で真っ暗な画／窓を横から受けた画</b></td><td>🔁📷</td><td>2枚</td><td>「画質を決めているのは、光の量です」</td><td>窓のそばで撮る人</td></tr><tr><td>⑪</td><td><b>暗く撮って編集で明るくした画／最初から明るく撮った画</b></td><td>🔁📷</td><td>2枚</td><td>よく聞かれること「編集で明るくすればよくないですか」</td><td>夜に撮ることがある人</td></tr></table></div>
+<p class="szh">9-3 見やすい動画には、撮り方のルールが5つある（id 99）</p>
+<div style="overflow-x:auto"><table class="sz"><tr><th></th><th>何を用意するか</th><th>形式</th><th>尺・枚数</th><th>差し込みたい場所</th><th>候補</th></tr><tr><td>⑫</td><td><b>傾いた画／水平が合った画</b>（同じ場所で）</td><td>🔁📷</td><td>2枚</td><td>ルール①</td><td>全員</td></tr><tr><td>⑬</td><td><b>動いているものが画面の端にある画／真ん中にある画</b></td><td>🔁📷</td><td>2枚</td><td>ルール②</td><td>手元を映す人</td></tr><tr><td>⑭</td><td><b>引き→寄り→引きの3カット</b>（本文はコーヒーだが、<i>自分のジャンルの作業でOK</i>）</td><td>🎬</td><td>各2〜3秒</td><td>ルール③の「たとえばコーヒーを淹れるシーンなら」</td><td>作業が映る人</td></tr><tr><td>⑮</td><td><b>同じ側から撮った2カット／反対側に回り込んだ2カット</b>（つなげると分かる）</td><td>🎬</td><td>各3秒</td><td>ルール④（この章のいちばん大事なところ）</td><td>誰か1人でよい</td></tr><tr><td>⑯</td><td><b>スマホを振って撮った画／固定してカットを分けた画</b></td><td>🎬</td><td>各3秒</td><td>ルール⑤</td><td>誰か1人でよい</td></tr></table></div>
+<p class="szh">9-4 撮影日を作って、まとめて撮る（id 100）</p>
+<div style="overflow-x:auto"><table class="sz"><tr><th></th><th>何を用意するか</th><th>形式</th><th>尺・枚数</th><th>差し込みたい場所</th><th>候補</th></tr><tr><td>⑰</td><td><b>1枚に集計した撮影メモの実物</b>（場所・物・服・時間帯。手書きでもメモアプリでも可）</td><td>📷</td><td>1枚</td><td>「撮影メモを『1枚に集計する』」</td><td>撮影日をやっている人</td></tr><tr><td>⑱</td><td><b>映る一角だけ整えた状態と、その外側</b>（フレームの外は散らかったままでいい）</td><td>🔁📷</td><td>2枚</td><td>「片づけるのは『映る一角』だけ」</td><td>家で撮る人</td></tr><tr><td>⑲</td><td><b>素材フォルダの分け方のスクショ</b>（リール素材／企画ごと／手元・完成品・足元 など）</td><td>📷</td><td>1〜2枚</td><td>「フォルダは6-5の3つ＋1つ」</td><td>けんじさん＋分けている人</td></tr><tr><td>⑳</td><td><b>Amazon Photosの画面</b>（プライム会員なら写真が容量無制限だと分かるところ）</td><td>📷</td><td>1枚</td><td>「容量の逃がし先」</td><td>プライム会員の人</td></tr></table></div>
+<p class="szh">9-5 実際に、初めての撮影日をやってみる（id 101）</p>
+<div style="overflow-x:auto"><table class="sz"><tr><th></th><th>何を用意するか</th><th>形式</th><th>尺・枚数</th><th>差し込みたい場所</th><th>候補</th></tr><tr><td>㉑</td><td><b>撮影日のダイジェスト</b>（前日のメモ → 当日の固定と画角決め → 撮影 → 選別まで）</td><td>🎬</td><td>各5秒×4本</td><td>各見出しの頭</td><td>撮影日を1回やる人1名</td></tr><tr><td>㉒</td><td><b>自分の影で手元が暗くなった事故カット／半歩ずらして撮り直した画</b></td><td>🔁📷</td><td>2枚</td><td>「1カット撮るたびに、見返す」の事故の場面</td><td>手元を映す人</td></tr></table></div>
+<p class="szh">なるさんの教科書は、どう動画を使っているか（2026-09-10に実測）</p>
+<p>会員ページを開いて本数と尺を数えた。全69ページ中、動画があるのは26ページ・<b>全75本</b>。詳細は `reference/short-douga-kyokasho/_解説動画の一覧と傾向.md`。</p>
+<div class="szl">・<b>撮影の章（第6章）は9本・合計49分</b>。内訳は<i>短い実演クリップ4本（43秒〜2分52）＋通しの撮影実演25分54秒＋アプリ操作の画面録画3本</i></div>
+<div class="szl">・<b>編集の章（第7章）は20本・63分</b>。カット編集とテロップだけ11分の長尺、あとは3分前後</div>
+<div class="szl">・<b>文章だけの回もある</b>……<i>全体像・機材とカメラ設定・保管・練習法</i>は動画なし。<i>「動画にしないと伝わらない所」だけ動画にしている</i></div>
+<div class="szl">・つまり<b>この22点は、なるさんで言う「6-3の短い実演クリップ」にあたる</b>。ここが埋まれば、うちの撮影の章は文章＋図解＋実演で一通りそろう</div>
+<div class="szl">・足りないとすれば<b>通しの撮影実演（㉑）</b>。なるさんは25分かけているが、<i>うちは5秒×4本のダイジェストで十分</i>（本文とタイムラインの図解が既にあるため）</div>
+<p class="szh">優先順位（全部そろわなくても出せる順）</p>
+<p>1. <b>⑤⑥⑧⑨</b>（設定と固定）……<i>文章だけでは絶対に伝わらないところ</i>。ここが最優先</p>
+<p>2. <b>⑫⑬⑭⑮⑯</b>（5つのルール）……<i>比較で見せると一発で分かる</i></p>
+<p>3. <b>①②③⑩⑪</b>（見返し・光）……あると親切</p>
+<p>4. <b>⑰⑱⑲⑳㉑㉒</b>（撮影日まわり）……<i>実物が1つあるだけで一気に現実味が出る</i></p>
+<p class="szh">撮るときの共通ルール</p>
+<div class="szl">・<b>縦（9:16）で撮る。</b>教材に載せるときも縦のまま使う</div>
+<div class="szl">・<b>悪い例は、わざとらしくていい。</b>「これは分かりやすく失敗させています」と本文に書ける</div>
+<div class="szl">・比較（🔁）は<b>同じ場所・同じ被写体・同じ服</b>で撮る。<i>条件が違うと比較にならない</i></div>
+<div class="szl">・画面録画は<b>通知が映らないように</b>（機内モードかおやすみモードにしてから）</div>
+<div class="szl">・送るときは<b>番号（①〜㉒）を書いて送る</b>。どこに差し込むか分かるように</div></div></details></div></div>
+  </div>
+  <div class="task" data-id="s-step10">
+    <div class="head"><input type="checkbox"><h3><span class="num">9</span>STEP10（編集）の解説動画・画面キャプチャ10点を撮る<span class="who w-split">分担を決める</span></h3></div>
+    <div class="body"><ul><li>⑦〜⑩はけんじさんが撮る</li><li>編集画面のキャプチャはじゅんさん</li><li><b>終わりの目安：</b>10点が動画欄・本文に入る</li></ul><div class="note"><details><summary>📁 STEP10 素材リストを見る</summary><div class="szbox"><p class="szh">STEP10 編集：解説動画・画面キャプチャの素材リスト</p>
+<p>2026-09-13のけんじさんの指摘から起こしたもの。<b>文字だけでは伝わらないところ</b>だけを挙げている。</p>
+<p><b>形式</b>：📱＝スマホの画面録画　📷＝スクリーンショット　🎬＝短い動画（5〜15秒）</p>
+<div style="overflow-x:auto"><table class="sz"><tr><th></th><th>何を用意するか</th><th>形式</th><th>差し込みたい場所</th></tr><tr><td>①</td><td><b>アフレコの間をカットしている画面</b>（波形の平らなところを詰めていくところ。カット前とカット後が分かるように）</td><td>📱 15秒</td><td>10-3「カット前は、山と山の間に平らな線が長く続いています」の直後（図解10-3-8の下）</td></tr><tr><td>②</td><td><b>息継ぎ音を消して、言葉の終わりと次の始まりを少し重ねるところ</b></td><td>📱 10秒</td><td>10-3「伸びている人は、前の言葉の終わりと次の言葉の始まりが少し重なるくらいまで詰めています」の直後</td></tr><tr><td>③</td><td><b>CapCutで色を選んでいる画面</b>（テロップの色を3色に絞るところ。どのボタンを押すかが分かるように）</td><td>📱 10秒</td><td>10-4「色数は絞ります」の直後</td></tr><tr><td>④</td><td><b>CapCutのフォント選択画面</b>（決めたフォントを固定するところ）</td><td>📷 1〜2枚</td><td>10-4「フォントと色は「1回決めて、ずっと使う」」</td></tr><tr><td>⑤</td><td><b>動画からサムネ用のスクリーンショットを撮っているところ</b>（動きが止まっている瞬間で止めて撮る）</td><td>📱 10秒</td><td>10-6「ルール①　サムネの画は、動画のスクショでいい」</td></tr><tr><td>⑥</td><td><b>投稿後のリール画面</b>（テロップがインスタのボタンに隠れている例と、隠れていない例）</td><td>🔁📷 2枚</td><td>10-4「文字を置いていい場所と、避ける場所」（図解10-4-4の下）</td></tr></table></div>
+<p class="szh">2026-09-15のMTGで追加（けんじさんが自分で撮ると宣言した解説動画）</p>
+<p>けんじさん「<i>ここは解説動画みたいなので僕が1本入れますね</i>」「<i>これも僕、担当しますね</i>」</p>
+<div style="overflow-x:auto"><table class="sz"><tr><th></th><th>何を用意するか</th><th>形式</th><th>差し込みたい場所</th></tr><tr><td>⑦</td><td><b>完コピのやり方の実演</b>。CapCutに参考リールを読み込んで、どこを見るかを指しながら説明する。「<i>これがズレたりすると、気持ち悪い・違和感がある動画になってしまう</i>」を実際に見せる</td><td>🎬 1本</td><td>10-2「完コピのやり方」の冒頭</td></tr><tr><td>⑧</td><td><b>アフレコの詰め方の実演</b>。編集画面で「<i>前の言葉の終わりと次の言葉の始まりが少し重なる</i>」状態を見せる</td><td>📱 10秒</td><td>10-3 折りたたみ「間の詰め方が足りているか、見分け方」の中</td></tr><tr><td>⑨</td><td><b>挿入画像の入れ方</b>。編集画面で「差し込み画像はこれですよ」と一瞬見せる</td><td>📱 10秒</td><td>10-5「挿入画像：映像とテロップだけでは伝わらないところを補う」</td></tr><tr><td>⑩</td><td><b>サムネ作りの実演</b>。競合の伸びているサムネを10枚集めるところから、Canvaで1枚作るまで</td><td>🎬 1本</td><td>10-6「作り方：Canvaで5分」</td></tr></table></div>
+<p class="szh">備考</p>
+<div class="szl">・①②は図解（10-3-8）で波形の形は示してあるが、<b>実際の操作は動画でないと伝わらない</b>というけんじさんの判断</div>
+<div class="szl">・③④はCapCutの画面そのものが要る。文字での説明では伝わらない</div></div></details></div></div>
+  </div>
+  <div class="task" data-id="s-42">
+    <div class="head"><input type="checkbox"><h3><span class="num">10</span>教科書に入れる動画42本を分担して撮る<span class="who w-split">分担を決める</span></h3></div>
+    <div class="body"><ul><li>Notionの動画リストに担当者の名前を入れる</li><li>撮れたら状態欄を「済」にする</li><li><b>終わりの目安：</b>Notionの42本がすべて「済」になる</li></ul><div class="links"><a href="https://www.notion.so/39765eae373d800499e7de0c66907f98" target="_blank">🔗 Notion 教科書管理ページ</a></div></div>
+  </div>
+  <div class="task" data-id="s-taidan">
+    <div class="head"><input type="checkbox"><h3><span class="num">11</span>ローンチ用の対談動画を撮る<span class="who w-split">分担を決める</span></h3></div>
+    <div class="body"><ul><li>けんじさん×1人ずつ</li><li>韓国ワーケーションで撮る予定</li><li><b>終わりの目安：</b>4本撮り終わる</li></ul></div>
+  </div>
+  <h2 class="sec">🙋‍♂️ けんじさんがやるもの</h2>
+  <div class="task" data-id="k-45">
+    <div class="head"><input type="checkbox"><h3><span class="num">12</span>競合リサーチの実演をスマホで画面収録する<span class="who w-k">けんじさん</span></h3></div>
+    <div class="body"><ul><li>4-5に差し込む動画</li><li><b>終わりの目安：</b>動画が入り、4-5の赤バッジが消える</li></ul></div>
+  </div>
+  <div class="task" data-id="k-12id">
+    <div class="head"><input type="checkbox"><h3><span class="num">13</span>限定特典で紹介するアカウントのIDを決める<span class="who w-k">けんじさん</span></h3></div>
+    <div class="body"><ul><li>1-2に載せる</li><li><b>終わりの目安：</b>IDが入り、1-2の赤バッジが消える</li></ul></div>
+  </div>
+  <div class="task" data-id="k-12list">
+    <div class="head"><input type="checkbox"><h3><span class="num">14</span>1-2の特典テンプレート集の一覧を仕上げる<span class="who w-k">けんじさん</span></h3></div>
+    <div class="body"><ul><li>いまは「設計しているところ」のまま</li><li>17-7・17-8のテンプレも載せる</li><li><b>終わりの目安：</b>一覧が完成する</li></ul></div>
+  </div>
+  <div class="task" data-id="k-jikki">
+    <div class="head"><input type="checkbox"><h3><span class="num">15</span>アプリの実機で確かめる（2か所）<span class="who w-k">けんじさん</span></h3></div>
+    <div class="body"><ul><li>13-7：ストーリーズのデザイン操作</li><li>16-4：楽天ROOMのランク条件</li><li><b>終わりの目安：</b>本文と今のアプリが合っている</li></ul></div>
+  </div>
+  <div class="task" data-id="k-prof">
+    <div class="head"><input type="checkbox"><h3><span class="num">16</span>プロフィール集のスクショを集める<span class="who w-k">けんじさん</span></h3></div>
+    <div class="body"><ul><li>おすすめに出てくる人のプロフィール画面</li><li><b>終わりの目安：</b>STEP6に入る</li></ul></div>
+  </div>
+  <div class="task" data-id="k-15">
+    <div class="head"><input type="checkbox"><h3><span class="num">17</span>STEP15を1人で見直す<span class="who w-k">けんじさん</span></h3></div>
+    <div class="body"><ul><li>9/28の会議で「けんじさん1人で見直す」と決定済み</li><li><b>終わりの目安：</b>見直しが終わり、直す点がClaudeに渡る</li></ul></div>
+  </div>
+  <div class="task" data-id="k-1819">
+    <div class="head"><input type="checkbox"><h3><span class="num">18</span>STEP18（特典2本）とSTEP19（LIVEアーカイブ）の中身を入れる<span class="who w-k">けんじさん</span></h3></div>
+    <div class="body"><ul><li>いまは本文が空のレッスンが3つ</li><li><b>終わりの目安：</b>本文・動画が入る</li></ul></div>
+  </div>
+  <div class="task" data-id="k-lp">
+    <div class="head"><input type="checkbox"><h3><span class="num">19</span>LPの価格まわりを決める<span class="who w-k">けんじさん</span></h3></div>
+    <div class="body"><ul><li>価格／分割回数／比べる金額</li><li><b>終わりの目安：</b>LPの空欄がなくなり、公開できる</li></ul></div>
+  </div>
+  <div class="task" data-id="k-ai">
+    <div class="head"><input type="checkbox"><h3><span class="num">20</span>STEP17の最後の「AI活用回」を作るか決める<span class="who w-k">けんじさん</span></h3></div>
+    <div class="body"><ul><li>17-11で予告済み</li><li>作らないなら予告文を消す</li><li><b>終わりの目安：</b>作る or 予告を消す</li></ul></div>
+  </div>
+  <div class="task" data-id="k-judge">
+    <div class="head"><input type="checkbox"><h3><span class="num">21</span>判断待ち10件にまとめて返事する<span class="who w-k">けんじさん</span></h3></div>
+    <div class="body"><ul><li>チャットで番号ごとに「OK／NG／こう直して」でOK</li><li><b>終わりの目安：</b>10件すべてに返事が出て、Claudeが反映する</li></ul><div class="note"><details><summary>判断待ちの中身（10件）を見る</summary><ol style="margin:6px 0 0 20px"><li>STEP14の事前点検 A-1〜A-8（ライブの1,000人条件など）</li><li>STEP16点検の残り9点（15-10と16-11の設定の食い違い、ストーリーズの枚数など）</li><li>STEP10の返事待ち3つ（スマホで画像を差し込めないのは本当か ほか）</li><li>13-1-3の図の直後の番号リスト／13-1-5「払うべき代償」の言い換え</li><li>「1000再生までは直すのは冒頭だけ」を8-3にも入れるか</li><li>事例の「Aさん」（全章141回）を「ことねさん」に統一するか</li><li>17-4の自己紹介の紙の見本を作るか</li><li>STEP14の新しい事例を使ってよいか（14-8・14-9）</li><li>STEP15・16で根拠のない数字をどうするか</li><li>「僕もそうでした」の言い方を残すか</li></ol></details></div></div>
+  </div>
+  <h2 class="sec">🤖 Claudeがやるもの（メンバーの作業はなし）</h2>
+  <div class="task" data-id="c-14">
+    <div class="head"><input type="checkbox"><h3><span class="num">22</span>STEP14の会議の決定を本文に入れ、14-8・14-9を新しく書く<span class="who w-c">Claude</span></h3></div>
+    <div class="body"><ul><li>14-8：アカウントの旬　14-9：何人買ったかで設計する</li><li><b>終わりの目安：</b>2本が本番に出る</li></ul></div>
+  </div>
+  <div class="task" data-id="c-zukai">
+    <div class="head"><input type="checkbox"><h3><span class="num">23</span>16-12・16-13の図解を作る<span class="who w-c">Claude</span></h3></div>
+    <div class="body"><ul><li>追加したレッスンの図解</li><li><b>終わりの目安：</b>本番に図解が出る</li></ul></div>
+  </div>
+  <div class="task" data-id="c-yomi">
+    <div class="head"><input type="checkbox"><h3><span class="num">24</span>本文が変わったレッスンの読み上げ音声を作り直す<span class="who w-c">Claude</span></h3></div>
+    <div class="body"><ul><li>14-7・15-5・15-6・15-7・15-10</li><li><b>終わりの目安：</b>新しい本文どおりに読み上げる</li></ul></div>
+  </div>
+  <div class="task" data-id="c-leica">
+    <div class="head"><input type="checkbox"><h3><span class="num">25</span>Androidの「Leicaレンズ」の話を裏取りする<span class="who w-c">Claude</span></h3></div>
+    <div class="body"><ul><li>STEP9に入れるかどうか</li><li><b>終わりの目安：</b>裏が取れたら入れる、取れなければ入れない</li></ul></div>
+  </div>
+  <h2 class="sec">🕐 保留中（いま決めなくてOK）</h2>
+  <div class="hold">
+    <h3>自分の商品を売る章を足す</h3>
+    <p>作りかけのスライドあり。本編を出したあと、アップデートで章を足す予定（9/2の会議）。</p>
+  </div>
+
+  <div class="links" style="margin-top:18px;"><a href="https://insta-kyokasho.keji-insta.workers.dev" target="_blank">🔗 教科書サイト（本番）</a><a href="https://www.notion.so/39765eae373d800499e7de0c66907f98" target="_blank">🔗 Notion 教科書管理ページ</a></div>
+  <button class="reset" id="reset">チェックを全部リセット</button>
+  <footer>インスタの教科書 やることリスト ｜ 更新 2026/10/16</footer>
+</div>
+
+<script>
+  // ★7: リストごとに必ず別のキーにする（同じだとチェックが混ざる）
+  var KEY = 'otolab-todo-kyokasho-bunntan-2026-10';
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e){ saved = {}; }
+
+  var tasks = Array.prototype.slice.call(document.querySelectorAll('.task'));
+
+  function paint(){
+    var done = 0;
+    tasks.forEach(function(t){
+      var cb = t.querySelector('input[type=checkbox]');
+      if (cb.checked){ done++; t.classList.add('done'); } else { t.classList.remove('done'); }
+    });
+    var pct = tasks.length ? Math.round(done / tasks.length * 100) : 0;
+    document.getElementById('bar').style.width = pct + '%';
+    document.getElementById('ptext').innerText = done + ' / ' + tasks.length + ' 完了';
+  }
+
+  tasks.forEach(function(t){
+    var id = t.dataset.id;
+    var cb = t.querySelector('input[type=checkbox]');
+    cb.checked = !!saved[id];
+    cb.addEventListener('change', function(){
+      saved[id] = cb.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch(e){}
+      paint();
+    });
+  });
+  paint();
+
+  document.getElementById('reset').addEventListener('click', function(){
+    saved = {};
+    try { localStorage.removeItem(KEY); } catch(e){}
+    tasks.forEach(function(t){ t.querySelector('input[type=checkbox]').checked = false; });
+    paint();
+  });
+
+  function feedback(btn){
+    var old = btn.dataset.label || btn.innerText;
+    btn.dataset.label = old;
+    btn.innerText = 'コピー済み ✓';
+    btn.classList.add('done');
+    setTimeout(function(){ btn.innerText = old; btn.classList.remove('done'); }, 1600);
+  }
+  /* 画面外の textarea に入れて選択する。
+     display:none の要素は選択が無音で失敗するので絶対に使わない。 */
+  function legacyCopy(text){
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;left:-9999px;top:0;width:1px;height:1px;padding:0;border:0;margin:0;font-size:16px;';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    try { ta.setSelectionRange(0, text.length); } catch(e){}
+    /* 本当に選択できたかを確認する（できていなければコピーは成立しない） */
+    var selected = (ta.selectionEnd - ta.selectionStart) === text.length;
+    var ok = false;
+    if (selected) { try { ok = document.execCommand('copy'); } catch(e){ ok = false; } }
+    document.body.removeChild(ta);
+    return ok;
+  }
+  /* 自動コピーができなかったときは、手で選べる枠を出す */
+  function manualCopy(btn, text){
+    /* .cmd は flex 行なので、枠は「中」ではなく「すぐ下」に出す（中に入れると横並びになって崩れる） */
+    var cmd = btn.parentNode;
+    var wrap = cmd.nextElementSibling;
+    if (!wrap || wrap.className !== 'copy-manual-wrap'){
+      wrap = document.createElement('div');
+      wrap.className = 'copy-manual-wrap';
+      var msg = document.createElement('p');
+      msg.textContent = '自動コピーができませんでした。下の枠は選択してあるので、⌘C でコピーしてください。';
+      msg.style.cssText = 'margin:10px 0 4px;font-size:12.5px;color:#e06c6c;font-weight:700;';
+      var ta = document.createElement('textarea');
+      ta.readOnly = true;
+      ta.style.cssText = 'display:block;width:100%;box-sizing:border-box;min-height:130px;padding:10px;'
+        + 'border:2px solid #ef8a7a;border-radius:10px;font:13px/1.7 inherit;background:#fff;color:#4a3f3b;';
+      wrap.appendChild(msg); wrap.appendChild(ta);
+      cmd.insertAdjacentElement('afterend', wrap);
+    }
+    var box = wrap.querySelector('textarea');
+    box.value = text; box.focus(); box.select();
+    /* ボタンの文言は短くする（長いとボタンが伸びてコマンド枠を圧迫する） */
+    var old = btn.dataset.label || btn.innerText;
+    btn.dataset.label = old;
+    btn.innerText = '手でコピー';
+    setTimeout(function(){ btn.innerText = old; }, 6000);
+  }
+  document.querySelectorAll('.copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      /* コピー原文は画面に出ている要素の innerText から読む（テキストを二重に持たない） */
+      var text = document.getElementById(btn.dataset.target).innerText.replace(/ /g, ' ').trim();
+      if (!text) return;
+      if (legacyCopy(text)) { feedback(btn); return; }
+      if (!(navigator.clipboard && navigator.clipboard.writeText)) { manualCopy(btn, text); return; }
+
+      /* ⚠️ writeText の Promise は、フォーカスやユーザー操作の条件を満たさないと
+         resolve も reject もせず宙吊りになることがある（＝押しても無反応になる）。
+         必ず時間で打ち切って、手動コピー枠を出す。 */
+      var settled = false;
+      var giveUp = setTimeout(function(){
+        if (settled) return;
+        settled = true; manualCopy(btn, text);
+      }, 800);
+      navigator.clipboard.writeText(text).then(function(){
+        if (settled) return;
+        settled = true; clearTimeout(giveUp); feedback(btn);
+      }).catch(function(){
+        if (settled) return;
+        settled = true; clearTimeout(giveUp); manualCopy(btn, text);
+      });
+    });
+  });
+</script>
+</body>
+</html>

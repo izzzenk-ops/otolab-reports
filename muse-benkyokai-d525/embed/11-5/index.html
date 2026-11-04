@@ -1,0 +1,872 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Museのスライド</title><meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ===== Muse勉強会 v3：このデッキ専用のデザイン（色は講座スライドと同じ） ===== */
+:root{
+	--ig:linear-gradient(125deg,#5851db,#833ab4,#c13584,#e1306c,#f77737);
+	--bg:#fdfcfa; --paper:#fff; --ink:#3a3a46; --ink2:#5a5a68; --mute:#8a8a9a; --line:#ece7e0;
+	--coral:#ff9e9e; --coral-d:#fb8b8b; --coral-dd:#e86f6f; --coral-l:#fff0f0;
+	--blue:#4a87bc; --blue-l:#e8f1f9; --dark:#3a3a46; --dark-l:#f1efec;
+	--sh:0 .5cqw 1.6cqw rgba(193,53,132,.08), 0 .1cqw .3cqw rgba(58,58,70,.06);
+	--f-head:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN",sans-serif;
+	--f-body:"Zen Kaku Gothic New","Hiragino Sans","Hiragino Kaku Gothic ProN",sans-serif;
+}
+*{ margin:0; padding:0; box-sizing:border-box }
+body{ font-family:var(--f-body); background:#efece7; color:var(--ink); padding:28px 24px 80px; line-height:1.6;
+	-webkit-font-smoothing:antialiased }
+.wrap{ max-width:none; margin:0 auto }
+.page-head h1{ font-family:var(--f-head); font-size:22px; font-weight:800 }
+.lesson{ margin-top:18px; border-top:2px solid #ddd8d0; padding-top:14px }
+.lesson h2{ font-size:16px; font-weight:700; color:var(--mute) }
+.deck{ display:grid; grid-template-columns:minmax(0,1fr); gap:26px; margin-top:24px }
+body:not(.present) .deck .slide{ width:min(100%, calc((100vh - 90px) * 16 / 9)); justify-self:center }
+
+/* ---- 枠 ---- */
+.slide{ position:relative; width:100%; aspect-ratio:16/9; background:var(--ig); padding:.75cqw; border-radius:1.8cqw;
+	box-shadow:0 10px 30px rgba(58,58,70,.16); container-type:inline-size }
+.inner{ position:relative; height:100%; background:var(--bg); border-radius:1.15cqw; padding:2.2cqw 4.2cqw 2.4cqw;
+	display:flex; flex-direction:column; overflow:hidden; word-break:keep-all; overflow-wrap:normal; line-break:strict }
+.inner{ background:radial-gradient(circle at 96% 0%, #ffecec 0, rgba(255,236,236,0) 20cqw), var(--bg) }
+.nw,.tk{ display:inline-block; white-space:nowrap }
+
+/* ---- 見出しまわり ---- */
+.hd{ display:flex; align-items:center; justify-content:space-between; gap:2cqw; position:relative; z-index:1 }
+.ch{ display:inline-flex; align-items:center; gap:.8cqw; font-family:var(--f-head); font-weight:800; font-size:1.35cqw; color:var(--coral-dd) }
+.ch i{ font-style:normal; width:2.3cqw; height:2.3cqw; border-radius:50%; display:grid; place-items:center; color:#fff; background:var(--ig); font-size:1.25cqw }
+.prog{ display:flex; gap:.35cqw }
+.prog b{ width:2.6cqw; height:.45cqw; border-radius:99px; background:var(--dark-l) }
+.prog b.on{ background:var(--coral-d) } .prog b.done{ background:#f6c9c9 }
+.title{ font-family:var(--f-head); font-weight:800; font-size:3.5cqw; line-height:1.28; letter-spacing:.01em; margin-top:1.1cqw; position:relative; z-index:1 }
+.title .tk{ color:var(--coral-dd); background:linear-gradient(transparent 68%, #ffe1e1 68%, #ffe1e1 92%, transparent 92%) }
+.lead{ margin-top:.5cqw; font-size:1.65cqw; font-weight:700; color:var(--mute) }
+.step{ display:none }
+.mid{ flex:1; display:flex; flex-direction:column; justify-content:center; gap:1.1cqw; margin-top:1.2cqw; min-height:0 }
+.mid > *{ margin:0 }
+.b{ font-weight:900; color:var(--dark) } .bc{ font-weight:900; color:var(--coral-dd) } .bb{ font-weight:900; color:var(--blue) }
+.m{ font-weight:900; background:linear-gradient(transparent 55%, #ffe39e 55%); padding:0 .15em }
+
+/* ---- 一言まとめ ---- */
+.exp{ display:grid; grid-template-columns:auto 1fr; gap:1.3cqw; align-items:center; background:var(--coral-l);
+	border-radius:1.2cqw; padding:.75cqw 1.8cqw .75cqw .9cqw; border:.12cqw solid #ffd9d9 }
+.exp img{ width:3.4cqw; height:3.4cqw; object-fit:contain; background:#fff; border-radius:50%; padding:.35cqw; box-shadow:var(--sh) }
+.exp p{ font-size:1.5cqw; font-weight:700; color:var(--ink2); line-height:1.65 }
+
+/* ---- 表紙・章扉 ---- */
+.cover .inner{ justify-content:center; padding:4cqw 5cqw }
+.cover__body{ display:grid; grid-template-columns:1fr 40cqw; gap:3cqw; align-items:center }
+.cover__body > div{ min-width:0 }
+.cover .step{ display:inline-block; font-family:var(--f-head); font-weight:800; font-size:1.5cqw; color:#fff; background:var(--ig); border-radius:99px; padding:.4cqw 1.6cqw }
+.cover .title{ font-size:5.6cqw; margin-top:1.6cqw }
+.cover .lead{ font-size:1.9cqw; margin-top:1.4cqw; color:var(--ink2) }
+.cover img{ width:100%; height:auto; border-radius:1.6cqw; box-shadow:var(--sh) }
+.chap .inner{ justify-content:center; padding:4cqw 6cqw }
+.chap .inner{ background:radial-gradient(circle at 92% 8%, rgba(225,48,108,.38) 0, rgba(225,48,108,0) 34cqw), radial-gradient(circle at 0% 100%, rgba(88,81,219,.3) 0, rgba(88,81,219,0) 30cqw), var(--dark) }
+.chap__no{ font-family:var(--f-head); font-weight:800; font-size:13cqw; line-height:1; background:var(--ig); -webkit-background-clip:text; background-clip:text; color:transparent }
+.chap__t{ font-family:var(--f-head); font-weight:800; font-size:4.6cqw; color:#fff; margin-top:1cqw }
+.chap__s{ margin-top:1.4cqw; display:flex; flex-wrap:wrap; gap:.8cqw }
+.chap__s span{ font-size:1.6cqw; font-weight:700; color:#fff; border:.15cqw solid rgba(255,255,255,.35); border-radius:99px; padding:.35cqw 1.4cqw }
+
+/* ---- 共通パネル ---- */
+.panel{ background:var(--paper); border-radius:1.4cqw; box-shadow:var(--sh) }
+
+/* 数字3つ */
+.info{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.6cqw }
+.info__item{ background:#fff; border-radius:1.4cqw; box-shadow:var(--sh); padding:1.6cqw 1.4cqw; text-align:center; position:relative; overflow:hidden }
+.info__item::after{ content:""; position:absolute; left:0; right:0; top:0; height:.45cqw; background:var(--ig) }
+.info__item img{ height:6.2cqw; width:auto }
+.info__num{ font-family:var(--f-head); margin-top:.6cqw; font-size:3.5cqw; font-weight:800; color:var(--coral-dd); line-height:1.1; white-space:nowrap }
+.info__label{ margin-top:.4cqw; font-size:1.6cqw; font-weight:900 }
+.info__sub{ margin-top:.2cqw; font-size:1.4cqw; font-weight:700; color:var(--mute) }
+
+/* 2行の工程（いつものAI／Muse） */
+.srows{ display:grid; gap:1.2cqw }
+.srow{ display:grid; grid-template-columns:12cqw 1fr; align-items:stretch; background:#fff; border-radius:1.4cqw; box-shadow:var(--sh); overflow:hidden }
+.srow > b{ display:grid; place-items:center; background:var(--dark); color:#fff; font-family:var(--f-head); font-size:1.8cqw; font-weight:800 }
+.srow.is-coral > b{ background:var(--ig) }
+.srow__chips{ display:flex; align-items:center; gap:.6cqw; padding:1.2cqw 1.3cqw }
+.srow__chips span{ flex:1; text-align:center; background:var(--dark-l); border-radius:.8cqw; padding:1cqw .3cqw; font-size:1.55cqw; font-weight:900; color:var(--ink2); white-space:nowrap }
+.srow__chips i{ font-style:normal; color:var(--mute); font-weight:900; font-size:1.7cqw }
+.srow.is-coral .srow__chips span{ background:var(--coral-l); color:var(--coral-dd) }
+.srow.is-dark .srow__chips span:nth-child(n+5){ background:#e6e2dc; color:var(--dark) }
+
+/* 工程 */
+.flow{ display:grid; grid-template-columns:repeat(4,1fr); gap:1.6cqw }
+.flow.is-3{ grid-template-columns:repeat(3,1fr) } .flow.is-5{ grid-template-columns:repeat(5,1fr); gap:1.2cqw }
+.node{ position:relative; background:#fff; border-radius:1.2cqw; box-shadow:var(--sh); padding:1.1cqw .6cqw; text-align:center }
+.node:not(:last-child)::after{ content:""; position:absolute; right:-1.05cqw; top:50%; width:.9cqw; height:.9cqw; border-top:.3cqw solid var(--coral); border-right:.3cqw solid var(--coral); transform:translateY(-50%) rotate(45deg) }
+.flow.is-5 .node:not(:last-child)::after{ right:-.85cqw; width:.7cqw; height:.7cqw }
+.node__no{ display:inline-grid; place-items:center; width:2.4cqw; height:2.4cqw; border-radius:50%; background:var(--dark-l); color:var(--mute); font-family:var(--f-head); font-weight:800; font-size:1.3cqw }
+.node__text{ margin-top:.5cqw; font-family:var(--f-head); font-size:1.7cqw; font-weight:800; white-space:nowrap }
+.flow.is-5 .node__text{ font-size:1.45cqw }
+.node.is-now{ background:var(--coral-l); box-shadow:0 0 0 .2cqw var(--coral) inset, var(--sh) }
+.node.is-now .node__no{ background:var(--ig); color:#fff } .node.is-now .node__text{ color:var(--coral-dd) }
+
+/* 3つの波 */
+.waves{ display:grid; gap:.6cqw }
+.waves p{ display:flex; align-items:center; gap:1.3cqw; background:#fff; border-radius:1cqw; box-shadow:var(--sh); padding:.75cqw 1.6cqw; font-size:1.65cqw; font-weight:700; color:var(--ink2) }
+.waves p b{ flex:none; background:var(--dark-l); color:var(--mute); border-radius:99px; padding:.15cqw 1.1cqw; font-size:1.4cqw }
+.waves p.is-now{ background:var(--coral-l); color:var(--ink) } .waves p.is-now b{ background:var(--ig); color:#fff }
+
+/* SVG図 */
+.dg{ width:100%; height:auto; display:block; max-height:24cqw; background:#fff; border-radius:1.4cqw; box-shadow:var(--sh); padding:.6cqw }
+.dg--s{ max-height:23cqw }
+.dg text{ font-family:var(--f-head); font-weight:800 }
+.dg .t1{ font-size:30px; fill:#3a3a46 } .dg .t1c{ font-size:30px; fill:#e86f6f }
+.dg .t2{ font-size:24px; fill:#3a3a46 } .dg .t2c{ font-size:22px; fill:#e86f6f } .dg .t2b{ font-size:22px; fill:#4a87bc }
+.dg .t3{ font-size:19px; fill:#8a8a9a; font-family:var(--f-body); font-weight:700 } .dg .t4{ font-size:18px; fill:#e86f6f } .dg .tx{ font-size:22px; fill:#fff }
+
+/* 表（ラベル＋説明） */
+.diag__table{ background:#fff; border-radius:1.4cqw; box-shadow:var(--sh); overflow:hidden }
+.diag__row{ display:grid; grid-template-columns:12cqw 1fr; align-items:stretch }
+.diag__row + .diag__row{ border-top:.12cqw solid var(--line) }
+.diag__row > b{ display:grid; place-items:center; background:var(--coral-l); color:var(--coral-dd); font-family:var(--f-head); font-size:1.55cqw; font-weight:800; padding:.6cqw .3cqw; text-align:center }
+.diag__row > div{ padding:.65cqw 1.6cqw; font-size:1.75cqw; font-weight:900 }
+.diag__row > div small{ display:block; font-size:1.45cqw; font-weight:700; color:var(--mute) }
+
+/* 4枚カード */
+.cards{ display:grid; grid-template-columns:1fr 1fr; gap:1.2cqw 1.6cqw }
+.card{ position:relative; display:grid; grid-template-columns:11cqw 1fr; background:#fff; border-radius:1.3cqw; box-shadow:var(--sh); overflow:hidden; min-height:8cqw }
+.card__head{ display:grid; place-items:center; background:var(--ig); color:#fff; font-family:var(--f-head); font-size:1.7cqw; font-weight:800; padding:.6cqw; text-align:center }
+.card__body{ padding:1cqw 1.4cqw; display:flex; align-items:center }
+.point{ font-size:1.6cqw; font-weight:700; color:var(--ink2); line-height:1.55 }
+.card .num{ position:absolute; right:1cqw; bottom:.2cqw; font-family:var(--f-head); font-size:3.4cqw; font-weight:800; color:var(--coral); opacity:.18 }
+
+/* 許可の選び方 */
+.appr{ display:grid; grid-template-columns:24cqw 1fr; gap:2cqw; align-items:center }
+.appr__ask{ display:flex; gap:1cqw; align-items:center; background:#fff; border-radius:1.4cqw; box-shadow:var(--sh); padding:1.4cqw; border-left:.5cqw solid var(--blue) }
+.appr__ask img{ height:6.5cqw; width:auto }
+.appr__ask p{ font-size:1.7cqw; font-weight:900; line-height:1.55 }
+.appr__ask p b{ display:block; font-size:1.35cqw; color:var(--blue) }
+.appr__opts{ display:grid; gap:.8cqw }
+.appr__o{ display:grid; grid-template-columns:16cqw 1fr auto; align-items:center; gap:1.1cqw; background:#fff; border-radius:1.1cqw; box-shadow:var(--sh); padding:.85cqw 1.4cqw }
+.appr__o b{ font-family:var(--f-head); font-size:1.7cqw; font-weight:800 }
+.appr__o p{ font-size:1.5cqw; font-weight:700; color:var(--mute) }
+.appr__o em{ font-style:normal; font-size:1.3cqw; font-weight:900; border-radius:99px; padding:.2cqw 1cqw; background:var(--dark-l); color:var(--mute); white-space:nowrap }
+.appr__o.is-ok{ box-shadow:0 0 0 .2cqw var(--coral) inset, var(--sh); background:var(--coral-l) } .appr__o.is-ok em{ background:var(--ig); color:#fff }
+.appr__o.is-warn em{ background:var(--dark); color:#fff }
+
+/* よくある質問 */
+.qa{ display:grid; grid-template-columns:minmax(0,1fr); gap:1.4cqw; text-align:center }
+.qa__q,.qa__a{ position:relative; border-radius:1.4cqw; padding:2.4cqw 2cqw 1.6cqw; font-family:var(--f-head); font-weight:800; line-height:1.5 }
+.qa__q{ background:#fff; box-shadow:var(--sh); font-size:1.9cqw; color:var(--ink2) }
+.qa__a{ background:var(--coral-l); box-shadow:0 0 0 .2cqw var(--coral) inset; font-size:2.2cqw; color:var(--ink) }
+.qa__q::before,.qa__a::before{ position:absolute; top:-1.1cqw; left:1.6cqw; font-family:var(--f-body); font-size:1.35cqw; font-weight:900; color:#fff; border-radius:99px; padding:.25cqw 1.3cqw }
+.qa__q::before{ content:"よくある質問"; background:var(--blue) } .qa__a::before{ content:"答え"; background:var(--coral-dd) }
+.qa__a small{ display:block; margin-top:.8cqw; font-family:var(--f-body); font-size:1.5cqw; font-weight:700; color:var(--ink2); line-height:1.65 }
+.qa__arrow{ text-align:center; font-size:0; }
+.qa__arrow::before{ content:""; display:inline-block; width:1.4cqw; height:1.4cqw; border-top:.4cqw solid var(--coral); border-right:.4cqw solid var(--coral); transform:rotate(135deg) }
+.qa__arrow{ line-height:0; height:1cqw }
+
+/* スマホの設定画面 */
+.mock{ display:grid; grid-template-columns:30cqw 1fr; gap:3cqw; align-items:center }
+.mock__phone{ background:#f2f2f7; border:.55cqw solid #1c1c22; border-radius:2.2cqw; overflow:hidden; box-shadow:var(--sh) }
+.mock__bar{ background:#fff; text-align:center; font-size:1.6cqw; font-weight:900; padding:.9cqw 0; border-bottom:.12cqw solid #e5e5ea }
+.mock__bar--sub{ background:#f2f2f7; font-size:1.3cqw; color:#8e8e93; text-align:left; padding:.6cqw 1.6cqw; border:none }
+.mock__row{ display:flex; justify-content:space-between; align-items:center; background:#fff; padding:1.05cqw 1.6cqw; font-size:1.5cqw; font-weight:700; gap:1cqw }
+.mock__row + .mock__row{ border-top:.12cqw solid #e5e5ea }
+.mock__row b{ color:#8e8e93; white-space:nowrap } .mock__row small{ font-size:1.25cqw; color:#8e8e93 }
+.mock__row .off{ color:var(--coral-dd); font-weight:900; white-space:nowrap } .mock__row .on{ color:#2ea44f; font-weight:900 }
+.mock__note{ font-family:var(--f-head); font-size:2cqw; font-weight:800; line-height:1.7 }
+.mock__note small{ display:block; margin-top:.8cqw; font-family:var(--f-body); font-size:1.5cqw; font-weight:700; color:var(--mute); line-height:1.7 }
+
+/* 指示文 */
+.prs{ display:grid; gap:1.2cqw }
+.pr{ position:relative; background:#fff; border-radius:1.2cqw; box-shadow:var(--sh); padding:1.8cqw 1.8cqw 1.1cqw 2.2cqw; border-left:.5cqw solid var(--blue) }
+.pr__lbl{ position:absolute; top:-1cqw; left:1.6cqw; background:var(--blue); color:#fff; font-size:1.25cqw; font-weight:900; padding:.2cqw 1.2cqw; border-radius:99px; white-space:nowrap }
+.pr p{ font-size:1.65cqw; font-weight:700; color:var(--ink); line-height:1.6 }
+.pr p::before{ content:"「"; color:var(--blue) } .pr p::after{ content:"」"; color:var(--blue) }
+.pr__ex{ display:block; margin-top:.4cqw; font-size:1.35cqw; font-weight:900; color:var(--blue) }
+
+/* 使い道6つ */
+.six{ display:grid; grid-template-columns:repeat(3,1fr); gap:1cqw 1.2cqw }
+.six__c{ background:#fff; border-radius:1.3cqw; box-shadow:var(--sh); padding:1cqw 1.3cqw }
+.six__name{ font-family:var(--f-head); font-size:1.85cqw; font-weight:800; display:flex; align-items:center; gap:.7cqw }
+.six__name b{ width:2.3cqw; height:2.3cqw; border-radius:50%; background:var(--ig); color:#fff; display:grid; place-items:center; font-size:1.25cqw }
+.six__d{ margin-top:.3cqw; font-size:1.45cqw; font-weight:700; color:var(--mute); line-height:1.5 }
+.six__ex{ margin-top:.4cqw; display:inline-block; background:var(--coral-l); border-radius:99px; padding:.15cqw .9cqw; font-size:1.25cqw; font-weight:900; color:var(--coral-dd) }
+.six__c.is-try .six__name b{ background:var(--blue) } .six__c.is-try .six__ex{ background:var(--blue-l); color:var(--blue) }
+
+/* チャット画面 */
+.chatmock{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:2.2cqw; align-items:center }
+.cm__phone{ background:#f2f2f7; border:.55cqw solid #1c1c22; border-radius:2.2cqw; padding:1cqw; display:grid; gap:.6cqw; box-shadow:var(--sh) }
+.cm__phone p{ font-size:1.45cqw; font-weight:700; line-height:1.55; border-radius:1.2cqw; padding:.65cqw 1.1cqw }
+.cm__me{ justify-self:end; max-width:88%; background:var(--blue); color:#fff; border-bottom-right-radius:.3cqw !important }
+.cm__ai{ justify-self:start; max-width:94%; background:#fff; color:var(--ink2); border-bottom-left-radius:.3cqw !important }
+.cm__ai b{ display:block; color:var(--coral-dd) } .cm__ai span{ display:block; margin-top:.3cqw; color:var(--coral-dd); font-weight:900 }
+.cm__btns{ display:flex; gap:.5cqw; flex-wrap:wrap } .cm__btns i{ font-style:normal; font-size:1.25cqw; font-weight:900; color:var(--blue); background:#fff; border:.12cqw solid #cfe0f0; border-radius:99px; padding:.15cqw .9cqw; white-space:nowrap }
+.res{ background:#fff; border-radius:1.3cqw; box-shadow:var(--sh); padding:1.3cqw 1.7cqw; border-top:.45cqw solid var(--coral) }
+.res__head{ font-family:var(--f-head); font-size:1.65cqw; font-weight:800; color:var(--coral-dd); display:flex; align-items:center; gap:.9cqw; flex-wrap:wrap }
+.res__head em{ font-style:normal; font-family:var(--f-body); font-size:1.25cqw; font-weight:900; color:var(--mute); background:var(--dark-l); border-radius:99px; padding:.1cqw .9cqw }
+.res ul{ list-style:none; margin-top:.6cqw; display:grid; gap:.5cqw }
+.res li{ position:relative; padding-left:2cqw; font-size:1.5cqw; font-weight:700; color:var(--ink2); line-height:1.55 }
+.res li::before{ content:""; position:absolute; left:.2cqw; top:.55cqw; width:.9cqw; height:.5cqw; border-left:.25cqw solid var(--coral-dd); border-bottom:.25cqw solid var(--coral-dd); transform:rotate(-45deg) }
+.ex{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:2cqw; align-items:center }
+
+/* 漏斗（棒） */
+.fun2{ display:grid; grid-template-columns:1fr 1fr; gap:1.8cqw }
+.fun{ background:#fff; border-radius:1.4cqw; box-shadow:var(--sh); padding:1.3cqw 1.6cqw; display:grid; gap:.75cqw }
+.fun__h{ font-family:var(--f-head); font-size:1.6cqw; font-weight:800 }
+.fun__r{ display:grid; grid-template-columns:12.5cqw 1fr 7.5cqw; align-items:center; gap:.8cqw }
+.fun__r span{ font-size:1.4cqw; font-weight:700; color:var(--mute); white-space:nowrap }
+.fun__r i{ display:block; height:2.2cqw; min-width:.5cqw; background:var(--blue); border-radius:.5cqw }
+.fun__r b{ font-family:var(--f-head); font-size:1.75cqw; font-weight:800; text-align:right; white-space:nowrap }
+.fun__r.is-hit i{ background:var(--coral-dd) } .fun__r.is-hit b{ color:var(--coral-dd) }
+.fun__n{ font-size:1.45cqw; font-weight:700; color:var(--ink2) } .fun__n b{ color:var(--coral-dd) }
+
+/* 1日の時間割 */
+.day{ position:relative; height:11.5cqw; margin:0 3cqw }
+.day__line{ position:absolute; left:0; right:0; top:2.4cqw; height:.45cqw; background:var(--dark-l); border-radius:99px }
+.day__line span{ position:absolute; top:-2.4cqw; transform:translateX(-50%); font-size:1.3cqw; font-weight:900; color:var(--mute) }
+.day__ev{ position:absolute; top:3.6cqw; width:25cqw; transform:translateX(-10%); background:#fff; border-radius:1.1cqw; box-shadow:var(--sh); padding:.7cqw 1.1cqw; font-size:1.45cqw; font-weight:700; color:var(--ink2) }
+.day__ev::before{ content:""; position:absolute; left:10%; top:-1.75cqw; width:1.3cqw; height:1.3cqw; border-radius:50%; background:var(--mute); transform:translateX(-50%) }
+.day__ev b{ display:block; font-family:var(--f-head); font-size:1.75cqw; color:var(--ink) }
+.day__ev.is-main{ background:var(--coral-l) } .day__ev.is-main::before{ background:var(--coral-dd) } .day__ev.is-main b{ color:var(--coral-dd) }
+.day__ev.is-week{ background:var(--blue-l) } .day__ev.is-week::before{ background:var(--blue) } .day__ev.is-week b{ color:var(--blue) }
+
+/* やる／やらない */
+.say{ display:grid; gap:1cqw }
+.say__row{ display:grid; grid-template-columns:11cqw 1fr; border-radius:1.2cqw; overflow:hidden; box-shadow:var(--sh); background:#fff }
+.say__row b{ display:grid; place-items:center; background:var(--dark); color:#fff; font-family:var(--f-head); font-size:1.7cqw; font-weight:800 }
+.say__row p{ padding:1.1cqw 1.8cqw; font-size:1.75cqw; font-weight:900; color:var(--ink2) }
+.say__row.is-ng p{ color:var(--mute); text-decoration:line-through; text-decoration-color:rgba(58,58,70,.35) }
+.say__row.is-ok b{ background:var(--ig) } .say__row.is-ok p{ background:var(--coral-l); color:var(--ink) }
+
+/* 対比 */
+.vs{ display:grid; grid-template-columns:1fr auto 1fr; gap:1.4cqw; align-items:stretch }
+.vs__mark{ align-self:center; font-family:var(--f-head); font-size:2.2cqw; font-weight:800; color:#fff; background:var(--ig); width:4.4cqw; height:4.4cqw; border-radius:50%; display:grid; place-items:center }
+.side{ background:#fff; border-radius:1.4cqw; box-shadow:var(--sh); overflow:hidden; display:flex; flex-direction:column }
+.side__head{ background:var(--dark); color:#fff; text-align:center; font-family:var(--f-head); font-weight:800; padding:.9cqw .6cqw; font-size:1.85cqw }
+.side.is-good .side__head{ background:var(--ig) }
+.side__body{ padding:1.3cqw 1.6cqw; display:grid; gap:.7cqw; flex:1; align-content:center }
+.side__body p{ position:relative; padding-left:2cqw; font-size:1.6cqw; font-weight:700; color:var(--ink2); line-height:1.5 }
+.side__body p::before{ content:"✕"; position:absolute; left:0; font-size:1.3cqw; top:.15cqw; color:var(--mute); font-weight:900 }
+.side.is-good .side__body p::before{ content:"◯"; color:var(--coral-dd) }
+.side__pill{ margin-top:.3cqw; background:var(--dark-l); border-radius:.9cqw; padding:.8cqw; text-align:center; font-family:var(--f-head); font-weight:800; font-size:1.6cqw }
+.side.is-good .side__pill{ background:var(--coral-l); color:var(--coral-dd) }
+
+/* 事例カード */
+.case{ display:grid; grid-template-columns:1fr 32cqw; gap:2.4cqw; align-items:center }
+.case > img{ width:100%; border-radius:1.4cqw; box-shadow:var(--sh) }
+.case__card{ background:#fff; border-radius:1.4cqw; box-shadow:var(--sh); padding:1.6cqw 2cqw; border-top:.5cqw solid var(--coral) }
+.case__tag{ display:inline-block; background:var(--dark); color:#fff; font-size:1.25cqw; font-weight:900; border-radius:99px; padding:.2cqw 1.2cqw }
+.case__title{ margin-top:.8cqw; font-family:var(--f-head); font-size:1.85cqw; font-weight:800; line-height:1.5 }
+.case__who{ margin-top:.5cqw; font-size:1.55cqw; font-weight:900; color:var(--coral-dd) }
+.case__card ul{ list-style:none; margin-top:.6cqw; display:grid; gap:.25cqw }
+.case__card li{ position:relative; padding-left:1.6cqw; font-size:1.45cqw; font-weight:700; color:var(--mute) }
+.case__card li::before{ content:""; position:absolute; left:.2cqw; top:.75cqw; width:.6cqw; height:.6cqw; border-radius:50%; background:var(--coral) }
+.case__url{ display:inline-block; margin-top:.8cqw; font-size:1.35cqw; font-weight:900; color:var(--blue) }
+
+/* 得意の表 */
+.tbl{ width:100%; border-collapse:separate; border-spacing:0; background:#fff; border-radius:1.4cqw; overflow:hidden; box-shadow:var(--sh) }
+.tbl th,.tbl td{ padding:.8cqw 1.4cqw; font-size:1.55cqw; font-weight:900; text-align:center; border-bottom:.12cqw solid var(--line) }
+.tbl tr:last-child td{ border-bottom:none }
+.tbl td:first-child{ text-align:left; color:var(--ink) }
+.tbl th{ font-family:var(--f-head); font-size:1.65cqw }
+.tbl th.is-m{ background:var(--ig); color:#fff } .tbl th.is-c{ background:var(--dark); color:#fff } .tbl th:first-child{ background:var(--dark-l) }
+.tbl td.ok{ color:var(--coral-dd) } .tbl td.ng{ color:var(--mute); font-weight:700 }
+.tbl .mk{ display:inline-block; font-size:2.1cqw; line-height:1; vertical-align:-.15em; margin-right:.4cqw }
+
+/* フォルダの中身 */
+.treerow{ display:grid; grid-template-columns:30cqw 1fr; gap:2.2cqw; align-items:center }
+.tree{ background:#2b2b35; border-radius:1.4cqw; padding:1.4cqw 1.8cqw; display:grid; gap:.3cqw; font-family:Menlo,monospace; box-shadow:var(--sh) }
+.tree p{ font-size:1.45cqw; font-weight:700; color:#e8e6e3; display:flex; justify-content:space-between; gap:1cqw }
+.tree__root{ color:#fff !important; font-size:1.65cqw !important }
+.tree__root em{ font-style:normal; font-family:var(--f-body); font-size:1.15cqw; background:var(--ig); color:#fff; border-radius:99px; padding:0 .9cqw }
+.tree__d{ padding-left:1.4cqw; color:#ffb3b3 !important } .tree__d span{ font-family:var(--f-body); font-size:1.2cqw; color:#b9b4ad }
+.tree__f{ padding-left:3.2cqw; color:#b9c9da !important }
+.treeexp{ display:grid; gap:.9cqw }
+.treeexp p{ background:#fff; border-radius:1.1cqw; box-shadow:var(--sh); padding:.9cqw 1.4cqw; font-size:1.5cqw; font-weight:700; color:var(--ink2) }
+.treeexp b{ display:block; font-family:Menlo,monospace; color:var(--coral-dd); font-size:1.5cqw }
+
+/* 5ステップ */
+.gh5{ display:grid; gap:.6cqw }
+.gh5 p{ display:grid; grid-template-columns:2.6cqw 9cqw 1fr; gap:1cqw; align-items:center; background:#fff; border-radius:1.1cqw; box-shadow:var(--sh); padding:.6cqw 1.2cqw; font-size:1.45cqw; font-weight:700; color:var(--ink2) }
+.gh5 p > b{ width:2.6cqw; height:2.6cqw; border-radius:50%; background:var(--ig); color:#fff; display:grid; place-items:center; font-size:1.3cqw; font-family:var(--f-head) }
+.gh5 p > em{ font-style:normal; font-size:1.25cqw; font-weight:900; text-align:center; border-radius:99px; padding:.15cqw .4cqw; white-space:nowrap }
+.gh5 .w-gh{ background:var(--dark-l); color:var(--dark) } .gh5 .w-mu{ background:var(--coral-l); color:var(--coral-dd) } .gh5 .w-cl{ background:var(--blue-l); color:var(--blue) }
+
+/* 守る3つ／やらない3つ */
+.rules3,.ng{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.4cqw }
+.rules3 > div,.ng__card{ background:#fff; border-radius:1.3cqw; box-shadow:var(--sh); overflow:hidden }
+.rules3 b{ display:block; background:var(--ig); color:#fff; text-align:center; font-family:var(--f-head); font-size:1.7cqw; font-weight:800; padding:.8cqw }
+.rules3 p{ padding:1.1cqw 1.4cqw; font-size:1.5cqw; font-weight:700; color:var(--ink2); line-height:1.6 }
+.ng__head{ background:var(--dark); color:#fff; text-align:center; font-family:var(--f-head); font-weight:800; font-size:1.7cqw; padding:.8cqw .6cqw }
+.ng__body{ position:relative; padding:1.1cqw 1.4cqw 1.3cqw 3.6cqw; font-size:1.5cqw; font-weight:700; color:var(--mute); line-height:1.6 }
+.ng__body::before{ content:"✕"; position:absolute; left:1.2cqw; top:1.2cqw; width:1.7cqw; height:1.7cqw; border-radius:50%; background:var(--dark); color:#fff; font-size:1.05cqw; display:grid; place-items:center }
+
+/* 今日やる */
+.checks{ display:grid; gap:.65cqw }
+.checks__i{ position:relative; padding:.85cqw 2cqw .85cqw 5.4cqw; background:#fff; border-radius:1.1cqw; box-shadow:var(--sh); font-size:1.75cqw; font-weight:900 }
+.checks__i::before{ content:""; position:absolute; left:1.6cqw; top:50%; transform:translateY(-50%); width:2.4cqw; height:2.4cqw; border-radius:.6cqw; background:var(--ig) }
+.checks__i::after{ content:""; position:absolute; left:2.3cqw; top:50%; width:1cqw; height:.55cqw; border-left:.28cqw solid #fff; border-bottom:.28cqw solid #fff; transform:translateY(-70%) rotate(-45deg) }
+.checks__i small{ display:block; margin-top:.15cqw; font-size:1.35cqw; font-weight:700; color:var(--mute) }
+
+/* 絵と文 */
+.pic{ display:grid; grid-template-columns:38cqw 1fr; gap:2.6cqw; align-items:center }
+.pic > img{ width:100%; height:auto; border-radius:1.4cqw; box-shadow:var(--sh) }
+.pic__note{ font-family:var(--f-head); font-size:2cqw; font-weight:800; line-height:1.65 }
+.pic__note small{ display:block; margin-top:.9cqw; font-family:var(--f-body); font-size:1.5cqw; font-weight:700; color:var(--mute); line-height:1.7 }
+
+/* 結論ブロック */
+.breakout{ display:grid; grid-template-columns:auto 1fr; gap:2.4cqw; align-items:center; background:#fff; border-radius:1.6cqw; box-shadow:var(--sh); padding:2cqw 2.6cqw; position:relative; overflow:hidden }
+.breakout::after{ content:""; position:absolute; left:0; top:0; bottom:0; width:.6cqw; background:var(--ig) }
+.breakout img{ height:15cqw; width:auto; border-radius:1.2cqw }
+.breakout .big{ font-family:var(--f-head); font-size:6cqw; font-weight:800; line-height:1.1; background:var(--ig); -webkit-background-clip:text; background-clip:text; color:transparent }
+.breakout p{ font-size:1.9cqw; font-weight:900 } .breakout small{ display:block; margin-top:.5cqw; font-size:1.5cqw; font-weight:700; color:var(--mute) }
+
+/* 結び（絵＋一文） */
+.concl{ display:grid; grid-template-columns:auto 1fr; gap:1.8cqw; align-items:center; background:#fff; border-radius:1.3cqw; box-shadow:var(--sh); padding:1cqw 2cqw }
+.concl img{ height:6.6cqw; width:auto }
+.concl p{ font-family:var(--f-head); font-size:1.8cqw; font-weight:800; line-height:1.5 }
+.concl small{ display:block; margin-top:.3cqw; font-family:var(--f-body); font-size:1.45cqw; font-weight:700; color:var(--mute); line-height:1.6 }
+
+/* 誤解→正しい理解 */
+.mis{ display:grid; grid-template-columns:1fr 4cqw 1.25fr; gap:1cqw; align-items:stretch }
+.mis__box{ position:relative; background:#fff; border-radius:1.4cqw; box-shadow:var(--sh); padding:2.4cqw 1.8cqw 1.4cqw; display:grid; gap:1cqw; align-content:start }
+.mis__box > em{ position:absolute; top:-1.1cqw; left:1.6cqw; font-style:normal; font-size:1.35cqw; font-weight:900; color:#fff; background:var(--dark); border-radius:99px; padding:.25cqw 1.4cqw }
+.mis__box.is-ok{ box-shadow:0 0 0 .2cqw var(--coral) inset, var(--sh) } .mis__box.is-ok > em{ background:var(--coral-dd) }
+.mis__h{ font-family:var(--f-head); font-size:1.85cqw; font-weight:800; text-align:center; line-height:1.45 }
+.mis__chips{ display:flex; justify-content:center; gap:.7cqw }
+.mis__chips span{ font-size:1.45cqw; font-weight:900; border-radius:.8cqw; padding:1cqw 1cqw; background:var(--dark-l); color:var(--mute); white-space:nowrap }
+.mis__no{ text-align:center; font-family:var(--f-head); font-size:1.85cqw; font-weight:800 }
+.mis__no b{ display:inline-grid; place-items:center; width:2.4cqw; height:2.4cqw; border-radius:50%; background:var(--dark); color:#fff; margin-right:.6cqw; font-size:1.3cqw }
+.mis__arrow{ align-self:center; text-align:center; font-size:0 }
+.mis__arrow::before{ content:""; display:inline-block; width:1.8cqw; height:1.8cqw; border-top:.5cqw solid var(--coral); border-right:.5cqw solid var(--coral); transform:rotate(45deg) }
+.mis__hub{ display:grid; grid-template-columns:auto 1fr; gap:1.4cqw; align-items:center }
+.mis__muse{ width:9cqw; height:9cqw; border-radius:50%; padding:.45cqw; background:var(--ig) }
+.mis__muse span{ width:100%; height:100%; border-radius:50%; background:#fff; display:grid; place-items:center; font-family:var(--f-head); font-size:2cqw; font-weight:800; color:var(--coral-dd) }
+.mis__to{ display:grid; gap:.55cqw }
+.mis__to span{ font-size:1.5cqw; font-weight:900; background:var(--coral-l); border-radius:99px; padding:.4cqw 1.4cqw; white-space:nowrap; color:var(--ink) }
+
+/* 動詞4つ */
+.verb4{ display:grid; grid-template-columns:1fr 1fr; gap:1.2cqw 1.6cqw }
+.verb{ display:grid; grid-template-columns:7cqw 1fr; gap:1.4cqw; align-items:center; background:#fff; border-radius:1.4cqw; box-shadow:var(--sh); padding:1.1cqw 1.6cqw }
+.verb img{ width:100%; height:auto }
+.verb b{ display:block; font-family:var(--f-head); font-size:3cqw; font-weight:800; color:var(--coral-dd); line-height:1.15 }
+.verb p{ margin-top:.3cqw; font-size:1.5cqw; font-weight:900; color:var(--ink2) }
+.verb small{ display:block; font-size:1.35cqw; font-weight:700; color:var(--mute) }
+
+/* 比較表（ほかの秘書AI） */
+.cmp{ width:100%; border-collapse:separate; border-spacing:0; background:#fff; border-radius:1.4cqw; overflow:hidden; box-shadow:var(--sh) }
+.cmp th,.cmp td{ padding:.7cqw 1cqw; font-size:1.4cqw; font-weight:700; text-align:center; border-bottom:.12cqw solid var(--line); color:var(--ink2) }
+.cmp th{ font-family:var(--f-head); font-weight:800; background:var(--dark); color:#fff; font-size:1.5cqw }
+.cmp th.is-m{ background:var(--ig) } .cmp td.is-m{ background:var(--coral-l); color:var(--ink); font-weight:900 }
+.cmp td:first-child{ text-align:left; font-weight:900; color:var(--ink); background:#faf8f5 }
+.cmp tr:last-child td{ border-bottom:none }
+
+/* Threadsの投稿プレビュー */
+.thr{ display:grid; grid-template-columns:30cqw 1fr; gap:2.4cqw; align-items:center }
+.thr__card{ background:#fff; border-radius:1.4cqw; box-shadow:var(--sh); padding:1.2cqw 1.4cqw; display:grid; gap:.8cqw }
+.thr__post{ display:grid; grid-template-columns:3cqw 1fr; gap:.9cqw }
+.thr__post i{ width:3cqw; height:3cqw; border-radius:50%; background:var(--ig) }
+.thr__post b{ display:block; font-size:1.3cqw; font-weight:900 }
+.thr__post p{ font-size:1.4cqw; font-weight:700; color:var(--ink2); line-height:1.55 }
+.thr__post .ph{ display:block; height:.9cqw; border-radius:99px; background:var(--dark-l); margin-top:.45cqw }
+.thr__post .ph.s{ width:60% }
+.thr__tag{ justify-self:start; font-size:1.2cqw; font-weight:900; color:#fff; background:var(--dark); border-radius:99px; padding:.15cqw 1cqw }
+
+/* 3つの確認 */
+.three{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.4cqw }
+.three > div{ background:#fff; border-radius:1.4cqw; box-shadow:var(--sh); padding:1.4cqw 1.5cqw; text-align:center }
+.three img{ height:6cqw; width:auto }
+.three b{ display:block; margin-top:.5cqw; font-family:var(--f-head); font-size:1.8cqw; font-weight:800; color:var(--coral-dd) }
+.three p{ margin-top:.3cqw; font-size:1.45cqw; font-weight:700; color:var(--ink2); line-height:1.55 }
+
+/* ---- プレゼンモード（presenter.js 用。slide.css から移植） ---- */
+.pm-hint{ position:fixed; right:16px; bottom:14px; z-index:50; font-size:13px; font-weight:800; color:#8a8a9a; background:#fff; border:1px solid var(--line); border-radius:999px; padding:7px 14px; box-shadow:0 4px 14px rgba(74,74,90,.12) }
+body.present{ overflow:hidden; background:#0e0e12 }
+body.present .wrap{ visibility:hidden }
+body.present .pm-hint{ display:none }
+body.present .slide.is-live{ visibility:visible; position:fixed; left:50%; top:50%; width:1200px; transform-origin:50% 50%; z-index:60; border-radius:0; box-shadow:none }
+body.present .slide.is-live *{ visibility:visible }
+.pm-mark{ display:none }
+body.present .slide.is-live .pm-mark{ display:block; position:absolute; right:2cqw; bottom:1.4cqw; z-index:5; font-size:1.3cqw; font-weight:800; color:#b9b4ad }
+
+.ex .fun__r{ grid-template-columns:15.5cqw 1fr 5.5cqw }
+.qa__q,.qa__a{ word-break:keep-all }
+
+/* ===== v3.1 追加（ポイントの帯・アプリのアイコン・スクショ・やってみよう） ===== */
+.exp{ grid-template-columns:auto 1fr; gap:1.3cqw; background:#fff8dc; border:.15cqw solid #f1d27a; border-radius:1.3cqw; padding:.9cqw 2cqw .9cqw 1.2cqw }
+.exp img{ width:3.6cqw; height:3.6cqw }
+.exp p{ font-size:1.72cqw; font-weight:700; color:var(--ink); line-height:1.6 }
+.exp p strong{ font-weight:900; color:var(--ink) }
+.exp p .lbl{ display:inline-block; margin-right:.8cqw; font-size:1.25cqw; font-weight:900; color:#fff; background:#e0a92b; border-radius:99px; padding:.05cqw .9cqw; vertical-align:.15em }
+
+.app{ display:inline-grid; place-items:center; width:3.4cqw; height:3.4cqw; border-radius:24%; flex:none; vertical-align:middle; box-shadow:0 .15cqw .4cqw rgba(0,0,0,.12) }
+.app img{ width:58%; height:58% }
+.app.s{ width:2.4cqw; height:2.4cqw } .app.l{ width:5.6cqw; height:5.6cqw }
+.app.ig{ background:var(--ig) } .app.th,.app.x{ background:#000 } .app.fb{ background:#0866ff } .app.oa{ background:#10a37f }
+.app.cl{ background:#d97757 } .app.gm{ background:linear-gradient(135deg,#4285f4,#9b72cb) } .app.gh{ background:#24292f }
+.app.gmail{ background:#ea4335 } .app.cal{ background:#4285f4 } .app.yt{ background:#ff0000 } .app.meta{ background:#0467df }
+.app.muse{ background:#fff } .app.muse img{ width:100%; height:100%; border-radius:24% }
+.ic-t{ display:inline-flex; align-items:center; gap:.6cqw; white-space:nowrap }
+
+.mis__chips span{ display:grid; justify-items:center; gap:.5cqw; background:transparent; padding:.4cqw .2cqw; color:var(--ink2) }
+.mis__to span{ display:flex; align-items:center; gap:.7cqw; padding:.35cqw 1.2cqw .35cqw .4cqw }
+.mis__muse{ background:none; padding:0; width:9cqw; height:9cqw }
+.mis__muse img{ width:100%; height:100%; border-radius:24%; box-shadow:var(--sh) }
+.cmp th .app{ margin-right:.4cqw }
+.card__head{ display:grid; place-items:center; gap:.4cqw }
+.card__head .app{ box-shadow:none; background-color:rgba(255,255,255,.2) }
+
+/* 全体の流れ（アイコン版） */
+.pipe{ display:grid; grid-template-columns:1fr auto 1fr auto 1fr auto 1fr; align-items:center; gap:.8cqw }
+.pipe__c{ background:#fff; border-radius:1.4cqw; box-shadow:var(--sh); padding:1.4cqw 1cqw; text-align:center; display:grid; justify-items:center; gap:.5cqw }
+.pipe__c b{ font-family:var(--f-head); font-size:2cqw; font-weight:800 }
+.pipe__c small{ font-size:1.4cqw; font-weight:700; color:var(--mute); line-height:1.45 }
+.pipe__c.is-shelf{ background:var(--blue-l) }
+.pipe__a{ display:grid; justify-items:center; gap:.2cqw; font-size:1.25cqw; font-weight:900; color:var(--coral-dd) }
+.pipe__a::after{ content:""; width:1.2cqw; height:1.2cqw; border-top:.35cqw solid var(--coral); border-right:.35cqw solid var(--coral); transform:rotate(45deg) }
+
+/* ブラウザ枠・スマホ枠のスクショ */
+.shotrow{ display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); gap:2.4cqw; align-items:center }
+.shotrow.is-phone{ grid-template-columns:20cqw minmax(0,1fr) }
+.browser{ background:#fff; border-radius:1.2cqw; box-shadow:var(--sh); overflow:hidden; border:.12cqw solid var(--line) }
+.browser__bar{ display:flex; align-items:center; gap:.5cqw; padding:.6cqw .9cqw; background:#f3f1ee }
+.browser__bar i{ width:.9cqw; height:.9cqw; border-radius:50% } .browser__bar i:nth-child(1){ background:#ff6159 } .browser__bar i:nth-child(2){ background:#ffbd2e } .browser__bar i:nth-child(3){ background:#28c941 }
+.browser__bar span{ margin-left:.8cqw; flex:1; background:#fff; border-radius:99px; padding:.15cqw 1cqw; font-size:1.15cqw; font-weight:700; color:var(--mute); white-space:nowrap; overflow:hidden }
+.browser img{ display:block; width:100% }
+.phone{ border:.6cqw solid #1c1c22; border-radius:2.6cqw; overflow:hidden; box-shadow:var(--sh); background:#1c1c22 }
+.phone img{ display:block; width:100% }
+.facts{ display:grid; gap:.8cqw }
+.facts p{ display:flex; align-items:center; gap:1cqw; background:#fff; border-radius:1.1cqw; box-shadow:var(--sh); padding:.8cqw 1.3cqw; font-size:1.6cqw; font-weight:900 }
+.facts p small{ display:block; font-size:1.3cqw; font-weight:700; color:var(--mute) }
+.facts p em{ font-style:normal; flex:none; font-family:var(--f-head); font-size:1.3cqw; color:#fff; background:var(--ig); border-radius:99px; padding:.15cqw .9cqw }
+.src{ font-size:1.2cqw; font-weight:700; color:var(--mute); margin-top:.5cqw }
+
+/* やってみよう */
+.try{ position:relative; display:grid; grid-template-columns:minmax(0,1fr) 16cqw; gap:2cqw; align-items:center; background:#fff; border-radius:1.6cqw; box-shadow:var(--sh); padding:2.4cqw 2.4cqw 1.8cqw; border:.25cqw dashed var(--coral) }
+.try > em{ position:absolute; top:-1.4cqw; left:2cqw; font-style:normal; font-family:var(--f-head); font-size:1.7cqw; font-weight:800; color:#fff; background:var(--ig); border-radius:99px; padding:.3cqw 1.8cqw }
+.try ol{ list-style:none; counter-reset:t; display:grid; gap:.8cqw }
+.try li{ counter-increment:t; display:grid; grid-template-columns:3cqw 1fr; gap:1cqw; align-items:center; font-size:1.75cqw; font-weight:900; color:var(--ink) }
+.try li::before{ content:counter(t); width:3cqw; height:3cqw; border-radius:50%; background:var(--coral-l); color:var(--coral-dd); display:grid; place-items:center; font-family:var(--f-head); font-size:1.5cqw; font-weight:800 }
+.try li small{ display:block; font-size:1.35cqw; font-weight:700; color:var(--mute) }
+.try img{ width:100%; height:auto }
+.try__done{ grid-column:1 / -1; display:flex; align-items:center; gap:1cqw; background:var(--coral-l); border-radius:1cqw; padding:.7cqw 1.4cqw; font-size:1.55cqw; font-weight:900; color:var(--coral-dd) }
+.try__done::before{ content:"できたらOK"; flex:none; font-size:1.2cqw; color:#fff; background:var(--coral-dd); border-radius:99px; padding:.1cqw .9cqw }
+.code{ display:inline-block; font-family:Menlo,monospace; font-size:1.7cqw; font-weight:800; letter-spacing:.12em; color:var(--coral-dd); background:var(--coral-l); border:.15cqw dashed var(--coral); border-radius:.6cqw; padding:0 .8cqw; vertical-align:middle }
+.browser img{ max-height:23cqw; object-fit:cover; object-position:top }
+.phone img{ max-height:30cqw; object-fit:cover; object-position:top }
+.shotrow{ min-height:0 }
+.cover img{ max-height:30cqw; object-fit:contain }
+
+/* ===== v3.2 章のゴール・目次 ===== */
+.chap__g{ margin-top:2cqw; max-width:62cqw; background:rgba(255,255,255,.08); border:.15cqw solid rgba(255,255,255,.18); border-radius:1.3cqw; padding:1.2cqw 1.8cqw }
+.chap__g b{ display:block; font-size:1.45cqw; font-weight:900; color:#ffb3b3 }
+.chap__g ul{ list-style:none; margin-top:.5cqw; display:grid; gap:.35cqw }
+.chap__g li{ position:relative; padding-left:2.2cqw; font-size:1.7cqw; font-weight:700; color:#fff }
+.chap__g li::before{ content:""; position:absolute; left:.2cqw; top:.55cqw; width:1cqw; height:.55cqw; border-left:.28cqw solid #ffb3b3; border-bottom:.28cqw solid #ffb3b3; transform:rotate(-45deg) }
+.chap .inner{ padding-top:3cqw; padding-bottom:3cqw }
+.chap__no{ font-size:10cqw }
+.toc{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1cqw 1.2cqw }
+.toc__c{ display:grid; grid-template-columns:auto 1fr; column-gap:1cqw; align-items:center; background:#fff; border-radius:1.2cqw; box-shadow:var(--sh); padding:1cqw 1.3cqw }
+.toc__c i{ grid-row:span 2; font-style:normal; font-family:var(--f-head); font-weight:800; font-size:2.6cqw; background:var(--ig); -webkit-background-clip:text; background-clip:text; color:transparent }
+.toc__c b{ font-family:var(--f-head); font-size:1.75cqw; font-weight:800 }
+.toc__c small{ font-size:1.3cqw; font-weight:700; color:var(--mute); line-height:1.45 }
+
+.eight{ display:grid; grid-template-columns:repeat(4,1fr); gap:1cqw 1.1cqw }
+.said{ position:relative; margin-top:1cqw; background:var(--dark-l); border-radius:1cqw; padding:1.7cqw 1.4cqw .9cqw }
+.said__lbl{ position:absolute; top:-1cqw; left:1.2cqw; background:var(--dark); color:#fff; font-size:1.2cqw; font-weight:900; padding:.2cqw 1.1cqw; border-radius:99px; white-space:nowrap }
+.said p{ font-size:1.5cqw; font-weight:700; color:var(--ink2); line-height:1.6 }
+.paste{ display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); gap:1.8cqw; align-items:start }
+.pr.is-long p{ height:17cqw; overflow-y:auto; white-space:pre-wrap; font-size:1.1cqw; font-weight:500; line-height:1.65; padding-right:.6cqw }
+.pr.is-long p::before,.pr.is-long p::after,.pr.is-pre p::before,.pr.is-pre p::after{ content:none }
+.pr.is-pre{ margin-top:1cqw; padding-top:1.5cqw; padding-bottom:.9cqw }
+.pr.is-pre p{ white-space:pre-wrap; font-size:1.4cqw; font-weight:600; line-height:1.6 }
+.paste__steps{ list-style:none; display:grid; gap:.7cqw; counter-reset:ps; margin:0; padding:0 }
+.paste__steps li{ counter-increment:ps; position:relative; background:#fff; border-radius:1.2cqw; box-shadow:var(--sh); padding:.7cqw 1.2cqw .7cqw 5cqw; line-height:1.4 }
+.paste__steps li::before{ content:counter(ps); position:absolute; left:1.3cqw; top:50%; transform:translateY(-50%); width:2.8cqw; height:2.8cqw; border-radius:50%; background:var(--ig); color:#fff; font-family:var(--f-head); font-weight:800; font-size:1.6cqw; display:grid; place-items:center }
+.paste__steps b{ display:block; font-family:var(--f-head); font-size:1.55cqw; font-weight:800 }
+.paste__steps span{ font-size:1.25cqw; font-weight:700; color:var(--mute) }
+.checks.is-7{ gap:.45cqw } .checks.is-7 .checks__i{ padding-top:.55cqw; padding-bottom:.55cqw }
+</style>
+<style>
+html,body{margin:0;padding:0;background:#fff;overflow:hidden}
+.page-head,.lesson{display:none!important}
+.vw{position:relative;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center}
+.vw .slide{display:none;margin:0!important;width:min(100vw,177.78vh)!important;max-width:none!important;box-shadow:none!important}
+.vw .slide.on{display:block}
+.nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:0;background:rgba(40,40,60,.55);color:#fff;font-size:22px;line-height:44px;cursor:pointer;z-index:5}
+.nav:disabled{opacity:.15;cursor:default}
+.nav.prev{left:6px}.nav.next{right:6px}
+.cnt{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);background:rgba(40,40,60,.6);color:#fff;font:700 12px/1 sans-serif;padding:5px 10px;border-radius:99px;z-index:5}
+</style></head><body><div class="vw">		<div class="slide">
+			<div class="inner">
+				<div class="hd"><span class="ch"><i>4</i>インスタ活用</span><div class="prog"><b class="done"></b><b class="done"></b><b class="done"></b><b class="on"></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b></div></div>
+				<h2 class="title">インスタでの使い道は、<span class="tk">この8つ</span></h2>
+				<p class="lead">上の4つが「調べる・まとめる」、下の4つが「作る・出す・返す」です</p>
+				<div class="mid"><div class="eight"><div class="six__c"><p class="six__name"><b>1</b>分析</p><p class="six__d">数字を読んで改善案</p><p class="six__ex">実演あり</p></div><div class="six__c"><p class="six__name"><b>2</b>週次レポート</p><p class="six__d">毎週月曜に自動で届く</p><p class="six__ex">実演あり</p></div><div class="six__c"><p class="six__name"><b>3</b>保存の整理</p><p class="six__d">保存したリールを選別</p><p class="six__ex">実演あり</p></div><div class="six__c"><p class="six__name"><b>4</b>毎朝のネタ</p><p class="six__d">決めた時間に届ける</p><p class="six__ex">実演あり</p></div><div class="six__c"><p class="six__name"><b>5</b>素材づくり</p><p class="six__d">写真から短い縦動画</p><p class="six__ex">実演あり</p></div><div class="six__c"><p class="six__name"><b>6</b>投稿まで</p><p class="six__d">承認してから投稿</p><p class="six__ex">実演あり</p></div><div class="six__c is-try"><p class="six__name"><b>7</b>返信の下書き</p><p class="six__d">コメント・DMの返し方</p><p class="six__ex">紹介が中心</p></div><div class="six__c is-try"><p class="six__name"><b>8</b>コメントの声</p><p class="six__d">コメントした人と中身</p><p class="six__ex">取れる範囲で</p></div></div><div class="exp"><img src="../img/light.png" alt=""><p><span class="lbl">ポイント</span><strong><span class="nw">1〜4と8は、</span><span class="nw">Museがインスタの中を見られるからできることです。</span></strong><span class="nw">1〜4で集めたデータは、</span><span class="nw">⑦の章でClaudeに渡して、</span><span class="nw">台本づくりに使います。</span></p></div></div>
+			</div>
+		</div>
+		<div class="slide">
+			<div class="inner">
+				<div class="hd"><span class="ch"><i>4</i>インスタ活用</span><div class="prog"><b class="done"></b><b class="done"></b><b class="done"></b><b class="on"></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b></div></div>
+				<h2 class="title">使い道1　自分のアカウントを分析してもらう</h2>
+				<p class="lead">インサイトの数字を、Museが自分で取ってきて読みます</p>
+				<div class="mid"><div class="chatmock"><div class="cm__phone"><p class="cm__me"><span class="nw">私のInstagramのアカウントを分析して、</span><span class="nw">次の投稿を教えて</span></p><p class="cm__ai"><b>直近30日のまとめ</b>閲覧 1,511回<br>プロフィールへの訪問 142件<br>外部リンクのタップ 2件<br><span><span class="nw">プロフィールまで来た人が、</span><span class="nw">リンクを押していません</span></span></p><p class="cm__me">PDFにまとめて保存して</p></div><div class="res"><p class="res__head">実際にやった人の結果<em>日本の検証動画</em></p><ul><li><span class="nw">直近の投稿55件と、</span><span class="nw">アカウントの数字を、</span><span class="nw">Museが自分で取ってきた</span></li><li><span class="nw">プロフィール訪問142件・</span><span class="nw">リンクのタップ2件などが、</span><span class="bc">実際の画面の数字と一致</span></li><li><span class="nw">分析のあと、</span><span class="nw">PDFの報告書にして保存できた</span></li></ul></div></div><div class="exp"><img src="../img/light.png" alt=""><p><span class="lbl">ポイント</span><strong><span class="nw">左はやり取りのイメージで、</span><span class="nw">数字は日本の検証動画の実際の結果です。</span></strong><span class="nw">Museもまちがえるので、</span><span class="nw">分析は仮説として読み、</span><span class="nw">自分のインサイトで確かめます。</span></p></div></div>
+			</div>
+		</div>
+		<div class="slide">
+			<div class="inner">
+				<div class="hd"><span class="ch"><i>4</i>インスタ活用</span><div class="prog"><b class="done"></b><b class="done"></b><b class="done"></b><b class="on"></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b></div></div>
+				<h2 class="title">分析で分かったのは、<span class="tk">「プロフィールの先で止まっている」</span></h2>
+				<p class="lead">日本と海外、2つのアカウントで同じ形が出ていました</p>
+				<div class="mid"><div class="fun2"><div class="fun"><p class="fun__h">日本の事業アカウント（直近30日）</p><div class="fun__r"><span>閲覧</span><i style="width:100%"></i><b>1,511回</b></div><div class="fun__r"><span>プロフィール訪問</span><i style="width:9.4%"></i><b>142件</b></div><div class="fun__r is-hit"><span>リンクのタップ</span><i style="width:.6%"></i><b>2件</b></div><p class="fun__n">訪問した人のうち、リンクを押したのは<b>約1.4%</b></p></div><div class="fun"><p class="fun__h">アメリカのマーケティング番組（30日）</p><div class="fun__r"><span>再生</span><i style="width:100%"></i><b>21.7万回</b></div><div class="fun__r"><span>プロフィール訪問</span><i style="width:1.5%"></i><b>817件</b></div><div class="fun__r is-hit"><span>リンクのタップ</span><i style="width:.6%"></i><b>29件</b></div><p class="fun__n">訪問した人のうち、リンクを押したのは<b>約3.5%</b></p></div></div><div class="exp"><img src="../img/light.png" alt=""><p><span class="lbl">ポイント</span><strong><span class="nw">どちらも、</span><span class="nw">見られてはいるのに、</span><span class="nw">プロフィールの先に進んでいません。</span></strong><span class="nw">訪問した人の数％しかリンクを押していないなら、</span><span class="nw">直すサインです。</span><span class="nw">Museは海外の例で「リーチの問題ではない」と見立てていました。</span><span class="nw">直すのは、</span><span class="nw">プロフィールの文とリンクの置き方です。</span><span class="nw">（棒の長さは、</span><span class="nw">それぞれのいちばん上を100としています）</span></p></div></div>
+			</div>
+		</div>
+		<div class="slide">
+			<div class="inner">
+				<div class="hd"><span class="ch"><i>4</i>インスタ活用</span><div class="prog"><b class="done"></b><b class="done"></b><b class="done"></b><b class="on"></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b></div></div>
+				<h2 class="title">Museのリール分析は、最初は<span class="tk">要約</span>しか読んでいない</h2>
+				<p class="lead">長くてくわしい分析が返ってきても、動画の中身を見たとは限りません</p>
+				<div class="mid"><div class="mis"><div class="mis__box"><em>誤解しやすい点</em><p class="mis__h"><span class="nw">長い分析が返ってきた。</span><span class="nw">だから動画を見て分析した</span></p><div class="mis__chips"><span>話を一言ずつ</span><span>画面を1秒ずつ</span></div><p class="mis__no"><b>✕</b>最初はしていない</p></div><p class="mis__arrow">➜</p><div class="mis__box is-ok"><em>正しい理解</em><p class="mis__h"><span class="nw">見ているのは、動画の要約と</span><span class="nw">キャプション（投稿の説明文）だけ</span></p><div class="said"><span class="said__lbl">Museに聞いた答え（要旨）</span><p><span class="nw">中身の把握はできるが、</span><span class="nw">一言一句の文字起こしはできない。</span><span class="nw">要約をもとに理解している</span></p></div><p class="src">出どころ：YouTube「カイシャインのSNS高校」2026年10月27日の動画（4:30ごろ）</p></div></div><div class="exp"><img src="../img/light.png" alt=""><p><span class="lbl">ポイント</span><strong><span class="nw">要約を読んだ感想のとおりにリールを直すと、</span><span class="nw">伸びるどころか逆効果になることもあります。</span></strong><span class="nw">動画の発信者は、</span><span class="nw">ChatGPTでリールを分析している人も、</span><span class="nw">最初のままなら同じ状態だろうと話していました。</span></p></div></div>
+			</div>
+		</div>
+		<div class="slide">
+			<div class="inner">
+				<div class="hd"><span class="ch"><i>4</i>インスタ活用</span><div class="prog"><b class="done"></b><b class="done"></b><b class="done"></b><b class="on"></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b></div></div>
+				<h2 class="title">プロンプトは呪文ではなく、<span class="tk">業務マニュアル</span></h2>
+				<p class="lead">プロンプト＝AIに送る指示の文章。AIは、最初のままだと近道をします</p>
+				<div class="mid"><div class="vs"><div class="side"><div class="side__head">薄いマニュアル</div><div class="side__body"><p>「このリールを分析して」だけ</p><p>要約を読んで、それっぽくまとめる</p><p>中身を見ていなくても、言い切る</p><div class="side__pill">薄い仕事が返ってくる</div></div></div><span class="vs__mark">VS</span><div class="side is-good"><div class="side__head">手順を書いたマニュアル</div><div class="side__body"><p>やる順番と、出す形を決めてある</p><p>話は一言ずつ、画面は1秒ずつ読む</p><p>見られなかった所は「見られなかった」と書く</p><div class="side__pill">中身を見た分析が返ってくる</div></div></div></div><div class="exp"><img src="../img/light.png" alt=""><p><span class="lbl">ポイント</span><strong><span class="nw">近道を禁止して、</span><span class="nw">やってほしい順番を書いておくのがプロンプトです。</span></strong><span class="nw">人に仕事を頼むときと同じで、</span><span class="nw">マニュアルが薄いと、</span><span class="nw">どんなに優秀な相手でも薄い仕事しか返ってきません。</span></p></div></div>
+			</div>
+		</div>
+		<div class="slide">
+			<div class="inner">
+				<div class="hd"><span class="ch"><i>4</i>インスタ活用</span><div class="prog"><b class="done"></b><b class="done"></b><b class="done"></b><b class="on"></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b></div></div>
+				<h2 class="title">手順を書いて渡すと、<span class="tk">動画の中身まで</span>読めた</h2>
+				<p class="lead">Museは専用のパソコンを持っているので、文字起こしのソフトを自分で入れて使えます（あなたのスマホには入りません）</p>
+				<div class="mid"><div class="flow"><div class="node"><span class="node__no">1</span><p class="node__text">動画を取る</p></div><div class="node"><span class="node__no">2</span><p class="node__text">文字起こし</p></div><div class="node"><span class="node__no">3</span><p class="node__text">テロップと照らす</p></div><div class="node is-now"><span class="node__no">4</span><p class="node__text">画面を切り出す</p></div></div><div class="res"><p class="res__head">動画の発信者が、自分のリールで試した結果<em>日本の検証動画</em></p><ul><li><span class="nw">72秒のリールが、</span><span class="bc">約27秒で秒数つきの文字起こし</span><span class="nw">になった</span></li><li><span class="nw">「1秒目は斜めの大きなテロップ」のように、</span><span class="nw">画面まで読めるようになった</span></li><li><span class="nw">競合と比べて、台本の弱い言い方や、</span><span class="nw">冒頭の変え方まで出るようになった</span></li></ul></div><div class="exp"><img src="../img/light.png" alt=""><p><span class="lbl">ポイント</span><strong><span class="nw">3は、</span><span class="nw">聞き間違えた名前や数字を、</span><span class="nw">テロップ（動画に乗せた文字）やキャプションと照らして直す作業です。</span></strong><span class="nw">声が入っていないリールでも、</span><span class="nw">4で画面を切り出せば、</span><span class="nw">テロップから話の流れを組み立て直せます。</span><span class="nw">使う動画は、</span><span class="nw">コネクターで取れた物か、</span><span class="nw">自分で画面収録して送った物だけです。</span></p></div></div>
+			</div>
+		</div>
+		<div class="slide">
+			<div class="inner">
+				<div class="hd"><span class="ch"><i>4</i>インスタ活用</span><div class="prog"><b class="done"></b><b class="done"></b><b class="done"></b><b class="on"></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b></div></div>
+				<h2 class="title">おとラボの<span class="tk">リール解剖プロンプト</span>の中身</h2>
+				<p class="lead">上の順番でMuseが読み取って、下の形で毎回同じように出してきます</p>
+				<div class="mid"><div class="srows"><div class="srow is-dark"><b>Museが読む</b><div class="srow__chips"><span>伸びたかの判定</span><i>›</i><span>動画を取る</span><i>›</i><span>話を起こす</span><i>›</i><span>画面を読む</span><i>›</i><span>音を読む</span></div></div><div class="srow is-coral"><b>出てくる物</b><div class="srow__chips"><span>結論と信頼度</span><i>›</i><span>台本と画面の表</span><i>›</i><span>冒頭3秒の作り</span><i>›</i><span>呼びかけと数字</span><i>›</i><span>弱点と真似る型</span></div></div></div><div class="rules3"><div><b>伸びたかは倍率で</b><p><span class="nw">直近10本ほどの真ん中の数の</span><span class="nw">何倍か。</span><span class="nw">他の人のリールはいいね数で比べる</span></p></div><div><b>声が無くても読む</b><p><span class="nw">声が無ければテロップから、</span><span class="nw">テロップも無ければ</span><span class="nw">映像だけで解剖する</span></p></div><div><b>作り話をしない</b><p><span class="nw">動画が取れなかったら</span><span class="nw">「取れなかった」と書き、</span><span class="nw">取れた物だけで進める</span></p></div></div><div class="exp"><img src="../img/light.png" alt=""><p><span class="lbl">ポイント</span><strong><span class="nw">いちばん大事なのは右の「作り話をしない」です。</span></strong><span class="nw">動画を見られなかったのに、</span><span class="nw">それらしい分析を書かせないための決まりです。</span></p></div></div>
+			</div>
+		</div>
+		<div class="slide">
+			<div class="inner">
+				<div class="hd"><span class="ch"><i>4</i>インスタ活用</span><div class="prog"><b class="done"></b><b class="done"></b><b class="done"></b><b class="on"></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b></div></div>
+				<h2 class="title">最初の1回だけ、<span class="tk">これを貼る</span></h2>
+				<p class="lead">中身は読まなくて大丈夫です。配布版の［コピー］ボタンで、約5,500字が全部コピーされます</p>
+				<div class="mid"><div class="paste"><div class="pr is-long"><span class="pr__lbl">リール解剖プロンプト（全文）</span><p>あなたは「バズるリールの解剖」の専門家です。以下は一度きりの依頼ではなく、今後ずっと有効な常駐の指示です。
+
+■常駐ルール
+・今後、私がInstagramリールのURLを送ったら、質問や確認を挟まず、毎回このプロンプトの手順で「台本の取得＋画面解剖＋分析」を実行してください。
+・URLが複数送られた場合は、1本ずつ同じ手順で処理し、最後に「複数本の比較フォーマット」で横並び比較を出してください。
+・動画ファイルや音声ファイルが送られた場合も、同じ手順で処理してください。
+・出力の冒頭に必ず「0. 結論と信頼度」を置くこと。長い解剖を全部読まなくても要点が分かる形にする。
+
+■手順0：メタデータと実績の位置づけ（解剖の前に取る）
+動画本体の前に、そのリールを取り巻く情報を取得できる範囲で取ること。
+・アカウント名／投稿日時／動画の総尺／キャプション全文（ハッシュタグ含む）／使用音源の名前（分かる場合）
+・カバー画像（プロフィールグリッドに表示される画像）。動画の0秒フレームとは別物として扱い、別に記録する
+・固定コメント（ピン留めコメント）があればその全文
+・公開指標：他の人のリールは、公式コネクターで取れるいいね数・コメント数・コメントの中身だけを使う。再生数・保存数・シェア数は取りに行かず「取れない」と書く。自分のアカウントの場合は、コネクターのインサイトで取れる範囲（再生数・保存数・シェア数・リーチなど）も使う
+・位置づけ：そのアカウントの直近リール（目安10本）の中央値と比べ、このリールが何倍か。「バズっている」かどうかを、感覚ではなくこの倍率で先に判定して書く。他の人のリールはいいね数で計算し「いいね基準」と書く。取得できない場合は「位置づけ不明」と明記する
+
+■手順1：素材の取得
+以下の優先順位で進めてください。
+※インスタの情報は、公式のコネクターで取れる範囲だけを使うこと。ブラウザでインスタを開いて、探す・再生する・スクロールする・動画を保存するといった操作は、規約違反になるので絶対にしない。
+1. 公式のコネクターで動画を取得できる場合、または私が動画ファイル（画面収録でも可）を送った場合
+その動画を使ってください。取得できたら、音声トラックの有無ではなく「発話の有無」を確認し、手順2のA/B/Cどちらのルートで進むか決めてください。
+2. コネクターで動画そのものが取得できない場合
+ブラウザに切り替えず、推測でも進めず、「動画を取得できなかった」と明示してください。その上で、キャプションなど取得できた範囲だけで分析するか、動画ファイル（画面収録でも可）か文字起こしテキストの提供を私に求めるか、できる範囲とできない範囲を分けて提示してから進んでください。
+3. 動画にアクセスできない通常のチャット型AIの場合
+絶対に台本や映像を推測・創作しないでください。「動画にアクセスできないので、文字起こしテキストを貼ってください。VrewやNottaで書き出したテキストでOKです」とだけ伝えて止まってください。
+
+■手順2-A：発話がある場合（正確な文字起こし）
+・音声をタイムスタンプ付き（例：[0:00-0:03]）で、話した通り一言一句起こすこと。要約や言い換えをしない。
+・複数人が話す場合は話者を分ける（話者A／話者B）。誰の発話か分からない場合はその旨を書く。
+・発話と発話の間の「間（ポーズ）」が1秒以上ある箇所は [間 ○秒] と記録する。間は演出の一部として扱う。
+・精度を上げるため、使える手段の中で最も精度の高い方法を使うこと。画面のテロップやキャプションと突き合わせて、固有名詞・数字・専門用語の誤認識を直すこと（直した箇所は分かるように示す）。
+・聞き取れない部分は [聞き取り不可]、自信がない部分は [?] と書く。もっともらしい言葉で埋めない。
+・テロップと発話が違う場合は、発話を台本の正とし、テロップの文言は別に記録する。
+
+■手順2-B：発話がない／取れない場合（フレームからテロップを取る）
+動画は取得できたが発話がない（BGMのみ等）場合や、音声が取れなかった場合は、台本を諦めず、画面から復元してください。
+・動画をフレーム抽出して各フレームのテロップを読み取ること。抽出間隔は固定にせず、場面の切り替わりとテロップの変化点を基準にする。速いカットのリールでは0.5秒刻みまで細かくする。
+・連続する同じテロップは1つにまとめ、表示されていた秒数の範囲で記録すること。
+・出力は「テロップ台本」として、発話の逐語文字起こしとは明確に区別して出すこと（発話とテロップが一致しない場合があるため）。
+・テロップが文単位で全文表示されるタイプのリールでは、この方法で台本の大部分を再構成できる。逆に、テロップがキーワードのみ・要約型の場合は再構成できないので、「テロップからは台本を再構成できない」と明示し、映像解剖（手順3）のみで進むこと。
+・読み取りに自信がない文字は [?] を付ける。装飾フォントなどで判読できない箇所は、その旨を書く。
+
+■手順2-C：発話もテロップも乏しい場合（映像主体の型）
+・無理に台本を作らない。「台本と呼べる要素はない」と明記し、映像解剖（手順3）と音響解剖（手順4）を中心に進めること。ASMR・ビフォーアフター・作業映像などはこの型になりやすい。
+
+■手順3：画面の読み込み（映像解剖）
+・動画から静止画を切り出して、画面を読み取ること。最低限の切り出し位置：0秒・1秒・2秒・3秒（冒頭は1秒刻み）、その後は場面が切り替わるたび＋5秒おきを目安とする。カバー画像も1枚として記録する。
+・各画面で記録すること：映っているものと構図／テロップの文言（画面で読めた通り一言一句）／テロップの位置・大きさ・色などの特徴／カットの切り替わり位置／人物の動き・表情・小道具／画面録画・図解・暗転カードなどの演出。
+・テロップについては集計も行う：1画面あたりの文字数と表示秒数から「読み切れる速度か（文字／秒）」を判定する。速すぎて読み切れないテロップはその旨を指摘する。
+・画面で確認できなかったことは書かない。「映っていたはず」という推測で映像を描写しない。
+
+■手順4：音響の解剖
+・BGM：使用音源がトレンド音源かどうか（分かる範囲で）、曲調、音量感（発話に対して大きい／小さい／発話なし）
+・効果音（SE）が入る箇所と秒数、その役割（注意を引く／場面転換／笑い／強調）
+・カットの切り替わりと音楽のビートが合っている箇所があるか
+・無音・静寂が使われている箇所（手順2-Aの[間]と合わせて見る）
+
+■出力前の自己検証（出す前に必ず通す）
+・[?] や [聞き取り不可] の箇所をもう一度確認し、直せたものは直す（直した箇所は分かるように示す）
+・台本中の数字・固有名詞を、テロップ・キャプションと突き合わせたか
+・その上で、文字起こしの信頼度を「高／中／低＋理由1行」で決め、出力の「0. 結論と信頼度」に書く
+
+■分析の出力フォーマット（毎回この順番で出すこと）
+0. 結論と信頼度
+・このリールの型を一言で（例：「数字フック＋疑問を畳む保存型」）
+・最も転用価値のある要素を1つ、真似すべきでない要素を1つ
+・取得ルート（2-A／2-B／2-C）、文字起こしの信頼度（高／中／低＋理由）、手順0の位置づけ（アカウント中央値の○倍／不明）
+
+1. 台本全文
+手順2-Aの場合はタイムスタンプ付きの逐語文字起こし、手順2-Bの場合はテロップ台本。どちらのルートで取得したかを冒頭に明記する。
+
+2. 画面タイムライン
+秒数ごとに「映像・テロップ・発話・音（BGM/SE/間）」を対応させた表。言葉と画面と音がどう連動しているか分かる形にする。
+
+3. 冒頭3秒の解剖
+・フックを3層に分けて記録する：言語フック（最初の一言、そのまま引用）／視覚フック（最初の画面：構図・テロップ・動き）／音フック（最初の音：発話の入り方、BGM、SE）。3層のタイミングが揃っているか、ずれているかも書く。
+・フックの型を判定する（数字提示／問いかけ／逆張り／損の警告／結果の先見せ／物語の途中から、など）。
+・「なぜ指が止まるのか」を、言葉と映像と音の構造から説明する。
+
+4. 構成マップ
+台本と映像を区切りに分け、各パートの役割を表にする。役割の例：フック／疑問の設置／共感／予想の裏切り（転換）／具体例／答え／次の疑問／実績・権威付け／CTA。
+
+5. 「離脱させない仕掛け」の抽出
+・疑問が置かれている箇所と、それが何秒後に回収されるか。
+・答えを出した直後に「次の疑問」が出ている箇所。
+・新しい情報や疑問が出る間隔（情報の更新間隔）を測り、間隔が空きすぎている箇所を秒数で指摘する。
+・視聴者が途中で飽きるポイントがあるとしたら、台本と画面のどこか（秒数で指摘）。
+・終わりとループ：最後が冒頭につながる設計か（ループ再生狙い）、続きを見たくなる終わり方か、きれいに閉じているかも判定する。
+
+6. CTAの分析
+・CTAは動画内だけでなく、キャプションと固定コメントも横断して探す。文言をそのまま引用し、何秒目（動画外ならその場所）に置かれているかを示す。
+・型を判定する（キーワードコメント型／選択式コメント型／保存型／シェア型／フォロー型／プロフィール誘導型）。
+・そのCTAが「コメント数・保存数・シェア数・フォロー」のどれを狙った設計かを見分ける。
+・検証できる場合は実測で裏づける：キーワードコメント型なら、実際のコメント欄にそのキーワードが何件あるか／総コメント数の何割か。固定コメントへの反応数なども同様。
+
+7. 数値
+数え方の定義（毎回同じにすること）：文字数は空白・改行を除いた発話（またはテロップ）の文字数。「文」は文末（。！？）または発話の区切りで数える。
+・総再生秒数、総文字数、1分あたりの文字数（話すスピード）。
+・1文の平均の長さ。短文で畳みかけているか、長文で説明しているか。
+・カットの総数と、平均カット間隔。冒頭3秒までと、それ以降で間隔が変わる場合は分けて出す。
+・無音（間）の合計秒数と最長の間。
+・テロップの表示速度（文字／秒）の最大値。読み切れない水準かどうか。
+
+8. コメント欄の反応（取得できた場合のみ）
+・上位コメント（いいね順など）から、視聴者が実際に反応したフレーズ・箇所を拾う。「刺さったのは台本のどこか」の実証として使う。
+・繰り返し出ている質問・疑問があれば記録する（次のリールのネタと、離脱・未回収ポイントの証拠になる）。
+・取得できなかった場合はこの節を丸ごと省略せず、「コメント欄は取得できなかった」と1行書く。
+
+9. 弱点と改善点
+・このリールの伸びを妨げている要素、直せる弱点を秒数つきで指摘する。「自分が作るならここを変える」を具体的に書く。
+
+10. バズ要因の仮説（事実と分けて書く）
+・台本と映像から読み取れる事実と、あなたの仮説を分けて書くこと。
+・手順0の位置づけ（中央値の何倍か）を前提にする。実績データが取れていない場合は、「伸びた理由」を断定しない。構造から言えることだけに留める。
+・想定視聴者（誰の、どんな悩み・欲求に向けたものか）は仮説として明記して書く。
+
+11. 自分のリールへの転用テンプレート
+最後に、このリールの構造だけを抜き出し、自分のジャンルで使える形にする。
+・［0-3秒：フック型○○／画面は○○］［3-○秒：疑問の設置］…のように、秒数付きの骨組み（言葉と画面と音の両方）で出す。
+・中身の文章は丸パクリせず、骨組み（型）だけを転用すること。埋めるべき変数は［ ］で示す。
+・制作コスト評価を付ける：新規撮影が必要か／手持ち素材の流用で作れるか／編集の難度（低・中・高と理由）／顔出し・声出しが必要か。
+・骨組みを自分のジャンルで埋めた「冒頭3秒だけの具体例」を1つ添える（全文の丸パクリではなく、型の使い方の例として）。
+・真似てはいけない表層要素（その人のキャラ・実績・環境に依存していて、型として転用できないもの）があれば明記する。
+
+■複数本の比較フォーマット（複数URLのとき最後に出す）
+・まず各リールを上のフォーマットで1本ずつ出す。
+・最後に比較表を出す。軸：アカウント中央値比／フックの型（言語・視覚・音）／総尺／文字数／分／平均カット間隔／情報の更新間隔／CTAの型と実測／ループ設計／制作コスト。
+・共通点は「再現性のある型」、差異は「そのアカウント固有の個性・条件」として切り分けて書く。数字の大小だけで優劣を断定しない。
+
+■禁止事項
+・台本・映像にないセリフ、数字、エピソード、画面描写を作らないこと。
+・要約を「文字起こし」と言わないこと。テロップ台本を発話の逐語と言わないこと。推定の秒数を確定情報のように書かないこと（推定は推定と明記する）。
+・他人のリールについて、非公開の指標（保存数など）を推測で書かないこと。取れた公開指標と取れないものを分ける。
+・数値の数え方（手順7の定義）を回ごとに勝手に変えないこと。比較が崩れるため。
+・分析の前に長々と一般論（アルゴリズム論など）を語らないこと。まず素材、次に解剖。</p><small class="pr__ex">▼ 枠の中を下に動かすと、全文が読めます</small></div><ol class="paste__steps"><li><b>スマホでコピーして貼る</b><span>配布版をスマホで開いて、Museに貼る</span></li><li><b>リールのURLをコピー</b><span>インスタのリールの紙飛行機マーク →［リンクをコピー］</span></li><li><b>同じチャットにURLを送る</b><span>「0. 結論と信頼度」から始まる解剖が届きます</span></li></ol></div><div class="exp"><img src="../img/light.png" alt=""><p><span class="lbl">ポイント</span><strong><span class="nw">貼るのは最初の1回だけです。</span></strong><span class="nw">そのあとは、</span><span class="nw">同じチャットにリールのURLを送るだけで、</span><span class="nw">毎回同じ形で返ってきます。</span></p></div></div>
+			</div>
+		</div>
+		<div class="slide">
+			<div class="inner">
+				<div class="hd"><span class="ch"><i>4</i>インスタ活用</span><div class="prog"><b class="done"></b><b class="done"></b><b class="done"></b><b class="on"></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b></div></div>
+				<h2 class="title">解剖を使うときに、<span class="tk">知っておく3つ</span></h2>
+				<p class="lead">よくできた解剖でも、全部の数字がそろうわけではありません</p>
+				<div class="mid"><div class="rules3"><div><b>再生数・保存数</b><p><span class="nw">投稿ごとの数は、</span><span class="nw">つないでも取れなかった。</span><span class="nw">自分のインサイトで見る</span></p></div><div><b>許可は読んでから</b><p><span class="nw">「入れていい？」と聞かれたら、</span><span class="nw">何を入れるか見てから押す。</span><span class="nw">分からなければ聞き返す</span></p></div><div><b>まず0だけ読む</b><p><span class="nw">長い返事は、</span><span class="nw">「0. 結論と信頼度」から読む。</span><span class="nw">直す所は自分で決める</span></p></div></div><div class="pr"><span class="pr__lbl">おすすめの送り方</span><p><span class="nw">［自分のリールのURL］［参考にしたリールのURL］1本目が伸びなかった私のリール、</span><span class="nw">2本目が参考にしたリールです</span></p><small class="pr__ex">［　］の所に、リールのURLを貼ります。参考にしたリールの動画が取れないと言われたら、画面収録した動画を送ります</small></div><div class="exp"><img src="../img/light.png" alt=""><p><span class="lbl">ポイント</span><strong><span class="nw">いちばん効くのは、</span><span class="nw">伸びなかった自分のリールと、</span><span class="nw">参考にしたリールを2本並べて送る使い方です。</span></strong><span class="nw">プロンプトには、</span><span class="nw">2本以上届いたら最後に比べた表を出す決まりも入れてあります。</span></p></div></div>
+			</div>
+		</div>
+		<div class="slide">
+			<div class="inner">
+				<div class="hd"><span class="ch"><i>4</i>インスタ活用</span><div class="prog"><b class="done"></b><b class="done"></b><b class="done"></b><b class="on"></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b></div></div>
+				<h2 class="title">使い道2　週次レポートには<span class="tk">次にやること</span>まで</h2>
+				<p class="lead">海外の発信者が「毎週のレポートを作って」と頼んだ、1回目の中身です</p>
+				<div class="mid"><div class="ex"><div class="fun"><p class="fun__h">分かったこと（数字）</p><div class="fun__r"><span>フォロワー以外の閲覧</span><i style="width:72%"></i><b>72%</b></div><div class="fun__r is-hit"><span>保存数（いいね比）</span><i style="width:51%"></i><b>51%</b></div><p class="fun__n">いちばん伸びたのは<b>「ほかの発信者を分解する」投稿</b></p></div><div class="res"><p class="res__head">今週やること（レポートの提案）<em>海外の発信者</em></p><ul><li><span class="nw">ほかの発信者を分解する投稿を、</span><span class="nw">毎週のシリーズにする</span></li><li><span class="nw">カルーセルは一度止める（本人は「好きなのに」）</span></li><li><span class="nw">プロフィールのリンクから先に進まない所を直す</span></li><li><span class="nw">コメントからDMへの流れは続ける</span></li></ul></div></div><div class="pr"><span class="pr__lbl">そのまま使える指示文</span><p><span class="nw">毎週のコンテンツレポートを作って。</span><span class="nw">毎週月曜の朝に、</span><span class="nw">最新の数字で作り直して届けて</span></p></div><div class="exp"><img src="../img/light.png" alt=""><p><span class="lbl">ポイント</span><strong><span class="nw">1回頼むと、</span><span class="nw">その場でレポートができて、</span><span class="nw">毎週月曜の自動実行まで登録されていました。</span></strong><span class="nw">数字だけでなく「やめること・続けること」まで書いてあるのが、</span><span class="nw">自分で表を作るのとの違いです。</span></p></div></div>
+			</div>
+		</div>
+		<div class="slide">
+			<div class="inner">
+				<div class="hd"><span class="ch"><i>4</i>インスタ活用</span><div class="prog"><b class="done"></b><b class="done"></b><b class="done"></b><b class="on"></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b></div></div>
+				<h2 class="title">使い道3　保存したリールを、企画メモにする</h2>
+				<p class="lead">保存したまま見返していないリールが、そのまま企画のもとになります</p>
+				<div class="mid"><div class="flow is-3"><div class="node"><span class="node__no">1</span><p class="node__text">保存一覧</p></div><div class="node"><span class="node__no">2</span><p class="node__text">選ばせる</p></div><div class="node is-now"><span class="node__no">3</span><p class="node__text">PDFに</p></div></div><div class="pr"><span class="pr__lbl">そのまま使える指示文</span><p><span class="nw">インスタに保存した〇〇のリールを見て、</span><span class="nw">テーマ別に分けて。</span><span class="nw">私が参考にできそうな物を10本選んで、</span><span class="nw">選んだ理由と一緒にPDFにまとめて。</span><span class="nw">公式のコネクターで取れる範囲だけでやって、</span><span class="nw">取れなければ止まって教えて</span></p><small class="pr__ex">〇〇には自分のジャンルを入れます　例）焼き菓子・家計管理・ヘアアレンジ</small></div><div class="exp"><img src="../img/light.png" alt=""><p><span class="lbl">ポイント</span><strong><span class="nw">海外では、</span><span class="nw">保存した旅行のリールから行き先を探させて、</span><span class="nw">8本を採用・2本は理由つきで外した計画書がPDFで届いていました。</span></strong><span class="nw">旅行の部分を自分のジャンルに置き換えれば、</span><span class="nw">そのまま企画探しに使えます。</span><span class="nw">Museが「ブラウザで保存一覧を開きます」と言ったら、</span><span class="nw">そこで止めます。</span></p></div></div>
+			</div>
+		</div>
+		<div class="slide">
+			<div class="inner">
+				<div class="hd"><span class="ch"><i>4</i>インスタ活用</span><div class="prog"><b class="done"></b><b class="done"></b><b class="done"></b><b class="on"></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b></div></div>
+				<h2 class="title">使い道4　毎朝、ネタを届けてもらう</h2>
+				<p class="lead">スケジュールに登録すると、決めた時間に勝手に動きます</p>
+				<div class="mid"><div class="day"><div class="day__line"><span style="left:0%">0時</span><span style="left:25%">6時</span><span style="left:50%">12時</span><span style="left:75%">18時</span></div><div class="day__ev" style="left:0%"><b>0:00</b>前日のストーリーズを書き起こす</div><div class="day__ev is-main" style="left:29.2%"><b>7:00</b>ジャンルの話題を5つ届ける</div><div class="day__ev is-week" style="left:56%"><b>月曜 9:00</b>先週の投稿の振り返り</div></div><div class="pr"><span class="pr__lbl">そのまま使える指示文</span><p><span class="nw">毎朝7時に、</span><span class="nw">〇〇で、</span><span class="nw">ここ24時間に話題になっていることを5つ集めて。</span><span class="nw">リールのネタになりそうな順に並べて。</span><span class="nw">インスタの中は、</span><span class="nw">公式のコネクターで取れる範囲だけで調べて</span></p><small class="pr__ex">〇〇には自分のジャンルを入れます　例）お菓子作り</small></div><div class="exp"><img src="../img/light.png" alt=""><p><span class="lbl">ポイント</span><strong><span class="nw">上は登録のしかたの例です。</span></strong><span class="nw">1回頼めば毎日動くので、</span><span class="nw">朝スマホを開いたときにはネタがそろっています。</span><span class="nw">「〇〇のときだけ知らせて」と条件をつけると、</span><span class="nw">通知が増えすぎません。</span></p></div></div>
+			</div>
+		</div>
+		<div class="slide">
+			<div class="inner">
+				<div class="hd"><span class="ch"><i>4</i>インスタ活用</span><div class="prog"><b class="done"></b><b class="done"></b><b class="done"></b><b class="on"></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b></div></div>
+				<h2 class="title">応用　お手本アカウントを<span class="tk">毎週見張って</span>もらう</h2>
+				<p class="lead">伸びた投稿の型を、自分のジャンルに置き換えるところまで頼めます</p>
+				<div class="mid"><div class="flow is-3"><div class="node"><span class="node__no">1</span><p class="node__text">お手本を登録</p></div><div class="node"><span class="node__no">2</span><p class="node__text">伸びた投稿</p></div><div class="node is-now"><span class="node__no">3</span><p class="node__text">型を借りる</p></div></div><div class="pr"><span class="pr__lbl">そのまま使える指示文</span><p><span class="nw">この10人をウォッチリストにして。</span><span class="nw">週に1回、</span><span class="nw">最近飛び抜けて伸びた投稿を持ってきて分解して。</span><span class="nw">私のジャンルと立ち位置に合わせて、</span><span class="nw">丸パクリせずに型を借りる方法を教えて。</span><span class="nw">数字は、</span><span class="nw">コネクターで取れるいいね数とコメント数で比べて。</span><span class="nw">動画が取れないときは、</span><span class="nw">キャプションと数字だけで分解して</span></p><small class="pr__ex">10人のアカウント名を、指示文のあとに並べて送ります</small></div><div class="exp"><img src="../img/light.png" alt=""><p><span class="lbl">ポイント</span><strong><span class="nw">アメリカの発信者が口頭で紹介した使い方で、</span><span class="nw">画面での実演はまだ見つかっていません。</span></strong><span class="nw">おとラボのリサーチと同じく、</span><span class="nw">数字は自分の目でも確かめてから企画に使います。</span></p></div></div>
+			</div>
+		</div>
+		<div class="slide">
+			<div class="inner">
+				<div class="hd"><span class="ch"><i>4</i>インスタ活用</span><div class="prog"><b class="done"></b><b class="done"></b><b class="done"></b><b class="on"></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b></div></div>
+				<h2 class="title">使い道5　投稿の素材を作ってもらう</h2>
+				<p class="lead">写真をチャットに添付して、短い縦動画にするところまでできます</p>
+				<div class="mid"><div class="ex"><div class="prs"><div class="pr"><span class="pr__lbl">そのまま使える指示文</span><p><span class="nw">この画像をもとに、</span><span class="nw">縦長9:16で、</span><span class="nw">6秒くらいのリール動画を作って。</span><span class="nw">下のほうに「〇〇」という文字を入れて、</span><span class="nw">おしゃれな感じで</span></p><small class="pr__ex">例）〇〇＝11月のレッスン受付中</small></div></div><div class="res"><p class="res__head">実際にやった人の結果<em>日本の実演動画</em></p><ul><li><span class="nw">6秒の縦動画が、</span><span class="bc">1分もかからずに</span><span class="nw">できた</span></li><li><span class="nw">写真を1枚添付するだけで、</span><span class="nw">それをもとに作れる</span></li><li><span class="nw">チラシのような細かいデザインは、</span><span class="nw">「ChatGPTの方が上」という声</span></li></ul></div></div><div class="exp"><img src="../img/light.png" alt=""><p><span class="lbl">ポイント</span><strong><span class="nw">撮影の代わりにはしません。</span></strong><span class="nw">告知用の短い動画や、</span><span class="nw">写真が足りない日の1枚に使います。</span><span class="nw">商品そのものは、</span><span class="nw">本物の写真で載せます。</span></p></div></div>
+			</div>
+		</div>
+		<div class="slide">
+			<div class="inner">
+				<div class="hd"><span class="ch"><i>4</i>インスタ活用</span><div class="prog"><b class="done"></b><b class="done"></b><b class="done"></b><b class="on"></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b></div></div>
+				<h2 class="title">使い道6　投稿まで任せても、最後は承認で止まる</h2>
+				<p class="lead">ストーリーズもリールも、出す前に許可するかどうかを聞いてきます</p>
+				<div class="mid"><div class="flow is-5"><div class="node"><span class="node__no">1</span><p class="node__text">頼む</p></div><div class="node"><span class="node__no">2</span><p class="node__text">作る</p></div><div class="node"><span class="node__no">3</span><p class="node__text">下書き</p></div><div class="node is-now"><span class="node__no">4</span><p class="node__text">承認</p></div><div class="node"><span class="node__no">5</span><p class="node__text">投稿</p></div></div><div class="concl"><img src="../img/bk_check.png" alt=""><div><p><span class="nw">リンクスタンプつきのストーリーズや、</span><span class="nw">リールの投稿まで、</span><span class="bc">実際にできた人がいます</span></p><small><span class="nw">パソコンからストーリーズを出せるのが便利、という声もありました</span></small></div></div><div class="exp"><img src="../img/light.png" alt=""><p><span class="lbl">ポイント</span><strong><span class="nw">4の承認の画面は、</span><span class="nw">本文まで読みます。</span></strong><span class="nw">自分で書いた投稿文を、</span><span class="nw">Museが勝手に短く直していた例がありました。</span><span class="nw">慣れるまでは「このタスクだけ許可」を選びます。</span></p></div></div>
+			</div>
+		</div>
+		<div class="slide">
+			<div class="inner">
+				<div class="hd"><span class="ch"><i>4</i>インスタ活用</span><div class="prog"><b class="done"></b><b class="done"></b><b class="done"></b><b class="on"></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b></div></div>
+				<h2 class="title">使い道7　コメント・DMは「下書き」まで</h2>
+				<p class="lead">お客さんへの返事は、最後に自分の目を通します</p>
+				<div class="mid"><div class="say"><div class="say__row is-ng"><b>やらない</b><p>Museに返信を考えさせて、そのまま送らせる</p></div><div class="say__row is-ok"><b>こうする</b><p>Museが下書き → 自分で読んで直す → OKを出して送る</p></div></div><div class="pr"><span class="pr__lbl">そのまま使える指示文</span><p><span class="nw">新しく来たコメントへの返信案を、</span><span class="nw">1件ずつ作って。</span><span class="nw">送るのは、</span><span class="nw">私がOKしてからにして</span></p></div><div class="exp"><img src="../img/light.png" alt=""><p><span class="lbl">ポイント</span><strong><span class="nw">DMを1人ずつ送る作業をくり返させたら、</span><span class="nw">10人ほどでインスタに止められ、</span><span class="nw">そのMuseはインスタを触れなくなった、</span><span class="nw">という話があります（動画の発信者の知人の話）。</span></strong><span class="nw">この例のMuseは、</span><span class="nw">止められるまで送り続けていました。</span><span class="nw">送るのは自分で、</span><span class="nw">Museは下書きまでにします。</span></p></div></div>
+			</div>
+		</div>
+		<div class="slide">
+			<div class="inner">
+				<div class="hd"><span class="ch"><i>4</i>インスタ活用</span><div class="prog"><b class="done"></b><b class="done"></b><b class="done"></b><b class="on"></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b></div></div>
+				<h2 class="title">使い道8　コメントをくれた人と<span class="tk">中身</span>を表にする</h2>
+				<p class="lead">「だれが、何に反応してくれているか」を知るための使い方です</p>
+				<div class="mid"><div class="ex"><div class="res"><p class="res__head">頼んでいいこと・頼まないこと</p><ul><li><span class="nw">コメントをくれた人の名前と、</span><span class="nw">コメントの中身を表にする</span></li><li><span class="nw">多かった質問や感想を、</span><span class="nw">次の投稿のネタとして並べる</span></li><li><span class="nw">いいねした人を1人ずつ開いて調べるのは、</span><span class="nw">頼まない</span></li><li><span class="nw">見ただけの人（視聴者）は、</span><span class="nw">もともと出せない</span></li></ul></div><div class="prs"><div class="pr"><span class="pr__lbl">そのまま使える指示文</span><p><span class="nw">この投稿にコメントをくれた人と、</span><span class="nw">コメントの中身を表にして。</span><span class="nw">多かった質問や感想を、</span><span class="nw">次の投稿のネタとして3つ出して。</span><span class="nw">公式のコネクターで取れる範囲だけでやって</span></p></div></div></div><div class="exp"><img src="../img/light.png" alt=""><p><span class="lbl">ポイント</span><strong><span class="nw">海外では、</span><span class="nw">いいねした27人をMuseが1人ずつ調べて表にした実演がありました。</span></strong><span class="nw">15〜20分かけてプロフィールを1人ずつ開いて回る作業なので、</span><span class="nw">ブラウザでの操作になりやすく、</span><span class="nw">おとラボでは頼みません。</span><span class="nw">コメントの表も人には渡さず、</span><span class="nw">使い終わったら自分で消します。</span></p></div></div>
+			</div>
+		</div>
+		<div class="slide">
+			<div class="inner">
+				<div class="hd"><span class="ch"><i>4</i>インスタ活用</span><div class="prog"><b class="done"></b><b class="done"></b><b class="done"></b><b class="on"></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b></div></div>
+				<h2 class="title">任せていいこと、自分でやること</h2>
+				<p class="lead">Museに渡すのは、時間を食う「下ごしらえ」です</p>
+				<div class="mid"><div class="vs"><div class="side"><div class="side__head">自分でやる</div><div class="side__body"><p>何を投稿するかを決める</p><p>顔出しの撮影・自分の声</p><p>お客さんへの最後の返事</p><div class="side__pill">あなたらしさが出るところ</div></div></div><span class="vs__mark">VS</span><div class="side is-good"><div class="side__head">Museに任せる</div><div class="side__body"><p>数字を読んで、まとめる</p><p>保存・ストーリーズの整理</p><p>ネタ集め・下書き・素材</p><div class="side__pill">時間を食う下ごしらえ</div></div></div></div><div class="exp"><img src="../img/light.png" alt=""><p><span class="lbl">ポイント</span><strong><span class="nw">海外のマーケターも「センスと判断はAIに丸投げしない」と話していました。</span></strong><span class="nw">Museの案は下書きとして受け取り、</span><span class="nw">どれを使うかを自分で選びます。</span></p></div></div>
+			</div>
+		</div>
+		<div class="slide">
+			<div class="inner">
+				<div class="hd"><span class="ch"><i>4</i>インスタ活用</span><div class="prog"><b class="done"></b><b class="done"></b><b class="done"></b><b class="on"></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b><b class=""></b></div></div>
+				<h2 class="title">ChatGPTやClaudeは、もう要らない？</h2>
+				<p class="lead">おとラボで使っているAIとの、役割分担の話です</p>
+				<div class="mid"><div class="qa"><div class="qa__q"><span class="nw">台本はClaude、画像はChatGPTで作っています。</span><span class="nw">Museに乗り換えた方がいいですか？</span></div><p class="qa__arrow">▼</p><div class="qa__a"><span class="nw">乗り換えではなく、</span><span class="nw">「インスタの情報係」として足します</span><small><span class="nw">インスタの中を見に行けるのが、Museの強み。</span><span class="nw">画像の仕上がりは「ChatGPTの方が上」という声が多く、</span><span class="bc">台本はClaudeに、Museのデータを渡して作ります</span></small></div></div></div>
+			</div>
+		</div>
+<button class="nav prev" aria-label="前へ">‹</button><button class="nav next" aria-label="次へ">›</button><span class="cnt"></span></div><script>
+(()=>{const s=[...document.querySelectorAll('.vw .slide')];let i=0;
+const p=document.querySelector('.prev'),n=document.querySelector('.next'),c=document.querySelector('.cnt');
+const go=k=>{i=Math.max(0,Math.min(s.length-1,k));s.forEach((x,j)=>x.classList.toggle('on',j===i));p.disabled=i===0;n.disabled=i===s.length-1;c.textContent=(i+1)+' / '+s.length};
+p.onclick=()=>go(i-1);n.onclick=()=>go(i+1);
+addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(i+1);if(e.key==='ArrowLeft')go(i-1)});
+let x0=null;addEventListener('touchstart',e=>{x0=e.touches[0].clientX},{passive:true});
+addEventListener('touchend',e=>{if(x0===null)return;const d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>40)go(i+(d<0?1:-1));x0=null});
+go(0)})();
+</script><script>
+// 配布用URLだけに入れる仕掛け（export_single.py が埋め込む）
+// 1. 指示文（.pr）にコピーボタンを付ける
+// 2. 「くわしく読む」をスライドの下に足す（<script type="application/json" id="pm-more"> の配列。空の所は出さない）
+(() => {
+	/* ---- コピー（クリップボードが拒否・宙吊りになる前提。memory: feedback_copy_button_clipboard） ---- */
+	const elText = (el) => (el ? (el.innerText || el.textContent || "") : "").replace(/ /g, " ").trim();
+	const copySync = (text) => {
+		const t = document.createElement("textarea");
+		t.value = text; t.setAttribute("readonly", "");
+		t.style.cssText = "position:fixed;left:-9999px;top:0;width:1px;height:1px;padding:0;border:0;margin:0;font-size:16px;";
+		document.body.appendChild(t);
+		t.focus(); t.select();
+		try { t.setSelectionRange(0, text.length); } catch (e) {}
+		const selected = (t.selectionEnd - t.selectionStart) === text.length;
+		let ok = false;
+		if (selected) { try { ok = document.execCommand("copy"); } catch (e) { ok = false; } }
+		t.remove();
+		return ok;
+	};
+	const manual = (btn, text) => {
+		let box = btn.nextElementSibling;
+		if (!box || !box.classList.contains("copy-manual")) {
+			box = document.createElement("textarea");
+			box.className = "copy-manual"; box.readOnly = true;
+			btn.insertAdjacentElement("afterend", box);
+		}
+		box.value = text; box.focus(); box.select();
+	};
+	const run = (btn, text) => {
+		const orig = btn.textContent;
+		const done = (ok) => {
+			btn.textContent = ok ? "✅ コピーしました。Museに貼ってください" : "⚠️ コピーできませんでした。下の枠を長押し（選択）してコピー";
+			if (!ok) manual(btn, text);
+			setTimeout(() => { btn.textContent = orig; }, ok ? 1800 : 6000);
+		};
+		if (copySync(text)) { done(true); return; }
+		if (!(navigator.clipboard && navigator.clipboard.writeText)) { done(false); return; }
+		let settled = false;
+		const giveUp = setTimeout(() => { if (!settled) { settled = true; done(false); } }, 800);
+		navigator.clipboard.writeText(text)
+			.then(() => { if (!settled) { settled = true; clearTimeout(giveUp); done(true); } })
+			.catch(() => { if (!settled) { settled = true; clearTimeout(giveUp); done(false); } });
+	};
+	document.querySelectorAll(".pr").forEach((pr) => {
+		const p = pr.querySelector("p");
+		const btn = document.createElement("button");
+		btn.type = "button"; btn.className = "pr__copy"; btn.textContent = "📋 コピー";
+		btn.addEventListener("click", (e) => { e.stopPropagation(); run(btn, elText(p)); });
+		pr.appendChild(btn);
+	});
+
+	/* ---- くわしく読む ---- */
+	const moreData = document.getElementById("pm-more");
+	if (moreData) {
+		const more = JSON.parse(moreData.textContent);
+		const slides = [...document.querySelectorAll(".deck > .slide")];
+		slides.forEach((s, i) => {
+			if (!more[i]) return;
+			const d = document.createElement("details");
+			d.className = "more";
+			d.innerHTML = "<summary>くわしく読む</summary><div>" + more[i] + "</div>";
+			s.insertAdjacentElement("afterend", d);
+		});
+	}
+
+	const st = document.createElement("style");
+	st.textContent = `
+.pr__copy{ position:absolute; right:1.2cqw; top:-1.1cqw; font-size:1.2cqw; font-weight:900; color:#fff; background:#e86f6f; border:0; border-radius:99px; padding:.25cqw 1.1cqw; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,.15) }
+.pr__copy:hover{ background:#fb8b8b }
+.copy-manual{ display:block; width:100%; min-height:6cqw; margin-top:.6cqw; padding:.8cqw; border:1px solid #e3d5cf; border-radius:.8cqw; font-size:1.4cqw; line-height:1.7 }
+body.present .pr__copy{ display:none }
+.more{ width:min(100%, calc((100vh - 90px) * 16 / 9)); justify-self:center; margin-top:-14px; background:#fff; border:1px solid #ece7e0; border-radius:14px; padding:10px 18px; font-size:15px; line-height:1.9; color:#4a4a5a }
+.more summary{ cursor:pointer; font-weight:800; color:#e86f6f }
+.more div{ margin-top:6px }`;
+	document.head.appendChild(st);
+})();
+
+</script></body></html>

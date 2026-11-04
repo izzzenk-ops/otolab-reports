@@ -380,7 +380,10 @@ body:not(.present) .deck .slide{ width:min(100%, calc((100vh - 90px) * 16 / 9));
 .three p{ margin-top:.3cqw; font-size:1.45cqw; font-weight:700; color:var(--ink2); line-height:1.55 }
 
 /* ---- プレゼンモード（presenter.js 用。slide.css から移植） ---- */
-.pm-hint{ position:fixed; right:16px; bottom:14px; z-index:50; font-size:13px; font-weight:800; color:#8a8a9a; background:#fff; border:1px solid var(--line); border-radius:999px; padding:7px 14px; box-shadow:0 4px 14px rgba(74,74,90,.12) }
+.pm-hint{ position:fixed; right:16px; bottom:14px; z-index:50; display:flex; gap:8px }
+.pm-hint button{ font:inherit; font-size:13px; font-weight:800; color:#4a4a5a; background:#fff; border:1px solid var(--line); border-radius:999px; padding:8px 16px; cursor:pointer; box-shadow:0 4px 14px rgba(74,74,90,.12) }
+.pm-hint button:first-child{ color:#fff; background:#e86f6f; border-color:#e86f6f }
+.pm-hint button:hover{ filter:brightness(1.05) }
 body.present{ overflow:hidden; background:#0e0e12 }
 body.present .wrap{ visibility:hidden }
 body.present .pm-hint{ display:none }
@@ -1592,15 +1595,16 @@ document.querySelectorAll('img[data-img]').forEach(e=>{e.src=IMG[e.dataset.img]}
 		}
 	};
 
+	// 文字は e.code（キーの位置）で見る。日本語入力がオンだと e.key が "Process" になり、P が効かないため
 	document.addEventListener("keydown", (e) => {
-		if (e.key === "p" || e.key === "P") return on ? stop() : start();
+		if (e.code === "KeyP") { e.preventDefault(); return on ? stop() : start(); }
 		if (!on) return;
 		if (e.key === "Escape") return stop();
-		if (e.key === "f" || e.key === "F") {
+		if (e.code === "KeyF") {
 			document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
 			return;
 		}
-		if (e.key === "l" || e.key === "L") return jumpLesson(e.shiftKey ? -1 : 1);
+		if (e.code === "KeyL") return jumpLesson(e.shiftKey ? -1 : 1);
 		if (["ArrowRight", "ArrowDown", " ", "PageDown"].includes(e.key)) { e.preventDefault(); go(1); }
 		if (["ArrowLeft", "ArrowUp", "PageUp"].includes(e.key)) { e.preventDefault(); go(-1); }
 	});
@@ -1610,9 +1614,18 @@ document.querySelectorAll('img[data-img]').forEach(e=>{e.src=IMG[e.dataset.img]}
 	});
 	window.addEventListener("resize", () => on && fit());
 
+	// 右下の案内。キーを知らなくても押せるようにボタンにする（notes.js が「発表者メモ」のボタンを足す）
 	const hint = document.createElement("div");
 	hint.className = "pm-hint";
-	hint.textContent = "P で全画面プレゼン（←→ で送る）";
+	const btn = document.createElement("button");
+	btn.type = "button";
+	btn.textContent = "▶ プレゼン（P）";
+	btn.addEventListener("click", (e) => {
+		e.stopPropagation(); // 下の「クリックで次へ」に拾われて2枚目から始まらないように
+		at = Math.max(0, slides.findIndex((s) => s.getBoundingClientRect().bottom > window.innerHeight * 0.35));
+		start();
+	});
+	hint.append(btn);
 	document.body.append(hint);
 })();
 

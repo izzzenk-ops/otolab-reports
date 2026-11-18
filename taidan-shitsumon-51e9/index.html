@@ -66,6 +66,10 @@ body.today .q .txt{font-size:19px}
 body.today .q .fu{font-size:16px}
 body.today .ch.empty{display:none}
 body.today .grp{display:none}
+body.today .panel{display:none}
+#bBack{display:none;position:fixed;right:14px;bottom:18px;z-index:9;box-shadow:0 4px 14px rgba(40,60,120,.25);padding:8px 16px;font-size:15px}
+body.today #bBack{display:block}
+@media (max-width:700px){.panel{position:static}}
 @media print{.panel{position:static;box-shadow:none}.panel .row:not(.keep){display:none}.q{break-inside:avoid}}
 </style>
 </head>
@@ -115,6 +119,7 @@ body.today .grp{display:none}
 </div>
 
 <div id="chapters"></div>
+<button id="bBack" class="act">全部の質問に戻る</button>
 
 <h2 class="hide-today">答えを聞いて次に何を言うか<span class="t">伊藤さんの返し方から</span></h2>
 <div class="scroll hide-today"><table>
@@ -395,6 +400,7 @@ $("#bToday").onclick=()=>{
  $("#bToday").textContent=on?"全部の質問に戻る":"今日の台本だけ見る";
  window.scrollTo(0,0);
 };
+$("#bBack").onclick=()=>$("#bToday").click();
 const qp=new URLSearchParams(location.search).get("p");
 const BASE=["Q1","Q9","Q10","Q11","Q27"];
 if(qp&&PEOPLE[qp]&&st.p!==qp){st.p=qp;st.tags=[...PEOPLE[qp]];st.chk={};for(const id of BASE)st.chk[id]=true;for(const q of Q){if(q[2]==="n"&&q[5].some(t=>st.tags.includes(t)))st.chk[q[0]]=true;}}

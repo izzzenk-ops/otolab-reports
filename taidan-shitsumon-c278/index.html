@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>受講生対談の質問の引き出し</title>
+<style>
+:root{--ink:#2f3142;--sub:#6b6f82;--line:#e4e8f2;--bg:#fbfcff;--blue:#e3f0fb;--blue2:#bcdcf5;--coral:#ff7f6e;--coral2:#ffe6e1;--yellow:#fff5d6;--green:#e2f6ea;--hit:#fff1b8}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.75;font-size:15px}
+main{max-width:1000px;margin:0 auto;padding:28px 16px 80px}
+h1{font-size:24px;margin:0 0 16px}
+h2{font-size:19px;margin:32px 0 10px;padding:8px 14px;background:var(--blue);border-radius:10px}
+h2 .t{float:right;font-size:13px;font-weight:400;color:var(--sub);margin-top:3px}
+.kekka{background:#fff;border:2px solid var(--blue2);border-radius:16px;padding:18px 20px}
+.kekka b.big{display:block;font-size:20px;line-height:1.55;margin-bottom:6px}
+.boxes{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:14px 0}
+.box{background:var(--blue);border-radius:12px;padding:10px 14px}
+.box b{display:block;font-size:22px;line-height:1.3}
+.box span{font-size:13px;color:var(--sub)}
+.koko{background:var(--yellow);border-radius:12px;padding:12px 18px;margin:14px 0}
+.koko ol{margin:6px 0 0;padding-left:22px}
+.panel{position:sticky;top:0;z-index:5;background:#fff;border:2px solid var(--blue2);border-radius:14px;padding:12px 14px;margin:18px 0;box-shadow:0 4px 14px rgba(40,60,120,.08)}
+.row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:4px 0}
+.row .lb{font-size:12.5px;color:var(--sub);font-weight:700;margin-right:4px;min-width:5.5em}
+button{font:inherit;cursor:pointer;border-radius:999px;border:1.5px solid var(--blue2);background:#fff;color:var(--ink);padding:3px 12px;font-size:13.5px}
+button.on{background:#1e63d6;border-color:#1e63d6;color:#fff}
+button.person.on{background:var(--coral);border-color:var(--coral)}
+button.act{background:var(--coral);border-color:var(--coral);color:#fff;font-weight:700}
+button.ghost{border-style:dashed}
+.count{font-size:13px;color:var(--sub);margin-left:auto}
+.ch{background:#fff;border:1px solid var(--line);border-radius:14px;margin:14px 0;overflow:hidden}
+.ch>h3{margin:0;font-size:17px;padding:9px 14px;background:var(--blue)}
+.ch>h3 .t{float:right;font-size:12.5px;font-weight:400;color:var(--sub);margin-top:2px}
+.tsunagi{margin:8px 14px 0;font-size:14px;color:var(--sub)}
+.grp{font-size:12.5px;font-weight:700;color:var(--sub);padding:8px 14px 2px;border-top:1px dashed var(--line);margin-top:6px}
+.q{display:flex;gap:10px;padding:8px 14px;border-top:1px solid var(--line);align-items:flex-start}
+.q:first-of-type{border-top:0}
+.q input{margin-top:6px;width:18px;height:18px;flex:none;accent-color:var(--coral)}
+.q .body{flex:1;min-width:0}
+.q .txt{font-size:16px;font-weight:700;line-height:1.6}
+.q .fu{font-size:14px;color:var(--ink);margin-top:2px}
+.q .fu::before{content:"短いとき → ";color:var(--sub);font-weight:700;font-size:12.5px}
+.q .meta{font-size:12.5px;color:var(--sub);margin-top:3px}
+.q.must{background:var(--coral2)}
+.q.hit{background:var(--hit)}
+.q.must.hit{background:linear-gradient(90deg,var(--coral2) 0 8px,var(--hit) 8px)}
+.q.dim{opacity:.4}
+.q.hide{display:none}
+.pill{display:inline-block;background:var(--coral);color:#fff;border-radius:999px;padding:0 9px;font-size:12px;font-weight:700;margin-right:4px;white-space:nowrap;vertical-align:1px}
+.pill.blue{background:#1e63d6}.pill.gray{background:#9aa0b4}.pill.new{background:#2e9e6a}
+.tag{display:inline-block;border:1px solid var(--blue2);border-radius:999px;padding:0 7px;font-size:11.5px;margin:0 3px 0 0;color:#2a4f86;background:#f3f8fe}
+.scroll{overflow-x:auto;margin:10px 0}
+table{border-collapse:collapse;width:100%;background:#fff;font-size:14px}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--blue);white-space:nowrap}
+details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 16px;margin:10px 0}
+summary{cursor:pointer;font-weight:700}
+.note{color:var(--sub);font-size:13.5px}
+/* 今日の台本 */
+body.today .hide-today{display:none}
+body.today .q:not(.chk){display:none}
+body.today .q .meta,body.today .q input{display:none}
+body.today .q .txt{font-size:19px}
+body.today .q .fu{font-size:16px}
+body.today .ch.empty{display:none}
+body.today .grp{display:none}
+body.today .panel{display:none}
+#bBack{display:none;position:fixed;right:14px;bottom:18px;z-index:9;box-shadow:0 4px 14px rgba(40,60,120,.25);padding:8px 16px;font-size:15px}
+body.today #bBack{display:block}
+@media (max-width:700px){.panel{position:static}}
+@media print{.panel{position:static;box-shadow:none}.panel .row:not(.keep){display:none}.q{break-inside:avoid}}
+</style>
+</head>
+<body>
+<main>
+<h1>受講生対談の質問の引き出し</h1>
+
+<div class="kekka hide-today">
+<b class="big">伊藤さんの受講生対談24本から、相手に合わせて聞き分けている質問を拾い、撮影台本と同じ9つの章に入れました。</b>
+相手を押すと、その人に合う質問が黄色く光ります。聞きたい質問にチェックを入れて「今日の台本だけ見る」を押すと、選んだ質問だけが章の順に大きい字で並びます。対談中はその画面を横に置いて読みます。
+</div>
+
+<div class="boxes hide-today">
+<div class="box"><b>24本</b><span>伊藤さんの対談で読んだ本数（前回は3本）</span></div>
+<div class="box"><b><span id="nNew">–</span>問</b><span>新しく足した質問（緑の「新」）</span></div>
+<div class="box"><b><span id="nAll">–</span>問</b><span>撮影台本の39問と合わせた全部</span></div>
+<div class="box"><b>11種類</b><span>相手の種類。押して重ねられる</span></div>
+</div>
+
+<div class="koko hide-today"><b>ここだけ見てください</b>
+<ol>
+<li><b>ピンクの行は最初からチェック済みで、外せません。</b>切り抜きに使う11問です（撮影台本と同じ）。</li>
+<li><b>伊藤さんは、同じ型の質問に「その人にしか聞けない1〜3問」を足しています。</b>本業がある人には「本業にどう効いたか」、前に挫折した人には「前は続かなかったのに、なぜ今回は」、子育て中の人には「子どもとの時間」。この足し方を相手の種類にしてあります。</li>
+<li><b>答えに合わせた次の一言は、一番下の「答えを聞いて次に何を言うか」の表にまとめました。</b>質問を増やすより、ここが伊藤さんの対談の厚みです。</li>
+</ol>
+</div>
+
+<div class="panel" id="panel">
+<div class="row keep"><span class="lb">相手</span>
+<button class="person" data-p="jun">じゅんさん</button>
+<button class="person" data-p="minmin">みんみんさん</button>
+<button class="person" data-p="chiyomi">ちよみさん</button>
+<button class="person" data-p="mai">まいさん</button>
+<button class="person" data-p="eri">えりさん</button>
+<button class="person" data-p="other">ほかの人</button>
+<span class="count" id="count"></span>
+</div>
+<div class="row" id="tagRow"><span class="lb">相手の種類</span></div>
+<div class="row keep">
+<span class="lb">表示</span>
+<button id="bOnly">合う質問だけ見る</button>
+<button id="bToday" class="act">今日の台本だけ見る</button>
+<button id="bAuto" class="ghost">光った新しい質問を全部チェック</button>
+<button id="bClear" class="ghost">チェックを外す</button>
+<button id="bPrint" class="ghost">印刷</button>
+</div>
+</div>
+
+<div id="chapters"></div>
+<button id="bBack" class="act">全部の質問に戻る</button>
+
+<h2 class="hide-today">答えを聞いて次に何を言うか<span class="t">伊藤さんの返し方から</span></h2>
+<div class="scroll hide-today"><table>
+<tr><th>相手の答えがこうなったら</th><th>次に言うこと（例）</th><th>伊藤さんの回</th></tr>
+<tr><td>「変わりました」「良かったです」で終わった</td><td>「具体的には、どんな場面でそう思いましたか」</td><td>アイリさん（並走力→具体的に例えば）、高橋さん</td></tr>
+<tr><td>数字が1つ出た</td><td>短く続けて聞く。「それは始めて何か月目ですか」「そのときの投稿は週に何本ですか」「最初は何回くらいでしたか」</td><td>広さん、上本さん、中島さん</td></tr>
+<tr><td>大きい数字が出た</td><td>数字を一緒に口に出して驚く。「ゼロから、5か月で、ですよね」。そのあとに「ふだんの月は」</td><td>中島さん、カナさん、中野さん</td></tr>
+<tr><td>失敗やつらかった話が出た</td><td>先に一言断る。「そこ、ちょっと詳しく聞いていいですか」→「そのときの気持ちは」→「どこから変わりましたか」</td><td>一瀬さん、太郎さん</td></tr>
+<tr><td>前に挫折した話が出た</td><td>「前は続かなかったのに、今回はなぜ続いたんですか」</td><td>中島さん</td></tr>
+<tr><td>「運が良かった」と謙遜した</td><td>「その運が来るまで、何をしていたんですか」と、やってきたことを話してもらう</td><td>上本さん（2本とも）</td></tr>
+<tr><td>おとラボやけんじを褒めた</td><td>照れて流さない。「具体的に、例えばどんなときですか」</td><td>アイリさん</td></tr>
+<tr><td>正しいけど遠いアドバイスが出た（「熱中すればいける」など）</td><td>見ている人の「でも」を代わりに言う。「そうは言っても、仕事で疲れて帰ったら眠いと思うんですけど」</td><td>太郎さん、上本さん</td></tr>
+<tr><td>専門的な話が続いた</td><td>「ここまでまとめると、◯◯と◯◯ということですよね」と2〜3個に畳んで次へ</td><td>森下さん、上本さん、鈴木さん</td></tr>
+<tr><td>本人が自分の成果を言いにくそう</td><td>けんじが知っている事実を言って背中を押す。「企業さんから声がかかる人、なかなかいないですよ」。金額だけはけんじから言わない</td><td>アイリさん、オムさん</td></tr>
+<tr><td>失敗を恥ずかしそうに話した</td><td>「詳しい人ほど、そこでつまずくんですよね」と、よくあることにして続けやすくする</td><td>広さん、カナさん</td></tr>
+<tr><td>話が長くなって脱線した</td><td>「ここまでの流れを1回まとめると」で時系列を言い直してから次の質問へ</td><td>一瀬さん、上本さん</td></tr>
+</table></div>
+<p class="note hide-today">伊藤さんは「1本2,000円とかですか」と金額を先に言う場面もありますが、けんじさん版は撮影台本の決まりどおり、結果の金額はけんじさんから言いません。</p>
+
+<details class="hide-today"><summary>相手の種類の決め方と、4人に最初から付けた印</summary>
+<div class="scroll"><table>
+<tr><th>相手</th><th>最初から付けた種類</th><th>根拠</th></tr>
+<tr><td>じゅんさん（撮影済み）</td><td>子育て中・会社を辞めた・案件や商品・前に別の講座や副業・オフ会によく来る</td><td>2026-11-13の録画（子供服のショップ、前の講座3か月、オフ会の話）</td></tr>
+<tr><td>みんみんさん</td><td>子育て中・本業がある・入る前から発信</td><td>質問シートの紹介文（工作教室、3か月目212人、オンライン教室、子育て）</td></tr>
+<tr><td>ちよみさん</td><td>収入ゼロから・案件や商品</td><td>質問シートの紹介文（以前は自分の収入なし、アフィリエイトと企業の案件）</td></tr>
+<tr><td>まいさん</td><td>本業がある・案件や商品・伸び悩みの時期</td><td>質問シートの紹介文（お店の収益がパート程度、ゼロの月もあった、自社の商品）</td></tr>
+</table></div>
+<p class="note">紹介文に書いていないこと（子どもの有無、年代など）は付けていません。違っていたら種類のボタンを押して足す・外すだけで直ります。</p>
+</details>
+
+<details class="hide-today"><summary>読んだ伊藤さんの対談24本（どんな人に、何を足して聞いていたか）</summary>
+<div class="scroll"><table id="srcTable"><tr><th>呼び方</th><th>どんな人</th><th>この人にだけ足した質問</th></tr></table></div>
+<p class="note">自動字幕（話者の区別なし）から聞き手の質問を拾いました。名前は字幕の誤変換で確定できない人がいます。時刻は前後20秒ほどずれます。他人の動画の全文はプロジェクトに置いていません。</p>
+</details>
+
+</main>
+
+<script>
+const TAGS={
+ mama:"子育て中",kaisha:"会社員・会社を辞めた",honbyo:"本業がある（お店・教室）",zero:"収入ゼロ・SNS未経験から",
+ zasetsu:"前に挫折・別の講座や副業",teitai:"伸び悩み・止まった時期",anken:"案件・アフィ・商品（月の額が言いにくい）",
+ keiken:"入る前から発信していた",nakama:"勉強会・オフ会によく来る",nendai:"40代以上",hayai:"始めて間もない・短期間で伸びた"
+};
+const PEOPLE={jun:["mama","kaisha","anken","zasetsu","nakama"],minmin:["mama","honbyo","keiken"],chiyomi:["zero","anken"],mai:["honbyo","anken","teitai"],eri:["zero","hayai"],other:[]};
+/* まだ収入が出ていない人は、金額の3問を外す（チェックすれば戻せる） */
+const NOMONEY=["eri"];const MONEYQ=["Q5","K1","K2"];
+
+/* 章: [番号, 名前, 目安, つなぎ] */
+const CH=[
+ [1,"あいさつと紹介","0〜2分","こんにちは、おとラボのけんじです。今日は、おとラボの受講生の◯◯さんに来てもらいました。（紹介：始めたころ・今・今日聞きたいこと）"],
+ [2,"自己紹介","2〜4分",""],
+ [3,"入会前と入会後の変化","4〜12分","じゃあ、おとラボに入ってからのことを聞かせてください。"],
+ [4,"始める前のお悩み","12〜19分","少し戻って、始める前のことを聞かせてください。"],
+ [5,"稼げるようになって良かった点","19〜27分","結果が出てからのことを聞かせてください。"],
+ [6,"インスタで稼ぐために大事なこと","27〜34分","ここからは、見ている人に向けて聞かせてください。"],
+ [7,"おとラボに入って良かったこと","34〜39分",""],
+ [8,"今後の目標","37〜40分",""],
+ [9,"始めたい人へメッセージ","40〜45分","最後に、見ている人へ聞かせてください。"]
+];
+
+/* 質問: id, 章, 区分(k=撮影台本の伊藤さん型 / l=撮影台本のおとラボ / n=新), 質問, 短いとき, 種類タグ, 出典, 必須(切り抜き) */
+const Q=[
+// 2 自己紹介
+["Q1",2,"k","改めて、自己紹介をしていただいてもいいですか。","インスタを始める前は、どんな1日でしたか。",[],"中島さん"],
+["Q2",2,"k","周りに、副業をやっていたり、SNSで稼いでいる方はいますか。","周りの方は、どんなお仕事をしていることが多いですか。",[],"中島さん"],
+["N1",2,"n","インスタを始めたのは、いつごろからですか。今のアカウントは何個目ですか。","1個目のアカウントは、どうなりましたか。",["zasetsu","keiken"],"やめさん・りさん"],
+["N2",2,"n","今のお仕事の内容も、簡単に教えてもらっていいですか。","インスタのほかに、続けているお仕事はありますか。",["honbyo","kaisha"],"しもさん・アイリさん"],
+["N3",2,"n","今のジャンルで発信しようと思ったきっかけは何ですか。","ほかのジャンルも考えましたか。",[],"Kさん"],
+["N4",2,"n","会社員だったころと比べて、お金と時間の使い方はどうですか。","1日の流れで、一番変わったのはどこですか。",["kaisha"],"Kさん"],
+["N5",2,"n","言える範囲で大丈夫なんですけど、今おいくつでしたっけ。","始めたのは、何歳のときですか。",["nendai"],"広さん（本人が嫌がらなければ）"],
+// 3 変化
+["Q3",3,"k","おとラボに入会する前と入会した後で、どんな変化があったのか教えていただいてもいいですか。","大きな変化で言うと、何ですか。",[],"中島さん",1],
+["L1",3,"l","おとラボを知る前は、インスタで稼ぐことについて、どう思っていましたか。","自分には関係のない世界だと思っていましたか。",["zero"],"おとラボの質問"],
+["L2",3,"l","おとラボに入ろうと決めた、一番の決め手は何でしたか。","ほかの講座や独学と比べて、どこが違うと思いましたか。",[],"おとラボの質問"],
+["N6",3,"n","何の投稿を見て、おとラボやけんじのことを知ったんですか。","それを見て、どう思いましたか。",[],"アイリさん・上本さん"],
+["N7",3,"n","ほかにも講座がある中で、ほかの所も見ていたんですか。","比べてみて、どこで決めましたか。",["zasetsu"],"一瀬さん"],
+["L3",3,"l","入る前に、一番不安だったことは何ですか。","時間・お金・自分にできるか、のどれが一番大きかったですか。",[],"おとラボの質問",1],
+["L4",3,"l","その不安は、おとラボに入ってから、どうなりましたか。","不安が消えたのは、いつ・どんな場面でしたか。",[],"おとラボの質問",1],
+["Q4",3,"k","入会前は、インスタで稼いでいた金額でいくと、いくらでしたか。","言える範囲で、だいたいの額で大丈夫です。",[],"中島さん"],
+["Q5",3,"k","ちなみに、過去最高のところで、いくらぐらいだったんですか。","言える範囲で、だいたいの額で大丈夫です。",[],"中野さん",1],
+["K1",3,"k","（確認）その金額はいつの月で、売上ですか、経費を引いた額ですか。","1回の案件ですか、1か月の合計ですか。",[],"中野さん",1],
+["K2",3,"k","（確認）ふだんの月は、どれくらいがアベレージですか。","少ない月と多い月で、どのくらい差がありますか。",[],"中野さん・上本さん",1],
+["N8",3,"n","最初にもらった案件（最初の収入）は、何でしたか。いきなり大きかったんですか。","それは、始めて何か月目くらいでしたか。",["anken"],"上本さん（最初は月3万円・3年目）"],
+["N9",3,"n","企業さんからの案件で、一番大きかった物は何でしたか。","届いたとき（決まったとき）、どう思いましたか。",["anken"],"Kさんの数字の聞き方を案件に置き換え"],
+["N10",3,"n","そこから一気に伸びたんですか。どんな順番で変わっていきましたか。","伸びたときは、週に何本くらい投稿していましたか。",[],"上本さん"],
+["N11",3,"n","入会したときのフォロワーは何人で、今は何人ですか。入会はいつでしたっけ。","一番多く再生されたリールは、何回くらいですか。",["hayai"],"広さん（数字を短く続けて聞く）"],
+["N61",3,"n","3,500人まで、始めてどれくらいの期間でしたか。何本目の投稿から伸び始めましたか。","伸びる前の投稿は、何回くらい再生されていましたか。",["hayai"],"アイリさん（3週間で1万人）・広さん"],
+["N62",3,"n","伸びた投稿と、その前の投稿で、何を変えましたか。","それは、自分で気づいたんですか。誰かに言われたんですか。",["hayai"],"アイリさん・はるさん"],
+["N63",3,"n","一気にフォロワーが増えたとき、通知を見てどんな気持ちでしたか。","最初に誰に話しましたか。",["hayai"],"森下さん（収益化できたときの気持ち）"],
+["Q6",3,"k","ちなみに、今まで何に挑戦してきましたか。","やめたのは、なぜですか。",["zasetsu"],"中島さん"],
+["N12",3,"n","いろんな副業がある中で、なぜインスタだったんですか。","ブログやYouTubeは考えましたか。",["zasetsu","kaisha"],"一瀬さん・上本さん"],
+["N13",3,"n","お店（教室）だと、自分が動いた時間しかお金にならない、ということですか。","インスタだと、そこはどう変わりましたか。",["honbyo"],"一瀬さん（受注の仕事は時間に上限）"],
+["Q7",3,"k","入会してから、最初の1本目はどれくらいで投稿しましたか。","そのときの反応はどうでしたか。",[],"中島さん"],
+["Q8",3,"k","インスタの経験はあったんですか。動画制作の経験もありましたか。","編集アプリは使えていましたか。",["zero"],"中島さん"],
+["N14",3,"n","1本作るのに、最初はどれくらい時間がかかりましたか。","今はどれくらいですか。",["zero"],"三さん・上本さん"],
+["N15",3,"n","入る前から発信していた中で、どんな壁にぶつかっていましたか。","伸びた投稿と伸びない投稿の差は、自分で分かっていましたか。",["keiken","teitai"],"村木さん・鈴木さん・磯崎さん"],
+["N16",3,"n","自分が見せたい物と、見ている人が見たい物が、ずれていませんでしたか。","それは、最初は気づかなかったんですか。",["honbyo","keiken"],"広さん（詳しい人ほどずれる）"],
+["N17",3,"n","入る前と後で、投稿の作り方は何を変えましたか。","一番効いたのは、どこを変えたときですか。",["keiken"],"村木さん"],
+["N18",3,"n","最初は、言われた型をなんとなく入れていた感じでしたか。","投稿して数字を見るうちに、「あのとき、なぜこの言葉が良かったか」が分かってきましたか。",["zero"],"はるさん"],
+["Q9",3,"k","とはいえ、すぐに稼げるわけではなかったと思うんですけど、つまずくポイントはありましたか。","いちばんやめたいと思ったのは、いつですか。",[],"中島さん"],
+["N19",3,"n","最初の投稿は伸びたのに、そのあと伸びなくなったとき、「けんじの言うこと、大丈夫かな」と疑いませんでしたか。","そこから、どこで変わりましたか。",["teitai"],"一瀬さん（1本目2万再生→0再生が続いた）"],
+["N20",3,"n","伸びなくなったとき、そのときの気持ちはどうでしたか。","それでもやめなかったのは、なぜですか。",["teitai"],"太郎さん・一瀬さん"],
+["Q10",3,"k","今回、なぜ続けることができたんですか。","その時期、毎日どんなことをしていましたか。",[],"中島さん"],
+["N21",3,"n","前は続かなかったのに、今回はなぜ続けられたんですか。","前と今回で、一番違ったのは何ですか。",["zasetsu"],"中島さん（Q10を前の挫折と並べて聞く形）"],
+["N22",3,"n","けんじに相談して、変わる決め手になったのは、具体的に何でしたか。","具体的にどこを直したら、どう変わりましたか。",[],"やめさん・高橋さん"],
+// 4 悩み
+["Q11",4,"k","インスタを始める前、どんな悩みや不安がありましたか。","どうして、それでも始めたんですか。",[],"中島さん"],
+["N23",4,"n","インスタで稼げるって、元々知っていましたか。","最初は、月にどれくらいになればいいと思っていましたか。",["zero"],"やめさん・上本さん"],
+["N24",4,"n","自分にできるイメージが湧かなかったのに、なぜ入ろうと思えたんですか。","入る直前は、どんな気持ちでしたか。",["zero"],"中島さん（不安と入会の決め手の食い違いを聞く）"],
+["N25",4,"n","スマホやSNSは、元々得意でしたか。","最初に一番難しかったのは、どこですか。",["zero","nendai"],"やめさん"],
+["N26",4,"n","時間をかけて作ったのに伸びなかったらどうしよう、という気持ちは、どう乗り越えましたか。","しんどくなったときは、なかったんですか。",[],"かおりさん"],
+["N27",4,"n","完璧に作ろうとして、手が止まったことはありますか。","どうやって、まず1本出せたんですか。",[],"三さん"],
+["N28",4,"n","周りの人に「無理でしょ」と言われたことはありますか。","そのとき、どうやって気持ちを保ちましたか。",[],"上本さん"],
+["N29",4,"n","けんじに最初に相談したのは、どんな内容でしたか。覚えている範囲で大丈夫です。","そのときの返事で、覚えていることはありますか。",[],"Kさん・高橋さん"],
+["Q12",4,"k","ちなみに、今の結果まで何か月でいきましたか。","実際に数字が動いたのは、いつごろですか。",[],"中島さん"],
+["Q13",4,"k","最初は、どんなジャンルでやったんですか。","それは伸びましたか。そのあと、どうしましたか。",[],"中島さん"],
+["Q14",4,"k","今の結果まで、投稿本数はどんな感じでしたか。","最初の1か月は、何本くらい投稿しましたか。",[],"中島さん"],
+// 5 良かった点
+["N64",5,"n","フォロワーが増えて、インスタの外で何か変わったことはありますか。","家族や周りの人の反応はどうですか。",["hayai"],"上本さん・カナさん（始める前と後の変化）"],
+["N65",5,"n","伸びたあと、次の投稿を出すのが怖くなったりしませんでしたか。","今、一番の悩みは何ですか。",["hayai"],"一瀬さん（1本目が伸びたあとの0再生）"],
+["Q15",5,"k","成果を実際に出して、一番良かった点は何かありますか。","最近、やってて良かったと思ったのはいつですか。",[],"中島さん",1],
+["N30",5,"n","初めて収入（案件）が入ったとき、どんな気持ちでしたか。","誰に一番に話しましたか。",["anken"],"森下さん"],
+["Q16",5,"k","発信を頑張ろうと思ったきっかけは、何かありますか。","その前は、どんな働き方でしたか。",[],"中島さん"],
+["Q17",5,"k","今はどうですか。自分が頑張った分だけお金に変わっていく働き方に変わりましたか。","前と比べて、どこが変わりましたか。",[],"中島さん"],
+["Q18",5,"k","具体的に、変化のあったことや、数字で見える部分で成果があったことを教えていただいてもいいですか。","お金のことで、前と変わった場面はありますか。",[],"10万人の回",1],
+["N31",5,"n","インスタのお金で、買えた物や、できるようになったことはありますか。","前なら、あきらめていた物ですか。",[],"太郎さん（稼いだお金で買えた物）"],
+["N32",5,"n","家で仕事ができる形って、みんなが憧れると思うんですけど、実際どうですか。","大変なところもありますか。",["mama","kaisha"],"やめさん"],
+["N33",5,"n","お子さんとの時間は、増えましたか。","増えた時間で、何をしていますか。",["mama"],"上本さん"],
+["Q19",5,"k","家事や育児もしながらですけど、実際やられてみてどうですか。","朝起きてから夜寝るまでの流れを教えてください。",["mama"],"高橋さん"],
+["N34",5,"n","（会社のお給料を超えた人だけ）副業で会社のお給料を超えると、どうですか。","気持ちの面で、何が変わりましたか。",["kaisha"],"上本さん（超えていない人には聞かない）"],
+["N35",5,"n","インスタで学んだことが、本業（お店・教室）で役に立ったことはありますか。","お客さんへの伝え方は変わりましたか。",["honbyo"],"カナさん・広さん"],
+["N36",5,"n","来てくれるお客さんは変わりましたか。具体的な例はありますか。","問い合わせの数で言うと、どのくらい変わりましたか。",["honbyo"],"しもさん・まささん（集客の質と数）"],
+["N37",5,"n","お客さんが増えて、忙しくなりすぎていませんか。大丈夫ですか。","手が回らないとき、どうしていますか。",["honbyo"],"まささん"],
+["N38",5,"n","できることが増えて、あれもやりたい、これもやりたい、となっていませんか。","今、一番やりたいのはどれですか。",[],"森下さん"],
+// 6 大事なこと
+["Q20",6,"k","インスタで稼ぐためには、何が一番大事だと思いますか。","昔の自分のやり方で、今ならやめることはありますか。",[],"中島さん"],
+["N39",6,"n","コツコツ続ける、以外で言うと、何が一番大事ですか。","1つだけ挙げるなら、何ですか。",[],"かおりさん・三さん"],
+["N40",6,"n","企画・カバー・台本・ジャンルの中で、大事な順に並べるとどうなりますか。","一番時間をかけているのはどれですか。",["keiken"],"村木さん"],
+["N41",6,"n","ここを直したら一気に伸びた、という所はありますか。","それに気づいたのは、いつですか。",[],"磯崎さん"],
+["Q21",6,"k","何が一番、継続の要因ですか。","心が折れそうなときは、どうしていましたか。",[],"中島さん"],
+["N42",6,"n","数字に一喜一憂しなくなったのは、どうしてですか。","前は、数字を見てどんな気持ちになっていましたか。",["teitai","keiken"],"村木さん"],
+["N43",6,"n","自分が成長すれば数字もついてくる、と気づいたのはいつですか。","気づく前と後で、毎日の過ごし方は変わりましたか。",["teitai"],"りさん"],
+["Q22",6,"k","最初はどうでしたか。完璧に分かっていたわけじゃないですよね。","最初に一番分からなかったことは何ですか。",[],"中島さん"],
+["L5",6,"l","最初、何から手をつければいいか分からなかったとき、おとラボでは何をしましたか。","誰に、どこで聞きましたか。",[],"おとラボの質問"],
+["L6",6,"l","けんじさんに言われたことで、一番効いた一言は何ですか。","それを聞いて、投稿の何を変えましたか。",[],"おとラボの質問",1],
+["L7",6,"l","伸びなかった時期に、おとラボのどんなところに助けられましたか。","一人でやっていたら、どうなっていたと思いますか。",["teitai"],"おとラボの質問"],
+["N44",6,"n","伸びている人の投稿は、どこまで真似していいと思いますか。","真似したらパクリと言われないか、と心配する人にはどう言いますか。",[],"鈴木さん"],
+["N45",6,"n","見ている人が見たい物は、どうやって見つけていますか。","コメントで「ここが良かった」と言われるのは、どこが多いですか。",["keiken","honbyo"],"やめさん"],
+["N46",6,"n","そうは言っても、仕事や家事で疲れて、夜は眠いと思うんですけど、どうしたらいいですか。","時間の使い方で、工夫していることはありますか。",["mama","kaisha"],"太郎さん・中野さん（見ている人の「でも」を代わりに聞く）"],
+["N47",6,"n","今の自分が、始めたころの自分に伝えるなら、どんな順番で進めますか。","最初の1か月は、何をしますか。",[],"磯崎さん"],
+["Q23",6,"k","この動画を見ている、初心者の方や伸び悩んでいる方に、今アドバイスするとしたら、どんなことを伝えますか。","昔の自分に言うなら、何と言いますか。",[],"中島さん"],
+["N48",6,"n","言われた通りにやっても伸びない、と心が折れそうな人に、どう言いますか。","◯◯さんは、そういうときどうしていましたか。",["teitai"],"りさん・上本さん"],
+// 7 入って良かった
+["Q24",7,"k","おとラボに入会して、一番良かったことを教えていただいてもいいですか。","どんな場面で、そう思いましたか。",[],"中島さん",1],
+["N49",7,"n","重なるかもしれないんですけど、ほかにも良かったことはありますか。","別の角度で言うと、何がありますか。",[],"広さん・かおりさん・しもさん（同じ質問を2回聞く）"],
+["N50",7,"n","けんじのサポートで、「これは助かった」という場面は、具体的にありますか。","そのとき、何と言われましたか。",[],"アイリさん（褒め言葉を具体にしてもらう）"],
+["N51",7,"n","1回アドバイスをもらってやってみて、「もっとこうすれば伸びそう」という手応えはありましたか。","次に試したいことはありますか。",[],"Kさん"],
+["L8",7,"l","おとラボの仲間がいて良かったと思った場面はありますか。","同じ時期に始めた人と、どんな話をしましたか。",["nakama"],"おとラボの質問"],
+["N52",7,"n","勉強会やオフ会には、全部で何回くらい来てくれましたか。","来てみて、どうでしたか。",["nakama"],"アイリさん・まささん・村木さん"],
+["N53",7,"n","遠いのに来てくれたと思うんですけど、迷いませんでしたか。","来てみて、何が変わりましたか。",["nakama"],"りさん"],
+["L9",7,"l","独学でやっていたころと比べて、一番違ったことは何ですか。","独学のままだったら、どこでつまずいていたと思いますか。",["zasetsu","keiken"],"おとラボの質問"],
+// 8 目標
+["N66",8,"n","今は3,500人ですけど、次はどこまでいきたいですか。そのとき、どんな仕事をしていたいですか。","最初の収入は、何で作りたいですか。",["hayai","zero"],"アイリさん（今3.5万人なら10万人も目指せる）"],
+["Q25",8,"k","今後の目標があれば、お伺いしてもいいですか。","1年後、どんな1日を過ごしていたいですか。",[],"中島さん"],
+["N54",8,"n","これから、どんな物を売ったり、作ったりしていきたいですか。","それは、誰に届けたいですか。",["anken","honbyo"],"Kさん"],
+["N55",8,"n","（勉強会のワークに出た人）年末までの3か月でやること、決まりましたか。","紙に書いてみて、どうでしたか。",["nakama"],"一瀬さん"],
+// 9 メッセージ
+["L10",9,"l","始めたころの◯◯さんと同じような人、たとえば仕事や子育てで忙しくて、SNSの経験もない人がおとラボに入ったら、どうなると思いますか。","始めたころの◯◯さんに、特別な経験や才能はありましたか。",[],"おとラボの質問",1],
+["L11",9,"l","おとラボに入るか迷っている人に、背中を押すとしたら、何と言いますか。","昔の自分が迷っていたら、何と言いますか。",[],"おとラボの質問",1],
+["N56",9,"n","友達に「私にもできるかな」と聞かれたら、何て言いますか。","「投稿したけど伸びない」と言われたら、どうしますか。",[],"上本さん"],
+["N57",9,"n","インスタは、今から始めても稼げると思いますか。","遅いと思っている人に、何と言いますか。",[],"村木さん"],
+["N58",9,"n","40代から始めるのは、どう思いますか。","年齢が役に立ったことはありますか。",["nendai"],"上本さん"],
+["N59",9,"n","会社を辞めるところで、大変だったことはありますか。","辞めると決めたのは、いつですか。",["kaisha"],"村木さん"],
+["N60",9,"n","◯◯さんは「やるしかない」状態だったと思うんですけど、ふつうに副業で始める人にはどう言いますか。","時間がない人は、どこから始めればいいですか。",["kaisha","mama"],"三さん"],
+["Q26",9,"k","どんな方におすすめしたいとかあったら、教えていただいてもいいですか。","どんな悩みの人に、一番合いそうですか。",[],"中島さん"],
+["Q27",9,"k","これからインスタを始めたい方に向けて、忖度なくメッセージをいただいてもいいですか。","1つだけ伝えるなら、何ですか。",[],"中島さん"],
+["Q28",9,"k","頭がパンクしそうなときのコツはありますか。","どうやって乗り越えましたか。",[],"中島さん"]
+];
+
+const SRC=[
+["中島さん","副業・田舎のITエンジニア。前は情報商材で挫折","前は続かなかったのに今回はなぜ／頭がパンクしそうなとき"],
+["中野さん","副業で元から収益あり→月240万","過去最高→ふだんの月／副業なのに時間の使い方は"],
+["高橋さん","1児の母・元シナリオライター","子育てしながらどうか／具体的にどこを直したか"],
+["一瀬さん","副業。0再生が続き、収益停止も2回","講師を疑わなかったか／停止後の気持ち"],
+["三さん（名前未確定）","50代・脱サラ・完璧主義で手が止まった","追い込まれていない人にはどう言うか"],
+["まささん（名前未確定）","スクールを運営する事業者","集客が増えて忙しくないか／オフ会の感想"],
+["高さん","動画制作の会社","会社として工夫したこと"],
+["Kさん","スポーツ応援・グッズ販売","会社員のころと比べて／もう少し伸びそうな手応え"],
+["やめさん","元会社員・体調を崩して開始","家で働く形は実際どうか／決め手は具体的に何か"],
+["森下さん","動画編集者・10以上のチャンネルで挫折","やりたいことが増えていないか"],
+["かおりさん","インスタ・TikTok経験者","しんどくならなかったか／コツコツ以外で大事なこと"],
+["広さん","23歳・会社員の副業","見せたい物と見たい物のずれ／本業の気づき"],
+["りさん","9か月で月50万","心が折れそうな人へ／成長すれば結果が出ると気づいた時"],
+["村木さん","6年目・経験者","すでに結果がある人の壁／一喜一憂しなくなった理由／独立の大変さ"],
+["鈴木さん","マスメディア出身","どこまで真似していいか／遅い・パクリの心配"],
+["アイリさん","動画編集者・3週間で1万人","オフ会に何回来たか／サポートを具体的に"],
+["オムさん","40代・編集単価2,000円で絶望","収益化前の人に今の位置を見せる"],
+["上本さん（2本）","40代会社員の副業・3年で月3万→月100万","最初の収益と時期／友達に聞かれたら／40代から"],
+["はるさん","インスタ運用の発信者","型をなんとなく入れていたか／言葉の意味が分かってきたか"],
+["カナさん","デザイナー・2回目の対談","本業で生かせたこと／最初のチャンネルの失敗"],
+["太郎さん","専業・停止から復活・不動産","停止のときの気持ち／疲れて眠い人はどうする"],
+["しもさん","ひとり社長（資格サポート）","Xとの違い／集客の質の具体例"],
+["磯崎さん","パーソナルトレーナー","当時の自分に伝える手順／ここを直して伸びた所"],
+["そのほか（6か月で10万人の回）","人生動画の切り抜き元","（数字で見える成果）"]
+];
+
+/* 描画 */
+const $=s=>document.querySelector(s);
+const KEY="taidan_hikidashi_v1";
+let st={p:"",tags:[],chk:{},only:false};
+try{const s=JSON.parse(localStorage.getItem(KEY)||"null");if(s)st=Object.assign(st,s);}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}};
+const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+
+const tagRow=$("#tagRow");
+for(const k in TAGS){const b=document.createElement("button");b.textContent=TAGS[k];b.dataset.t=k;tagRow.appendChild(b);}
+
+const wrap=$("#chapters");
+for(const [n,name,t,tsu] of CH){
+ const d=document.createElement("div");d.className="ch";d.dataset.ch=n;
+ d.innerHTML=`<h3>${n}. ${name}<span class="t">${t}</span></h3>`+(tsu?`<div class="tsunagi">つなぎ：${esc(tsu)}</div>`:"");
+ const qs=Q.filter(q=>q[1]===n);
+ if(!qs.length){d.innerHTML+=`<div class="q chk"><div class="body"><div class="txt" style="font-weight:400;font-size:15px">紹介とあいさつは撮影台本（05）のとおり。</div></div></div>`;}
+ for(const q of qs){
+  const [id,,kind,txt,fu,tags,src,must]=q;
+  const el=document.createElement("label");el.className="q"+(must?" must":"");el.dataset.id=id;
+  const pill=must?`<span class="pill">切り抜き</span>`:"";
+  const kp=kind==="n"?`<span class="pill new">新</span>`:kind==="l"?`<span class="pill blue">おとラボ</span>`:`<span class="pill gray">台本</span>`;
+  el.innerHTML=`<input type="checkbox"${must?" checked disabled":""}><div class="body"><div class="txt">${pill}${esc(txt)}</div><div class="fu">${esc(fu)}</div><div class="meta">${kp}${id}　${tags.map(t=>`<span class="tag">${TAGS[t]}</span>`).join("")}出典：${esc(src)}</div></div>`;
+  el.querySelector("input").addEventListener("change",e=>{st.chk[id]=e.target.checked;save();render();});
+  d.appendChild(el);
+ }
+ wrap.appendChild(d);
+}
+const srcT=$("#srcTable");
+for(const r of SRC){const tr=document.createElement("tr");tr.innerHTML=r.map(c=>`<td>${esc(c)}</td>`).join("");srcT.appendChild(tr);}
+$("#nNew").textContent=Q.filter(q=>q[2]==="n").length;
+$("#nAll").textContent=Q.length;
+
+function render(){
+ document.querySelectorAll("button.person").forEach(b=>b.classList.toggle("on",b.dataset.p===st.p));
+ tagRow.querySelectorAll("button").forEach(b=>b.classList.toggle("on",st.tags.includes(b.dataset.t)));
+ $("#bOnly").classList.toggle("on",st.only);
+ let hit=0,chk=0;
+ for(const q of Q){
+  const [id,,kind,,,tags,,must]=q;
+  const el=document.querySelector(`.q[data-id="${id}"]`);
+  const h=tags.some(t=>st.tags.includes(t));
+  const skip=NOMONEY.includes(st.p)&&MONEYQ.includes(id);
+  const c=(must&&!skip)||!!st.chk[id];
+  el.querySelector("input").disabled=!!must&&!skip;
+  if(h)hit++; if(c)chk++;
+  el.classList.toggle("hit",h);
+  el.classList.toggle("chk",c);
+  el.querySelector("input").checked=c;
+  el.classList.toggle("hide",st.only&&st.tags.length>0&&tags.length>0&&!h);
+ }
+ document.querySelectorAll(".ch").forEach(d=>{
+  const any=[...d.querySelectorAll(".q")].some(e=>e.classList.contains("chk"));
+  d.classList.toggle("empty",!any);
+ });
+ $("#count").textContent=`光った質問 ${hit}問／今日聞く ${chk}問`;
+ save();
+}
+document.querySelectorAll("button.person").forEach(b=>b.onclick=()=>{
+ if(st.p===b.dataset.p){st.p="";st.tags=[];}else{st.p=b.dataset.p;st.tags=[...PEOPLE[b.dataset.p]];}
+ render();
+});
+tagRow.querySelectorAll("button").forEach(b=>b.onclick=()=>{
+ const t=b.dataset.t;st.tags=st.tags.includes(t)?st.tags.filter(x=>x!==t):[...st.tags,t];render();
+});
+$("#bOnly").onclick=()=>{st.only=!st.only;render();};
+$("#bAuto").onclick=()=>{for(const q of Q){if(q[2]==="n"&&q[5].some(t=>st.tags.includes(t)))st.chk[q[0]]=true;}render();};
+$("#bClear").onclick=()=>{st.chk={};render();};
+$("#bPrint").onclick=()=>{if(!document.body.classList.contains("today"))$("#bToday").click();setTimeout(()=>window.print(),50);};
+$("#bToday").onclick=()=>{
+ const on=document.body.classList.toggle("today");
+ $("#bToday").textContent=on?"全部の質問に戻る":"今日の台本だけ見る";
+ window.scrollTo(0,0);
+};
+$("#bBack").onclick=()=>$("#bToday").click();
+const qp=new URLSearchParams(location.search).get("p");
+const BASE=["Q1","Q9","Q10","Q11","Q27"];
+if(qp&&PEOPLE[qp]&&st.p!==qp){st.p=qp;st.tags=[...PEOPLE[qp]];st.chk={};for(const id of BASE)st.chk[id]=true;for(const q of Q){if(q[2]==="n"&&q[5].some(t=>st.tags.includes(t)))st.chk[q[0]]=true;}}
+render();
+</script>
+</body>
+</html>

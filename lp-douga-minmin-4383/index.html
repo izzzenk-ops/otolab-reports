@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>LP販売動画 みんみん v1</title>
+<style>body{margin:0;background:#111;color:#eee;font-family:sans-serif}main{max-width:1100px;margin:0 auto;padding:16px}h1{font-size:18px;font-weight:600}video{width:100%;background:#000;border-radius:8px}</style></head>
+<body><main><h1>LP販売動画（みんみんさん）v1・確認用</h1>
+<video id="v" controls playsinline preload="metadata"></video></main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.13/hls.min.js"></script>
+<script>
+const v=document.getElementById('v'),src='v/index.m3u8';
+if(window.Hls&&Hls.isSupported()){const h=new Hls();h.loadSource(src);h.attachMedia(v);}
+else v.src=src;
+</script></body></html>
